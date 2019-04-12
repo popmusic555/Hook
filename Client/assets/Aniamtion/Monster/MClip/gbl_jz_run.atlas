@@ -1,0 +1,69 @@
+
+gbl_jz_run.png
+size: 267,267
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+res/bg_b
+  rotate: false
+  xy: 173, 116
+  size: 36, 39
+  orig: 36, 39
+  offset: 0, 0
+  index: -1
+res/bg_j1
+  rotate: false
+  xy: 173, 79
+  size: 12, 9
+  orig: 12, 9
+  offset: 0, 0
+  index: -1
+res/bg_t1
+  rotate: false
+  xy: 173, 90
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+res/bg_t2
+  rotate: false
+  xy: 115, 20
+  size: 13, 16
+  orig: 13, 16
+  offset: 0, 0
+  index: -1
+res/jzg_dz
+  rotate: false
+  xy: 75, 4
+  size: 38, 32
+  orig: 38, 32
+  offset: 0, 0
+  index: -1
+res/jzg_sb
+  rotate: false
+  xy: 2, 2
+  size: 71, 34
+  orig: 71, 34
+  offset: 0, 0
+  index: -1
+res/jzg_sb1
+  rotate: false
+  xy: 211, 138
+  size: 20, 17
+  orig: 20, 17
+  offset: 0, 0
+  index: -1
+res/jzg_tk
+  rotate: false
+  xy: 173, 157
+  size: 86, 108
+  orig: 86, 108
+  offset: 0, 0
+  index: -1
+res/jzj
+  rotate: false
+  xy: 2, 38
+  size: 169, 227
+  orig: 169, 227
+  offset: 0, 0
+  index: -1

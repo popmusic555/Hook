@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "9df8c827-1e47-47d7-b44d-9ca27baf985b",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "OilTips": {
+      "ver": "1.0.3",
+      "uuid": "f041ee6d-7c6e-4dcb-a223-3bc6d50e4741",
+      "rawTextureUuid": "9df8c827-1e47-47d7-b44d-9ca27baf985b",
+      "trimType": "custom",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 118,
+      "height": 108,
+      "rawWidth": 118,
+      "rawHeight": 108,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

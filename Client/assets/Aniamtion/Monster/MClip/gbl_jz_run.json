@@ -1,0 +1,214 @@
+{
+"skeleton": { "hash": "zpZMvQ20PJJ80FjBubJtK/FWB8A", "spine": "2.1.27", "width": 169, "height": 227, "images": "" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root", "scaleX": 0.9, "scaleY": 0.9 },
+	{ "name": "bone4", "parent": "root" },
+	{ "name": "bone2", "parent": "bone", "x": -2.16, "y": -1.03, "scaleY": 1.112 },
+	{ "name": "bone3", "parent": "bone", "x": -6.62, "y": 13.04 },
+	{ "name": "bone5", "parent": "bone", "x": 11.29, "y": 8.7 },
+	{ "name": "bone6", "parent": "bone", "x": -10.55, "y": 11.66 },
+	{ "name": "legz", "parent": "bone", "x": -2.02, "y": -6.63 },
+	{ "name": "legz2", "parent": "bone", "x": 7.02, "y": -10.42 },
+	{ "name": "bone8", "parent": "legz2", "x": -6.07, "y": -14.68 },
+	{ "name": "bone9", "parent": "legz", "x": -8.96, "y": -22.13 }
+],
+"slots": [
+	{ "name": "res/bg_t2", "bone": "legz2", "attachment": "res/bg_t2" },
+	{ "name": "res/bg_j1", "bone": "bone8", "attachment": "res/bg_j1" },
+	{ "name": "res/bg_gb1", "bone": "bone5", "attachment": "res/jzg_sb1" },
+	{ "name": "res/bg_b", "bone": "bone", "attachment": "res/bg_b" },
+	{ "name": "res/bg_t1", "bone": "legz", "attachment": "res/bg_t1" },
+	{ "name": "res/bg_by", "bone": "bone2", "attachment": "res/jzg_dz" },
+	{ "name": "res/bg_t", "bone": "bone3", "attachment": "res/jzg_tk" },
+	{ "name": "res/bg_j3", "bone": "bone9", "attachment": "res/bg_j1" },
+	{ "name": "res/bg_gb2", "bone": "bone6", "attachment": "res/jzg_sb" },
+	{ "name": "res/jzj", "bone": "bone4", "attachment": "res/jzj" }
+],
+"skins": {
+	"default": {
+		"res/bg_b": {
+			"res/bg_b": { "width": 36, "height": 39 }
+		},
+		"res/bg_by": {
+			"res/jzg_dz": { "x": 1.03, "y": 2.19, "scaleY": 0.898, "width": 38, "height": 32 }
+		},
+		"res/bg_gb1": {
+			"res/jzg_sb1": { "x": 9.21, "y": -7.52, "width": 20, "height": 17 }
+		},
+		"res/bg_gb2": {
+			"res/jzg_sb": { "x": 12.09, "y": -14.57, "width": 71, "height": 34 }
+		},
+		"res/bg_j1": {
+			"res/bg_j1": { "x": 4.42, "y": -0.94, "width": 12, "height": 9 }
+		},
+		"res/bg_j3": {
+			"res/bg_j1": { "x": 3.15, "y": -0.94, "width": 12, "height": 9 }
+		},
+		"res/bg_t": {
+			"res/jzg_tk": { "x": 1.56, "y": 49.32, "width": 86, "height": 108 }
+		},
+		"res/bg_t1": {
+			"res/bg_t1": { "x": -0.31, "y": -12.64, "width": 24, "height": 24 }
+		},
+		"res/bg_t2": {
+			"res/bg_t2": { "x": 0.06, "y": -7.84, "width": 13, "height": 16 }
+		},
+		"res/jzj": {
+			"res/jzj": { "x": 21.15, "y": 21.15, "width": 169, "height": 227 }
+		}
+	}
+},
+"animations": {
+	"gbl_jz_run": {
+		"slots": {
+			"res/jzj": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"legz": {
+				"rotate": [
+					{ "time": 0, "angle": -22.48 },
+					{ "time": 0.3333, "angle": 39.37 },
+					{ "time": 0.6666, "angle": -22.48 }
+				],
+				"translate": [
+					{ "time": 0, "x": 1.53, "y": -4.01 },
+					{ "time": 0.3333, "x": 12.93, "y": 1.65 },
+					{ "time": 0.6666, "x": 1.53, "y": -4.01 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.3333, "x": 1, "y": 1.035 },
+					{ "time": 0.6666, "x": 1, "y": 1 }
+				]
+			},
+			"legz2": {
+				"rotate": [
+					{ "time": 0, "angle": 40.5 },
+					{ "time": 0.3333, "angle": -33.91 },
+					{ "time": 0.6666, "angle": 40.5 }
+				],
+				"translate": [
+					{ "time": 0, "x": 6, "y": -1.26 },
+					{ "time": 0.3333, "x": -8, "y": -4.63 },
+					{ "time": 0.6666, "x": 6, "y": -1.26 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1.046 },
+					{ "time": 0.3333, "x": 1, "y": 1.065 },
+					{ "time": 0.6666, "x": 1, "y": 1.046 }
+				]
+			},
+			"bone8": {
+				"rotate": [
+					{ "time": 0, "angle": -28.64 },
+					{ "time": 0.3333, "angle": -27.81 },
+					{ "time": 0.6666, "angle": -28.64 }
+				],
+				"translate": [
+					{ "time": 0, "x": -0.48, "y": 0.41, "curve": "stepped" },
+					{ "time": 0.6666, "x": -0.48, "y": 0.41 }
+				]
+			},
+			"bone9": {
+				"rotate": [
+					{ "time": 0, "angle": -7.39 },
+					{ "time": 0.3333, "angle": -31.63 },
+					{ "time": 0.6666, "angle": -7.39 }
+				],
+				"translate": [
+					{ "time": 0, "x": -0.15, "y": 0.03 },
+					{ "time": 0.3333, "x": 1.15, "y": 0.4 },
+					{ "time": 0.6666, "x": -0.15, "y": 0.03 }
+				]
+			},
+			"bone": {
+				"rotate": [
+					{ "time": 0, "angle": 0 },
+					{ "time": 0.3333, "angle": 358.35 },
+					{ "time": 0.6666, "angle": 0 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.1666, "x": 0, "y": 2.37 },
+					{ "time": 0.3333, "x": 0, "y": 0.35 },
+					{ "time": 0.5, "x": 0, "y": 2.37 },
+					{ "time": 0.6666, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.3333, "x": 0.99, "y": 1.01 },
+					{ "time": 0.6666, "x": 1, "y": 1 }
+				]
+			},
+			"bone3": {
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.3333, "x": 1.01, "y": 0.99 },
+					{ "time": 0.6666, "x": 1, "y": 1 }
+				]
+			}
+		}
+	},
+	"gbl_jz_sj": {
+		"slots": {
+			"res/bg_b": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/bg_by": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/bg_gb1": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/bg_gb2": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/bg_j1": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/bg_j3": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/bg_t": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/bg_t1": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/bg_t2": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			}
+		},
+		"bones": {
+			"bone4": {
+				"rotate": [
+					{ "time": 0, "angle": 0 }
+				]
+			}
+		}
+	}
+}
+}

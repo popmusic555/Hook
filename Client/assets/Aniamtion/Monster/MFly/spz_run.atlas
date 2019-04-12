@@ -1,0 +1,55 @@
+
+spz_run.png
+size: 141,141
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+res/shen
+  rotate: false
+  xy: 2, 38
+  size: 107, 101
+  orig: 107, 101
+  offset: 0, 0
+  index: -1
+res/youer
+  rotate: false
+  xy: 2, 17
+  size: 33, 19
+  orig: 33, 19
+  offset: 0, 0
+  index: -1
+res/youjiao
+  rotate: false
+  xy: 37, 19
+  size: 19, 17
+  orig: 19, 17
+  offset: 0, 0
+  index: -1
+res/youshou
+  rotate: false
+  xy: 111, 100
+  size: 16, 20
+  orig: 16, 20
+  offset: 0, 0
+  index: -1
+res/zuoer
+  rotate: false
+  xy: 111, 122
+  size: 20, 17
+  orig: 20, 17
+  offset: 0, 0
+  index: -1
+res/zuojiao
+  rotate: false
+  xy: 20, 2
+  size: 13, 13
+  orig: 13, 13
+  offset: 0, 0
+  index: -1
+res/zuoshou
+  rotate: true
+  xy: 2, 2
+  size: 13, 16
+  orig: 13, 16
+  offset: 0, 0
+  index: -1

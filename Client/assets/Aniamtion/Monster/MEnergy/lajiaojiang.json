@@ -1,0 +1,50 @@
+{
+"skeleton": { "hash": "yl0USlG8sEeXXBucVjKKhgL4tXc", "spine": "2.1.27", "width": 72, "height": 98, "images": "" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root" },
+	{ "name": "bone2", "parent": "bone", "scaleX": 2, "scaleY": 2 }
+],
+"slots": [
+	{ "name": "res/lajiaojiang", "bone": "bone", "attachment": "res/lajiaojiang" },
+	{ "name": "res/lajiaojiang01", "bone": "bone2", "blend": "additive" }
+],
+"skins": {
+	"default": {
+		"res/lajiaojiang": {
+			"res/lajiaojiang": { "width": 72, "height": 98 }
+		},
+		"res/lajiaojiang01": {
+			"res/lajiaojiang01": { "width": 36, "height": 49 },
+			"res/lajiaojiang02": { "width": 36, "height": 49 },
+			"res/lajiaojiang03": { "width": 36, "height": 49 },
+			"res/lajiaojiang04": { "width": 36, "height": 49 },
+			"res/lajiaojiang05": { "width": 36, "height": 49 }
+		}
+	}
+},
+"animations": {
+	"lajiaojiang": {
+		"slots": {
+			"res/lajiaojiang": {
+				"attachment": [
+					{ "time": 0, "name": "res/lajiaojiang" },
+					{ "time": 2, "name": "res/lajiaojiang" }
+				]
+			},
+			"res/lajiaojiang01": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.0333, "name": "res/lajiaojiang01" },
+					{ "time": 0.1, "name": "res/lajiaojiang02" },
+					{ "time": 0.1666, "name": "res/lajiaojiang03" },
+					{ "time": 0.2333, "name": "res/lajiaojiang04" },
+					{ "time": 0.3, "name": "res/lajiaojiang05" },
+					{ "time": 0.3666, "name": null },
+					{ "time": 2, "name": null }
+				]
+			}
+		}
+	}
+}
+}

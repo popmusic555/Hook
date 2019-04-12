@@ -1,0 +1,55 @@
+
+gbl_zd_boom.png
+size: 1024,512
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+res/boom01
+  rotate: false
+  xy: 2, 217
+  size: 204, 213
+  orig: 204, 213
+  offset: 0, 0
+  index: -1
+res/boom02
+  rotate: false
+  xy: 2, 2
+  size: 204, 213
+  orig: 204, 213
+  offset: 0, 0
+  index: -1
+res/boom03
+  rotate: false
+  xy: 208, 217
+  size: 204, 213
+  orig: 204, 213
+  offset: 0, 0
+  index: -1
+res/boom04
+  rotate: false
+  xy: 208, 2
+  size: 204, 213
+  orig: 204, 213
+  offset: 0, 0
+  index: -1
+res/boom05
+  rotate: false
+  xy: 414, 217
+  size: 204, 213
+  orig: 204, 213
+  offset: 0, 0
+  index: -1
+res/boom06
+  rotate: false
+  xy: 414, 2
+  size: 204, 213
+  orig: 204, 213
+  offset: 0, 0
+  index: -1
+res/boom07
+  rotate: false
+  xy: 620, 217
+  size: 204, 213
+  orig: 204, 213
+  offset: 0, 0
+  index: -1

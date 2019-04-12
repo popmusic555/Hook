@@ -1,0 +1,41 @@
+
+slm_run.png
+size: 93,93
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+res/shen
+  rotate: false
+  xy: 2, 16
+  size: 58, 75
+  orig: 58, 75
+  offset: 0, 0
+  index: -1
+res/youjiao
+  rotate: true
+  xy: 62, 44
+  size: 21, 16
+  orig: 21, 16
+  offset: 0, 0
+  index: -1
+res/youshou
+  rotate: false
+  xy: 62, 67
+  size: 17, 24
+  orig: 17, 24
+  offset: 0, 0
+  index: -1
+res/zuojiao
+  rotate: true
+  xy: 62, 25
+  size: 17, 14
+  orig: 17, 14
+  offset: 0, 0
+  index: -1
+res/zuoshou
+  rotate: false
+  xy: 78, 24
+  size: 13, 18
+  orig: 13, 18
+  offset: 0, 0
+  index: -1

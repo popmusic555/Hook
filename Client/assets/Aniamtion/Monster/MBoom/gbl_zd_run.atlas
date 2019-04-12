@@ -1,0 +1,104 @@
+
+gbl_zd_run.png
+size: 172,172
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+res/b
+  rotate: false
+  xy: 115, 98
+  size: 24, 34
+  orig: 24, 34
+  offset: 0, 0
+  index: -1
+res/bg_b
+  rotate: false
+  xy: 84, 46
+  size: 36, 39
+  orig: 36, 39
+  offset: 0, 0
+  index: -1
+res/bg_j1
+  rotate: false
+  xy: 115, 87
+  size: 12, 9
+  orig: 12, 9
+  offset: 0, 0
+  index: -1
+res/bg_t
+  rotate: true
+  xy: 2, 4
+  size: 80, 53
+  orig: 80, 53
+  offset: 0, 0
+  index: -1
+res/bg_t1
+  rotate: false
+  xy: 102, 20
+  size: 24, 24
+  orig: 24, 24
+  offset: 0, 0
+  index: -1
+res/bg_t2
+  rotate: true
+  xy: 84, 31
+  size: 13, 16
+  orig: 13, 16
+  offset: 0, 0
+  index: -1
+res/gbl_zd_gz
+  rotate: true
+  xy: 141, 88
+  size: 17, 26
+  orig: 17, 26
+  offset: 0, 0
+  index: -1
+res/gbl_zd_m
+  rotate: false
+  xy: 76, 134
+  size: 60, 36
+  orig: 60, 36
+  offset: 0, 0
+  index: -1
+res/gbl_zd_zb
+  rotate: false
+  xy: 57, 31
+  size: 25, 53
+  orig: 25, 53
+  offset: 0, 0
+  index: -1
+res/hy
+  rotate: false
+  xy: 141, 107
+  size: 28, 28
+  orig: 28, 28
+  offset: 0, 0
+  index: -1
+res/y
+  rotate: false
+  xy: 57, 2
+  size: 35, 27
+  orig: 35, 27
+  offset: 0, 0
+  index: -1
+res/yan_0007
+  rotate: true
+  xy: 138, 137
+  size: 33, 30
+  orig: 33, 30
+  offset: 0, 0
+  index: -1
+res/yz
+  rotate: false
+  xy: 76, 87
+  size: 37, 45
+  orig: 37, 45
+  offset: 0, 0
+  index: -1
+res/zhadan
+  rotate: false
+  xy: 2, 86
+  size: 72, 84
+  orig: 72, 84
+  offset: 0, 0
+  index: -1

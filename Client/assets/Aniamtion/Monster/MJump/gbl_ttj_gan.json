@@ -1,0 +1,52 @@
+{
+"skeleton": { "hash": "NhQWPj0yUFtJLbLaq+EnXY5oDkU", "spine": "2.1.27", "width": 0, "height": 0, "images": "" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "gan", "parent": "root", "length": 35, "rotation": -90 },
+	{ "name": "quan", "parent": "gan", "length": 25, "x": 36.54 }
+],
+"slots": [
+	{ "name": "res/gbl_ttj_zt3", "bone": "gan" },
+	{ "name": "res/gbl_ttj_zt4", "bone": "quan" }
+],
+"skins": {
+	"default": {
+		"res/gbl_ttj_zt3": {
+			"res/gbl_ttj_g": { "x": 18.97, "y": -0.47, "rotation": 90, "width": 10, "height": 43 }
+		},
+		"res/gbl_ttj_zt4": {
+			"res/gbl_ttj_qt": { "x": 18.09, "y": 0.04, "rotation": 90, "width": 64, "height": 40 }
+		}
+	}
+},
+"animations": {
+	"gbl_ttj_run1": {
+		"slots": {
+			"res/gbl_ttj_zt3": {
+				"attachment": [
+					{ "time": 0, "name": "res/gbl_ttj_g" }
+				]
+			},
+			"res/gbl_ttj_zt4": {
+				"attachment": [
+					{ "time": 0, "name": "res/gbl_ttj_qt" }
+				]
+			}
+		}
+	},
+	"gbl_ttj_run2": {
+		"slots": {
+			"res/gbl_ttj_zt3": {
+				"attachment": [
+					{ "time": 0, "name": "res/gbl_ttj_g" }
+				]
+			},
+			"res/gbl_ttj_zt4": {
+				"attachment": [
+					{ "time": 0, "name": "res/gbl_ttj_qt" }
+				]
+			}
+		}
+	}
+}
+}

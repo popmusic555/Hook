@@ -1,0 +1,159 @@
+{
+"skeleton": { "hash": "Kl+DWc4Fx/VyHOuTsh+gMqtuP7M", "spine": "2.1.27", "width": 128, "height": 140.87, "images": "" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "zhap", "parent": "root" },
+	{ "name": "blz", "parent": "zhap", "x": 3, "y": -0.18 },
+	{ "name": "body", "parent": "zhap", "x": 0.99, "y": -20 },
+	{ "name": "tou_g", "parent": "blz", "x": 3.06, "y": 10.95 },
+	{ "name": "tou_l", "parent": "blz", "x": -3.88, "y": 61.04 }
+],
+"slots": [
+	{ "name": "res/gbl_ttj_zt", "bone": "blz", "attachment": "res/jzg_body" },
+	{ "name": "res/gbl_ttj_zt2", "bone": "body", "attachment": "res/gbl_ttj" },
+	{ "name": "res/bg_t", "bone": "tou_g", "attachment": "res/bg_t" },
+	{ "name": "res/bg_t2", "bone": "tou_l" },
+	{ "name": "res/blz", "bone": "zhap", "attachment": "res/blz" }
+],
+"skins": {
+	"default": {
+		"res/bg_t": {
+			"res/bg_t": { "x": -7.32, "y": 22.18, "width": 80, "height": 53 }
+		},
+		"res/bg_t2": {
+			"res/lv_02": { "x": 5.54, "y": 24.71, "width": 51, "height": 62 }
+		},
+		"res/blz": {
+			"res/blz": { "x": 3, "y": 45.89, "width": 110, "height": 100 },
+			"res/blz_01": { "x": 3, "y": 9.96, "width": 116, "height": 23 }
+		},
+		"res/gbl_ttj_zt": {
+			"res/jzg_body": { "x": 3.4, "y": 4.9, "width": 58, "height": 29 },
+			"res/lv_01": { "x": -7.37, "y": 34.6, "width": 104, "height": 107 }
+		},
+		"res/gbl_ttj_zt2": {
+			"res/gbl_ttj": { "x": 0.65, "y": -0.98, "width": 128, "height": 48 }
+		}
+	}
+},
+"animations": {
+	"gbl_ttj_zhuti": {
+		"slots": {
+			"res/bg_t": {
+				"attachment": [
+					{ "time": 0, "name": "res/bg_t" },
+					{ "time": 0.9333, "name": "res/bg_t" }
+				]
+			},
+			"res/bg_t2": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.9333, "name": null }
+				]
+			},
+			"res/blz": {
+				"attachment": [
+					{ "time": 0, "name": "res/blz" },
+					{ "time": 0.9333, "name": "res/blz" }
+				]
+			},
+			"res/gbl_ttj_zt": {
+				"attachment": [
+					{ "time": 0, "name": "res/jzg_body" },
+					{ "time": 0.9333, "name": "res/jzg_body" }
+				]
+			},
+			"res/gbl_ttj_zt2": {
+				"attachment": [
+					{ "time": 0, "name": "res/gbl_ttj" },
+					{ "time": 0.9333, "name": "res/gbl_ttj" }
+				]
+			}
+		},
+		"bones": {
+			"tou_g": {
+				"rotate": [
+					{ "time": 0, "angle": 3.03 },
+					{ "time": 0.0666, "angle": 2.24 },
+					{ "time": 0.2333, "angle": -2.32 },
+					{ "time": 0.5, "angle": -3.15 },
+					{ "time": 0.6666, "angle": 2.24 },
+					{ "time": 0.9333, "angle": 3.03 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.2333, "x": 0, "y": -0.69 },
+					{ "time": 0.5, "x": 0, "y": -0.87 },
+					{ "time": 0.6666, "x": 0, "y": -0.74 },
+					{ "time": 0.9333, "x": 0, "y": 0 }
+				]
+			}
+		}
+	},
+	"ljr_ttj_run": {
+		"slots": {
+			"res/bg_t": {
+				"attachment": [
+					{ "time": 0, "name": null },
+					{ "time": 0.9333, "name": null }
+				]
+			},
+			"res/bg_t2": {
+				"attachment": [
+					{ "time": 0, "name": "res/lv_02" },
+					{ "time": 0.9333, "name": "res/lv_02" }
+				]
+			},
+			"res/blz": {
+				"attachment": [
+					{ "time": 0, "name": "res/blz_01" },
+					{ "time": 0.9333, "name": "res/blz_01" }
+				]
+			},
+			"res/gbl_ttj_zt": {
+				"attachment": [
+					{ "time": 0, "name": "res/lv_01" },
+					{ "time": 0.9333, "name": "res/lv_01" }
+				]
+			},
+			"res/gbl_ttj_zt2": {
+				"attachment": [
+					{ "time": 0, "name": "res/gbl_ttj" },
+					{ "time": 0.9333, "name": "res/gbl_ttj" }
+				]
+			}
+		},
+		"bones": {
+			"blz": {
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.5, "x": 0, "y": -0.83 },
+					{ "time": 0.9333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.5, "x": 1.016, "y": 0.966 },
+					{ "time": 0.9333, "x": 1, "y": 1 }
+				]
+			},
+			"tou_l": {
+				"rotate": [
+					{ "time": 0, "angle": 0.9 },
+					{ "time": 0.5, "angle": -4.44 },
+					{ "time": 0.9333, "angle": 0.9 }
+				],
+				"translate": [
+					{ "time": 0, "x": 0, "y": 0 },
+					{ "time": 0.5, "x": -1.1, "y": -1.6 },
+					{ "time": 0.9333, "x": 0, "y": 0 }
+				],
+				"scale": [
+					{ "time": 0, "x": 1, "y": 1 },
+					{ "time": 0.5, "x": 0.992, "y": 1.047 },
+					{ "time": 0.9333, "x": 1, "y": 1 }
+				]
+			}
+		}
+	}
+}
+}

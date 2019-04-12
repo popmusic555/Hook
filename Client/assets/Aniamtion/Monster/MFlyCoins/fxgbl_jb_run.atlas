@@ -1,0 +1,13 @@
+
+fxgbl_jb_run.png
+size: 143,143
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+res/fxgbl_jb
+  rotate: false
+  xy: 2, 21
+  size: 139, 120
+  orig: 139, 120
+  offset: 0, 0
+  index: -1

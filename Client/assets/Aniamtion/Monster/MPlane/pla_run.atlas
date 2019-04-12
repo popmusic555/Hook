@@ -1,0 +1,83 @@
+
+pla_run.png
+size: 247,247
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+res/fei1
+  rotate: false
+  xy: 88, 22
+  size: 31, 32
+  orig: 31, 32
+  offset: 0, 0
+  index: -1
+res/fei2
+  rotate: true
+  xy: 184, 61
+  size: 31, 32
+  orig: 31, 32
+  offset: 0, 0
+  index: -1
+res/fei3
+  rotate: false
+  xy: 121, 40
+  size: 31, 32
+  orig: 31, 32
+  offset: 0, 0
+  index: -1
+res/fei4
+  rotate: false
+  xy: 121, 6
+  size: 31, 32
+  orig: 31, 32
+  offset: 0, 0
+  index: -1
+res/hou
+  rotate: true
+  xy: 212, 183
+  size: 62, 19
+  orig: 62, 19
+  offset: 0, 0
+  index: -1
+res/qian
+  rotate: false
+  xy: 2, 157
+  size: 138, 88
+  orig: 138, 88
+  offset: 0, 0
+  index: -1
+res/ren
+  rotate: false
+  xy: 142, 163
+  size: 68, 82
+  orig: 68, 82
+  offset: 0, 0
+  index: -1
+res/shen
+  rotate: false
+  xy: 2, 56
+  size: 114, 99
+  orig: 114, 99
+  offset: 0, 0
+  index: -1
+res/tou
+  rotate: false
+  xy: 184, 94
+  size: 61, 67
+  orig: 61, 67
+  offset: 0, 0
+  index: -1
+res/youshou
+  rotate: false
+  xy: 118, 74
+  size: 64, 81
+  orig: 64, 81
+  offset: 0, 0
+  index: -1
+res/zuoshou
+  rotate: true
+  xy: 2, 4
+  size: 50, 84
+  orig: 50, 84
+  offset: 0, 0
+  index: -1
