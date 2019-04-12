@@ -4,12 +4,7 @@ var GameConst = require("GameConst");
 // 怪物生成器
 cc.Class({
     extends: cc.Component,
-
-    editor: CC_EDITOR && {
-        menu: 'i18n:MAIN_MENU.component.renderers/ParticleSystem',
-        inspector: 'packages://inspector/inspectors/comps/particle-system.js',
-    },
-
+    
     properties: {
         // 怪物预制
         monsterPrefabs:cc.Prefab,
