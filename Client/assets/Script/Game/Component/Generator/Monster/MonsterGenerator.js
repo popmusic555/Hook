@@ -1,5 +1,5 @@
 
-var GameConst = require("GameConst");
+var GameCommon = require("GameCommon");
 
 // 怪物生成器
 cc.Class({
@@ -68,7 +68,7 @@ cc.Class({
     },
 
     createMonster:function (min , max) {
-        var monsterNum = GameConst.GET_RANDOM(min , max);
+        var monsterNum = GameCommon.GET_RANDOM(min , max);
         // new cc.Node().childrenCount
         var canCreateNum = this.maxNum - this.node.childrenCount;
 
@@ -80,7 +80,7 @@ cc.Class({
         var cameraX = cc.Camera.main.node.x;
         var posx = cameraX + 1400;
 
-        if (GameConst.IS_IN_WALL(posx)) {
+        if (GameCommon.IS_IN_WALL(posx)) {
             return;
         }
 
@@ -102,7 +102,7 @@ cc.Class({
         var monsterNode = cc.instantiate(this.monsterPrefabs);
         monsterNode.name = name;
         monsterNode.x = x;
-        monsterNode.y = monsterNode.y + GameConst.GET_RANDOM(this.minHeight , this.maxHeight);
+        monsterNode.y = monsterNode.y + GameCommon.GET_RANDOM(this.minHeight , this.maxHeight);
         var rigid = monsterNode.getComponent(cc.RigidBody);
         rigid.linearVelocity = cc.v2(speed , 0);
 

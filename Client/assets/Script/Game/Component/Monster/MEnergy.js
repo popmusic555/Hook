@@ -39,6 +39,11 @@ cc.Class({
             player.SyncParam(this.getPlayerData());
             player.ApplyAllParam(player);
             self.beKill(player);
+
+            if (player.isSuperAtk())
+            {
+                player.unSuperAtk();
+            }
         }
     },
 

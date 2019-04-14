@@ -3,7 +3,7 @@ var GameObject = require("GameObject");
 var GameEnum = require("GameEnum");
 var PlayerModel = require("PlayerModel");
 var GameCommon = require("GameCommon");
-var UIView = require("UIView");
+var GameConst = require("GameConst");
 
 cc.Class({
     extends: GameObject,
@@ -11,7 +11,9 @@ cc.Class({
     properties: {
         // 冲击速度
         impactVelocity:0,
-        throughHoleAni:sp.Skeleton,
+
+        globalAni:[sp.Skeleton],
+        // throughHoleAni:sp.Skeleton,
         // 主角运动状态
         _RunState:GameEnum.PLAYER_RUNSTATE.NORMAL,
         _PlayerModel:null,
@@ -20,14 +22,19 @@ cc.Class({
         _FloorData:null,
 
         _SuperAtkLock:false,
+
+        isLaunching:{
+            default:false,
+            visible:false,
+        },
     },
 
     // onLoad () {},
 
     start () {
         this._PlayerModel = this.getComponent(PlayerModel);
-        var uiview = GameCommon.GetUIView(UIView);
-        uiview.setTouchListener(this);
+        var uiview = GameCommon.GetUIView();
+        // uiview.setTouchListener(this);
 
         this._FloorData = this.getComponent("FloorData");
     },
@@ -59,9 +66,20 @@ cc.Class({
             this.node.rotation = 0;
         }
 
-        if (this.throughHoleAni.node.active) {
-            this.updateThroughHoleAni();
-        }
+        // if (this.throughHoleAni.node.active) {
+        //     this.updateThroughHoleAni();
+        // }
+        this.updateGlobalAni();
+    },
+
+    // 开始发射
+    startLaunching:function (speedX , speedY) {
+        var uiview = GameCommon.GetUIView();
+        uiview.setTouchListener(this);
+        this.isLaunching = true;
+        // var speedY = Math.tan(angle * Math.PI / 180) * speedX;
+        this.setLinearVelocity(speedX , speedY);  
+        this.setGravityScale(GameConst.GRAVITY_SCALE);
     },
 
     getPlayerModel:function (state) {
@@ -150,10 +168,16 @@ cc.Class({
         this.ApplyAllParam(this);
         if (this.isImpact()) {
             this.unImpact();
+            if (this.killImpactMonster()) {
+                this.showBigBoomAni();    
+            }
         }
         else if (this.isSuperAtk())
         {
             this.unSuperAtk();
+            if (this.killImpactMonster()) {
+                this.showBigBoomAni();    
+            }
         }
         else
         {
@@ -208,18 +232,86 @@ cc.Class({
 
     },
 
+    // showThroughHoleAni:function (pos) {
+    //     this.throughHoleAni.node.active = true;
+    //     this.throughHoleAni.animation = "posui";
+    //     this.throughHoleAni.node.y = pos.y;
+    //     this.throughHoleAni.setCompleteListener(function () {
+    //         this.throughHoleAni.node.active = false;
+    //     }.bind(this));
+    // },
+
     showThroughHoleAni:function (pos) {
-        this.throughHoleAni.node.active = true;
-        this.throughHoleAni.animation = "posui";
-        this.throughHoleAni.node.y = pos.y;
-        this.throughHoleAni.setCompleteListener(function () {
-            this.throughHoleAni.node.active = false;
+        var throughHoleAni = this.globalAni[0];
+        throughHoleAni.node.active = true;
+        throughHoleAni.animation = "posui";
+        throughHoleAni.node.y = pos.y;
+        throughHoleAni.setCompleteListener(function () {
+            throughHoleAni.node.active = false;
         }.bind(this));
     },
 
-    updateThroughHoleAni:function () {
-        this.throughHoleAni.node.parent.x = this.node.x;
-        // this.throughHoleAni.node.parent.y = this.node.y;
+    showBigBoomAni:function () {
+        var bigBoomAni = this.globalAni[1];
+        bigBoomAni.node.active = true;
+        bigBoomAni.animation = "gbl_zd_boom";
+        bigBoomAni.setCompleteListener(function () {
+            bigBoomAni.node.active = false;
+        }.bind(this));
+    },
+
+    // updateThroughHoleAni:function () {
+    //     this.throughHoleAni.node.parent.x = this.node.x;
+    //     // this.throughHoleAni.node.parent.y = this.node.y;
+    // },
+
+    updateGlobalAni:function () {
+        var len = this.globalAni.length;
+        for (let index = 0; index < len; index++) {
+            var ani = this.globalAni[index];
+            if (ani.node.active) {
+                ani.node.parent.x = this.node.x;
+            }
+        }  
+    },
+
+    // 获取矩形范围内的怪物
+    getMonsterForAABB:function (worldRect) {
+        var result = [];
+        var colliderList = cc.director.getPhysicsManager().testAABB(worldRect);
+        var len = colliderList.length;
+        for (let index = 0; index < len; index++) {
+            var collider = colliderList[index];
+
+            var gameObject = collider.getComponent(GameObject);
+            if (gameObject.ObjectType == GameEnum.GAMEOBJ_TYPE.MONSTER) {
+                result.push(gameObject);    
+            }
+            
+        }
+        return result;
+    },
+
+    // 击杀冲击范围内的怪物
+    killImpactMonster:function () {
+        var result = false;
+
+        var worldPos = this.node.convertToWorldSpaceAR(cc.v2(0,0));
+
+        var rect = new cc.rect(worldPos.x - 150 , worldPos.y - 80 , 300 ,  80);
+
+        var monsters = this.getMonsterForAABB(rect);
+        var len = monsters.length;
+        for (let index = 0; index < len; index++) {
+            result = true;
+            var monster = monsters[index];
+            
+            if (!monster.isSleep) {
+                monster.beKill(this , true);    
+            }
+        }
+
+        return result;
     },
 
 });

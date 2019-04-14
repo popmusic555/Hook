@@ -12,6 +12,9 @@ cc.Class({
 
         _ReEmitSpeed:null,
         throughHole:cc.Node,
+
+        // 当前已碰撞到的Player
+        _CurEmitPlayer:null,
     },
 
     // onLoad () {},
@@ -65,7 +68,7 @@ cc.Class({
             // 重新唤醒player
             player.visible(true);
             player.wakeUp();
-            this.handlePlayer(self , player);
+            // this.handlePlayer(self , player);
         }
         else
         {

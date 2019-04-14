@@ -1,7 +1,7 @@
 
 var MPlayer = require("MPlayer");
 var Processor = require("Processor");
-var GameConst = require("GameConst");
+var GameCommon = require("GameCommon");
 var BuildingGenerator = require("BuildingGenerator");
 
 var GamePlayer = cc.Class({
@@ -30,15 +30,19 @@ var GamePlayer = cc.Class({
         // }
         // 注入处理器
         this.player.injection(this.processor);
-
-        GameConst.GAME_VIEW = this;
+        GameCommon.GAME_VIEW = this;
     },
 
     start () {
         // console.log("cc.Camera.main.getCameraToWorldPoint(0 , 0)" , cc.Camera.main.getCameraToWorldPoint(cc.v2(0,0)));
+        GameCommon.GetUIView().setTouchListener(this);
     },
 
     update (dt) {
         // console.log("cc.Camera.main.getCameraToWorldPoint(0 , 0)" , cc.Camera.main.getCameraToWorldPoint(cc.v2(0,0)));
+    },
+
+    onTouched:function () {
+        this.player.startLaunching(1500 , 1500);
     },
 });

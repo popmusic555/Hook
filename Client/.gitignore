@@ -14,6 +14,7 @@ build/
 *.log
 *.sql
 *.sqlite
+*.meta
 
 #/////////////////////////////////////////////////////////////////////////////
 # files for debugger
@@ -46,6 +47,7 @@ Thumbs.db
 *.vimentry.meta
 *.vimproject
 *.vimproject.meta
+*.meta
 .vimfiles.*/
 .exvim.*/
 quick_gen_project_*_autogen.bat

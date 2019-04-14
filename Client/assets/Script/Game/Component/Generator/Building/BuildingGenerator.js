@@ -1,4 +1,5 @@
 
+var GameCommon = require("GameCommon");
 var GameConst = require("GameConst");
 
 // 建筑生成器
@@ -90,13 +91,13 @@ cc.Class({
         // 预生成建筑物
         var index = this._Index + 1;
         var curPosx = index * this.generateRange;
-        var num = GameConst.GET_RANDOM(this.generateMinNum , this.generateMaxNum);
+        var num = GameCommon.GET_RANDOM(this.generateMinNum , this.generateMaxNum);
         var range = this.generateRange / num;
         var posx = 0;
         var building = null;
 
         for (let index = 0; index < num; index++) {
-            posx = curPosx + GameConst.GET_RANDOM(0 , range) + index * range;
+            posx = curPosx + GameCommon.GET_RANDOM(0 , range) + index * range;
             building = this.createSingleBuilding("building" , posx);
             this.node.insertChild(building , 0);
         }
@@ -110,7 +111,7 @@ cc.Class({
         node.anchorY = 0;
         var sprite = node.addComponent(cc.Sprite);
 
-        var index = GameConst.GET_RANDOM(0 , 3);
+        var index = GameCommon.GET_RANDOM(0 , 3);
         sprite.spriteFrame = this.bulidingRes[index];
 
         return node;

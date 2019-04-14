@@ -1,132 +1,149 @@
 
-var GameConst = require("GameConst");
+var GameCommon = require("GameCommon");
+var DataManager = require("DataManager");
+var MPlayer = require("MPlayer");
 
 // 怪物生成器
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        camera:cc.Node,
-
-        _Index:-1,
-
-        // 起始位置
-        startPosx:{
-            default:0,
-            visible:false,
-        },
-
-        player:cc.Node,
-
         // 怪物预制
         monsterPrefabs:cc.Prefab,
+        monsterPrefabs1:cc.Node,
+        // player
+        player:MPlayer,
 
-        // 生成概率
-        probability:0,
+        // 怪物名称
+        monsterName:"",
 
-        // 生成范围
-        generateRange:{
+        // 最大数量
+        maxNum:0,
+
+        // 刷新间隔
+        refreshInterval:0,
+
+        // 刷新数量
+        refreshNum:cc.Vec2,
+
+        // X轴偏移值
+        xOffset:cc.Vec2,
+        // Y轴偏移值     
+        yOffset:cc.Vec2,   
+        // 速度偏移值
+        speedOffset:cc.Vec2,
+
+        // 出生点偏移值位置
+        _BrithPosOffset:0,
+
+        // 可超出最大范围
+        maxRange:{
             default:0,
             visible:false,
         },
-
-        // 最小生成数量
-        generateMinNum:0,
-        // 最大生成数量
-        generateMaxNum:0,
 
         // 怪物总数量
         _TotalMonsterNum:0,
-        // 怪物名称
-        monsterName:"",
+        // 当前刷新帧
+        _CurRefFrame:0,
+
+        // 初始发射速度
+        _LaunchingSpeed:0,
     },
 
     // onLoad () {},
 
     start () {
-        // this.camera = cc.find("Canvas/MainCamera");
-        this.startPosx = 0 - cc.view.getVisibleSize().width * 0.5;
-        this.generateRange = 2500;
-
-        this.generateMonster();
+        this.maxRange = 1000;
+        this._BrithPosOffset = 850;
+        this._LaunchingSpeed = DataManager.Userdata.launchingSpeed;
+        // this.createMonster();
     },
 
     update (dt) {
-        // 初始生成怪物
-        this.generateMonster();
-        this.removeMonster();
-    },
-
-    generateMonster:function () {
-        var posx = this.camera.x - cc.view.getVisibleSize().width * 0.5;
-        // 距离其实点的距离
-        var distance = posx - this.startPosx;
-
-        var index = Math.floor(distance / this.generateRange);
-        this.generate(index);
-    },
-
-    generate:function (index) {
-        if (this._Index >= index) {
-            return
+        if (!this.player.isLaunching) {
+            return;
         }
-        this._Index = index;
-
-        if ((this._Index + 1) % GameConst.CREATE_WALL == 0) {
+        this.RemoveMonster();
+        if (this._LaunchingSpeed != 0) {
+            this.GenerateMonster(this._LaunchingSpeed);
+            this._LaunchingSpeed = 0;
         }
         else
         {
-            console.newlog("当前" , this.node.name , "列表" , "怪物数量" , this.node.childrenCount);
-            this.createMonster();
+            this.GenerateMonster(this.player.getLinearVelocity().x);  
         }
     },
 
-    createMonster:function () {
-        // 预生成怪物
-        var num = GameConst.GET_RANDOM(1 , 100)
-        
-        if (num > this.probability) {
+    GenerateMonster:function (playerSpeed) {
+        this._CurRefFrame++;
+        if (this._CurRefFrame >= this.refreshInterval) {
+            this._CurRefFrame = 0;
+            this.createMonster(playerSpeed);
+        }
+    },
+
+    createMonster:function (playerSpeed) {
+        // new cc.Node().childrenCount
+        var canCreateNum = this.maxNum - this.node.childrenCount;
+        if (canCreateNum <= 0) {
             return;
         }
 
-        var index = this._Index + 1;
-        var curPosx = index * this.generateRange;
-        var num = GameConst.GET_RANDOM(this.generateMinNum , this.generateMaxNum);
-        console.log("生成怪物数量" , num);
+        var refreshNum = GameCommon.GET_RANDOM(this.refreshNum.x , this.refreshNum.y)
+        canCreateNum = Math.min(canCreateNum , refreshNum);
 
+        var cameraX = cc.Camera.main.node.x;
+        var brithPosX = cameraX + this._BrithPosOffset;  //+ GameCommon.GET_RANDOM(xOffset.x , xOffset.y);
+        var num = 20;
+        for (let index = 0; index < canCreateNum; index++) {
+            var posX = brithPosX + GameCommon.GET_RANDOM(this.xOffset.x , this.xOffset.y);
+            if (GameCommon.IS_IN_WALL(posX)) {
+                return;
+            }
 
-        for (let index = 0; index < num; index++) {
-            var posx = curPosx + GameConst.GET_RANDOM(0 , this.generateRange);
-            var monster = this.createSingleMonster(this.monsterName , posx);
+            var speedOffset = (this.speedOffset.y - this.speedOffset.x) / num * GameCommon.GET_RANDOM(0 , num) + this.speedOffset.x;
+            var speed = playerSpeed - speedOffset;
+            // var speed = playerSpeed * Math.random() * 0.5 + 0.2;
+
+            var monster = this.createSingleMonster(this.getMonsterName() , posX , speed);            
             this.node.addChild(monster);
         }
     },
 
-    createSingleMonster:function (monsterName , posx) {
+    createSingleMonster:function (name , posX , speed) {
+        var monsterNode = cc.instantiate(this.monsterPrefabs);
+        monsterNode.name = name;
+        monsterNode.x = posX;
+        monsterNode.y = monsterNode.y + GameCommon.GET_RANDOM(this.yOffset.x , this.yOffset.y);
+        var rigid = monsterNode.getComponent(cc.RigidBody);
+        rigid.linearVelocity = cc.v2(speed , 0);
+
         this._TotalMonsterNum++;
-        var node = cc.instantiate(this.monsterPrefabs);
-        node.name = monsterName + this._TotalMonsterNum;
-        node.x = posx;
-
-        var rigid = node.getComponent(cc.RigidBody);
-        var rigidPlayer = this.player.getComponent(cc.RigidBody);
-
-        rigid.linearVelocity = cc.v2(rigidPlayer.linearVelocity.x * GameConst.GET_RANDOM(2 , 10) / 10 , 0);
-
-        return node;
+        return monsterNode;
     },
 
     // 删除怪物
-    removeMonster:function () {
+    RemoveMonster:function () {
         var len = this.node.childrenCount;
         // console.log("当前" , this.node.name , "列表" , "怪物数量" , len);
+        var posx = cc.Camera.main.node.x;
         for (let index = 0; index < len; index++) {
             var childNode = this.node.children[index];
             // var worldPos = childNode.convertToWorldSpaceAR(cc.v2(0,0));
-            var posx = cc.Camera.main.node.x;
-            if (posx - childNode.x > 1000) {
+            
+            if (posx - childNode.x > this.maxRange) {
+                childNode.destroy();
+            }
+            
+            if (childNode.x - posx >= this._BrithPosOffset + this.xOffset.y) {
                 childNode.destroy();
             }
         }
     },
+
+    getMonsterName:function () {
+        return this.monsterName + this._TotalMonsterNum;
+    },
+
 });

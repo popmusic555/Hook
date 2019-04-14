@@ -136,6 +136,16 @@ cc.Class({
                     player.wakeUp();
                     player.SyncParam(this.getPlayerData());
                     player.ApplyAllParam(player);
+
+                    if (player.isSuperAtk())
+                    {
+                        player.unSuperAtk();
+                    }
+
+                    if (player.isImpact())
+                    {
+                        player.unImpact();
+                    }
                 }
             }
         }

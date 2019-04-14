@@ -1,6 +1,6 @@
 
 var GameEnum = require("GameEnum");
-var GameConst = require("GameConst");
+var GameCommon = require("GameCommon");
 
 cc.Class({
     extends: cc.Component,
@@ -12,7 +12,6 @@ cc.Class({
         _State:GameEnum.PLAYER_STATE.STATIC,
         // 状态锁
         _StateLock:false,
-
         // 攻击动作
         _AtkAction:null,
     },
@@ -24,9 +23,14 @@ cc.Class({
     start () {
     },
 
+    // lateUpdate:function () {
+    //     console.log("this.model.node.y" , this.model.node.y);  
+    // },
+
     setState:function (state) {
         this._State = state;
-
+        // this.model.node.y = 0;
+        console.log("Change setState" , this._State);
         switch (this._State) {
             case GameEnum.PLAYER_STATE.NULL:
                 // this.setSpriteFrame(null);
@@ -42,22 +46,22 @@ cc.Class({
                 // console.log("State EMIT");
                 break;
             case GameEnum.PLAYER_STATE.FLY:
-                var num = GameConst.GET_RANDOM(1 , 3);
+                var num = GameCommon.GET_RANDOM(1 , 3);
                 this.setAnimation("fly" + num);
                 // console.log("State FLY");
                 break;
             case GameEnum.PLAYER_STATE.DROP:
-                var num = GameConst.GET_RANDOM(1 , 2);
+                var num = GameCommon.GET_RANDOM(1 , 2);
                 this.setAnimation("down" + num);
                 // console.log("State DROP");
                 break;
             case GameEnum.PLAYER_STATE.HIT:
-                var num = GameConst.GET_RANDOM(1 , 2);
+                var num = GameCommon.GET_RANDOM(1 , 2);
                 this.setAnimation("hurt" + num);
                 // console.log("State HIT");
                 break;
             case GameEnum.PLAYER_STATE.ATK:
-                var num = GameConst.GET_RANDOM(1 , 2);
+                var num = GameCommon.GET_RANDOM(1 , 2);
                 this.setAnimation("touch" + num);
                 // console.log("State ATK");
                 break;

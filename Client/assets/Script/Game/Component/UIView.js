@@ -1,3 +1,6 @@
+
+var GameCommon = require("GameCommon");
+
 cc.Class({
     extends: cc.Component,
 
@@ -6,11 +9,12 @@ cc.Class({
     },
 
     onLoad () {
+        GameCommon.SetUIView(this);
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouched, this);
     },
 
     start () {
-
+        
     },
 
     // update (dt) {},

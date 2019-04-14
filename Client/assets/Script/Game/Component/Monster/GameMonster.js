@@ -1,7 +1,6 @@
 
 var GameObject = require("GameObject");
 var GameEnum = require("GameEnum");
-var UIView = require("UIView");
 var GameCommon = require("GameCommon");
 
 cc.Class({
@@ -121,7 +120,7 @@ cc.Class({
     // 开启控制
     turnOnControl:function (player) {
         this._Controller = player;
-        var uiview = GameCommon.GetUIView(UIView);
+        var uiview = GameCommon.GetUIView();
         uiview.setTouchListener(this);
         this.setFollowPlayer(player);
         this.SyncLinearVelocity(player);
@@ -129,7 +128,7 @@ cc.Class({
 
     // 取消控制
     turnOffControl:function () {
-        var uiview = GameCommon.GetUIView(UIView);
+        var uiview = GameCommon.GetUIView();
         if (this._Controller) {
             uiview.setTouchListener(this._Controller);
             this._Controller = null;
