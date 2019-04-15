@@ -113,11 +113,10 @@ cc.Class({
             result = true;
             var monster = monsters[index];
             
-            if (!monster.isSleep) {
+            if (!monster.isSleep && !monster.getController()) {
                 monster.beKill(this);    
             }
         }
-
         return result;
     },
 });

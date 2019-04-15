@@ -254,7 +254,7 @@ cc.Class({
     showBigBoomAni:function () {
         var bigBoomAni = this.globalAni[1];
         bigBoomAni.node.active = true;
-        bigBoomAni.animation = "gbl_zd_boom";
+        bigBoomAni.animation = "boom_big";
         bigBoomAni.setCompleteListener(function () {
             bigBoomAni.node.active = false;
         }.bind(this));

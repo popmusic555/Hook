@@ -1,6 +1,7 @@
 
 var GameMonster = require("GameMonster");
 var GameEnum = require("GameEnum");
+var GameObject = require("GameObject");
 
 cc.Class({
     extends: GameMonster,
@@ -70,6 +71,7 @@ cc.Class({
         this.boomEffect.setCompleteListener(this.onDeath.bind(this)); 
 
         // 爆炸清除周围所有怪物
+        this.killOtherMonster();
     },
 
     onDeath:function () {
@@ -78,5 +80,43 @@ cc.Class({
 
     onTouched:function () {
         
+    },
+
+    // 获取矩形范围内的怪物
+    getMonsterForAABB:function (worldRect) {
+        var result = [];
+        var colliderList = cc.director.getPhysicsManager().testAABB(worldRect);
+        var len = colliderList.length;
+        for (let index = 0; index < len; index++) {
+            var collider = colliderList[index];
+
+            var gameObject = collider.getComponent(GameObject);
+            if (gameObject.ObjectType == GameEnum.GAMEOBJ_TYPE.MONSTER) {
+                result.push(gameObject);    
+            }
+            
+        }
+        return result;
+    },
+
+    // 击杀冲击范围内的怪物
+    killOtherMonster:function () {
+        var result = false;
+
+        var worldPos = this.node.convertToWorldSpaceAR(cc.v2(0,0));
+
+        var rect = new cc.rect(worldPos.x - 120 , worldPos.y - 120 , 240 ,  240);
+
+        var monsters = this.getMonsterForAABB(rect);
+        var len = monsters.length;
+        for (let index = 0; index < len; index++) {
+            result = true;
+            var monster = monsters[index];
+            
+            if (!monster.isSleep && !monster.getController()) {
+                monster.beKill(this);    
+            }
+        }
+        return result;
     },
 });

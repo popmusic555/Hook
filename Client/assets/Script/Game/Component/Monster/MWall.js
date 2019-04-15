@@ -68,7 +68,7 @@ cc.Class({
             // 重新唤醒player
             player.visible(true);
             player.wakeUp();
-            // this.handlePlayer(self , player);
+            this.handlePlayer(self , player);
         }
         else
         {

@@ -39,7 +39,7 @@
       }
     ],
     "_active": true,
-    "_level": 1,
+    "_level": 3,
     "_components": [
       {
         "__id__": 23
@@ -191,7 +191,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "f5eIdZNMJGvZDVmGo8mrJ1"
+    "_id": "9fDUbtJsVHnZOVGYNLPv3B"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -293,7 +293,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "34HI+fdpZGE4d7TwCIBnNf"
+    "_id": "18YhuVcipE7a1qHqhQ3ADm"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -395,7 +395,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "6dvYFmenFHM6k5zG1s7Riv"
+    "_id": "745cK0ZDFFiaA31iZFi0vp"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -497,7 +497,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "37DZ1ECl9MkY+4a84Gqmro"
+    "_id": "6cbVkdZXBPcqPrdSyOZmOd"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -599,7 +599,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "e5GpLF+0xJgIOwNxwWZzci"
+    "_id": "a3gP0oLwJL4ZZNdu1QybcA"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -701,7 +701,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "907jWb0PhFIYsopGbuM4Cx"
+    "_id": "2afcl6mpdAorb4nUr7epHJ"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -803,7 +803,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "8fe1/UGu1KEagncZFuT0B2"
+    "_id": "22VGC3Bz1NQb9OhOOU0pGd"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -844,7 +844,8 @@
     "throughHole": {
       "__id__": 20
     },
-    "_id": "3dRn+BJi5HsroAr0jC7S2d"
+    "_CurEmitPlayer": null,
+    "_id": "d0+ncrViVBsoQNZ2XZmGai"
   },
   {
     "__type__": "cc.RigidBody",
@@ -868,7 +869,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "b617RamxNKsLDNmv3GRFYg"
+    "_id": "86Awc3h6pPk7YZ5iLb+38m"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -894,7 +895,7 @@
       "width": 210,
       "height": 5825
     },
-    "_id": "27Tu3OeflGQJJMSB4UQHgc"
+    "_id": "c9ebUpgc9PpJZwrr/IWGUb"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -912,15 +913,15 @@
     "body": null,
     "_offset": {
       "__type__": "cc.Vec2",
-      "x": 2100,
+      "x": 2140,
       "y": 2864
     },
     "_size": {
       "__type__": "cc.Size",
-      "width": 50,
+      "width": 300,
       "height": 5825
     },
-    "_id": "8fCOieXdFJtK7eQ9hpU3jr"
+    "_id": "a4GOPSSbZLTbQnzirVWZg5"
   },
   {
     "__type__": "cc.PrefabInfo",
