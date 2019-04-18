@@ -9,6 +9,9 @@ cc.Class({
     properties: {
         // 怪物优先级
         priority:0,
+        // 怪物最小速度
+        minSpeed:0,
+
         // Player跟随
         _FollowPlayer:null,
         // 碰撞到Floor时运算的数据
@@ -141,6 +144,20 @@ cc.Class({
         return this._Controller;
     },
 
+    setLinearVelocityX:function (x) {
+        if (x < this.minSpeed) {
+            x = this.minSpeed;
+        }
+        this.getRigidBody().linearVelocity = new cc.Vec2(x , this.getRigidBody().linearVelocity.y);
+    },
+
+    setLinearVelocity:function (x , y) {
+        if (x < this.minSpeed) {
+            x = this.minSpeed;
+        }
+        this.getRigidBody().linearVelocity = new cc.Vec2(x , y);
+    },
+
     onCollision:function (contact , selfGameObj , otherGameObj) {
         // 碰撞不同类型的游戏物体触发不同的逻辑
         switch (otherGameObj.ObjectType) {
@@ -219,6 +236,7 @@ cc.Class({
             console.log("向上运动时屏蔽碰撞逻辑Player");
             return;
         }
+
         this.handlePlayer(self , other);
     },
 

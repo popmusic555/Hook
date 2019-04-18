@@ -28,4 +28,8 @@ cc.Class({
         map.updateMap(displacementX , displacementY);
     },
 
+    // 根据关卡ID刷新地图
+    refreshMapByPassID:function () {
+          
+    },
 });

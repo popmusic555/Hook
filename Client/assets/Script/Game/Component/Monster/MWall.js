@@ -15,6 +15,9 @@ cc.Class({
 
         // 当前已碰撞到的Player
         _CurEmitPlayer:null,
+
+        // 当前是否可以穿墙
+        _IsThrough:null,
     },
 
     // onLoad () {},
@@ -38,28 +41,38 @@ cc.Class({
         return this._ReEmitSpeed;  
     },
 
-    onCollision:function (contact , selfGameObj , otherGameObj) {
+    onBeginContact:function (contact, selfCollider, otherCollider) {
+        var selfGameObject = selfCollider.getComponent(GameObject); 
+        var otherGameObject = otherCollider.getComponent(GameObject);
+        // new cc.PhysicsBoxCollider().tag;
+        selfGameObject.onCollision(contact , selfGameObject , otherGameObject , selfCollider.tag , otherCollider.tag);
+    },
+
+    onCollision:function (contact , selfGameObj , otherGameObj , selfTag , otherTag) {
         // 碰撞不同类型的游戏物体触发不同的逻辑
         switch (otherGameObj.ObjectType) {
             case GameEnum.GAMEOBJ_TYPE.MONSTER:
-                this.onMonster(contact , selfGameObj , otherGameObj);
+                this.onMonster(contact , selfGameObj , otherGameObj , selfTag , otherTag);
                 break;
             case GameEnum.GAMEOBJ_TYPE.PLAYER:
-                this.onPlayer(contact , selfGameObj , otherGameObj);
+                this.onPlayer(contact , selfGameObj , otherGameObj , selfTag , otherTag);
                 break;
         }
     },
 
-    onMonster:function (contact , self , other) {
+    onMonster:function (contact , self , other , selfTag , otherTag) {
         // 休眠后不处理任何逻辑
         if (self.isSleep || other.isSleep) {
             console.log("休眠后不处理任何逻辑Monster");
             return;
         }
-        this.handleMonster(self , other);
+
+        if (selfTag > 1) {
+            this.handleMonster(self , other, selfTag , otherTag);
+        }
     },
 
-    handleMonster:function (self , other) {
+    handleMonster:function (self , other, selfTag , otherTag) {
         var monster = other;
         var player = monster.getController();
         if (player) {
@@ -77,51 +90,102 @@ cc.Class({
         }
     },
 
-    onPlayer:function (contact , self , other) {
+    onPlayer:function (contact , self , other, selfTag , otherTag) {
         // 休眠后不处理任何逻辑
         if (self.isSleep || other.isSleep) {
             console.log("休眠后不处理任何逻辑Player");
             return;
         }
-        this.handlePlayer(self , other);
+        this.handlePlayer(self , other, selfTag , otherTag);
     },
 
-    handlePlayer:function (self , other) {
-        console.log("Player 撞墙停止");
+    handlePlayer:function (self , other, selfTag , otherTag) {
+        console.log("Player 撞墙停止" , selfTag);
         var player = other;
+        switch (selfTag) {
+            case 1:
+                // 判断是否需要停止       
+                if (player.getLinearVelocity().x <= this.stopSpeed) {
+                    this._IsThrough = false;
+                    var cameraFollow = cc.Camera.main.getComponent("CameraFollow");
+                    cameraFollow.stopFollowWithPosX(this.node.x - cc.view.getVisibleSize().width * 0.25);
+                    console.log("需要停止");
+                }
+                else
+                {
+                    this._IsThrough = true;
+                    console.log("需要穿墙");
+                }
+                break;
+            case 2:
+                // 判断是否停止
+                if (!this._IsThrough) {
+                    player.stop();
+                    player.setGravityScale(GameConst.GRAVITY_SCALE);
+                    player.getPlayerModel().transitionStateAndLock(GameEnum.PLAYER_STATE.DEAD1);
+                    this.scheduleOnce(function () {
+                        player.node.x = this.node.x + 30;
+                    } , 0);    
+                }
+                else
+                {
+                    // 穿越墙壁
+                    console.log("穿越墙壁");
+                    this.through(player);
+                }
+                break;
+            case 3:
+                // 判断是否穿墙
+                if (this.getReEmitSpeed()) {
+                    player.setLinearVelocity(this.getReEmitSpeed().x , this.getReEmitSpeed().y);
+                    player.setGravityScale(GameConst.GRAVITY_SCALE);
+        
+                    var y = player.node.parent.convertToWorldSpaceAR(player.node.position).y;
+                    y = this.throughHole.parent.convertToNodeSpaceAR(cc.v2(0 , y)).y;
+                    
+                    this.throughHole.y = y;
+                    this.throughHole.active = true;
+        
+                    player.showThroughHoleAni(player.node.position);
+                    // this.scheduleOnce(function () {
+                    //     player.node.x = this.node.x + 2000;
+                    // } , 0);  
+                }
+                break;
+        }
 
-        if (this.getReEmitSpeed()) {
-            player.setLinearVelocity(this.getReEmitSpeed().x , this.getReEmitSpeed().y);
-            player.setGravityScale(GameConst.GRAVITY_SCALE);
+        // if (this.getReEmitSpeed()) {
+        //     player.setLinearVelocity(this.getReEmitSpeed().x , this.getReEmitSpeed().y);
+        //     player.setGravityScale(GameConst.GRAVITY_SCALE);
 
-            var y = player.node.parent.convertToWorldSpaceAR(player.node.position).y;
-            y = this.throughHole.parent.convertToNodeSpaceAR(cc.v2(0 , y)).y;
+        //     var y = player.node.parent.convertToWorldSpaceAR(player.node.position).y;
+        //     y = this.throughHole.parent.convertToNodeSpaceAR(cc.v2(0 , y)).y;
             
-            this.throughHole.y = y;
-            this.throughHole.active = true;
+        //     this.throughHole.y = y;
+        //     this.throughHole.active = true;
 
-            player.showThroughHoleAni(player.node.position);
-            // this.scheduleOnce(function () {
-            //     player.node.x = this.node.x + 2000;
-            // } , 0);  
-        }
-        else
-        {
-            if (player.getLinearVelocity().x <= this.stopSpeed) {
-                player.stop();
-                player.setGravityScale(GameConst.GRAVITY_SCALE);
-                player.getPlayerModel().transitionStateAndLock(GameEnum.PLAYER_STATE.DEAD1);
-                this.scheduleOnce(function () {
-                    player.node.x = this.node.x + 157;
-                } , 0);    
-            }
-            else
-            {
-                // 穿越墙壁
-                console.log("穿越墙壁");
-                this.through(player);
-            }
-        }
+        //     player.showThroughHoleAni(player.node.position);
+        //     // this.scheduleOnce(function () {
+        //     //     player.node.x = this.node.x + 2000;
+        //     // } , 0);  
+        // }
+        // else
+        // {
+        //     if (player.getLinearVelocity().x <= this.stopSpeed) {
+        //         player.stop();
+        //         player.setGravityScale(GameConst.GRAVITY_SCALE);
+        //         player.getPlayerModel().transitionStateAndLock(GameEnum.PLAYER_STATE.DEAD1);
+        //         this.scheduleOnce(function () {
+        //             player.node.x = this.node.x + 30;
+        //         } , 0);    
+        //     }
+        //     else
+        //     {
+        //         // 穿越墙壁
+        //         console.log("穿越墙壁");
+        //         this.through(player);
+        //     }
+        // }
     },
 
     through:function (player) {

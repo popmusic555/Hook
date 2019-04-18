@@ -49,6 +49,7 @@ cc.Class({
 
     start () {
         this._super();
+        this._IsTouch = false;
         this.injection(cc.find("Canvas/Processor").getComponent("Processor"));
     },
 

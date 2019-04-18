@@ -1,4 +1,5 @@
 var GameConst = require("GameConst");
+var DataManager = require("DataManager");
 
 var GameCommon = {};
 
@@ -14,21 +15,8 @@ GameCommon.GetUIView = function () {
 };
 
 // 是否在墙体范围内
-GameCommon.IS_IN_WALL = function (x) {
-    var bGenerator = GameCommon.GAME_VIEW.buildGenerator;
-
-    if (bGenerator.wallCreatePosX <= 0) {
-        return false;
-    }
-
-    var leftPosX = bGenerator.wallCreatePosX - 100;
-    var rightPosX = bGenerator.wallCreatePosX + GameConst.WALL_WIDTH;
-
-    if (x >= leftPosX && x <= rightPosX) {
-        return true;        
-    }
-
-    return false;
+GameCommon.isInWall = function (x) {
+    return DataManager.Userdata.isInWall(x);
 },
 
 // 获取随机数

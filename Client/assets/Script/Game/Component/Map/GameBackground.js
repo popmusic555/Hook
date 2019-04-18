@@ -12,6 +12,8 @@ cc.Class({
         bg1:cc.Sprite,
         // 地图背景2
         bg2:cc.Sprite,
+        // 地图背景3
+        bg3:cc.Sprite,
     },
 
     // onLoad () {},
@@ -27,7 +29,8 @@ cc.Class({
         // 地图背景1 替换成地图背景2
         // 地图背景2 随机生成新背景
         this.bg1.spriteFrame = this.bg2.spriteFrame;
-        this.bg2.spriteFrame = this.bgSprite[this.getRandomNum(this.bgSprite.length)];
+        this.bg2.spriteFrame = this.bg3.spriteFrame;
+        this.bg3.spriteFrame = this.bgSprite[this.getRandomNum(this.bgSprite.length)];
     },
 
     getRandomNum:function (num) {

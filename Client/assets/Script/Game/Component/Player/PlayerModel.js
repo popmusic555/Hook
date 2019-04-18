@@ -75,6 +75,7 @@ cc.Class({
                 break;
             case GameEnum.PLAYER_STATE.DEAD2:
                 this.setAnimation("lose2");
+                this.model.node.x += -40;
                 // console.log("State DEAD2");
                 break;
             default:

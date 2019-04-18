@@ -47,7 +47,7 @@ cc.Class({
     },
 
     beKill:function (gameObject , dontAni) {
-        console.log("爆炸并死亡");
+        console.log("爆炸并死亡" , gameObject.node.name);
         this.stopAndSleep();
         
         var linearVelocity = gameObject.getLinearVelocity();

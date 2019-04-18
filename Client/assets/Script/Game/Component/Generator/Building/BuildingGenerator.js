@@ -8,45 +8,29 @@ cc.Class({
 
     properties: {
         camera:cc.Node,
-
-        _Index:-1,
-
         bulidingRes:[cc.SpriteFrame],
-
-        tmpBuilding:cc.Node,
-        // 墙体预制
-        wallPrefabs:cc.Prefab,
         // 前景墙体
-        wallForegroundPrefabs:cc.Prefab,
+        wallForeground:cc.Prefab,
+        // 背景墙体
+        wallBackground:cc.Prefab,
 
-        // 起始生成点
-        startPosx:{
-            default:0,
-            visible:false,
-        },
         // 生成范围
-        generateRange:{
-            default:0,
-            visible:false,
-        },
-        // 最小生成数量
-        generateMinNum:0,
-        // 最大生成数量
-        generateMaxNum:0,
+        generateRange:0,
 
-        // 墙体生成的位置
-        wallCreatePosX:-1,
+        // 当前地图索引
+        _CurIndex:-1,
+        // 偏移量
+        _StartOffset:0,
+        // 建筑总数量
+        _TotalBuildingNum:0,
     },
 
     // onLoad () {},
 
     start () {
-        // this.camera = cc.find("Canvas/MainCamera");
-        this.startPosx = 0 - cc.view.getVisibleSize().width * 0.5;
-        this.generateRange = 2500;
-        this._Index = -1;
-
-        this.generateBuilding();
+        var cameraPosX = cc.Camera.main.node.x;
+        var index = this.updateIndex(cameraPosX , this.generateRange);
+        this.GenerateBuilding(index , this.generateRange);
     },
 
     update (dt) {
@@ -60,114 +44,138 @@ cc.Class({
 
         // var index = Math.floor(distance / this.generateRange);
         // this.generate(index);
-        this.removeBuilding();
-        this.generateBuilding();
+
+        var cameraPosX = cc.Camera.main.node.x;
+        var index = this.updateIndex(cameraPosX , this.generateRange);
+
+        this.RemoveBuilding();
+        this.GenerateBuilding(index , this.generateRange);
+        
     },
-
-    generateBuilding:function () {
-        var posx = this.camera.x - cc.view.getVisibleSize().width * 0.5;
-        // 距离起始点的距离
-        var distance = posx - this.startPosx;
-
-        var index = Math.floor(distance / this.generateRange);
-        this.generate(index);
-    },
-
-    generate:function (index) {
-        if (index <= this._Index) {
-            return;
-        }
-        this._Index = index;
-        if ((this._Index + 1) % GameConst.CREATE_WALL == 0) {
-            this.createWall();
+    /**
+     * 更新索引
+     * 
+     */
+    updateIndex:function (cameraPosX , generateRange) {
+        var index = Math.floor(cameraPosX / generateRange);
+        if (index > this._CurIndex) {
+            this._CurIndex = index;
+            return this._CurIndex;
         }
         else
         {
-            this.createBuilding();
+            return null;
         }
     },
+    /**
+     * 生成建筑
+     * 
+     */
+    GenerateBuilding:function (index , generateRange) {
+        if (index == null) {
+            return;
+        }
+        // 生成下一地图建筑
+        index = index + 1;
+        console.log("createMap for index " , index , this._StartOffset);
+        var startPosX = index * generateRange - cc.view.getVisibleSize().width * 0.5;
+        this.Generate(startPosX , this._StartOffset , generateRange);
+    },
+    /**
+     * 生成函数
+     * 
+     * @param {any} startPosX 起始位置
+     * @param {any} startOffset 起始位置偏移
+     * @param {any} generateRange 生成范围
+     */
+    Generate:function (startPosX , startOffset , generateRange) {
+        this.createBuilding(startPosX , startOffset , generateRange);
+    },
+    /**
+     * 创建建筑
+     * 
+     * @param {any} startPosX 生成的起始点
+     * @param {any} startOffset 起始点的偏移
+     * @param {any} generateRange 生成范围
+     */
+    createBuilding:function (startPosX , startOffset , generateRange) {
+        var posX = startPosX + startOffset;
 
-    createBuilding:function () {
-        // 预生成建筑物
-        var index = this._Index + 1;
-        var curPosx = index * this.generateRange;
-        var num = GameCommon.GET_RANDOM(this.generateMinNum , this.generateMaxNum);
-        var range = this.generateRange / num;
-        var posx = 0;
-        var building = null;
-
-        for (let index = 0; index < num; index++) {
-            posx = curPosx + GameCommon.GET_RANDOM(0 , range) + index * range;
-            building = this.createSingleBuilding("building" , posx);
-            this.node.insertChild(building , 0);
+        var flag = true;
+        while (flag) {
+            if (posX >= startPosX + generateRange) {
+                flag = false;
+                this._StartOffset = posX - (startPosX + generateRange);
+            }
+            else
+            {
+                var building = this.createSingleBuilding("building" + this._TotalBuildingNum , posX);
+                this.node.addChild(building);
+                posX = posX + building.width;
+                this._TotalBuildingNum++;
+            }
         }
     },
-
+    /**
+     * 创建单个建筑
+     * 
+     * @param {any} buildingName 名称
+     * @param {any} posx X轴坐标
+     * @returns 
+     */
     createSingleBuilding:function (buildingName , posx) {
         var node = new cc.Node(buildingName);
         node.x = posx;
         node.y = 0;
         node.anchorX = 0;
         node.anchorY = 0;
+        node.width = 300;
+        node.height = 0;
         var sprite = node.addComponent(cc.Sprite);
+        var index = GameCommon.GET_RANDOM(0 , this.bulidingRes.length - 1);
 
-        var index = GameCommon.GET_RANDOM(0 , 3);
-        sprite.spriteFrame = this.bulidingRes[index];
-
+        var spf = this.bulidingRes[index];
+        if (spf) {
+            sprite.spriteFrame = spf
+            sprite.sizeMode = cc.Sprite.SizeMode.TRIMMED;
+            node.width = sprite.spriteFrame.getRect().width;
+            node.height = sprite.spriteFrame.getRect().height; 
+        }
         return node;
     },
 
-    createWall:function () {
-        var wall = cc.instantiate(this.wallPrefabs);
+    // createWall:function () {
+    //     var wall = cc.instantiate(this.wallPrefabs);
+    //     var index = this._Index + 1;
+    //     var curPosx = index * this.generateRange;
+    //     wall.x = curPosx;
+    //     wall.y = 0;
+    //     this.wallCreatePosX = curPosx;
+    //     console.log("aaaaaaaaaaaaaaaaaaaaa" , this.wallCreatePosX);
+    //     this.node.addChild(wall);
+    //     this.createForegroundWall();
+    // },
 
-        var index = this._Index + 1;
-        var curPosx = index * this.generateRange;
+    // createForegroundWall:function () {
+    //     var wallForeground = cc.instantiate(this.wallForegroundPrefabs);
 
-        wall.x = curPosx;
-        wall.y = 0;
+    //     var index = this._Index + 1;
+    //     var curPosx = index * this.generateRange;
 
-        this.wallCreatePosX = curPosx;
-        console.log("aaaaaaaaaaaaaaaaaaaaa" , this.wallCreatePosX);
+    //     wallForeground.x = curPosx
+    //     wallForeground.y = 0;
 
-        this.node.addChild(wall);
-
-        this.createForegroundWall();
-    },
-
-    createForegroundWall:function () {
-        var wallForeground = cc.instantiate(this.wallForegroundPrefabs);
-
-        var index = this._Index + 1;
-        var curPosx = index * this.generateRange;
-
-        wallForeground.x = curPosx
-        wallForeground.y = 0;
-
-        this.tmpBuilding.addChild(wallForeground);
-    },
+    //     this.tmpBuilding.addChild(wallForeground);
+    // },
 
     // 删除建筑
-    removeBuilding:function () {
+    RemoveBuilding:function () {
         var len = this.node.childrenCount;
         for (let index = 0; index < len; index++) {
             var childNode = this.node.children[index];
             var worldPos = childNode.convertToWorldSpaceAR(cc.v2(0,0));
-
             var pos = cc.Camera.main.getWorldToCameraPoint(worldPos);
-
-            if (pos.x <= -this.generateRange) {
-                childNode.destroy();
-            }
-        }
-
-        var len = this.tmpBuilding.childrenCount;
-        for (let index = 0; index < len; index++) {
-            var childNode = this.tmpBuilding.children[index];
-            var worldPos = childNode.convertToWorldSpaceAR(cc.v2(0,0));
-
-            var pos = cc.Camera.main.getWorldToCameraPoint(worldPos);
-
-            if (pos.x <= -this.generateRange) {
+            if (pos.x <= -600) {
                 childNode.destroy();
             }
         }

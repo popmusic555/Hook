@@ -62,8 +62,6 @@ var GameObject = cc.Class({
     },
 
     onLoad () {
-        // 刚体组件
-        this._RigidBody = this.getComponent(cc.RigidBody);
     },
 
     start () {
@@ -92,37 +90,45 @@ var GameObject = cc.Class({
         return this._Subject;
     },
 
+    // 获取RigidBody
+    getRigidBody:function () {
+        if (!this._RigidBody) {
+            this._RigidBody = this.getComponent(cc.RigidBody);
+        }
+        return this._RigidBody;
+    },
+
     // 设置linearVelocity
     setLinearVelocityX:function (x) {
-        this._RigidBody.linearVelocity = new cc.Vec2(x , this._RigidBody.linearVelocity.y);
+        this.getRigidBody().linearVelocity = new cc.Vec2(x , this.getRigidBody().linearVelocity.y);
     },
 
     setLinearVelocityY:function (y) {
-        this._RigidBody.linearVelocity = new cc.Vec2(this._RigidBody.linearVelocity.x , y);
+        this.getRigidBody().linearVelocity = new cc.Vec2(this.getRigidBody().linearVelocity.x , y);
     },
 
     setLinearVelocity:function (x , y) {
-        this._RigidBody.linearVelocity = new cc.Vec2(x , y);
+        this.getRigidBody().linearVelocity = new cc.Vec2(x , y);
     },
 
     getLinearVelocity:function () {
-        return this._RigidBody.linearVelocity;
+        return this.getRigidBody().linearVelocity;
     },
 
     setAngularVelocity:function (num) {
-        this._RigidBody.angularVelocity = num;
+        this.getRigidBody().angularVelocity = num;
     },
 
     getAngularVelocity:function () {
-        return this._RigidBody.angularVelocity;  
+        return this.getRigidBody().angularVelocity;  
     },
 
     setGravityScale:function (scale) {
-        this._RigidBody.gravityScale = scale;
+        this.getRigidBody().gravityScale = scale;
     },
 
     getGravityScale:function () {
-        return this._RigidBody.gravityScale;
+        return this.getRigidBody().gravityScale;
     },
 
     stop:function () {

@@ -80,7 +80,7 @@ cc.Class({
         var cameraX = cc.Camera.main.node.x;
         var posx = cameraX + 1400;
 
-        if (GameCommon.IS_IN_WALL(posx)) {
+        if (GameCommon.isInWall(posx)) {
             return;
         }
 

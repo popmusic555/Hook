@@ -12,6 +12,8 @@ cc.Class({
 
         // 地图
         map:MapManager,
+
+        _StopPosX:null,
     },
 
     onLoad () {
@@ -19,6 +21,7 @@ cc.Class({
     },
 
     start () {
+        this._StopPosX = null;
     },
 
     lateUpdate: function (dt) {
@@ -35,8 +38,17 @@ cc.Class({
         if (y < 0) {
             y = 0;
         }
+
+        if (this._StopPosX && x > this._StopPosX) {
+            x = this._StopPosX;
+        }
+
         this.node.x = x;
         this.node.y = y;
-    }
+    },
+
+    stopFollowWithPosX:function (x) {
+        this._StopPosX = x;
+    },
 
 });
