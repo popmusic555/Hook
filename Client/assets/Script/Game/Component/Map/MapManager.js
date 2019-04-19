@@ -29,7 +29,11 @@ cc.Class({
     },
 
     // 根据关卡ID刷新地图
-    refreshMapByPassID:function () {
-          
+    refreshMapByPassID:function (passId) {
+        var len = this.maps.length
+        for (let index = 0; index < len; index++) {
+            const map = this.maps[index];
+            map.refreshMapByPassID(passId);
+        }
     },
 });

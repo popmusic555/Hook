@@ -27,6 +27,8 @@ cc.Class({
             default:false,
             visible:false,
         },
+
+        // 
     },
 
     // onLoad () {},
@@ -103,6 +105,13 @@ cc.Class({
 
     isSuperAtk:function () {
         if (this.getRunState() == GameEnum.PLAYER_RUNSTATE.SUPER_ATK) {
+            return true;
+        }  
+        return false;
+    },
+
+    isDeath:function () {
+        if (this.getRunState() == GameEnum.PLAYER_RUNSTATE.DEATH) {
             return true;
         }  
         return false;
@@ -209,8 +218,14 @@ cc.Class({
         this.getPlayerModel().transitionStateAndLock(GameEnum.PLAYER_STATE.HIT);
     },
 
+    deadForWall:function () {
+        this.getPlayerModel().transitionStateAndLock(GameEnum.PLAYER_STATE.DEAD1);
+        this.setRunState(GameEnum.PLAYER_RUNSTATE.DEATH);
+    },
+
     dead:function () {
         this.getPlayerModel().transitionStateAndLock(GameEnum.PLAYER_STATE.DEAD2);
+        this.setRunState(GameEnum.PLAYER_RUNSTATE.DEATH);
     },
 
     superAtk:function () {

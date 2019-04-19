@@ -2,6 +2,7 @@
 var GameObject = require("GameObject");
 var GameEnum = require("GameEnum");
 var GameConst = require("GameConst");
+var DataManager = require("DataManager");
 
 cc.Class({
     extends: GameObject,
@@ -9,15 +10,16 @@ cc.Class({
     properties: {
         // 撞墙停止速度
         stopSpeed:0,
+        throughHole:cc.Node,
+        // 当前地板
+        floor:cc.Sprite,
+        // 当前地板资源
+        floorRes:[cc.SpriteFrame],
 
         _ReEmitSpeed:null,
-        throughHole:cc.Node,
-
-        // 当前已碰撞到的Player
-        _CurEmitPlayer:null,
-
         // 当前是否可以穿墙
         _IsThrough:null,
+        _CurPlayer:null,
     },
 
     // onLoad () {},
@@ -25,6 +27,8 @@ cc.Class({
     start () {
         this._super();
         // this._ReEmitSpeed = cc.v2(0,0);
+        var passId = DataManager.Userdata.getPassID() % 3;
+        this.floor.spriteFrame = this.floorRes[passId];
     },
 
     lateUpdate (dt) {
@@ -66,27 +70,47 @@ cc.Class({
             console.log("休眠后不处理任何逻辑Monster");
             return;
         }
-
-        if (selfTag > 1) {
-            this.handleMonster(self , other, selfTag , otherTag);
-        }
+        this.handleMonster(self , other, selfTag , otherTag);
     },
 
     handleMonster:function (self , other, selfTag , otherTag) {
         var monster = other;
         var player = monster.getController();
-        if (player) {
-            monster.turnOffControl();
-            monster.beKill(this);
-            // 重新唤醒player
-            player.visible(true);
-            player.wakeUp();
-            this.handlePlayer(self , player);
-        }
-        else
-        {
-            monster.beKill(this);
-            monster.stopAndSleep();
+
+        switch (selfTag) {
+            case 1:
+                // 判断是否需要停止
+                if (player) {
+                    if (player.getLinearVelocity().x <= this.stopSpeed) {
+                        this._IsThrough = false;
+                        var cameraFollow = cc.Camera.main.getComponent("CameraFollow");
+                        cameraFollow.stopFollowWithPosX(this.node.x - cc.view.getVisibleSize().width * 0.25);
+                        console.log("需要停止");
+                    }
+                    else
+                    {
+                        this._IsThrough = true;
+                        console.log("需要穿墙");
+                    }    
+                }
+                break;
+            case 2:
+                if (player) {
+                    monster.turnOffControl();
+                    monster.beKill(this);
+                    // 重新唤醒player
+                    player.visible(true);
+                    player.wakeUp();
+                    player.SyncParam(monster.getPlayerData());
+                    player.ApplyAllParam(player);
+                    this.handlePlayer(self , player , selfTag , otherTag);
+                }
+                else
+                {
+                    monster.beKill(this);
+                    monster.stopAndSleep();
+                }
+                break;
         }
     },
 
@@ -119,20 +143,23 @@ cc.Class({
                 break;
             case 2:
                 // 判断是否停止
-                if (!this._IsThrough) {
-                    player.stop();
-                    player.setGravityScale(GameConst.GRAVITY_SCALE);
-                    player.getPlayerModel().transitionStateAndLock(GameEnum.PLAYER_STATE.DEAD1);
-                    this.scheduleOnce(function () {
-                        player.node.x = this.node.x + 30;
-                    } , 0);    
+                if (!this._CurPlayer) {
+                    if (!this._IsThrough) {
+                        player.stop();
+                        player.setGravityScale(GameConst.GRAVITY_SCALE);
+                        player.deadForWall();
+                        this.scheduleOnce(function () {
+                            player.node.x = this.node.x + 30;
+                        } , 0);
+                    }
+                    else
+                    {
+                        // 穿越墙壁
+                        console.log("穿越墙壁");
+                        this.through(player);
+                    }    
                 }
-                else
-                {
-                    // 穿越墙壁
-                    console.log("穿越墙壁");
-                    this.through(player);
-                }
+                this._CurPlayer = player;
                 break;
             case 3:
                 // 判断是否穿墙

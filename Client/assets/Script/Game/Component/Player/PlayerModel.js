@@ -14,10 +14,17 @@ cc.Class({
         _StateLock:false,
         // 攻击动作
         _AtkAction:null,
+
+        // 0 随机 1  发射 2 撞墙
+        _CurActionID:0,
+        // 0-4
+        _CurAtkActionID:0,
     },
 
     onLoad () {
         this.transitionState(GameEnum.PLAYER_STATE.STATIC);
+        this._CurActionID = 0;
+        this._CurAtkActionID = 0;
     },
 
     start () {
@@ -39,20 +46,46 @@ cc.Class({
                 break;
             case GameEnum.PLAYER_STATE.STATIC:
                 this.setAnimation("shoot");
-                // console.log("State STATIC");
+                console.log("State STATIC");
                 break;
             case GameEnum.PLAYER_STATE.EMIT:
                 this.setAnimation("shoot");
                 // console.log("State EMIT");
                 break;
             case GameEnum.PLAYER_STATE.FLY:
-                var num = GameCommon.GET_RANDOM(1 , 3);
-                this.setAnimation("fly" + num);
+                var num = this._CurActionID;
+                // this._CurAtkActionID = num;
+                if (num == 0) {
+                    this.setAnimation("fly" + GameCommon.GET_RANDOM(1 , 3));
+                }
+                else if (num == 1)
+                {
+                    this.setAnimation("shoot");                        
+                }
+                else if (num == 2) {
+                    this.setAnimation("impact");                        
+                }
+                this._CurAtkActionID = 0;
                 // console.log("State FLY");
                 break;
             case GameEnum.PLAYER_STATE.DROP:
-                var num = GameCommon.GET_RANDOM(1 , 2);
-                this.setAnimation("down" + num);
+                var num = this._CurActionID;
+                // GameCommon.GET_RANDOM(1 , 3)
+                if (num == 0) {
+                    num = GameCommon.GET_RANDOM(1 , 3);
+                    this.setAnimation("down" + num);
+                    this._CurAtkActionID = num;
+                }
+                else if (num == 1)
+                {
+                    num = GameCommon.GET_RANDOM(1 , 3);
+                    this.setAnimation("down" + num);
+                    this._CurAtkActionID = num;
+                }
+                else if (num == 2) {
+                    this.setAnimation("impact");
+                    this._CurAtkActionID = 4;
+                }
                 // console.log("State DROP");
                 break;
             case GameEnum.PLAYER_STATE.HIT:
@@ -61,8 +94,24 @@ cc.Class({
                 // console.log("State HIT");
                 break;
             case GameEnum.PLAYER_STATE.ATK:
-                var num = GameCommon.GET_RANDOM(1 , 2);
-                this.setAnimation("touch" + num);
+                var num = this._CurAtkActionID;
+                if (num == 0) {
+                    num = GameCommon.GET_RANDOM(1 , 2);
+                    if (num == 1) {
+                        this.setAnimation("touch1");
+                    }
+                    else if (num == 2) {
+                        this.setAnimation("touch3");
+                    }
+                }
+                else if (num == 4)
+                {
+                    this.setAnimation("touch1");
+                }
+                else
+                {
+                    this.setAnimation("touch" + num);
+                }
                 // console.log("State ATK");
                 break;
             case GameEnum.PLAYER_STATE.SUPER_ATK:
@@ -75,7 +124,7 @@ cc.Class({
                 break;
             case GameEnum.PLAYER_STATE.DEAD2:
                 this.setAnimation("lose2");
-                this.model.node.x += -40;
+                this.model.node.x += -25;
                 // console.log("State DEAD2");
                 break;
             default:

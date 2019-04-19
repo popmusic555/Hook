@@ -28,11 +28,41 @@ DataManager.Userdata.isInWall = function (x) {
     var leftPosX = posx;
     var rightPosX = posx + DataManager.Userdata.WallWidth;
 
-    if (x >= leftPosX && x <= rightPosX) {
+    if (!DataManager.Userdata.isLeftWall(x) && !DataManager.Userdata.isRightWall(x)) {
         return true;        
     }
     return false;  
 },
+
+DataManager.Userdata.isLeftWall = function (x) {
+    var passId = DataManager.Userdata.getPassID();
+
+    var posx = DataManager.Userdata.getWallPosByPassID(passId);
+
+    var leftPosX = posx;
+    var rightPosX = posx + DataManager.Userdata.WallWidth;
+
+    if (x < leftPosX) {
+        return true;
+    }
+
+    return false;
+};
+
+DataManager.Userdata.isRightWall = function (x) {
+    var passId = DataManager.Userdata.getPassID();
+
+    var posx = DataManager.Userdata.getWallPosByPassID(passId);
+
+    var leftPosX = posx;
+    var rightPosX = posx + DataManager.Userdata.WallWidth;
+
+    if (x > rightPosX) {
+        return true;
+    }
+
+    return false;
+};
 
 DataManager.Userdata.getWallPosByPassID = function (passId) {
     if (passId >= this.WallPosSpeed.length) {

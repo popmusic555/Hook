@@ -27,6 +27,7 @@ GameEnum.PLAYER_RUNSTATE = new cc.Enum({
     NORMAL:1,
     SUPER_ATK:2,
     IMPACT:3,
+    DEATH:4
 });
 
 GameEnum.GAME_STATE = {    

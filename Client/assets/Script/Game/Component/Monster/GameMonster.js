@@ -236,6 +236,10 @@ cc.Class({
             console.log("向上运动时屏蔽碰撞逻辑Player");
             return;
         }
+        // 人物死亡时不处理任何逻辑
+        if (other.isDeath()) {
+            return;
+        }
 
         this.handlePlayer(self , other);
     },

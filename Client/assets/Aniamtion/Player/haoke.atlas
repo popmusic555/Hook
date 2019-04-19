@@ -1,124 +1,131 @@
 
 haoke.png
-size: 842,842
+size: 1857,361
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 res/appear
   rotate: false
-  xy: 2, 354
+  xy: 242, 128
   size: 236, 231
   orig: 236, 231
   offset: 0, 0
   index: -1
 res/down1
   rotate: false
-  xy: 697, 446
+  xy: 1692, 17
   size: 143, 157
   orig: 143, 157
   offset: 0, 0
   index: -1
 res/down2
-  rotate: false
-  xy: 466, 666
-  size: 235, 174
-  orig: 235, 174
+  rotate: true
+  xy: 1365, 2
+  size: 172, 165
+  orig: 172, 165
   offset: 0, 0
   index: -1
 res/down3
-  rotate: true
-  xy: 441, 9
+  rotate: false
+  xy: 744, 6
   size: 181, 148
   orig: 181, 148
   offset: 0, 0
   index: -1
 res/down4
-  rotate: true
-  xy: 240, 347
+  rotate: false
+  xy: 917, 188
   size: 238, 171
   orig: 238, 171
   offset: 0, 0
   index: -1
 res/fly1
-  rotate: true
-  xy: 413, 192
-  size: 175, 205
-  orig: 175, 205
+  rotate: false
+  xy: 1425, 185
+  size: 235, 174
+  orig: 235, 174
   offset: 0, 0
   index: -1
 res/fly2
   rotate: false
-  xy: 242, 615
+  xy: 480, 134
   size: 222, 225
   orig: 222, 225
   offset: 0, 0
   index: -1
 res/fly3
   rotate: false
-  xy: 2, 587
+  xy: 2, 106
   size: 238, 253
   orig: 238, 253
   offset: 0, 0
   index: -1
 res/gu1
-  rotate: true
-  xy: 620, 295
+  rotate: false
+  xy: 2, 39
   size: 72, 65
   orig: 72, 65
   offset: 0, 0
   index: -1
 res/gu2
   rotate: false
-  xy: 620, 245
+  xy: 76, 56
   size: 40, 48
   orig: 40, 48
   offset: 0, 0
   index: -1
 res/hurt1
   rotate: false
-  xy: 2, 149
+  xy: 704, 156
   size: 211, 203
   orig: 211, 203
   offset: 0, 0
   index: -1
 res/hurt2
   rotate: false
-  xy: 466, 495
+  xy: 927, 17
   size: 229, 169
   orig: 229, 169
   offset: 0, 0
   index: -1
+res/impact 
+  rotate: true
+  xy: 1158, 39
+  size: 175, 205
+  orig: 175, 205
+  offset: 0, 0
+  index: -1
 res/loose1
   rotate: true
-  xy: 413, 369
+  xy: 242, 2
   size: 124, 263
   orig: 124, 263
   offset: 0, 0
   index: -1
 res/loose2
-  rotate: true
-  xy: 703, 605
+  rotate: false
+  xy: 507, 3
   size: 235, 129
   orig: 235, 129
   offset: 0, 0
   index: -1
 res/shoot
   rotate: false
-  xy: 215, 162
+  xy: 1662, 176
   size: 193, 183
   orig: 193, 183
   offset: 0, 0
   index: -1
 res/touch1
   rotate: false
-  xy: 2, 4
+  xy: 1157, 216
   size: 266, 143
   orig: 266, 143
   offset: 0, 0
   index: -1
 res/touch2
-  rotate: true
-  xy: 270, 2
+  rotate: false
+  xy: 1532, 5
   size: 158, 169
   orig: 158, 169
   offset: 0, 0

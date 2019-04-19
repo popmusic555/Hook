@@ -17,12 +17,12 @@ var GamePlayer = cc.Class({
     onLoad () {
         var manager = cc.director.getPhysicsManager();
         manager.enabled = true;
-        cc.director.getPhysicsManager().debugDrawFlags = cc.PhysicsManager.DrawBits.e_aabbBit |
-        cc.PhysicsManager.DrawBits.e_pairBit |
-        cc.PhysicsManager.DrawBits.e_centerOfMassBit |
-        cc.PhysicsManager.DrawBits.e_jointBit |
-        cc.PhysicsManager.DrawBits.e_shapeBit
-        ;
+        // cc.director.getPhysicsManager().debugDrawFlags = cc.PhysicsManager.DrawBits.e_aabbBit |
+        // cc.PhysicsManager.DrawBits.e_pairBit |
+        // cc.PhysicsManager.DrawBits.e_centerOfMassBit |
+        // cc.PhysicsManager.DrawBits.e_jointBit |
+        // cc.PhysicsManager.DrawBits.e_shapeBit
+        // ;
 
         // console.newlog = console.log;
 

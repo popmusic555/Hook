@@ -1,6 +1,7 @@
 
 var GameCommon = require("GameCommon");
 var GameConst = require("GameConst");
+var DataManager = require("DataManager");
 
 // 建筑生成器
 cc.Class({
@@ -8,7 +9,9 @@ cc.Class({
 
     properties: {
         camera:cc.Node,
-        bulidingRes:[cc.SpriteFrame],
+        bulidingRes0:[cc.SpriteFrame],
+        bulidingRes1:[cc.SpriteFrame],
+        bulidingRes2:[cc.SpriteFrame],
         // 前景墙体
         wallForeground:cc.Prefab,
         // 背景墙体
@@ -77,7 +80,7 @@ cc.Class({
         }
         // 生成下一地图建筑
         index = index + 1;
-        console.log("createMap for index " , index , this._StartOffset);
+        // console.log("createMap for index " , index , this._StartOffset);
         var startPosX = index * generateRange - cc.view.getVisibleSize().width * 0.5;
         this.Generate(startPosX , this._StartOffset , generateRange);
     },
@@ -109,10 +112,8 @@ cc.Class({
             }
             else
             {
-                var building = this.createSingleBuilding("building" + this._TotalBuildingNum , posX);
-                this.node.addChild(building);
-                posX = posX + building.width;
-                this._TotalBuildingNum++;
+                var width = this.createSingleBuilding("building" + this._TotalBuildingNum , posX);
+                posX = posX + width;
             }
         }
     },
@@ -124,49 +125,45 @@ cc.Class({
      * @returns 
      */
     createSingleBuilding:function (buildingName , posx) {
-        var node = new cc.Node(buildingName);
-        node.x = posx;
-        node.y = 0;
-        node.anchorX = 0;
-        node.anchorY = 0;
-        node.width = 300;
-        node.height = 0;
-        var sprite = node.addComponent(cc.Sprite);
-        var index = GameCommon.GET_RANDOM(0 , this.bulidingRes.length - 1);
+        var passId = DataManager.Userdata.getPassID();
+        if (GameCommon.isRightWall(posx)) {
+            // 在墙右侧
+            passId = passId + 1;
+        }
 
-        var spf = this.bulidingRes[index];
+        var buildingRes = this["bulidingRes" + (passId % 3)];
+
+        var index = GameCommon.GET_RANDOM(0, buildingRes.length - 1);
+        var spf = buildingRes[index];
+        var width = 300;
+        var height = 0; 
         if (spf) {
+            width = spf.getRect().width;
+            height = spf.getRect().height;
+        }
+        else
+        {
+            return width;
+        }
+
+        if (!GameCommon.isInWall(posx) && !GameCommon.isInWall(posx + width)) {
+            var node = new cc.Node(buildingName);
+            node.x = posx;
+            node.y = 0;
+            node.anchorX = 0;
+            node.anchorY = 0;
+            node.width = width;
+            node.height = height;
+            var sprite = node.addComponent(cc.Sprite);
             sprite.spriteFrame = spf
             sprite.sizeMode = cc.Sprite.SizeMode.TRIMMED;
-            node.width = sprite.spriteFrame.getRect().width;
-            node.height = sprite.spriteFrame.getRect().height; 
+
+            this.node.addChild(node);          
+            this._TotalBuildingNum++;
         }
-        return node;
+   
+        return width;
     },
-
-    // createWall:function () {
-    //     var wall = cc.instantiate(this.wallPrefabs);
-    //     var index = this._Index + 1;
-    //     var curPosx = index * this.generateRange;
-    //     wall.x = curPosx;
-    //     wall.y = 0;
-    //     this.wallCreatePosX = curPosx;
-    //     console.log("aaaaaaaaaaaaaaaaaaaaa" , this.wallCreatePosX);
-    //     this.node.addChild(wall);
-    //     this.createForegroundWall();
-    // },
-
-    // createForegroundWall:function () {
-    //     var wallForeground = cc.instantiate(this.wallForegroundPrefabs);
-
-    //     var index = this._Index + 1;
-    //     var curPosx = index * this.generateRange;
-
-    //     wallForeground.x = curPosx
-    //     wallForeground.y = 0;
-
-    //     this.tmpBuilding.addChild(wallForeground);
-    // },
 
     // 删除建筑
     RemoveBuilding:function () {

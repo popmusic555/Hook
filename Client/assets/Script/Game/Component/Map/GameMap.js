@@ -8,6 +8,12 @@ cc.Class({
 
         refreshDis:0,
 
+        // 显示节点
+        displayNode:cc.Sprite,
+
+        // 地图资源
+        mapRes:[cc.SpriteFrame],
+
         _ChangeNum:0,
 
         _MapIndex:-1,
@@ -54,5 +60,10 @@ cc.Class({
 
     updateDisplacement:function (displacement , speedRatio) {
         return displacement * speedRatio;
+    },
+
+    refreshMapByPassID:function (passId) {
+        var index = passId % this.mapRes.length;
+        this.displayNode.spriteFrame = this.mapRes[index];
     },
 });
