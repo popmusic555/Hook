@@ -3,6 +3,7 @@ var GameCommon = require("GameCommon");
 var DataManager = require("DataManager");
 var MPlayer = require("MPlayer");
 var GameMonster = require("GameMonster");
+var Shadow = require("Shadow");
 
 // 怪物生成器
 cc.Class({
@@ -11,6 +12,8 @@ cc.Class({
     properties: {
         // 怪物预制
         monsterPrefabs:cc.Prefab,
+        // 怪物阴影预制
+        monsterShadowPrefabs:cc.Prefab,
         // player
         player:MPlayer,
         // 怪物名称
@@ -211,7 +214,11 @@ cc.Class({
             var speedOffset = this._CurRelativeSpeed - this.relativeSpeedRange / num * GameCommon.GET_RANDOM(0 , num);
             var speed = playerSpeed - speedOffset;
 
-            var monster = this.createSingleMonster(this.getMonsterName() , posX , speed);
+            var monsterShadow = this.createMonsterShadow();
+            if (monsterShadow) {
+                this.node.addChild(monsterShadow);    
+            }
+            var monster = this.createSingleMonster(this.getMonsterName() , monsterShadow , posX , speed);
             this.node.addChild(monster);
         }
     },
@@ -223,7 +230,7 @@ cc.Class({
      * @param {any} speed 速度
      * @returns 怪物节点
      */
-    createSingleMonster:function (name , posX , speed) {
+    createSingleMonster:function (name , monsterShadow , posX , speed) {
         var monsterNode = cc.instantiate(this.monsterPrefabs);
         monsterNode.name = name;
         monsterNode.x = posX;
@@ -233,8 +240,25 @@ cc.Class({
         var monster = monsterNode.getComponent(GameMonster);
         monster.setLinearVelocity(speed , 0);
 
+        if (monsterShadow) {
+            monsterShadow.name = name + "Shadow";
+            monsterShadow.x = monsterNode.x;
+            monsterShadow.y = monsterNode.y;
+            monsterShadow.getComponent(Shadow).setTarget(monsterNode);
+        }
+
         this._TotalMonsterNum++;
         return monsterNode;
+    },
+    /**
+     * 创建阴影
+     */
+    createMonsterShadow:function () {
+        var monsterShadowNode = null;
+        if (this.monsterShadowPrefabs) {
+            monsterShadowNode = cc.instantiate(this.monsterShadowPrefabs);
+        }
+        return monsterShadowNode;
     },
 
     // 删除怪物

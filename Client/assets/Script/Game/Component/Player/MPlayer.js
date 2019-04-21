@@ -61,14 +61,14 @@ cc.Class({
             }
         }
 
-        // if (this.getPlayerModel().getState() == GameEnum.PLAYER_STATE.HIT) {
-        //     this.setAngularVelocity(260);
-        // }
-        // else
-        // {
-        //     this.setAngularVelocity(0);
-        //     this.node.rotation = 0;
-        // }
+        if (this.getPlayerModel().getState() == GameEnum.PLAYER_STATE.HIT) {
+            this.setAngularVelocity(260);
+        }
+        else
+        {
+            this.setAngularVelocity(0);
+            this.node.rotation = 0;
+        }
 
         // if (this.throughHoleAni.node.active) {
         //     this.updateThroughHoleAni();
