@@ -5,23 +5,23 @@ var GameConst = require("GameConst");
 var MOil = require("MOil");
 
 var ANIMATION_NAME = {
-    RUN:"gbl_run",
-    SIT:"ljr_run",
+    RUN:"xg_feiji_run",
+    SIT:"xg_feiji_ljr",
 };
 
 var COLLIDER = {
     RUN:[
-        new cc.Vec2(-20,-66),
-        new cc.Vec2(66,-13),
-        new cc.Vec2(18,68),
-        new cc.Vec2(-61,-5),
+        new cc.Vec2(-5,-80),
+        new cc.Vec2(50,-20),
+        new cc.Vec2(-5,50),
+        new cc.Vec2(-65,-20),
     ],
     SIT:[
-        new cc.Vec2(-24,-68),
-        new cc.Vec2(67,-16),
-        new cc.Vec2(72,75),
-        new cc.Vec2(10,95),
-        new cc.Vec2(-75,16),
+        new cc.Vec2(-10,-130),
+        new cc.Vec2(60,-55),
+        new cc.Vec2(0,45),
+        new cc.Vec2(-50,15),
+        new cc.Vec2(-80,-55),
     ]
 };
 

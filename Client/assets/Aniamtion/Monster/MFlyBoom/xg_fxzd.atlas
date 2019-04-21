@@ -1,0 +1,41 @@
+
+xg_fxzd.png
+size: 338,121
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+g11_01
+  rotate: true
+  xy: 143, 2
+  size: 117, 131
+  orig: 117, 131
+  offset: 0, 0
+  index: -1
+g11_02
+  rotate: false
+  xy: 305, 51
+  size: 27, 68
+  orig: 27, 68
+  offset: 0, 0
+  index: -1
+g11_03
+  rotate: false
+  xy: 276, 49
+  size: 27, 70
+  orig: 27, 70
+  offset: 0, 0
+  index: -1
+g11_04
+  rotate: true
+  xy: 276, 10
+  size: 37, 60
+  orig: 37, 60
+  offset: 0, 0
+  index: -1
+zd
+  rotate: true
+  xy: 2, 3
+  size: 116, 139
+  orig: 116, 139
+  offset: 0, 0
+  index: -1

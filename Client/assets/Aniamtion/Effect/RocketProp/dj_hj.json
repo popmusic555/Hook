@@ -1,0 +1,28 @@
+{
+"skeleton": { "hash": "EM539H6XuqaceN8KfIbPvYKd9UI", "spine": "3.6.52", "width": 87.6, "height": 87.6, "images": "" },
+"bones": [
+	{ "name": "root", "scaleX": 0.6, "scaleY": 0.6 },
+	{ "name": "bone", "parent": "root" }
+],
+"slots": [
+	{ "name": "res/hj (2)", "bone": "bone", "attachment": "res/hj (2)" }
+],
+"skins": {
+	"default": {
+		"res/hj (2)": {
+			"res/hj (2)": { "width": 146, "height": 146 }
+		}
+	}
+},
+"animations": {
+	"daojv_hj": {
+		"slots": {
+			"res/hj (2)": {
+				"attachment": [
+					{ "time": 0, "name": "res/hj (2)" }
+				]
+			}
+		}
+	}
+}
+}

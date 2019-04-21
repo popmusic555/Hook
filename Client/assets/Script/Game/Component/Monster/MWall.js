@@ -81,6 +81,7 @@ cc.Class({
             case 1:
                 // 判断是否需要停止
                 if (player) {
+                    player.hitWall(); 
                     if (player.getLinearVelocity().x <= this.stopSpeed) {
                         this._IsThrough = false;
                         var cameraFollow = cc.Camera.main.getComponent("CameraFollow");
@@ -128,7 +129,8 @@ cc.Class({
         var player = other;
         switch (selfTag) {
             case 1:
-                // 判断是否需要停止       
+                // 判断是否需要停止      
+                player.hitWall(); 
                 if (player.getLinearVelocity().x <= this.stopSpeed) {
                     this._IsThrough = false;
                     var cameraFollow = cc.Camera.main.getComponent("CameraFollow");
@@ -149,7 +151,7 @@ cc.Class({
                         player.setGravityScale(GameConst.GRAVITY_SCALE);
                         player.deadForWall();
                         this.scheduleOnce(function () {
-                            player.node.x = this.node.x + 30;
+                            // player.node.x = this.node.x + 30;
                         } , 0);
                     }
                     else
@@ -163,6 +165,7 @@ cc.Class({
                 break;
             case 3:
                 // 判断是否穿墙
+                player.unHitWall();
                 if (this.getReEmitSpeed()) {
                     player.setLinearVelocity(this.getReEmitSpeed().x , this.getReEmitSpeed().y);
                     player.setGravityScale(GameConst.GRAVITY_SCALE);

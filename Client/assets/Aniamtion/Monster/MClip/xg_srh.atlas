@@ -1,0 +1,62 @@
+
+xg_srh.png
+size: 612,250
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+g07_01
+  rotate: true
+  xy: 494, 34
+  size: 105, 107
+  orig: 105, 107
+  offset: 0, 0
+  index: -1
+g07_02
+  rotate: false
+  xy: 493, 141
+  size: 117, 107
+  orig: 117, 107
+  offset: 0, 0
+  index: -1
+g07_03
+  rotate: false
+  xy: 319, 9
+  size: 95, 60
+  orig: 95, 60
+  offset: 0, 0
+  index: -1
+g07_04
+  rotate: false
+  xy: 454, 20
+  size: 38, 49
+  orig: 38, 49
+  offset: 0, 0
+  index: -1
+g07_05
+  rotate: false
+  xy: 238, 8
+  size: 79, 61
+  orig: 79, 61
+  offset: 0, 0
+  index: -1
+g07_06
+  rotate: true
+  xy: 416, 10
+  size: 59, 36
+  orig: 59, 36
+  offset: 0, 0
+  index: -1
+g07_07
+  rotate: true
+  xy: 2, 2
+  size: 246, 234
+  orig: 246, 234
+  offset: 0, 0
+  index: -1
+g07_08
+  rotate: false
+  xy: 238, 71
+  size: 253, 177
+  orig: 253, 177
+  offset: 0, 0
+  index: -1

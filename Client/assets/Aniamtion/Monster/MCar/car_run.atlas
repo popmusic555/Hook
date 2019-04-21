@@ -1,97 +1,83 @@
 
 car_run.png
-size: 291,291
+size: 489,535
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-res/bei
+23
+  rotate: false
+  xy: 2, 292
+  size: 401, 241
+  orig: 401, 241
+  offset: 0, 0
+  index: -1
+24
   rotate: true
-  xy: 77, 2
-  size: 45, 37
-  orig: 45, 37
+  xy: 266, 48
+  size: 69, 67
+  orig: 69, 67
   offset: 0, 0
   index: -1
-res/chuang1
+25
   rotate: false
-  xy: 2, 15
-  size: 73, 32
-  orig: 73, 32
+  xy: 335, 9
+  size: 129, 128
+  orig: 129, 128
   offset: 0, 0
   index: -1
-res/chuang2
+g05
+  rotate: false
+  xy: 2, 119
+  size: 321, 171
+  orig: 321, 171
+  offset: 0, 0
+  index: -1
+yan_0001
   rotate: true
-  xy: 254, 75
-  size: 73, 32
-  orig: 73, 32
+  xy: 405, 403
+  size: 130, 80
+  orig: 130, 80
   offset: 0, 0
   index: -1
-res/gai
+yan_0002
   rotate: false
-  xy: 2, 182
-  size: 188, 107
-  orig: 188, 107
+  xy: 2, 37
+  size: 130, 80
+  orig: 130, 80
   offset: 0, 0
   index: -1
-res/guai1
+yan_0003
   rotate: false
-  xy: 192, 150
-  size: 77, 67
-  orig: 77, 67
+  xy: 134, 37
+  size: 130, 80
+  orig: 130, 80
   offset: 0, 0
   index: -1
-res/guai2
-  rotate: false
-  xy: 175, 81
-  size: 77, 67
-  orig: 77, 67
-  offset: 0, 0
-  index: -1
-res/hou
+yan_0004
   rotate: true
-  xy: 225, 48
-  size: 31, 24
-  orig: 31, 24
+  xy: 325, 160
+  size: 130, 80
+  orig: 130, 80
   offset: 0, 0
   index: -1
-res/lun
-  rotate: false
-  xy: 251, 41
-  size: 37, 32
-  orig: 37, 32
-  offset: 0, 0
-  index: -1
-res/pa
+yan_0005
   rotate: true
-  xy: 196, 15
-  size: 64, 27
-  orig: 64, 27
+  xy: 407, 271
+  size: 130, 80
+  orig: 130, 80
   offset: 0, 0
   index: -1
-res/shen
-  rotate: false
-  xy: 2, 49
-  size: 118, 131
-  orig: 118, 131
-  offset: 0, 0
-  index: -1
-res/tou
-  rotate: false
-  xy: 122, 11
-  size: 72, 67
-  orig: 72, 67
-  offset: 0, 0
-  index: -1
-res/youshou
-  rotate: false
-  xy: 192, 219
-  size: 85, 70
-  orig: 85, 70
-  offset: 0, 0
-  index: -1
-res/zuoshou
+yan_0006
   rotate: true
-  xy: 122, 80
-  size: 100, 51
-  orig: 100, 51
+  xy: 407, 139
+  size: 130, 80
+  orig: 130, 80
+  offset: 0, 0
+  index: -1
+yan_0007
+  rotate: true
+  xy: 2, 2
+  size: 33, 30
+  orig: 33, 30
   offset: 0, 0
   index: -1

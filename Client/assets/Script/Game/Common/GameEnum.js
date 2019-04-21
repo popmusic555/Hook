@@ -20,6 +20,7 @@ GameEnum.PLAYER_STATE = {
     IMPACT:8,// 冲击
     DEAD1:9,// 死亡
     DEAD2:10,// 死亡
+    HITWALL:11,
 }
 
 // 主角运动状态

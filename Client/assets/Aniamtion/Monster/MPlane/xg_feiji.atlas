@@ -1,0 +1,48 @@
+
+xg_feiji.png
+size: 529,255
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+fd_01
+  rotate: true
+  xy: 461, 10
+  size: 43, 26
+  orig: 43, 26
+  offset: 0, 0
+  index: -1
+fd_02
+  rotate: true
+  xy: 407, 2
+  size: 51, 52
+  orig: 51, 52
+  offset: 0, 0
+  index: -1
+fd_03
+  rotate: true
+  xy: 2, 6
+  size: 247, 291
+  orig: 247, 291
+  offset: 0, 0
+  index: -1
+fd_04
+  rotate: false
+  xy: 295, 14
+  size: 110, 39
+  orig: 110, 39
+  offset: 0, 0
+  index: -1
+fd_05
+  rotate: false
+  xy: 489, 37
+  size: 35, 16
+  orig: 35, 16
+  offset: 0, 0
+  index: -1
+g04
+  rotate: true
+  xy: 295, 55
+  size: 198, 232
+  orig: 198, 232
+  offset: 0, 0
+  index: -1

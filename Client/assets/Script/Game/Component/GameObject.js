@@ -27,6 +27,9 @@ var GameObject = cc.Class({
         // 上升时忽略碰撞
         riseIgnore:false,
 
+        // 最小速度
+        minSpeed:0,
+
         // 弹性系数
         elasticity:{
             default:0,
@@ -100,6 +103,9 @@ var GameObject = cc.Class({
 
     // 设置linearVelocity
     setLinearVelocityX:function (x) {
+        if (x < this.minSpeed) {
+            x = this.minSpeed;
+        }
         this.getRigidBody().linearVelocity = new cc.Vec2(x , this.getRigidBody().linearVelocity.y);
     },
 
@@ -108,6 +114,9 @@ var GameObject = cc.Class({
     },
 
     setLinearVelocity:function (x , y) {
+        if (x < this.minSpeed) {
+            x = this.minSpeed;
+        }
         this.getRigidBody().linearVelocity = new cc.Vec2(x , y);
     },
 

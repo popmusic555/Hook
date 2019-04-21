@@ -1,0 +1,41 @@
+
+kzptg_run.png
+size: 211,211
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+res/g08_01
+  rotate: false
+  xy: 2, 30
+  size: 158, 179
+  orig: 158, 179
+  offset: 0, 0
+  index: -1
+res/g08_02
+  rotate: true
+  xy: 162, 59
+  size: 74, 42
+  orig: 74, 42
+  offset: 0, 0
+  index: -1
+res/g08_03
+  rotate: true
+  xy: 162, 135
+  size: 74, 47
+  orig: 74, 47
+  offset: 0, 0
+  index: -1
+res/g08_04
+  rotate: true
+  xy: 2, 3
+  size: 25, 40
+  orig: 25, 40
+  offset: 0, 0
+  index: -1
+res/g08_05
+  rotate: true
+  xy: 162, 38
+  size: 19, 31
+  orig: 19, 31
+  offset: 0, 0
+  index: -1

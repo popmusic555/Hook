@@ -10,19 +10,16 @@ var ANIMATION_NAME = {
 
 var COLLIDER = {
     RUN:[
-        new cc.Vec2(-57,-27),
-        new cc.Vec2(57,-27),
-        new cc.Vec2(45,80),
-        new cc.Vec2(0,105),
-        new cc.Vec2(-45,80),
+        new cc.Vec2(-30,-75),
+        new cc.Vec2(30,-75),
+        new cc.Vec2(30,25),
+        new cc.Vec2(-30,25),
     ],
     SIT:[
-        new cc.Vec2(-57,-27),
-        new cc.Vec2(57,-27),
-        new cc.Vec2(57,21),
-        new cc.Vec2(17,122),
-        new cc.Vec2(-7,120),
-        new cc.Vec2(-50,75),
+        new cc.Vec2(-40,-75),
+        new cc.Vec2(40,-75),
+        new cc.Vec2(40,70),
+        new cc.Vec2(-40,70),
     ]
 };
 
@@ -76,11 +73,15 @@ cc.Class({
                 this.setAnimation(GameEnum.MONSTER_STATE[this._State]);
                 // 改变碰撞框
                 this.setCollider(GameEnum.MONSTER_STATE[this._State]);
+                this.animation.node.x = 2;
+                this.animation.node.y = -25;
                 break;
             case GameEnum.MONSTER_STATE.SIT:
                 this.setAnimation(GameEnum.MONSTER_STATE[this._State]);
                 // 改变碰撞框
                 this.setCollider(GameEnum.MONSTER_STATE[this._State]);
+                this.animation.node.x = 3;
+                this.animation.node.y = 0;
                 break;
         }
     },
@@ -253,8 +254,9 @@ cc.Class({
         }
         this._IsTouch = false;
         this._IsPunches = true;
-        var move = cc.moveBy(0.2 , 0 , -30);
-        this.mJumpParts.runAction(cc.sequence(move , cc.callFunc(function () {
+        var move = cc.moveBy(0.1 , 0 , -30);
+        var delayTime = cc.delayTime(0.1);
+        this.mJumpParts.runAction(cc.sequence(move , delayTime , cc.callFunc(function () {
             this._IsPunches = false;
         },  this) ,  move.reverse() , cc.callFunc(function () {
             this._IsTouch = true;            

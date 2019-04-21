@@ -1,28 +1,27 @@
 
-var MPlayer = require("MPlayer");
 var Processor = require("Processor");
 var GameCommon = require("GameCommon");
 var BuildingGenerator = require("BuildingGenerator");
-var DataManager = require("DataManager");
+var MArtillery = require("MArtillery");
 
 var GamePlayer = cc.Class({
     extends: cc.Component,
 
     properties: {
         processor:Processor,
-        player:MPlayer,
+        artillery:MArtillery,
         buildGenerator:BuildingGenerator,
     },
 
     onLoad () {
         var manager = cc.director.getPhysicsManager();
         manager.enabled = true;
-        // cc.director.getPhysicsManager().debugDrawFlags = cc.PhysicsManager.DrawBits.e_aabbBit |
-        // cc.PhysicsManager.DrawBits.e_pairBit |
-        // cc.PhysicsManager.DrawBits.e_centerOfMassBit |
-        // cc.PhysicsManager.DrawBits.e_jointBit |
-        // cc.PhysicsManager.DrawBits.e_shapeBit
-        // ;
+        cc.director.getPhysicsManager().debugDrawFlags = cc.PhysicsManager.DrawBits.e_aabbBit |
+        cc.PhysicsManager.DrawBits.e_pairBit |
+        cc.PhysicsManager.DrawBits.e_centerOfMassBit |
+        cc.PhysicsManager.DrawBits.e_jointBit |
+        cc.PhysicsManager.DrawBits.e_shapeBit
+        ;
 
         // console.newlog = console.log;
 
@@ -30,7 +29,7 @@ var GamePlayer = cc.Class({
             
         // }
         // 注入处理器
-        this.player.injection(this.processor);
+        // this.player.injection(this.processor);
         GameCommon.GAME_VIEW = this;
     },
 
@@ -44,7 +43,6 @@ var GamePlayer = cc.Class({
     },
 
     onTouched:function () {
-        // this.player.startLaunching(DataManager.Userdata.launchingSpeed , 1280 * 2);
-        this.player.startLaunching(DataManager.Userdata.launchingSpeed , 300);
+        this.artillery.startEmit();
     },
 });

@@ -32,6 +32,10 @@ cc.Class({
     },
 
     updatePos:function () {
+        if (!this.targetFollow) {
+            return;
+        }
+
         var x = this.targetFollow.x - this.anchorPos.x;
         var y = this.targetFollow.y - this.anchorPos.y;
 

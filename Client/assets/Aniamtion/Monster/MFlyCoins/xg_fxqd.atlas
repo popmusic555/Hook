@@ -1,0 +1,41 @@
+
+xg_fxqd.png
+size: 149,309
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+g12_01
+  rotate: true
+  xy: 2, 172
+  size: 135, 142
+  orig: 135, 142
+  offset: 0, 0
+  index: -1
+g12_02
+  rotate: true
+  xy: 64, 31
+  size: 27, 70
+  orig: 27, 70
+  offset: 0, 0
+  index: -1
+g12_03
+  rotate: true
+  xy: 64, 2
+  size: 27, 70
+  orig: 27, 70
+  offset: 0, 0
+  index: -1
+g12_04
+  rotate: true
+  xy: 2, 21
+  size: 37, 60
+  orig: 37, 60
+  offset: 0, 0
+  index: -1
+jb
+  rotate: true
+  xy: 2, 60
+  size: 110, 145
+  orig: 110, 145
+  offset: 0, 0
+  index: -1

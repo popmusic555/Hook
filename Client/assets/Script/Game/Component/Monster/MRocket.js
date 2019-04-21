@@ -4,23 +4,22 @@ var GameEnum = require("GameEnum");
 var GameConst = require("GameConst");
 
 var ANIMATION_NAME = {
-    RUN:"hjp_run",
-    SIT:"ljr_run",
+    RUN:"xg_hj_run",
+    SIT:"ljr_hj_run",
 };
 
 var COLLIDER = {
     RUN:[
-        new cc.Vec2(-2,-69),
-        new cc.Vec2(50,-15),
-        new cc.Vec2(0,82),
-        new cc.Vec2(-48,-8),
+        new cc.Vec2(-15,-65),
+        new cc.Vec2(35,-5),
+        new cc.Vec2(30,60),
+        new cc.Vec2(-55,-30),
     ],
     SIT:[
-        new cc.Vec2(-3,-68),
-        new cc.Vec2(28,3),
-        new cc.Vec2(19,63),
-        new cc.Vec2(-38,110),
-        new cc.Vec2(-86,28),
+        new cc.Vec2(35,-70),
+        new cc.Vec2(45,55),
+        new cc.Vec2(-40,45),
+        new cc.Vec2(-55,0),
     ]
 };
 

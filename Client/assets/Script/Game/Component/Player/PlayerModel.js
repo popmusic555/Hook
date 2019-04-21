@@ -9,7 +9,7 @@ cc.Class({
         // 人物模型
         model:sp.Skeleton,
         // 人物状态
-        _State:GameEnum.PLAYER_STATE.STATIC,
+        _State:null,
         // 状态锁
         _StateLock:false,
         // 攻击动作
@@ -22,8 +22,8 @@ cc.Class({
     },
 
     onLoad () {
-        this.transitionState(GameEnum.PLAYER_STATE.STATIC);
-        this._CurActionID = 0;
+        this.transitionState(GameEnum.PLAYER_STATE.NULL);
+        this._CurActionID = 1;
         this._CurAtkActionID = 0;
     },
 
@@ -34,6 +34,10 @@ cc.Class({
     //     console.log("this.model.node.y" , this.model.node.y);  
     // },
 
+    setActionID:function (id) {
+        this._CurActionID = id;
+    },
+
     setState:function (state) {
         this._State = state;
         // this.model.node.y = 0;
@@ -42,11 +46,11 @@ cc.Class({
             case GameEnum.PLAYER_STATE.NULL:
                 // this.setSpriteFrame(null);
                 this.setAnimation(null);
-                // console.log("State NULL");
+                console.log("State NULL");
                 break;
             case GameEnum.PLAYER_STATE.STATIC:
                 this.setAnimation("shoot");
-                console.log("State STATIC");
+                // console.log("State STATIC");
                 break;
             case GameEnum.PLAYER_STATE.EMIT:
                 this.setAnimation("shoot");
@@ -60,7 +64,8 @@ cc.Class({
                 }
                 else if (num == 1)
                 {
-                    this.setAnimation("shoot");                        
+                    this.setAnimation("shoot");   
+                    this._CurActionID = 0;                     
                 }
                 else if (num == 2) {
                     this.setAnimation("impact");                        
@@ -97,16 +102,11 @@ cc.Class({
                 var num = this._CurAtkActionID;
                 if (num == 0) {
                     num = GameCommon.GET_RANDOM(1 , 2);
-                    if (num == 1) {
-                        this.setAnimation("touch1");
-                    }
-                    else if (num == 2) {
-                        this.setAnimation("touch3");
-                    }
+                    this.setAnimation("touch" + num);
                 }
                 else if (num == 4)
                 {
-                    this.setAnimation("touch1");
+                    this.setAnimation("touch2");
                 }
                 else
                 {
@@ -124,8 +124,11 @@ cc.Class({
                 break;
             case GameEnum.PLAYER_STATE.DEAD2:
                 this.setAnimation("lose2");
-                this.model.node.x += -25;
+                // this.model.node.x += -25;
                 // console.log("State DEAD2");
+                break;
+            case GameEnum.PLAYER_STATE.HITWALL:
+                this.setAnimation("impact");
                 break;
             default:
                 break;

@@ -4,21 +4,23 @@ var GameEnum = require("GameEnum");
 var GameConst = require("GameConst");
 
 var ANIMATION_NAME = {
-    RUN:"gbl_run",
-    SIT:"ljr_run",
+    RUN:"car_gbl_run",
+    SIT:"car_ljr_run01",
+    SIT4FLOOR:"car_ljr_runtx",
 };
 
 var COLLIDER = {
     RUN:[
-        new cc.Vec2(-9,18),
-        new cc.Vec2(173,18),
-        new cc.Vec2(54,105),
+        new cc.Vec2(10,-15),
+        new cc.Vec2(170,-15),
+        new cc.Vec2(100,65),
+        new cc.Vec2(40,65),
     ],
     SIT:[
-        new cc.Vec2(-10,-4),
-        new cc.Vec2(172,-4),
-        new cc.Vec2(39,182),
-        new cc.Vec2(-6,120),
+        new cc.Vec2(0,-30),
+        new cc.Vec2(195,-30),
+        new cc.Vec2(85,120),
+        new cc.Vec2(-30,30),
     ]
 };
 
@@ -109,6 +111,8 @@ cc.Class({
     },
 
     handleFloor:function (self , other) {
+        this.setAnimation("SIT4FLOOR");
+
         this.scheduleOnce(function () {
             this.node.rotation = 0;    
         } , 0);

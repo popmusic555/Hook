@@ -1,0 +1,83 @@
+
+yanwu.png
+size: 1268,183
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+_quan
+  rotate: true
+  xy: 1042, 28
+  size: 153, 147
+  orig: 153, 147
+  offset: 0, 0
+  index: -1
+bao
+  rotate: true
+  xy: 1191, 96
+  size: 85, 75
+  orig: 85, 75
+  offset: 0, 0
+  index: -1
+tmp
+  rotate: false
+  xy: 1191, 30
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+yw_00001
+  rotate: true
+  xy: 2, 2
+  size: 179, 128
+  orig: 179, 128
+  offset: 0, 0
+  index: -1
+yw_00002
+  rotate: true
+  xy: 132, 2
+  size: 179, 128
+  orig: 179, 128
+  offset: 0, 0
+  index: -1
+yw_00003
+  rotate: true
+  xy: 262, 2
+  size: 179, 128
+  orig: 179, 128
+  offset: 0, 0
+  index: -1
+yw_00004
+  rotate: true
+  xy: 392, 2
+  size: 179, 128
+  orig: 179, 128
+  offset: 0, 0
+  index: -1
+yw_00005
+  rotate: true
+  xy: 522, 2
+  size: 179, 128
+  orig: 179, 128
+  offset: 0, 0
+  index: -1
+yw_00006
+  rotate: true
+  xy: 652, 2
+  size: 179, 128
+  orig: 179, 128
+  offset: 0, 0
+  index: -1
+yw_00007
+  rotate: true
+  xy: 782, 2
+  size: 179, 128
+  orig: 179, 128
+  offset: 0, 0
+  index: -1
+yw_00008
+  rotate: true
+  xy: 912, 2
+  size: 179, 128
+  orig: 179, 128
+  offset: 0, 0
+  index: -1

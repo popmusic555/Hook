@@ -11,6 +11,8 @@ cc.Class({
     properties: {
         // 冲击速度
         impactVelocity:0,
+        // 死亡速度
+        deathSpeed:0,
 
         globalAni:[sp.Skeleton],
         // throughHoleAni:sp.Skeleton,
@@ -59,14 +61,14 @@ cc.Class({
             }
         }
 
-        if (this.getPlayerModel().getState() == GameEnum.PLAYER_STATE.HIT) {
-            this.setAngularVelocity(260);
-        }
-        else
-        {
-            this.setAngularVelocity(0);
-            this.node.rotation = 0;
-        }
+        // if (this.getPlayerModel().getState() == GameEnum.PLAYER_STATE.HIT) {
+        //     this.setAngularVelocity(260);
+        // }
+        // else
+        // {
+        //     this.setAngularVelocity(0);
+        //     this.node.rotation = 0;
+        // }
 
         // if (this.throughHoleAni.node.active) {
         //     this.updateThroughHoleAni();
@@ -173,13 +175,14 @@ cc.Class({
 
     // 处理Floor逻辑
     handleFloor:function (self , other) {
-        this.SyncParam(this.getFloorData());
-        this.ApplyAllParam(this);
+        
         if (this.isImpact()) {
             this.unImpact();
             if (this.killImpactMonster()) {
                 this.showBigBoomAni();    
             }
+            this.SyncParam(this.getFloorData());
+            this.ApplyElasticityParam(this);
         }
         else if (this.isSuperAtk())
         {
@@ -187,10 +190,14 @@ cc.Class({
             if (this.killImpactMonster()) {
                 this.showBigBoomAni();    
             }
+            this.SyncParam(this.getFloorData());
+            this.ApplyElasticityParam(this);
         }
         else
         {
-            if (this.getLinearVelocity().x <= 10) {
+            this.SyncParam(this.getFloorData());
+            this.ApplyAllParam(this);
+            if (this.getLinearVelocity().x <= this.deathSpeed) {
                 this.dead();
                 this.stop();
             }
@@ -199,6 +206,11 @@ cc.Class({
                 this.hit();
             }
         }
+
+        if (!this.isDeath()) {
+            this.showSmokeAni();    
+        }
+        
     },
 
     onTouched:function () {
@@ -210,7 +222,7 @@ cc.Class({
     },
 
     attack:function () {
-        this.getPlayerModel().transitionStateAndLock(GameEnum.PLAYER_STATE.ATK , 0.3);
+        this.getPlayerModel().transitionStateAndLock(GameEnum.PLAYER_STATE.ATK , 0.2);
     },
 
     hit:function () {
@@ -238,6 +250,11 @@ cc.Class({
         this.setRunState(GameEnum.PLAYER_RUNSTATE.SUPER_ATK);
     },
 
+    hitWall:function () {
+        this.getPlayerModel().setActionID(2);
+        this.getPlayerModel().transitionState(GameEnum.PLAYER_STATE.HITWALL);
+    },
+
     unSuperAtk:function () {
         this.getPlayerModel().unlockState();
         this.setRunState(GameEnum.PLAYER_RUNSTATE.NORMAL);
@@ -245,6 +262,10 @@ cc.Class({
 
     unImpact:function () {
 
+    },
+
+    unHitWall:function () {
+        this.getPlayerModel().setActionID(0);
     },
 
     // showThroughHoleAni:function (pos) {
@@ -272,6 +293,15 @@ cc.Class({
         bigBoomAni.animation = "boom_big";
         bigBoomAni.setCompleteListener(function () {
             bigBoomAni.node.active = false;
+        }.bind(this));
+    },
+
+    showSmokeAni:function () {
+        var smokeAni = this.globalAni[2];
+        smokeAni.node.active = true;
+        smokeAni.animation = "zadi";
+        smokeAni.setCompleteListener(function () {
+            smokeAni.node.active = false;
         }.bind(this));
     },
 

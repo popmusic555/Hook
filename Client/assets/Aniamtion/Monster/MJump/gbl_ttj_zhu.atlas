@@ -1,55 +1,20 @@
 
 gbl_ttj_zhu.png
-size: 220,220
+size: 463,221
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-res/bg_t
-  rotate: false
-  xy: 132, 63
-  size: 80, 53
-  orig: 80, 53
-  offset: 0, 0
-  index: -1
-res/blz
-  rotate: false
-  xy: 108, 118
-  size: 110, 100
-  orig: 110, 100
-  offset: 0, 0
-  index: -1
-res/blz_01
-  rotate: false
-  xy: 2, 36
-  size: 116, 23
-  orig: 116, 23
-  offset: 0, 0
-  index: -1
-res/gbl_ttj
-  rotate: false
-  xy: 2, 61
-  size: 128, 48
-  orig: 128, 48
-  offset: 0, 0
-  index: -1
-res/jzg_body
-  rotate: false
-  xy: 2, 5
-  size: 58, 29
-  orig: 58, 29
-  offset: 0, 0
-  index: -1
-res/lv_01
-  rotate: false
-  xy: 2, 111
-  size: 104, 107
-  orig: 104, 107
-  offset: 0, 0
-  index: -1
-res/lv_02
+res/21
   rotate: true
-  xy: 132, 10
-  size: 51, 62
-  orig: 51, 62
+  xy: 2, 2
+  size: 217, 283
+  orig: 217, 283
+  offset: 0, 0
+  index: -1
+res/g06
+  rotate: false
+  xy: 287, 6
+  size: 174, 213
+  orig: 174, 213
   offset: 0, 0
   index: -1

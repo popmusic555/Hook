@@ -15,7 +15,7 @@ cc.Class({
 
     start () {
         this._super();
-        this.injection(cc.find("Canvas/Processor").getComponent("Processor"));
+        // this.injection(cc.find("Canvas/Processor").getComponent("Processor"));
     },
 
     handleFloor:function (self , other) {

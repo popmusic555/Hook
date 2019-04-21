@@ -1,23 +1,32 @@
 
 var GameMonster = require("GameMonster");
 var GameEnum = require("GameEnum");
+var GameCommon = require("GameCommon");
 
 var ANIMATION_NAME = {
-    RUN:"gbl_jz_run",
-    SIT:"gbl_jz_sj",
+    RUN:"xg_srh",
+    SIT1:"xg_srh_lvr1",
+    SIT2:"xg_srh_lvr2",
 };
 
 var COLLIDER = {
     RUN:[
-        new cc.Vec2(-13,-19),
-        new cc.Vec2(21,-20),
-        new cc.Vec2(31,86),
-        new cc.Vec2(-37,84),
+        new cc.Vec2(-53,-45),
+        new cc.Vec2(40,-45),
+        new cc.Vec2(25,40),
+        new cc.Vec2(-20,40),
     ],
-    SIT:[
-        new cc.Vec2(-38,-90),
-        new cc.Vec2(97,80),
-        new cc.Vec2(-35,108),
+    SIT1:[
+        new cc.Vec2(-25,-65),
+        new cc.Vec2(65,25),
+        new cc.Vec2(30,65),
+        new cc.Vec2(-65,-5),
+    ],
+    SIT2:[
+        new cc.Vec2(5,-50),
+        new cc.Vec2(65,0),
+        new cc.Vec2(-40,50),
+        new cc.Vec2(-65,5),
     ]
 };
 
@@ -60,9 +69,10 @@ cc.Class({
                 this.setCollider(GameEnum.MONSTER_STATE[this._State]);
                 break;
             case GameEnum.MONSTER_STATE.SIT:
-                this.setAnimation(GameEnum.MONSTER_STATE[this._State]);
+                var stateName = GameEnum.MONSTER_STATE[this._State] + GameCommon.GET_RANDOM(1 , 2);
+                this.setAnimation(stateName);
                 // 改变碰撞框
-                this.setCollider(GameEnum.MONSTER_STATE[this._State]);
+                this.setCollider(stateName);
                 break;
         }
     },

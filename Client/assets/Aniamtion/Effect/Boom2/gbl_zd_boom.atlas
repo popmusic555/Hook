@@ -1,55 +1,90 @@
 
 gbl_zd_boom.png
-size: 1024,512
+size: 1018,1018
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-res/boom01
+./res/boom_zd0001
   rotate: false
-  xy: 2, 217
-  size: 204, 213
-  orig: 204, 213
+  xy: 2, 764
+  size: 325, 252
+  orig: 325, 252
   offset: 0, 0
   index: -1
-res/boom02
+./res/boom_zd0002
+  rotate: false
+  xy: 2, 510
+  size: 325, 252
+  orig: 325, 252
+  offset: 0, 0
+  index: -1
+./res/boom_zd0003
+  rotate: false
+  xy: 329, 764
+  size: 325, 252
+  orig: 325, 252
+  offset: 0, 0
+  index: -1
+./res/boom_zd0004
+  rotate: false
+  xy: 2, 256
+  size: 325, 252
+  orig: 325, 252
+  offset: 0, 0
+  index: -1
+./res/boom_zd0005
+  rotate: false
+  xy: 329, 510
+  size: 325, 252
+  orig: 325, 252
+  offset: 0, 0
+  index: -1
+./res/boom_zd0006
+  rotate: false
+  xy: 656, 764
+  size: 325, 252
+  orig: 325, 252
+  offset: 0, 0
+  index: -1
+./res/boom_zd0007
   rotate: false
   xy: 2, 2
-  size: 204, 213
-  orig: 204, 213
+  size: 325, 252
+  orig: 325, 252
   offset: 0, 0
   index: -1
-res/boom03
+./res/boom_zd0008
   rotate: false
-  xy: 208, 217
-  size: 204, 213
-  orig: 204, 213
+  xy: 329, 256
+  size: 325, 252
+  orig: 325, 252
   offset: 0, 0
   index: -1
-res/boom04
+./res/boom_zd0009
   rotate: false
-  xy: 208, 2
-  size: 204, 213
-  orig: 204, 213
+  xy: 656, 510
+  size: 325, 252
+  orig: 325, 252
   offset: 0, 0
   index: -1
-res/boom05
+./res/boom_zd0010
   rotate: false
-  xy: 414, 217
-  size: 204, 213
-  orig: 204, 213
+  xy: 329, 2
+  size: 325, 252
+  orig: 325, 252
   offset: 0, 0
   index: -1
-res/boom06
+./res/boom_zd0011
   rotate: false
-  xy: 414, 2
-  size: 204, 213
-  orig: 204, 213
+  xy: 656, 256
+  size: 325, 252
+  orig: 325, 252
   offset: 0, 0
   index: -1
-res/boom07
+./res/boom_zd0012
   rotate: false
-  xy: 620, 217
-  size: 204, 213
-  orig: 204, 213
+  xy: 656, 2
+  size: 325, 252
+  orig: 325, 252
   offset: 0, 0
   index: -1

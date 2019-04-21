@@ -1,22 +1,27 @@
 {
-"skeleton": { "hash": "XFce0gY5spqJ3RWqmAs+PdKhK0E", "spine": "2.1.27", "width": 204, "height": 213, "images": "" },
+"skeleton": { "hash": "YPlCvUt0OHk8gqkxzYAacu31WO0", "spine": "2.1.27", "width": 325, "height": 252, "images": "" },
 "bones": [
 	{ "name": "root" },
 	{ "name": "boom", "parent": "root" }
 ],
 "slots": [
-	{ "name": "res/boom_0001", "bone": "boom", "attachment": "res/boom07" }
+	{ "name": "res/boom_0001", "bone": "boom", "attachment": "./res/boom_zd0012" }
 ],
 "skins": {
 	"default": {
 		"res/boom_0001": {
-			"res/boom01": { "width": 204, "height": 213 },
-			"res/boom02": { "width": 204, "height": 213 },
-			"res/boom03": { "width": 204, "height": 213 },
-			"res/boom04": { "width": 204, "height": 213 },
-			"res/boom05": { "width": 204, "height": 213 },
-			"res/boom06": { "width": 204, "height": 213 },
-			"res/boom07": { "width": 204, "height": 213 }
+			"./res/boom_zd0001": { "width": 325, "height": 252 },
+			"./res/boom_zd0002": { "width": 325, "height": 252 },
+			"./res/boom_zd0003": { "width": 325, "height": 252 },
+			"./res/boom_zd0004": { "width": 325, "height": 252 },
+			"./res/boom_zd0005": { "width": 325, "height": 252 },
+			"./res/boom_zd0006": { "width": 325, "height": 252 },
+			"./res/boom_zd0007": { "width": 325, "height": 252 },
+			"./res/boom_zd0008": { "width": 325, "height": 252 },
+			"./res/boom_zd0009": { "width": 325, "height": 252 },
+			"./res/boom_zd0010": { "width": 325, "height": 252 },
+			"./res/boom_zd0011": { "width": 325, "height": 252 },
+			"./res/boom_zd0012": { "width": 325, "height": 252 }
 		}
 	}
 },
@@ -25,15 +30,19 @@
 		"slots": {
 			"res/boom_0001": {
 				"attachment": [
-					{ "time": 0, "name": "res/boom01" },
-					{ "time": 0.0666, "name": "res/boom02" },
-					{ "time": 0.1333, "name": "res/boom03" },
-					{ "time": 0.2, "name": "res/boom04" },
-					{ "time": 0.2666, "name": "res/boom05" },
-					{ "time": 0.3333, "name": "res/boom06" },
-					{ "time": 0.4, "name": "res/boom07" },
-					{ "time": 0.4666, "name": null },
-					{ "time": 0.5, "name": null }
+					{ "time": 0, "name": "./res/boom_zd0001" },
+					{ "time": 0.0333, "name": "./res/boom_zd0002" },
+					{ "time": 0.0666, "name": "./res/boom_zd0003" },
+					{ "time": 0.1, "name": "./res/boom_zd0004" },
+					{ "time": 0.1666, "name": "./res/boom_zd0005" },
+					{ "time": 0.2333, "name": "./res/boom_zd0006" },
+					{ "time": 0.3, "name": "./res/boom_zd0007" },
+					{ "time": 0.3666, "name": "./res/boom_zd0008" },
+					{ "time": 0.4333, "name": "./res/boom_zd0009" },
+					{ "time": 0.5, "name": "./res/boom_zd0010" },
+					{ "time": 0.5666, "name": "./res/boom_zd0011" },
+					{ "time": 0.6333, "name": "./res/boom_zd0012" },
+					{ "time": 0.7, "name": null }
 				]
 			}
 		}

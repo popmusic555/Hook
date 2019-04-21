@@ -1,0 +1,76 @@
+
+xg_dmjb.png
+size: 363,150
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+g10_02
+  rotate: false
+  xy: 215, 17
+  size: 60, 53
+  orig: 60, 53
+  offset: 0, 0
+  index: -1
+g10_03
+  rotate: false
+  xy: 215, 72
+  size: 96, 76
+  orig: 96, 76
+  offset: 0, 0
+  index: -1
+g10_04
+  rotate: true
+  xy: 313, 55
+  size: 33, 40
+  orig: 33, 40
+  offset: 0, 0
+  index: -1
+g10_05
+  rotate: true
+  xy: 307, 20
+  size: 33, 38
+  orig: 33, 38
+  offset: 0, 0
+  index: -1
+g10_shen
+  rotate: false
+  xy: 114, 27
+  size: 99, 121
+  orig: 99, 121
+  offset: 0, 0
+  index: -1
+g10_yan01
+  rotate: true
+  xy: 277, 23
+  size: 47, 28
+  orig: 47, 28
+  offset: 0, 0
+  index: -1
+g10_yan02
+  rotate: false
+  xy: 313, 120
+  size: 48, 28
+  orig: 48, 28
+  offset: 0, 0
+  index: -1
+g10_yan03
+  rotate: false
+  xy: 313, 90
+  size: 48, 28
+  orig: 48, 28
+  offset: 0, 0
+  index: -1
+g10_zui
+  rotate: false
+  xy: 114, 2
+  size: 47, 23
+  orig: 47, 23
+  offset: 0, 0
+  index: -1
+jb
+  rotate: false
+  xy: 2, 3
+  size: 110, 145
+  orig: 110, 145
+  offset: 0, 0
+  index: -1

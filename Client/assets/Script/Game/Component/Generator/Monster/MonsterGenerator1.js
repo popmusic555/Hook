@@ -211,7 +211,7 @@ cc.Class({
             var speedOffset = this._CurRelativeSpeed - this.relativeSpeedRange / num * GameCommon.GET_RANDOM(0 , num);
             var speed = playerSpeed - speedOffset;
 
-            var monster = this.createSingleMonster(this.getMonsterName() , posX , speed);            
+            var monster = this.createSingleMonster(this.getMonsterName() , posX , speed);
             this.node.addChild(monster);
         }
     },

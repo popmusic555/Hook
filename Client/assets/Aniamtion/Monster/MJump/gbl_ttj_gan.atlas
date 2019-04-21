@@ -1,20 +1,13 @@
 
 gbl_ttj_gan.png
-size: 68,68
+size: 111,139
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-res/gbl_ttj_g
-  rotate: true
-  xy: 2, 14
-  size: 10, 43
-  orig: 10, 43
-  offset: 0, 0
-  index: -1
-res/gbl_ttj_qt
+res/21_01
   rotate: false
-  xy: 2, 26
-  size: 64, 40
-  orig: 64, 40
+  xy: 2, 2
+  size: 107, 135
+  orig: 107, 135
   offset: 0, 0
   index: -1

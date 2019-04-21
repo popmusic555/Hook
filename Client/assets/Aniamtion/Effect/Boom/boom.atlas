@@ -1,180 +1,194 @@
 
 boom.png
-size: 1871,972
+size: 2028,1037
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 bj_0001
-  rotate: true
-  xy: 2, 664
+  rotate: false
+  xy: 2, 323
   size: 306, 300
   orig: 306, 300
   offset: 0, 0
   index: -1
 bj_0002
-  rotate: true
-  xy: 2, 356
+  rotate: false
+  xy: 488, 735
   size: 306, 300
   orig: 306, 300
   offset: 0, 0
   index: -1
 bj_0003
-  rotate: true
-  xy: 2, 48
+  rotate: false
+  xy: 796, 735
   size: 306, 300
   orig: 306, 300
   offset: 0, 0
   index: -1
 bj_0004
-  rotate: true
-  xy: 304, 664
+  rotate: false
+  xy: 1104, 735
   size: 306, 300
   orig: 306, 300
   offset: 0, 0
   index: -1
 bj_0005
-  rotate: true
-  xy: 304, 356
+  rotate: false
+  xy: 1412, 735
   size: 306, 300
   orig: 306, 300
   offset: 0, 0
   index: -1
 bj_0006
-  rotate: true
-  xy: 304, 48
+  rotate: false
+  xy: 1720, 735
   size: 306, 300
   orig: 306, 300
   offset: 0, 0
   index: -1
 bj_0007
-  rotate: true
-  xy: 606, 664
+  rotate: false
+  xy: 310, 323
   size: 306, 300
   orig: 306, 300
   offset: 0, 0
   index: -1
 bj_0008
-  rotate: true
-  xy: 606, 356
+  rotate: false
+  xy: 618, 433
   size: 306, 300
   orig: 306, 300
   offset: 0, 0
   index: -1
 bj_0009
-  rotate: true
-  xy: 606, 48
+  rotate: false
+  xy: 926, 433
   size: 306, 300
   orig: 306, 300
   offset: 0, 0
   index: -1
 bj_0010
   rotate: false
-  xy: 908, 670
+  xy: 1234, 433
   size: 306, 300
   orig: 306, 300
   offset: 0, 0
   index: -1
 bj_0011
   rotate: false
-  xy: 1216, 670
+  xy: 1542, 433
   size: 306, 300
   orig: 306, 300
   offset: 0, 0
   index: -1
 bj_01
-  rotate: false
-  xy: 1524, 758
+  rotate: true
+  xy: 2, 2
   size: 319, 212
   orig: 319, 212
   offset: 0, 0
   index: -1
 bj_02
-  rotate: false
-  xy: 1524, 544
+  rotate: true
+  xy: 216, 2
   size: 319, 212
   orig: 319, 212
   offset: 0, 0
   index: -1
 bj_03
-  rotate: false
-  xy: 908, 456
+  rotate: true
+  xy: 430, 2
   size: 319, 212
   orig: 319, 212
   offset: 0, 0
   index: -1
 bj_04
-  rotate: true
-  xy: 1229, 349
+  rotate: false
+  xy: 644, 219
   size: 319, 212
   orig: 319, 212
   offset: 0, 0
   index: -1
 bj_05
   rotate: false
-  xy: 908, 242
+  xy: 644, 5
   size: 319, 212
   orig: 319, 212
   offset: 0, 0
   index: -1
-bj_06
+bj_05_
   rotate: true
-  xy: 1229, 28
+  xy: 1821, 189
+  size: 242, 205
+  orig: 242, 205
+  offset: 0, 0
+  index: -1
+bj_05_01
+  rotate: false
+  xy: 2, 625
+  size: 484, 410
+  orig: 484, 410
+  offset: 0, 0
+  index: -1
+bj_06
+  rotate: false
+  xy: 965, 219
   size: 319, 212
   orig: 319, 212
   offset: 0, 0
   index: -1
 bj_07
   rotate: false
-  xy: 908, 28
+  xy: 965, 5
   size: 319, 212
   orig: 319, 212
   offset: 0, 0
   index: -1
 bj_08
   rotate: false
-  xy: 1443, 330
+  xy: 1286, 219
   size: 319, 212
   orig: 319, 212
   offset: 0, 0
   index: -1
 bj_09
-  rotate: true
-  xy: 1443, 9
+  rotate: false
+  xy: 1286, 5
   size: 319, 212
   orig: 319, 212
   offset: 0, 0
   index: -1
 bj_10
   rotate: true
-  xy: 1657, 9
+  xy: 1607, 112
   size: 319, 212
   orig: 319, 212
   offset: 0, 0
   index: -1
 g07_04
-  rotate: true
-  xy: 47, 8
+  rotate: false
+  xy: 488, 684
   size: 38, 49
   orig: 38, 49
   offset: 0, 0
   index: -1
 g09_02
-  rotate: true
-  xy: 2, 2
+  rotate: false
+  xy: 1607, 67
   size: 44, 43
   orig: 44, 43
   offset: 0, 0
   index: -1
 g10_04
   rotate: false
-  xy: 98, 6
+  xy: 1850, 693
   size: 33, 40
   orig: 33, 40
   offset: 0, 0
   index: -1
 qqq11
   rotate: false
-  xy: 133, 21
+  xy: 1821, 162
   size: 25, 25
   orig: 25, 25
   offset: 0, 0
