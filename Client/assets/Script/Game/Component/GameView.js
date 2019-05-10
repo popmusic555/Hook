@@ -8,6 +8,16 @@ var GamePlayer = cc.Class({
     extends: cc.Component,
 
     properties: {
+        bgm: {
+            type:cc.AudioClip,
+            default:null,
+        },
+
+        sound:{
+            type:[cc.AudioClip],
+            default:[],
+        },
+
         processor:Processor,
         artillery:MArtillery,
         buildGenerator:BuildingGenerator,
@@ -16,12 +26,12 @@ var GamePlayer = cc.Class({
     onLoad () {
         var manager = cc.director.getPhysicsManager();
         manager.enabled = true;
-        cc.director.getPhysicsManager().debugDrawFlags = cc.PhysicsManager.DrawBits.e_aabbBit |
-        cc.PhysicsManager.DrawBits.e_pairBit |
-        cc.PhysicsManager.DrawBits.e_centerOfMassBit |
-        cc.PhysicsManager.DrawBits.e_jointBit |
-        cc.PhysicsManager.DrawBits.e_shapeBit
-        ;
+        // cc.director.getPhysicsManager().debugDrawFlags = cc.PhysicsManager.DrawBits.e_aabbBit |
+        // cc.PhysicsManager.DrawBits.e_pairBit |
+        // cc.PhysicsManager.DrawBits.e_centerOfMassBit |
+        // cc.PhysicsManager.DrawBits.e_jointBit |
+        // cc.PhysicsManager.DrawBits.e_shapeBit
+        // ;
 
         // console.newlog = console.log;
 
@@ -34,15 +44,17 @@ var GamePlayer = cc.Class({
     },
 
     start () {
-        // console.log("cc.Camera.main.getCameraToWorldPoint(0 , 0)" , cc.Camera.main.getCameraToWorldPoint(cc.v2(0,0)));
         GameCommon.GetUIView().setTouchListener(this);
     },
 
     update (dt) {
-        // console.log("cc.Camera.main.getCameraToWorldPoint(0 , 0)" , cc.Camera.main.getCameraToWorldPoint(cc.v2(0,0)));
     },
 
     onTouched:function () {
         this.artillery.startEmit();
+    },
+
+    playSound:function (index) {
+        cc.audioEngine.playEffect(this.sound[index] , false);
     },
 });

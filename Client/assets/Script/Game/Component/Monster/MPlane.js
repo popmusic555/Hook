@@ -3,6 +3,9 @@ var GameMonster = require("GameMonster");
 var GameEnum = require("GameEnum");
 var GameConst = require("GameConst");
 var MOil = require("MOil");
+var MonsterConfig = require("MonsterConfig");
+var DataManager = require("DataManager");
+var GameCommon = require("GameCommon");
 
 var ANIMATION_NAME = {
     RUN:"xg_feiji_run",
@@ -53,6 +56,16 @@ cc.Class({
         // 油桶生成的次数
         oilCreateNum:0,
 
+        cost:{
+            default:0,
+            visible:false,
+        },
+
+        oilSpeedAddValue:{
+            default:0,
+            visible:false,
+        },
+
         // 油桶怪物
         _MOil:null,
         // 油桶是否跟随
@@ -67,6 +80,19 @@ cc.Class({
         this._super();
         this.injection(cc.find("Canvas/Processor").getComponent("Processor"));
         this._OilCeateDis = 500 + cc.view.getVisibleSize().width * 0.5 + 40;
+        // 初始化数据
+        this.initData(MonsterConfig.getDataByLevel("MPlaneConfig" , DataManager.Userdata.getLevelByIndex(10)));
+    },
+
+    initData:function (cfg) {
+        var data = this.getPlayerData();
+        data.elasticity = cfg.elasticity;
+        data.heightAddedValue = cfg.heightAddValue;
+        data.minHeight = cfg.minHeight;
+        data.speedAddedValue = cfg.speedAddValue;
+        this.oilCreateTime = cfg.duration;
+        this.cost = cfg.cost;
+        this.oilSpeedAddValue = cfg.speedValue;
     },
 
     setState:function (value) {
@@ -152,6 +178,8 @@ cc.Class({
             {
                 // 碰撞到的怪物优先级较低
                 monster.onControlFail(self);
+                self.SyncNewParam(this.getPlayerData() , 0 , 0 , 0 , this.oilSpeedAddValue , null);
+                self.ApplySpeedParam(self);
                 var mOil = monster.getComponent(MOil);
                 if (mOil) {
                     self.addMonsterOil(player , mOil);
@@ -172,7 +200,8 @@ cc.Class({
         else
         {
             self.turnOnControl(player);
-            self.SyncParam(self.getPlayerData());
+            this.SyncNewParam(this.getPlayerData() , 0 , 200 , 0 , this.oilSpeedAddValue , null);
+            // self.SyncParam(self.getPlayerData());
             self.ApplyAllParam(self);
             // 改变状态
             self.state = GameEnum.MONSTER_STATE.SIT;
@@ -184,6 +213,8 @@ cc.Class({
             
             self.addMonsterOil(player , null);
         }
+        GameCommon.GetUIView().getEnergyPower().addEnergyForOne();
+        GameCommon.GetUIView().getCoinsValue().addCoins(10);
     },
 
     beKill:function (gameObject) {

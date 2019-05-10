@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "32a85d9c-9609-4d7e-ae0b-7018ea6748c3",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "Game_Power_Progress_Bg": {
+      "ver": "1.0.3",
+      "uuid": "ef4e1130-4f22-4330-b28c-4e2632cc248c",
+      "rawTextureUuid": "32a85d9c-9609-4d7e-ae0b-7018ea6748c3",
+      "trimType": "custom",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 419,
+      "height": 156,
+      "rawWidth": 419,
+      "rawHeight": 156,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

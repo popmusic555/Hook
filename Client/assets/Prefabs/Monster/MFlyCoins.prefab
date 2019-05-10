@@ -24,7 +24,7 @@
       }
     ],
     "_active": true,
-    "_level": 5,
+    "_level": 1,
     "_components": [
       {
         "__id__": 10
@@ -234,7 +234,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "00pp+xfDJBH5LfH6m0h9FB"
+    "_id": "16M8SkCaJNsoUv5Z5X0Z+5"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -286,8 +286,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 612,
-      "height": 600
+      "width": 329.6,
+      "height": 332
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -297,7 +297,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -8,
-      "y": -14,
+      "y": 6,
       "z": 0
     },
     "_scale": {
@@ -342,7 +342,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "7f/IkQ72BETrfOubgiBX0K"
+    "_id": "21jVpsJb5OtLuIwqn1VKni"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -370,6 +370,7 @@
     "canMonster": false,
     "canFloor": false,
     "riseIgnore": false,
+    "minSpeed": 200,
     "elasticity": 0,
     "heightAddedValue": 0,
     "minHeight": 0,
@@ -379,7 +380,6 @@
     "_AsyncPos": null,
     "_RigidBody": null,
     "priority": 4,
-    "minSpeed": 0,
     "_FollowPlayer": null,
     "_FloorData": null,
     "_PlayerData": null,
@@ -392,7 +392,9 @@
     "boomEffect": {
       "__id__": 8
     },
-    "_id": "ffG11V9dVEyYk1DkIVvAon"
+    "cost": 0,
+    "coinsAddValue": 0,
+    "_id": "a7I7d0WB5MS4gnCeWHnFHb"
   },
   {
     "__type__": "73321aYAadFMYLS4syLIgAC",
@@ -406,8 +408,8 @@
     "heightAddedValue": 200,
     "minHeight": 0,
     "speedAddedValue": 0,
-    "maxSpeed": 7000,
-    "_id": "abdttHbmFJX5Qk9tqwdw5v"
+    "maxSpeed": 20000,
+    "_id": "02X4GA8BNOH5ArP+s5ekrF"
   },
   {
     "__type__": "cc.RigidBody",
@@ -431,7 +433,7 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "ffheExgYhOe4CO0e1papFv"
+    "_id": "5fatUYzItAp5164VKCEr/r"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -457,7 +459,7 @@
       "width": 67.6,
       "height": 113.4
     },
-    "_id": "a9n9W4dOhM56fBsNBSTETH"
+    "_id": "e8iDR1tlBJp7gz3iEsPnns"
   },
   {
     "__type__": "cc.PrefabInfo",

@@ -2,6 +2,9 @@
 var GameMonster = require("GameMonster");
 var GameEnum = require("GameEnum");
 var GameConst = require("GameConst");
+var MonsterConfig = require("MonsterConfig");
+var DataManager = require("DataManager");
+var GameCommon = require("GameCommon");
 
 var ANIMATION_NAME = {
     RUN:"xg_hj_run",
@@ -41,6 +44,11 @@ cc.Class({
         // 爆炸动画
         boomEffect:sp.Skeleton,
 
+        cost:{
+            default:0,
+            visible:false,
+        },
+
         _IsActivate:false,
     },
 
@@ -49,6 +57,17 @@ cc.Class({
     start () {
         this._super();
         this.injection(cc.find("Canvas/Processor").getComponent("Processor"));
+        // 初始化数据
+        this.initData(MonsterConfig.getDataByLevel("MRocketConfig" , DataManager.Userdata.getLevelByIndex(14)));
+    },
+
+    initData:function (cfg) {
+        var data = this.getPlayerData();
+        data.elasticity = cfg.elasticity;
+        data.heightAddedValue = cfg.heightAddValue;
+        data.minHeight = cfg.minHeight;
+        data.speedAddedValue = cfg.speedAddValue;
+        this.cost = cfg.cost;
     },
 
     setState:function (value) {
@@ -192,6 +211,8 @@ cc.Class({
             player.sleep();
             player.visible(false);
         }
+        GameCommon.GetUIView().getEnergyPower().addEnergyForOne();
+        GameCommon.GetUIView().getCoinsValue().addCoins(10);
     },
 
     beKill:function (gameObject) {

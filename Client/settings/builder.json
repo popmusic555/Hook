@@ -27,9 +27,9 @@
     "REMOTE_SERVER_ROOT": "",
     "orientation": "portrait"
   },
-  "startScene": "abed337a-3b9a-469a-b139-a9754500b712",
-  "title": "hello_world",
-  "webOrientation": "auto",
+  "startScene": "e9a19076-9d0b-40a0-8eaf-ead64dbeb04d",
+  "title": "Hook",
+  "webOrientation": "landscape",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
     "appid": "wx6ac3f5090a6b99c5",

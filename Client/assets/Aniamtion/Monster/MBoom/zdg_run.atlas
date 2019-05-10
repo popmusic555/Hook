@@ -1,0 +1,111 @@
+
+zdg_run.png
+size: 198,270
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+res/shen
+  rotate: false
+  xy: 2, 6
+  size: 99, 121
+  orig: 99, 121
+  offset: 0, 0
+  index: -1
+res/shou
+  rotate: true
+  xy: 120, 168
+  size: 100, 76
+  orig: 100, 76
+  offset: 0, 0
+  index: -1
+res/tou
+  rotate: false
+  xy: 120, 123
+  size: 44, 43
+  orig: 44, 43
+  offset: 0, 0
+  index: -1
+res/youjiao
+  rotate: false
+  xy: 103, 49
+  size: 33, 39
+  orig: 33, 39
+  offset: 0, 0
+  index: -1
+res/youyan
+  rotate: false
+  xy: 166, 137
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: -1
+res/youyan1
+  rotate: false
+  xy: 152, 92
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: -1
+res/youyan2
+  rotate: false
+  xy: 138, 59
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: -1
+res/youyan3
+  rotate: false
+  xy: 138, 28
+  size: 29, 29
+  orig: 29, 29
+  offset: 0, 0
+  index: -1
+res/zhadan
+  rotate: false
+  xy: 2, 129
+  size: 116, 139
+  orig: 116, 139
+  offset: 0, 0
+  index: -1
+res/zui
+  rotate: false
+  xy: 103, 90
+  size: 47, 31
+  orig: 47, 31
+  offset: 0, 0
+  index: -1
+res/zuojiao
+  rotate: false
+  xy: 103, 9
+  size: 33, 38
+  orig: 33, 38
+  offset: 0, 0
+  index: -1
+res/zuoyan
+  rotate: true
+  xy: 138, 2
+  size: 24, 25
+  orig: 24, 25
+  offset: 0, 0
+  index: -1
+res/zuoyan1
+  rotate: false
+  xy: 169, 65
+  size: 24, 25
+  orig: 24, 25
+  offset: 0, 0
+  index: -1
+res/zuoyan2
+  rotate: false
+  xy: 169, 38
+  size: 24, 25
+  orig: 24, 25
+  offset: 0, 0
+  index: -1
+res/zuoyan3
+  rotate: false
+  xy: 169, 11
+  size: 24, 25
+  orig: 24, 25
+  offset: 0, 0
+  index: -1

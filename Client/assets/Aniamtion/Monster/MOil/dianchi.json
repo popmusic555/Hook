@@ -1,0 +1,28 @@
+{
+"skeleton": { "hash": "gbw+EcYtBoYxNwZXeieMXwas9rs", "spine": "3.6.52", "width": 87.6, "height": 87.6, "images": "./res/" },
+"bones": [
+	{ "name": "root", "scaleX": 0.6, "scaleY": 0.6 },
+	{ "name": "dianchi", "parent": "root" }
+],
+"slots": [
+	{ "name": "dianchi", "bone": "dianchi", "attachment": "dianchi" }
+],
+"skins": {
+	"default": {
+		"dianchi": {
+			"dianchi": { "width": 146, "height": 146 }
+		}
+	}
+},
+"animations": {
+	"dianchi": {
+		"slots": {
+			"dianchi": {
+				"attachment": [
+					{ "time": 0, "name": "dianchi" }
+				]
+			}
+		}
+	}
+}
+}

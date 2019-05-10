@@ -1,8 +1,8 @@
 {
-"skeleton": { "hash": "3YNAFNQifpzaMxCmvCbvk7EIBxk", "spine": "3.6.52", "width": 512, "height": 512, "images": "./res/" },
+"skeleton": { "hash": "/xmnuM23Hq6lJzNdbhtHP/K4xQ0", "spine": "3.6.52", "width": 768, "height": 768, "images": "./res/" },
 "bones": [
 	{ "name": "root" },
-	{ "name": "bz", "parent": "root", "scaleX": 2, "scaleY": 2 }
+	{ "name": "bz", "parent": "root", "scaleX": 3, "scaleY": 3 }
 ],
 "slots": [
 	{ "name": "zl__00", "bone": "bz", "attachment": "zl_01 (1)" }

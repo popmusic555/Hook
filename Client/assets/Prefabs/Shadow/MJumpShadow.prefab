@@ -51,7 +51,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -160,
+      "y": -155,
       "z": 0
     },
     "_scale": {
@@ -114,7 +114,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": -120,
+      "y": -130,
       "z": 0
     },
     "_scale": {
@@ -164,7 +164,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "bc0dJxsTNN643mRqH6TW03"
+    "_id": "12QaUtvCJH/5J4yBteRlnx"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -186,7 +186,8 @@
     },
     "_enabled": true,
     "follow": null,
-    "_id": "f65euFWL9NxotRMwgW7l+F"
+    "_Shadow": null,
+    "_id": "29qAo2iaRCqokEr+lAh3pG"
   },
   {
     "__type__": "cc.PrefabInfo",

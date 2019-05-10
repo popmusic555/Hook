@@ -2,6 +2,9 @@
 var GameMonster = require("GameMonster");
 var GameObject = require("GameObject");
 var GameEnum = require("GameEnum");
+var MonsterConfig = require("MonsterConfig");
+var DataManager = require("DataManager");
+var GameCommon = require("GameCommon");
 
 cc.Class({
     extends: GameMonster,
@@ -11,6 +14,11 @@ cc.Class({
         // 爆炸动画
         boomEffect:sp.Skeleton,
         boomEffect2:sp.Skeleton,
+
+        cost:{
+            default:0,
+            visible:false,
+        },
     },
 
     // onLoad () {},
@@ -18,9 +26,19 @@ cc.Class({
     start () {
         this._super();
         this.injection(cc.find("Canvas/Processor").getComponent("Processor"));
+        // 初始化数据
+        this.initData(MonsterConfig.getDataByLevel("MBombConfig" , DataManager.Userdata.getLevelByIndex(14)));
     },
 
     // update (dt) {},
+    initData:function (cfg) {
+        var data = this.getPlayerData();
+        data.elasticity = cfg.elasticity;
+        data.heightAddedValue = cfg.heightAddValue;
+        data.minHeight = cfg.minHeight;
+        data.speedAddedValue = cfg.speedAddValue;
+        this.cost = cfg.cost;
+    },
 
     handleFloor:function (self , other) {
 
@@ -47,6 +65,8 @@ cc.Class({
                 player.unSuperAtk();
             }
         }
+        GameCommon.GetUIView().getEnergyPower().addEnergyForOne();
+        GameCommon.GetUIView().getCoinsValue().addCoins(10);
     },
 
     beKill:function (gameObject) {

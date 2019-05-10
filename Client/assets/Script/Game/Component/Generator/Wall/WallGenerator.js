@@ -1,5 +1,6 @@
 var DataManager = require("DataManager");
 var GameCommon = require("GameCommon");
+var PassConfig = require("PassConfig");
 
 cc.Class({
     extends: cc.Component,
@@ -40,6 +41,13 @@ cc.Class({
         this.passId = passId;
         DataManager.Userdata.setPassID(this.passId);
         this.GeneratorWallByPassID(this.passId);
+        var cfg = PassConfig.getDataByPassID(passId);
+        GameCommon.GetClipGenerator().refreshInterval = cfg.refreshInterval;
+        GameCommon.GetClipGenerator().refreshProbability = cfg.refreshProbability;
+
+        var refreshNum = JSON.parse(cfg.refreshNum);
+        GameCommon.GetClipGenerator().refreshNum.x = refreshNum[0];
+        GameCommon.GetClipGenerator().refreshNum.y = refreshNum[1];
     },
     /**
      * 开启下一关

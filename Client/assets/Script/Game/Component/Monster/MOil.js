@@ -97,11 +97,11 @@ cc.Class({
         if (this.tips.active) {
             var pos = this.tips.parent.convertToWorldSpaceAR(this._TipsPos);
             pos = cc.Camera.main.getWorldToCameraPoint(pos);
-            if (pos.y > cc.view.getVisibleSize().height - 60) {
-                pos.y = cc.view.getVisibleSize().height - 60;
+            if (pos.y > cc.view.getVisibleSize().height - 80) {
+                pos.y = cc.view.getVisibleSize().height - 80;
             }
-            if (pos.y < 0 + 60) {
-                pos.y = 0 + 60;
+            if (pos.y < 0 + 80) {
+                pos.y = 0 + 80;
             }
             pos = cc.Camera.main.getCameraToWorldPoint(pos);
             pos = this.tips.parent.convertToNodeSpaceAR(pos);

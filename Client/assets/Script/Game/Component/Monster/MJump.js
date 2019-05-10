@@ -2,6 +2,9 @@
 var GameMonster = require("GameMonster");
 var GameEnum = require("GameEnum");
 var GameConst = require("GameConst");
+var MonsterConfig = require("MonsterConfig");
+var DataManager = require("DataManager");
+var GameCommon = require("GameCommon");
 
 var ANIMATION_NAME = {
     RUN:"gbl_ttj_zhuti",
@@ -45,8 +48,16 @@ cc.Class({
             default:null,
             visible:false,
         },
+        cost:{
+            default:0,
+            visible:false,
+        },
         // 弹跳次数
         jumpTimes:0,
+        // 技能速度增加量
+        skillSpeedAddValue:0,
+        // 技能高度增加量
+        skillHeightAddValue:0,
 
         _IsTouch:true,
         _IsPunches:false,
@@ -60,6 +71,19 @@ cc.Class({
         this.jumpTimes += 1;
         this.mJumpParts = this.node.getChildByName("MJumpPart");
         this.injection(cc.find("Canvas/Processor").getComponent("Processor"));
+        // 初始化数据
+        this.initData(MonsterConfig.getDataByLevel("MJumpConfig" , DataManager.Userdata.getLevelByIndex(8)));
+    },
+    
+    initData:function (cfg) {
+        var data = this.getPlayerData();
+        data.elasticity = cfg.elasticity;
+        data.heightAddedValue = cfg.heightAddValue;
+        data.minHeight = cfg.minHeight;
+        data.speedAddedValue = cfg.speedAddValue;
+        this.skillSpeedAddValue = cfg.skillSpeed;
+        this.skillHeightAddValue = cfg.skillHeight;
+        this.cost = cfg.cost;
     },
 
     setState:function (value) {
@@ -157,18 +181,19 @@ cc.Class({
         var player = self.getController();
         if (player) {
             if (this._IsPunches) {
-                this.SyncNewParam(this.getPlayerData() , null , 900 , null , null , null);
+                this.SyncNewParam(this.getPlayerData() , 0 , this.skillHeightAddValue , 0 , this.skillSpeedAddValue , null);
                 this.ApplyAllParam(this);    
             }
             else
             {
-                this.SyncParam(this.getPlayerData());
-                this.ApplyAllParam(this);    
+                this.SyncNewParam(this.getPlayerData() , 0, 400 , 0 , 90 , null);
+                // this.SyncNewParam(this.getPlayerData() , null , this.skillHeightAddValue , null , this.skillSpeedAddValue , null);
+                this.ApplyAllParam(this);
             }
         }
         else
         {
-            this.SyncParam(this.getPlayerData());
+            this.SyncNewParam(this.getPlayerData() , 0 , 400 , 0 , 0 , null);
             this.ApplyAllParam(this);   
         }
     },
@@ -209,7 +234,8 @@ cc.Class({
         else
         {
             self.turnOnControl(player);
-            self.SyncParam(this.getPlayerData());
+            // self.SyncNewParam(this.getPlayerData());
+            self.SyncNewParam(this.getPlayerData(),0 , 200 , 0 , 0 , null);
             self.ApplyAllParam(self);
             // 改变状态
             self.state = GameEnum.MONSTER_STATE.SIT;
@@ -221,6 +247,8 @@ cc.Class({
             player.sleep();
             player.visible(false);
         }
+        GameCommon.GetUIView().getEnergyPower().addEnergyForOne();
+        GameCommon.GetUIView().getCoinsValue().addCoins(10);
     },
 
     beKill:function (gameObject) {

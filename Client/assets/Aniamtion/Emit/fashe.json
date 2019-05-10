@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "hUcLwPhe2JGPf3ak0vDt0WPjpIQ", "spine": "3.6.52", "width": 161.63, "height": 170, "images": "" },
+"skeleton": { "hash": "N2vqn4sSU1+5smsL9MMN+arYUhI", "spine": "3.6.52", "width": 161.63, "height": 170, "images": "" },
 "bones": [
 	{ "name": "root", "scaleX": 0.6, "scaleY": 0.6 },
 	{ "name": "bone7", "parent": "root", "x": 34.25, "y": -80.31 },
@@ -74,6 +74,9 @@
 			"res/pao": { "x": -7.08, "y": 8.14, "width": 48, "height": 48 }
 		}
 	}
+},
+"events": {
+	"yanwu": {}
 },
 "animations": {
 	"fashe": {
@@ -230,7 +233,10 @@
 					]
 				}
 			}
-		}
+		},
+		"events": [
+			{ "time": 0.5333, "name": "yanwu", "string": "yanwu" }
+		]
 	},
 	"idle": {
 		"slots": {

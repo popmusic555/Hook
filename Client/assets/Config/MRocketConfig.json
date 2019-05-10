@@ -1,0 +1,123 @@
+[
+  {
+    "level": 0,
+    "elasticity": 0,
+    "minHeight": 0,
+    "heightAddValue": 1000,
+    "speedAddValue": 120,
+    "refreshInterval": 678,
+    "refreshNum": "[1,1]",
+    "refreshProbability": 30,
+    "cost": 30
+  },
+  {
+    "level": 1,
+    "elasticity": 0,
+    "minHeight": 0,
+    "heightAddValue": 1200,
+    "speedAddValue": 120,
+    "refreshInterval": 678,
+    "refreshNum": "[1,1]",
+    "refreshProbability": 30,
+    "cost": 30
+  },
+  {
+    "level": 2,
+    "elasticity": 0,
+    "minHeight": 0,
+    "heightAddValue": 1200,
+    "speedAddValue": 180,
+    "refreshInterval": 678,
+    "refreshNum": "[1,1]",
+    "refreshProbability": 30,
+    "cost": 30
+  },
+  {
+    "level": 3,
+    "elasticity": 0,
+    "minHeight": 0,
+    "heightAddValue": 1200,
+    "speedAddValue": 180,
+    "refreshInterval": 678,
+    "refreshNum": "[1,1]",
+    "refreshProbability": 35,
+    "cost": 30
+  },
+  {
+    "level": 4,
+    "elasticity": 0,
+    "minHeight": 0,
+    "heightAddValue": 1400,
+    "speedAddValue": 180,
+    "refreshInterval": 678,
+    "refreshNum": "[1,1]",
+    "refreshProbability": 35,
+    "cost": 30
+  },
+  {
+    "level": 5,
+    "elasticity": 0,
+    "minHeight": 0,
+    "heightAddValue": 1400,
+    "speedAddValue": 240,
+    "refreshInterval": 678,
+    "refreshNum": "[1,1]",
+    "refreshProbability": 35,
+    "cost": 30
+  },
+  {
+    "level": 6,
+    "elasticity": 0,
+    "minHeight": 0,
+    "heightAddValue": 1400,
+    "speedAddValue": 240,
+    "refreshInterval": 678,
+    "refreshNum": "[1,1]",
+    "refreshProbability": 40,
+    "cost": 30
+  },
+  {
+    "level": 7,
+    "elasticity": 0,
+    "minHeight": 0,
+    "heightAddValue": 1600,
+    "speedAddValue": 240,
+    "refreshInterval": 678,
+    "refreshNum": "[1,1]",
+    "refreshProbability": 40,
+    "cost": 30
+  },
+  {
+    "level": 8,
+    "elasticity": 0,
+    "minHeight": 0,
+    "heightAddValue": 1600,
+    "speedAddValue": 300,
+    "refreshInterval": 678,
+    "refreshNum": "[1,1]",
+    "refreshProbability": 40,
+    "cost": 30
+  },
+  {
+    "level": 9,
+    "elasticity": 0,
+    "minHeight": 0,
+    "heightAddValue": 1600,
+    "speedAddValue": 300,
+    "refreshInterval": 678,
+    "refreshNum": "[1,1]",
+    "refreshProbability": 45,
+    "cost": 30
+  },
+  {
+    "level": 10,
+    "elasticity": 0,
+    "minHeight": 0,
+    "heightAddValue": 1800,
+    "speedAddValue": 300,
+    "refreshInterval": 678,
+    "refreshNum": "[1,1]",
+    "refreshProbability": 45,
+    "cost": 30
+  }
+]

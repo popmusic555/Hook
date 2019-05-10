@@ -24,7 +24,7 @@
       }
     ],
     "_active": true,
-    "_level": 5,
+    "_level": 1,
     "_components": [
       {
         "__id__": 10
@@ -234,7 +234,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "b1Edf3cO9Gvb5u6CgEHpgc"
+    "_id": "ebENcRAgBGjaOEQKH7dqbp"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -286,8 +286,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 612,
-      "height": 600
+      "width": 329.6,
+      "height": 332
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -297,7 +297,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -5,
-      "y": -5,
+      "y": 8,
       "z": 0
     },
     "_scale": {
@@ -342,7 +342,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "15DUkBsfpBvYI99RemuWti"
+    "_id": "4cIZCDRGBEkZ6ZTozK7Ceb"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -370,6 +370,7 @@
     "canMonster": false,
     "canFloor": true,
     "riseIgnore": false,
+    "minSpeed": 200,
     "elasticity": 0,
     "heightAddedValue": 0,
     "minHeight": 0,
@@ -379,7 +380,6 @@
     "_AsyncPos": null,
     "_RigidBody": null,
     "priority": 10,
-    "minSpeed": 0,
     "_FollowPlayer": null,
     "_FloorData": null,
     "_PlayerData": null,
@@ -395,8 +395,9 @@
     "boomEffect": {
       "__id__": 8
     },
+    "cost": 0,
     "_IsActivate": false,
-    "_id": "62DvD5aQhKcrgwv6x3F+lO"
+    "_id": "7cMkZ5/ypJf5iw3fwHfjRE"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -439,7 +440,7 @@
         "y": -30
       }
     ],
-    "_id": "2cTI3HhiJDvq2EOzf3fmPS"
+    "_id": "a5Szx7SfhAZ6wE8OZDtaJi"
   },
   {
     "__type__": "73321aYAadFMYLS4syLIgAC",
@@ -453,8 +454,8 @@
     "heightAddedValue": 1000,
     "minHeight": 0,
     "speedAddedValue": 0,
-    "maxSpeed": 7000,
-    "_id": "denA1aKwdNmYEwVrEj6YLR"
+    "maxSpeed": 20000,
+    "_id": "79DbQaqetLuLjKQadvlOqm"
   },
   {
     "__type__": "cc.RigidBody",
@@ -478,7 +479,7 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "7exOhjTKJGM60F/J9AfQsz"
+    "_id": "7dNjXo/7hGZrbyXS8KqrtY"
   },
   {
     "__type__": "cc.PrefabInfo",

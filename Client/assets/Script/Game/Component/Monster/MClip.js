@@ -2,6 +2,9 @@
 var GameMonster = require("GameMonster");
 var GameEnum = require("GameEnum");
 var GameCommon = require("GameCommon");
+var MonsterConfig = require("MonsterConfig");
+var PassConfig = require("PassConfig");
+var DataManager = require("DataManager");
 
 var ANIMATION_NAME = {
     RUN:"xg_srh",
@@ -47,13 +50,29 @@ cc.Class({
         },
         // 爆炸动画
         boomEffect:sp.Skeleton,
+
+        cost:{
+            default:0,
+            visible:false,
+        },
     },
 
     // onLoad () {},
 
     start () {
         this._super();
-        this.injection(cc.find("Canvas/Processor").getComponent("Processor"));
+        // this.injection(cc.find("Canvas/Processor").getComponent("Processor"));
+        // 初始化数据
+        this.initData(MonsterConfig.getDataByLevel("MClipConfig" , DataManager.Userdata.getLevelByIndex(15)));
+    },
+
+    initData:function (cfg) {
+        var data = this.getPlayerData();
+        data.elasticity = cfg.elasticity;
+        data.heightAddedValue = cfg.heightAddValue;
+        data.minHeight = cfg.minHeight;
+        data.speedAddedValue = cfg.speedAddValue;
+        this.cost = cfg.cost;
     },
 
     setState:function (value) {
@@ -139,6 +158,12 @@ cc.Class({
         {
             self.turnOnControl(player);
             self.SyncParam(this.getPlayerData());
+
+            this.speedAddedValue += PassConfig.getDataByPassID(DataManager.Userdata.getPassID()).mClipAddValue;
+            if (this.speedAddedValue > -10) {
+                this.speedAddedValue = -10;
+            }
+
             self.ApplyAllParam(self);
             // 改变状态
             self.state = GameEnum.MONSTER_STATE.SIT;
@@ -150,6 +175,8 @@ cc.Class({
             player.sleep();
             player.visible(false);
         }
+        GameCommon.GetUIView().getEnergyPower().addEnergyForOne();
+        GameCommon.GetUIView().getCoinsValue().addCoins(10);
     },
 
     beKill:function (gameObject) {

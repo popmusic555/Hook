@@ -27,7 +27,7 @@
       }
     ],
     "_active": true,
-    "_level": 5,
+    "_level": 1,
     "_components": [
       {
         "__id__": 25
@@ -66,7 +66,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": -155,
       "z": 0
     },
     "_scale": {
@@ -376,7 +376,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "74SHF37axN0KGSTuusPH+F"
+    "_id": "f8sdWHY9FCEoQhgXqag63A"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -413,7 +413,7 @@
     "minHeight": 0,
     "speedAddedValue": 0,
     "maxSpeed": 7000,
-    "_id": "ddNL3kr4FAIqw82zgHxhgX"
+    "_id": "f7D46UghJN8oFOO10pMPxc"
   },
   {
     "__type__": "587da5/qSpDHankM8u1ORGH",
@@ -430,6 +430,7 @@
     "canMonster": false,
     "canFloor": true,
     "riseIgnore": false,
+    "minSpeed": 0,
     "elasticity": 0,
     "heightAddedValue": 0,
     "minHeight": 0,
@@ -439,7 +440,6 @@
     "_AsyncPos": null,
     "_RigidBody": null,
     "priority": 11,
-    "minSpeed": 0,
     "_FollowPlayer": null,
     "_FloorData": null,
     "_PlayerData": null,
@@ -450,7 +450,7 @@
     "mJump": {
       "__id__": 11
     },
-    "_id": "eahlwEdxpHTo9RroKcJq6A"
+    "_id": "f0kedzbHtKiZvhG1ZRgUPJ"
   },
   {
     "__type__": "dc9008IjYRJGaaRQ6dMSFEo",
@@ -467,6 +467,7 @@
     "canMonster": false,
     "canFloor": true,
     "riseIgnore": false,
+    "minSpeed": 200,
     "elasticity": 0,
     "heightAddedValue": 0,
     "minHeight": 0,
@@ -476,7 +477,6 @@
     "_AsyncPos": null,
     "_RigidBody": null,
     "priority": 11,
-    "minSpeed": 0,
     "_FollowPlayer": null,
     "_FloorData": null,
     "_PlayerData": null,
@@ -495,11 +495,14 @@
     "mJumpParts": {
       "__id__": 2
     },
+    "cost": 0,
     "jumpTimes": 3,
+    "skillSpeedAddValue": 0,
+    "skillHeightAddValue": 900,
     "_IsTouch": true,
     "_IsPunches": false,
     "_LastY": 0,
-    "_id": "25a5cWbARFt6QN2TX51Tya"
+    "_id": "f4Lo3J6hNGFJHZtThC8mWI"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -542,7 +545,7 @@
         "y": 25
       }
     ],
-    "_id": "c6CjM5Cl1HRYRf9dipQ42n"
+    "_id": "36ZnnkSeRKL7LUeH0oboqt"
   },
   {
     "__type__": "sp.Skeleton",
@@ -565,7 +568,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "b4Fdflo3tCdJM1GRAiA+Ak"
+    "_id": "101lel1hFKy76Gci1HjWSW"
   },
   {
     "__type__": "cc.Node",
@@ -736,7 +739,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "8fDNRDYClAzbo+dQkONKHD"
+    "_id": "cdEfimhUlOdoEY2jYzNfcb"
   },
   {
     "__type__": "cc.Node",
@@ -766,8 +769,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 612,
-      "height": 600
+      "width": 329.6,
+      "height": 332
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -777,7 +780,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": -10,
-      "y": 40,
+      "y": -35,
       "z": 0
     },
     "_scale": {
@@ -834,7 +837,7 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "e4230EMk9Ghas8RkULfut3"
+    "_id": "42rQCdqXpJH4+w8lOrmzlp"
   },
   {
     "__type__": "cc.PhysicsPolygonCollider",
@@ -877,7 +880,7 @@
         "y": -5
       }
     ],
-    "_id": "e158t3WzRDc67rMTSv5eLH"
+    "_id": "b1/4laK3RD2ZbejPWbKhwP"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -913,8 +916,8 @@
     "heightAddedValue": 250,
     "minHeight": 0,
     "speedAddedValue": 0,
-    "maxSpeed": 7000,
-    "_id": "f9S57U75RKhauVlfPVnw1W"
+    "maxSpeed": 20000,
+    "_id": "b2bPVdqbtGx5kAlXOkaiGe"
   },
   {
     "__type__": "cc.RigidBody",
@@ -938,7 +941,7 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "b8xi9352NNNbo1Jl4+gaqZ"
+    "_id": "75SCH5SPFB/6C5/Jlq8jgh"
   },
   {
     "__type__": "cc.PrefabInfo",

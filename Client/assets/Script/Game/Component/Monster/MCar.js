@@ -2,6 +2,9 @@
 var GameMonster = require("GameMonster");
 var GameEnum = require("GameEnum");
 var GameConst = require("GameConst");
+var MonsterConfig = require("MonsterConfig");
+var DataManager = require("DataManager");
+var GameCommon = require("GameCommon");
 
 var ANIMATION_NAME = {
     RUN:"car_gbl_run",
@@ -44,6 +47,11 @@ cc.Class({
 
         duration:0,
 
+        cost:{
+            default:0,
+            visible:false,
+        },
+
         _IsTouch:false,
     },
 
@@ -52,7 +60,20 @@ cc.Class({
     start () {
         this._super();
         this._IsTouch = false;
-        this.injection(cc.find("Canvas/Processor").getComponent("Processor"));
+        // this.injection(cc.find("Canvas/Processor").getComponent("Processor"));
+        
+        // 初始化数据
+        this.initData(MonsterConfig.getDataByLevel("MCarConfig" , DataManager.Userdata.getLevelByIndex(11)));
+    },
+
+    initData:function (cfg) {
+        var data = this.getPlayerData();
+        data.elasticity = cfg.elasticity;
+        data.heightAddedValue = cfg.heightAddValue;
+        data.minHeight = cfg.minHeight;
+        data.speedAddedValue = cfg.speedAddValue;
+        this.cost = cfg.cost;
+        this.duration = cfg.duration;
     },
 
     setState:function (value) {
@@ -178,7 +199,8 @@ cc.Class({
         else
         {
             self.turnOnControl(player);
-            self.SyncParam(this.getPlayerData());
+            self.SyncNewParam(this.getPlayerData() , 0 , 300 , 0 , 0 , null);
+            // self.SyncParam(this.getPlayerData());
             self.ApplyAllParam(self);
             // 改变状态
             self.state = GameEnum.MONSTER_STATE.SIT;
@@ -190,6 +212,8 @@ cc.Class({
             player.sleep();
             player.visible(false);
         }
+        GameCommon.GetUIView().getEnergyPower().addEnergyForOne();
+        GameCommon.GetUIView().getCoinsValue().addCoins(10);
     },
 
     beKill:function (gameObject) {
@@ -220,7 +244,7 @@ cc.Class({
         if (!this._IsTouch) {
             return;
         }
-        this.SyncNewParam(this.getPlayerData() , 0 , 0 , 0 , 50 , null);
+        this.SyncNewParam(this.getPlayerData() , 0 , 0 , 0 , 30 , null);
         this.ApplyAllParam(this);
         var move = cc.moveBy(0.1 , 30 , 0);
         this.animation.node.runAction(cc.sequence(move , move.reverse()));  

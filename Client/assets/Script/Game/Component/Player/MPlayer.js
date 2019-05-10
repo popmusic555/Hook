@@ -4,6 +4,9 @@ var GameEnum = require("GameEnum");
 var PlayerModel = require("PlayerModel");
 var GameCommon = require("GameCommon");
 var GameConst = require("GameConst");
+var PlayerConfig = require("PlayerConfig");
+var PassConfig = require("PassConfig");
+var DataManager = require("DataManager");
 
 cc.Class({
     extends: GameObject,
@@ -13,6 +16,16 @@ cc.Class({
         impactVelocity:0,
         // 死亡速度
         deathSpeed:0,
+        // 发射速度
+        launchingSpeed:{
+            default:0,
+            visible:false,
+        },
+        // 能量上限
+        energyLimit:{
+            default:0,
+            visible:false,
+        },
 
         globalAni:[sp.Skeleton],
         // throughHoleAni:sp.Skeleton,
@@ -24,26 +37,50 @@ cc.Class({
         _FloorData:null,
 
         _SuperAtkLock:false,
-
+        
         isLaunching:{
             default:false,
             visible:false,
         },
 
-        // 
+        // 当前原点
+        _Origin:0,
+
+        _Pause:false,
+
     },
 
     // onLoad () {},
 
     start () {
+        this._Origin = this.node.x;
+
         this._PlayerModel = this.getComponent(PlayerModel);
         var uiview = GameCommon.GetUIView();
         // uiview.setTouchListener(this);
-
         this._FloorData = this.getComponent("FloorData");
+        // 初始化数据
+        this.initData();
+    },
+
+    initData:function () {
+        var data = this.getFloorData();
+        var cfg = PlayerConfig.getDataByLevel(DataManager.Userdata.getLevelByIndex(1))
+        data.minHeight = cfg.bouncHeight;
+        var cfg = PlayerConfig.getDataByLevel(DataManager.Userdata.getLevelByIndex(5))
+        data.speedAddedValue = cfg.floorAddValue;
+
+        var cfg = PlayerConfig.getDataByLevel(DataManager.Userdata.getLevelByIndex(0))
+        this.launchingSpeed = cfg.emitSpeed;
+        var cfg = PlayerConfig.getDataByLevel(DataManager.Userdata.getLevelByIndex(2))
+        this.energyLimit = cfg.energyLimit;
     },
 
     lateUpdate (dt) {
+        if (this._Pause) {
+            return;
+        }
+
         this._super(dt);
 
         // 切换人物状态
@@ -74,16 +111,22 @@ cc.Class({
         //     this.updateThroughHoleAni();
         // }
         this.updateGlobalAni();
+
+        this.showSpeed();
+        this.showMileage();
     },
 
     // 开始发射
-    startLaunching:function (speedX , speedY) {
+    startLaunching:function () {
         var uiview = GameCommon.GetUIView();
         uiview.setTouchListener(this);
         this.isLaunching = true;
+        this.wakeUp();
         // var speedY = Math.tan(angle * Math.PI / 180) * speedX;
-        this.setLinearVelocity(speedX , speedY);  
+        this.setLinearVelocity(this.launchingSpeed , 1280 * 2);
+        // this.setLinearVelocity(this.launchingSpeed , 300);
         this.setGravityScale(GameConst.GRAVITY_SCALE);
+        GameCommon.GAME_VIEW.playSound(1);
     },
 
     getPlayerModel:function (state) {
@@ -192,10 +235,18 @@ cc.Class({
             }
             this.SyncParam(this.getFloorData());
             this.ApplyElasticityParam(this);
+            GameCommon.GAME_VIEW.playSound(6);
         }
         else
         {
-            this.SyncParam(this.getFloorData());
+            var floorData = this.getFloorData();
+            this.SyncParam(floorData);
+            
+            this.speedAddedValue += PassConfig.getDataByPassID(DataManager.Userdata.getPassID()).floorAddValue;
+            if (floorData.speedAddedValue > -4) {
+                floorData.speedAddedValue = -4;
+            }
+            
             this.ApplyAllParam(this);
             if (this.getLinearVelocity().x <= this.deathSpeed) {
                 this.dead();
@@ -204,6 +255,7 @@ cc.Class({
             else
             {
                 this.hit();
+                GameCommon.GAME_VIEW.playSound(3);
             }
         }
 
@@ -218,7 +270,18 @@ cc.Class({
             return;
         }
 
+        if (this.isDeath()) {
+            return;
+        }
+
+        var isEnough = GameCommon.GetUIView().getEnergyPower().isEnoughEnergy();
+        if (!isEnough) {
+            return;
+        }
+
         this.superAtk();
+        GameCommon.GAME_VIEW.playSound(5);
+        GameCommon.GetUIView().getEnergyPower().reduceEnergyForTen();
     },
 
     attack:function () {
@@ -238,6 +301,12 @@ cc.Class({
     dead:function () {
         this.getPlayerModel().transitionStateAndLock(GameEnum.PLAYER_STATE.DEAD2);
         this.setRunState(GameEnum.PLAYER_RUNSTATE.DEATH);
+        GameCommon.GAME_VIEW.playSound(9);
+        cc.audioEngine.stopMusic();
+        GameCommon.GetUIView().showSettlement(this.getMileage() , GameCommon.GetUIView().getCoinsValue().getCoins());
+        GameCommon.GetUIView().getSpeedPower().setSpeed(0);
+        DataManager.Userdata.setMaxPassID(DataManager.Userdata.getPassID());
+        DataManager.Userdata.setMaxMileage(this.getMileage());
     },
 
     superAtk:function () {
@@ -353,10 +422,41 @@ cc.Class({
             
             if (!monster.isSleep) {
                 monster.beKill(this , true);    
+                // monster.beKill(this , false);    
             }
         }
 
         return result;
+    },
+
+    // 获取里程
+    getMileage:function () {
+        var result = (this.node.x - this._Origin) / 30;
+        return Math.floor(result);
+    },
+
+    // 显示速度
+    showSpeed:function () {
+        if (this.getGravityScale() <= 0) {
+            return;
+        }
+
+        var speed = Math.floor(this.getLinearVelocity().x / 30);
+        GameCommon.GetUIView().getSpeedPower().setSpeed(speed);
+    },
+
+    // 显示里程
+    showMileage:function () {
+        var mileage = this.getMileage();
+        GameCommon.GetUIView().getMileageValue().setCurMileage(mileage);
+    },
+
+    pause:function () {
+        this._Pause = true;
+    },
+
+    resume:function () {
+        this._Pause = false;  
     },
 
 });

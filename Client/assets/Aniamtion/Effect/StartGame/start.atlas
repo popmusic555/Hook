@@ -1,0 +1,41 @@
+
+start.png
+size: 1099,106
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+ksyx
+  rotate: false
+  xy: 2, 5
+  size: 410, 99
+  orig: 410, 99
+  offset: 0, 0
+  index: -1
+start
+  rotate: false
+  xy: 414, 5
+  size: 410, 99
+  orig: 410, 99
+  offset: 0, 0
+  index: -1
+start022
+  rotate: false
+  xy: 826, 54
+  size: 205, 50
+  orig: 205, 50
+  offset: 0, 0
+  index: -1
+start_02
+  rotate: false
+  xy: 826, 2
+  size: 205, 50
+  orig: 205, 50
+  offset: 0, 0
+  index: -1
+yanhuo_00002
+  rotate: false
+  xy: 1033, 40
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1

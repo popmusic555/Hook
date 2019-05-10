@@ -3,6 +3,9 @@ var GameObject = require("GameObject");
 var GameEnum = require("GameEnum");
 var GameConst = require("GameConst");
 var DataManager = require("DataManager");
+var PlayerConfig = require("PlayerConfig");
+var PassConfig = require("PassConfig");
+var GameCommon = require("GameCommon");
 
 cc.Class({
     extends: GameObject,
@@ -10,11 +13,21 @@ cc.Class({
     properties: {
         // 撞墙停止速度
         stopSpeed:0,
+        // 撞墙减速
+        speedAddValue:0,
+        // 撞墙奖励
+        reward:0,
         throughHole:cc.Node,
         // 当前地板
         floor:cc.Sprite,
         // 当前地板资源
         floorRes:[cc.SpriteFrame],
+
+
+        cost:{
+            default:0,
+            visible:false,
+        },
 
         _ReEmitSpeed:null,
         // 当前是否可以穿墙
@@ -29,6 +42,10 @@ cc.Class({
         // this._ReEmitSpeed = cc.v2(0,0);
         var passId = DataManager.Userdata.getPassID() % 3;
         this.floor.spriteFrame = this.floorRes[passId];
+        // 初始化数据
+        var cfg = PlayerConfig.getDataByLevel(DataManager.Userdata.getLevelByIndex(7));
+        this.speedAddValue = cfg.wallAddValue;
+        this.cost = PassConfig.getDataByPassID(passId);
     },
 
     lateUpdate (dt) {
@@ -131,6 +148,7 @@ cc.Class({
             case 1:
                 // 判断是否需要停止      
                 player.hitWall(); 
+                console.log("判断是否需要停止" , player.getLinearVelocity().x , this.stopSpeed);
                 if (player.getLinearVelocity().x <= this.stopSpeed) {
                     this._IsThrough = false;
                     var cameraFollow = cc.Camera.main.getComponent("CameraFollow");
@@ -141,6 +159,10 @@ cc.Class({
                 {
                     this._IsThrough = true;
                     console.log("需要穿墙");
+                    this.speedAddValue += PassConfig.getDataByPassID(DataManager.Userdata.getPassID()).wallAddValue;
+                    if (this.speedAddValue > -20) {
+                        this.speedAddValue = -20;
+                    }
                 }
                 break;
             case 2:
@@ -153,12 +175,14 @@ cc.Class({
                         this.scheduleOnce(function () {
                             // player.node.x = this.node.x + 30;
                         } , 0);
+                        GameCommon.GAME_VIEW.playSound(8);
                     }
                     else
                     {
                         // 穿越墙壁
                         console.log("穿越墙壁");
                         this.through(player);
+                        GameCommon.GAME_VIEW.playSound(10);
                     }    
                 }
                 this._CurPlayer = player;
@@ -167,7 +191,7 @@ cc.Class({
                 // 判断是否穿墙
                 player.unHitWall();
                 if (this.getReEmitSpeed()) {
-                    player.setLinearVelocity(this.getReEmitSpeed().x , this.getReEmitSpeed().y);
+                    player.setLinearVelocity(this.getReEmitSpeed().x + this.speedAddValue , this.getReEmitSpeed().y);
                     player.setGravityScale(GameConst.GRAVITY_SCALE);
         
                     var y = player.node.parent.convertToWorldSpaceAR(player.node.position).y;
@@ -180,6 +204,8 @@ cc.Class({
                     // this.scheduleOnce(function () {
                     //     player.node.x = this.node.x + 2000;
                     // } , 0);  
+                    GameCommon.GetUIView().getEnergyPower().addEnergyForTen();
+                    GameCommon.GAME_VIEW.playSound(7);
                 }
                 break;
         }

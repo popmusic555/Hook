@@ -124,7 +124,7 @@ cc.Class({
                 break;
             case GameEnum.PLAYER_STATE.DEAD2:
                 this.setAnimation("lose2");
-                // this.model.node.x += -25;
+                this.model.node.y = -25;
                 // console.log("State DEAD2");
                 break;
             case GameEnum.PLAYER_STATE.HITWALL:
