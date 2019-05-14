@@ -1,0 +1,32 @@
+[
+  {
+    "passid": 0,
+    "elastic": 0.8,
+    "bounce": 200,
+    "accelerate": -300
+  },
+  {
+    "passid": 1,
+    "elastic": 0.8,
+    "bounce": 200,
+    "accelerate": -330
+  },
+  {
+    "passid": 2,
+    "elastic": 0.8,
+    "bounce": 200,
+    "accelerate": -360
+  },
+  {
+    "passid": 3,
+    "elastic": 0.8,
+    "bounce": 200,
+    "accelerate": -390
+  },
+  {
+    "passid": 4,
+    "elastic": 0.8,
+    "bounce": 200,
+    "accelerate": -420
+  }
+]

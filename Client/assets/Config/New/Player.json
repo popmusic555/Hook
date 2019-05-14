@@ -1,0 +1,47 @@
+[
+  {
+    "passid": 0,
+    "elastic": 1,
+    "bounce": 100,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 2,
+    "energyLimit": 10
+  },
+  {
+    "passid": 1,
+    "elastic": 1,
+    "bounce": 100,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 2,
+    "energyLimit": 10
+  },
+  {
+    "passid": 2,
+    "elastic": 1,
+    "bounce": 100,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 2,
+    "energyLimit": 10
+  },
+  {
+    "passid": 3,
+    "elastic": 1,
+    "bounce": 100,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 2,
+    "energyLimit": 10
+  },
+  {
+    "passid": 4,
+    "elastic": 1,
+    "bounce": 100,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 2,
+    "energyLimit": 10
+  }
+]
