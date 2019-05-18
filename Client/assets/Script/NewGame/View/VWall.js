@@ -1,4 +1,6 @@
 
+var GWall = require("GO_Wall");
+
 /**
  * 墙体
  * 
@@ -47,9 +49,9 @@ cc.Class({
      */
     generateWall:function (distance) {
         var wallPosx = Global.Model.MWall.getPosXByPassID(this.passID);
-        if (wallPosx > distance) {
-            return;
-        }
+        // if (wallPosx > distance) {
+        //     return;
+        // }
 
         if (this._GeneratedPassID >= this.passID) {
             return;
@@ -61,6 +63,9 @@ cc.Class({
         wallNode.x = wallPosx;
         wallNode.y = 0;
         this.node.addChild(wallNode);
+
+        var gWall = wallNode.getComponent(GWall);
+        gWall.setPassID(Global.Model.MWall.getPassID());
 
         var fgWallNode = this.createFgWall();
         fgWallNode.name = "FgWall" + this._GeneratedPassID;

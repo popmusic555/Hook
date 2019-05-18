@@ -24,6 +24,19 @@ Global.Model.MFloor = require("MD_Floor");
 Global.Model.MWall = require("MD_Wall");
 // 普通怪物数据模型
 Global.Model.MNormal = require("MD_Normal");
+Global.Model.MClip = require("MD_Clip");
+Global.Model.MFly = require("MD_Fly");
+Global.Model.MCoins = require("MD_Coins");
+Global.Model.MFlyCoins = require("MD_FlyCoins");
+Global.Model.MBoom = require("MD_Boom");
+Global.Model.MFlyBoom = require("MD_FlyBoom");
+Global.Model.MEnergy = require("MD_Energy");
+Global.Model.MRocket = require("MD_Rocket");
+Global.Model.MJump = require("MD_Jump");
+Global.Model.MPlane = require("MD_Plane");
+Global.Model.MCar = require("MD_Car");
+
+
 
 // 基类对象
 Global.GameObj.GBase = require("GO_Base");
@@ -34,6 +47,17 @@ Global.Model.MPlayer.init();
 Global.Model.MFloor.init();
 Global.Model.MWall.init();
 Global.Model.MNormal.init();
+Global.Model.MClip.init();
+Global.Model.MFly.init();
+Global.Model.MCoins.init();
+Global.Model.MFlyCoins.init();
+Global.Model.MBoom.init();
+Global.Model.MFlyBoom.init();
+Global.Model.MEnergy.init();
+Global.Model.MRocket.init();
+Global.Model.MJump.init();
+Global.Model.MPlane.init();
+Global.Model.MCar.init();
 
 console.log("Global is Loaded");
 

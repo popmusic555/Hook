@@ -58,24 +58,20 @@ GlobalEnum.P_ANI_STATE = new cc.Enum({
     // 死亡1状态
     DEATH1:8,
     // 死亡2状态
-    DEATH1:9,
+    DEATH2:9,
     // 撞墙状态
     HITWALL:10,
+    // 冲击状态
+    IMPACT:11,
 });
 
 GlobalEnum.P_STATE = new cc.Enum({
     // 准备
     READY:0,
-    // 发射
-    LAUNCH:1,
-    // 飞行
-    FLY:2,
-    // 撞墙
-    HITWALL:3,
-    // 死亡
-    DEATH:4,
-    // 冲击
-    IMPACT:5,
+    // 正常
+    NORMAL:1,
+    // 变化
+    TRANSFORM:2,
 });
 
 module.exports = GlobalEnum;

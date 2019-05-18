@@ -13,15 +13,16 @@ cc.Class({
         // 墙体配置表
         wallConfig:cc.JsonAsset,
 
-        // 人物对象节点
-        player:GO_Player,
-        // 地板对象节点
-        floor:GO_Floor,
-        // 普通怪物列表节点
-        
-        // 夹子怪物列表节点
-
-        // 墙体节点列表
+        // 地图节点
+        mapNode:cc.Node,
+        // 建筑节点
+        buildNode:cc.Node,
+        // 墙节点
+        wallNode:cc.Node,
+        // 怪物节点
+        monsterNode:cc.Node,
+        // 前景墙节点
+        fgWallNode:cc.Node,
     },
 
     onLoad () {
@@ -41,6 +42,22 @@ cc.Class({
         Global.Model.MWall.setConfig(this.wallConfig.json);
 
         Global.Model.MWall.setPassID(0);
+    },
+
+    // 震屏
+    shockScreen:function () {
+        this.shockNode(this.mapNode);
+        this.shockNode(this.buildNode);
+        this.shockNode(this.wallNode);
+        // this.shockNode(this.monsterNode);
+        this.shockNode(this.fgWallNode);
+    },
+
+    shockNode:function (node) {
+        var upAction = cc.moveBy(0.02 , 0 , 10);
+        var downAction = upAction.reverse();
+        var action = cc.sequence(upAction , downAction , downAction , upAction);
+        node.runAction(cc.repeat(action , 1));
     },
 
     // update (dt) {},

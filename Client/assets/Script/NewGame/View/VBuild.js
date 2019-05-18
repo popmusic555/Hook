@@ -95,7 +95,7 @@ cc.Class({
         node.anchorY = 0;
         var sprite = node.addComponent(cc.Sprite);
 
-        var buildResID = this._BulidResIDList[this.passID] || this._BulidResIDList[this._BulidResIDList.length-1];
+        var buildResID = this._BulidResIDList[this.passID % this._BulidResIDList.length];
         
 
         buildResID = buildResID[Global.Common.Utils.random(0 , buildResID.length-1)];

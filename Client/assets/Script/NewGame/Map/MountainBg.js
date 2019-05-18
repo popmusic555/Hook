@@ -28,9 +28,6 @@ cc.Class({
      */
     setPassID:function (passid) {
         this.passID = passid;
-        if (this.passID > 2) {
-            this.passID = 2;
-        }
     },
 
     start () {
@@ -80,7 +77,7 @@ cc.Class({
      * 
      */
     getMapRes4Random:function () {
-        var index = Global.Common.Utils.random(0 , 2) + 3 * this.passID;
+        var index = Global.Common.Utils.random(0 , 2) + 3 * (this.passID % 3);
         return this.mapRes[index];
     },
 
@@ -107,5 +104,11 @@ cc.Class({
         this.setPassID(passID);
         // 更新新的地图资源
         // 更新地块的贴图
+        var num = passID % 3;
+        var len = this.tiled.length;
+        for (let index = 0; index < len; index++) {
+            var tiled = this.tiled[index];
+            tiled.spriteFrame = this.getMapRes4Random();
+        }
     }
 });

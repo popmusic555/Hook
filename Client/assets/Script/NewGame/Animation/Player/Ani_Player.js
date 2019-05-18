@@ -6,6 +6,7 @@ cc.Class({
     properties: {
         // spine动画
         spAni:sp.Skeleton,
+        impact:cc.Node,
         // 人物状态
         _State:null,
         // 状态锁
@@ -24,12 +25,17 @@ cc.Class({
     setState:function (state) {
         var lastState = this._State;
         this._State = state;
+
+        this.node.stopActionByTag(10);
+        this.node.rotation = 0;
+        this.impact.active = false;
+
         switch (this._State) {
             case Global.Common.Enum.P_ANI_STATE.NULL:
                 this.setAnimation(null);
                 break;
             case Global.Common.Enum.P_ANI_STATE.READY:
-                this.setAnimation("shoot");
+                this.setAnimation(null);
                 break;
             case Global.Common.Enum.P_ANI_STATE.LAUNCH:
                 this._ActionID = 0;
@@ -57,8 +63,11 @@ cc.Class({
                 }
                 break;
             case Global.Common.Enum.P_ANI_STATE.HURT:
-                var num = GameCommon.GET_RANDOM(1 , 2);
+                var num = Global.Common.Utils.random(1 , 2);
                 this.setAnimation("hurt" + num);
+                var rotateAction = cc.repeatForever(cc.rotateBy(1 , 360));
+                rotateAction.setTag(10);
+                this.node.runAction(rotateAction);
                 // console.log("State HIT");
                 break;
             case Global.Common.Enum.P_ANI_STATE.ATTACK:
@@ -86,12 +95,17 @@ cc.Class({
                 break;
             case Global.Common.Enum.P_ANI_STATE.DEATH1:
                 this.setAnimation("lose1");
+                this.spAni.node.x = 25;
                 break;
             case Global.Common.Enum.P_ANI_STATE.DEATH2:
                 this.setAnimation("lose2");
+                this.spAni.node.y = -22;
                 break;
             case Global.Common.Enum.P_ANI_STATE.HITWALL:
                 this.setAnimation("impact");
+                break;
+            case Global.Common.Enum.P_ANI_STATE.IMPACT:
+                this.impact.active = true;
                 break;
             default:
                 break;

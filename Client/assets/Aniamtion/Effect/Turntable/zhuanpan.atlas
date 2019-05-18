@@ -1,0 +1,41 @@
+
+zhuanpan.png
+size: 765,505
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+000
+  rotate: false
+  xy: 637, 181
+  size: 64, 64
+  orig: 64, 64
+  offset: 0, 0
+  index: -1
+_quan
+  rotate: false
+  xy: 507, 247
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+fangsheguang
+  rotate: false
+  xy: 2, 2
+  size: 503, 501
+  orig: 503, 501
+  offset: 0, 0
+  index: -1
+lizi_00032
+  rotate: false
+  xy: 507, 117
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+xx_k
+  rotate: false
+  xy: 507, 47
+  size: 68, 68
+  orig: 68, 68
+  offset: 0, 0
+  index: -1

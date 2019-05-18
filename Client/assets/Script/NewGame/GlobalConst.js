@@ -16,8 +16,8 @@ GlobalConst.VELOCITY_RATIO = 1;
 GlobalConst.GAMEOVER_SPEED = 150;
 // 冲击速度
 GlobalConst.IMPACT_SPEED = 6000;
-// 穿墙速度
-GlobalConst.CROSSWALL_SPEED = 1500;
+// 墙体内速度
+GlobalConst.INWALL_SPEED = 3000;
 // 墙体宽度
 GlobalConst.WALL_WIDTH = 1810;
 

@@ -22,15 +22,17 @@ MNormal.init = function () {
     this.attr.maxVelocity = cc.v2(20000 , 20000);
     // 最小速度
     // this.attr.minVelocity = cc.Vec2.ZERO;
-    this.attr.minVelocity = cc.v2(150 , 0);
+    this.attr.minVelocity = cc.v2(300 , 0);
     // 反弹力
-    this.attr.bouncePower = 0;
+    this.attr.bouncePower = 300;
     // 加速力
     this.attr.acceleratePower = 0;
     // 价值
     this.attr.cost = 0;
     // 携带金币
     this.attr.coins = 0;
+    // 携带能量
+    this.attr.energy = 0;
 };
 
 /**
@@ -98,7 +100,7 @@ MNormal.collisionWall = function (contact , monsterCollider , wallCollider) {
             break;
         case 2:
             // 墙体2
-            
+            monster.static();
             break;
         case 3:
             // 墙体3

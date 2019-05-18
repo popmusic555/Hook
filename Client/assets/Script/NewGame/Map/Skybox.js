@@ -7,6 +7,8 @@ cc.Class({
     properties: {
         // 地图资源
         mapRes:[cc.SpriteFrame],
+        // 地图块资源
+        mapTiled:[cc.Sprite],
         // 关卡ID
         passID:0,
         // 速度
@@ -30,9 +32,6 @@ cc.Class({
      */
     setPassID:function (passid) {
         this.passID = passid;
-        if (this.passID > 2) {
-            this.passID = 2;
-        }
     },
 
     /**
@@ -86,5 +85,20 @@ cc.Class({
         this.setPassID(passID);
         // 更新新的地图资源
         // 更新地块的贴图
+        var num = passID % this.mapRes.length;
+        var len = this.mapTiled.length;
+        for (let index = 0; index < len; index++) {
+            var tiled = this.mapTiled[index];
+            tiled.spriteFrame = this.mapRes[num];
+        }
+
+        var bg = this.node.getChildByName("Bg");
+        if (num == this.mapRes.length-1) {
+            bg.active = true;
+        }
+        else
+        {
+            bg.active = false;
+        }
     }
 });

@@ -38,17 +38,18 @@ MWall.init = function () {
     this.gamedata.pass = 0;
 
     // 墙体配置表
-    var config = [];
-    config[0] = {
-        passid:0,
-        crossSpeed:900,
-        accelerate:-300,
-        cost:100,
-        carryCoins:0,
-        carryEnergy:10,
-        distance:6000,
-    };
-    this.config = config;
+    // var config = [];
+    // config[0] = {
+    //     passid:0,
+    //     crossSpeed:900,
+    //     accelerate:-300,
+    //     cost:100,
+    //     carryCoins:0,
+    //     carryEnergy:10,
+    //     distance:6000,
+    // };
+    // this.config = config;
+    this.config = null;
 };
 
 MWall.setConfig = function (config) {
@@ -103,6 +104,14 @@ MWall.setPassID = function (passid) {
 }
 
 /**
+ * 下一关
+ * 
+ */
+MWall.nextPass = function () {
+    this.setPassID(this.getPassID() + 1);
+}
+
+/**
  * 是否游戏结束
  * 
  */
@@ -119,6 +128,14 @@ MWall.isGameOver = function (velocity) {
  */
 MWall.getCrossSpeed = function () {
     return this.attr.crossSpeed;
+};
+
+/**
+ * 获取加速度
+ * 
+ */
+MWall.getAccelerate = function () {
+    return this.attr.acceleratePower;
 };
 
 /**
@@ -141,10 +158,16 @@ MWall.getPosXByPassID = function (passid) {
     if (!passid && passid != 0) {
         passid = this.getPassID();
     }
-
     var wallPosx = 0;
     for (let index = 0; index < passid+1; index++) {
-        var cfg = this.config[index];
+        var cfg = null;
+        if (index < this.config.length) {
+            cfg = this.config[index];    
+        }
+        else
+        {
+            cfg = this.config[this.config.length - 1];
+        }
         wallPosx += cfg.distance;
     }
 

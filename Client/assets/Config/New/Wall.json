@@ -1,30 +1,30 @@
 [
   {
     "passid": 0,
-    "crossSpeed": 900,
-    "accelerate": -300,
-    "cost": 100,
-    "carryCoins": 0,
-    "carryEnergy": 10,
-    "distance": 6000
-  },
-  {
-    "passid": 1,
-    "crossSpeed": 1050,
-    "accelerate": -600,
+    "crossSpeed": 200,
+    "accelerate": 0,
     "cost": 100,
     "carryCoins": 0,
     "carryEnergy": 10,
     "distance": 60000
   },
   {
-    "passid": 2,
-    "crossSpeed": 1200,
-    "accelerate": -900,
+    "passid": 1,
+    "crossSpeed": 200,
+    "accelerate": 0,
     "cost": 100,
     "carryCoins": 0,
     "carryEnergy": 10,
-    "distance": 90000
+    "distance": 6000
+  },
+  {
+    "passid": 2,
+    "crossSpeed": 200,
+    "accelerate": 0,
+    "cost": 100,
+    "carryCoins": 0,
+    "carryEnergy": 10,
+    "distance": 6000
   },
   {
     "passid": 3,
@@ -33,7 +33,7 @@
     "cost": 100,
     "carryCoins": 0,
     "carryEnergy": 10,
-    "distance": 120000
+    "distance": 6000
   },
   {
     "passid": 4,
@@ -42,141 +42,6 @@
     "cost": 100,
     "carryCoins": 0,
     "carryEnergy": 10,
-    "distance": 150000
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 0.0,
-    "distance": 0.0
-  },
-  {
-    "passid": 0.0,
-    "crossSpeed": 0.0,
-    "accelerate": 0.0,
-    "cost": 0.0,
-    "carryCoins": 0.0,
-    "carryEnergy": 20,
-    "distance": 0.0
+    "distance": 6000
   }
 ]

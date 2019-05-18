@@ -28,6 +28,10 @@ cc.Class({
 
     },
 
+    setType:function (type) {
+        this.type = type;
+    },
+
     /**
      * 获取类型
      * 

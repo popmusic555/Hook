@@ -17,23 +17,41 @@ cc.Class({
         minRelativeVelocity:cc.Vec2.ZERO,
 
         _CurRelativeVelocity:cc.Vec2.ZERO,
+
+        _IsUpdate:false,
     },
 
     // onLoad () {},
 
     start () {
         this._Player = Global.Model.MPlayer.getPlayerObj();
+        this.randomRelativeVelocity();
+        this._IsUpdate = true;
+    },
 
-        this._CurRelativeVelocity.x = Global.Common.Utils.random(this.minRelativeVelocity.x , this.maxRelativeVelocity.x);
+    static:function () {
+        this._super();
+        this._IsUpdate = false;
     },
 
     update (dt) {
         
     },
 
+    randomRelativeVelocity:function () {
+        this._CurRelativeVelocity.x = Global.Common.Utils.random(this.minRelativeVelocity.x , this.maxRelativeVelocity.x);
+    },
+
     lateUpdate (dt) {
+        this.updateVelocity();
+    },
+
+    updateVelocity:function () {
+        if (!this._IsUpdate) {
+            return;
+        }
         var velocityX = this._Player.getVelocityX();
-        velocityX = Global.Model.MNormal.limitVelocityX(velocityX - this._CurRelativeVelocity.x);
+        velocityX = Global.Model.MFlyCoins.limitVelocityX(velocityX - this._CurRelativeVelocity.x);
         this.setVelocityX(velocityX);
     },
 
@@ -46,6 +64,6 @@ cc.Class({
      * @param {any} otherCollider 被碰撞对象碰撞器
      */
     onBeginContact:function (contact, selfCollider, otherCollider) {
-        Global.Model.MNormal.handleCollision(contact, selfCollider, otherCollider);
+        Global.Model.MFlyCoins.handleCollision(contact, selfCollider, otherCollider);
     },
 });

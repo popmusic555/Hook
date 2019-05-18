@@ -15,9 +15,14 @@ cc.Class({
     start () {
 
     },
-
+    
     update (dt) {
 
+    },
+
+    lateUpdate (dt) {
+        // 跟随相机
+        this.node.x = cc.Camera.main.node.x;
     },
 
     /**

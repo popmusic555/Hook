@@ -9,6 +9,8 @@ cc.Class({
         passID:0,
         // 怪物列表
         monsterList:[LBase],
+
+        _IsUpdate:false,
     },
 
     // onLoad () {},
@@ -19,6 +21,10 @@ cc.Class({
 
     // update (dt) {},
 
+    launching:function () {
+        this._IsUpdate = true;
+    },
+
     /**
      * 更新怪物
      *
@@ -26,6 +32,14 @@ cc.Class({
      * @param {*} cameraY
      */
     updateMonster:function (cameraX , cameraY) {
+        if (true) {
+            return;
+        }
+
+        if (!this._IsUpdate) {
+            return;
+        }
+
         // 更新关卡ID
         this._RefreshPassID();
 

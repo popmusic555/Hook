@@ -4,6 +4,7 @@ var VMap = require("VMap");
 var VBuild = require("VBuild");
 var VWall = require("VWall");
 var VMonster = require("VMonster");
+var VArtillery = require("VArtillery");
 
 // 相机跟随脚本
 cc.Class({
@@ -22,15 +23,16 @@ cc.Class({
         // 怪物
         monster:VMonster,
 
-        _StopPosX:null,
+        _XFollow:true,
+        _YFollow:true,
     },
 
     onLoad () {
-
+        this._XFollow = true;
+        this._YFollow = true;
     },
 
     start () {
-        this._StopPosX = null;
     },
 
     lateUpdate: function (dt) {
@@ -39,8 +41,6 @@ cc.Class({
         this.building.updateBuild(this.node.x , this.node.y);
         this.wall.updateWall(this.node.x , this.node.y);
         this.monster.updateMonster(this.node.x , this.node.y);
-
-        this.node.x += 20;
     },
 
     updateCamera:function () {
@@ -48,24 +48,20 @@ cc.Class({
             return;
         }
 
-        var x = this.targetFollow.x - this.anchorPos.x;
-        var y = this.targetFollow.y - this.anchorPos.y;
-
-        if (y < 0) {
-            y = 0;
+        if (this._XFollow) {
+            var x = this.targetFollow.x - this.anchorPos.x;
+            this.node.x = x;
         }
-
-        if (this._StopPosX && x > this._StopPosX) {
-            x = this._StopPosX;
+        
+        if (this._YFollow) {
+            var y = this.targetFollow.y - this.anchorPos.y;
+            if (y < 0) {
+                y = 0;
+            }
+            this.node.y = y;    
         }
-
-        this.node.x = x;
-        this.node.y = y;
     },
 
-    stopFollowWithPosX:function (x) {
-        this._StopPosX = x;
-    },
     /**
      * 设置跟随目标
      * 
@@ -82,5 +78,13 @@ cc.Class({
      */
     setFollowAnchor:function (vec2) {
         this.anchorPos = vec2;
+    },
+
+    setStopXFollow:function () {
+        this._XFollow = false;
+    },
+
+    setStopYFollow:function () {
+        this._YFollow = false;
     },
 });

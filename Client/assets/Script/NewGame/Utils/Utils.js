@@ -38,10 +38,10 @@ Calculator.processVelocityY = function (curVelocityY , elastic1 , bouncePower1 ,
     var elastic = elastic1 * elastic2;
     // 两个反弹力和为最终反弹力
     var bouncePower = bouncePower1 + bouncePower2;
-    // 反弹力转反弹高度
+    // 反弹高度转反弹速度
     var bounceSpeed = Utils.Converter.toBounceSpeed(bouncePower);
 
-    if (limit) {
+    if (limit || limit == 0) {
         // 处理弹性上限
         elastic = Math.min(elastic , limit);
     }

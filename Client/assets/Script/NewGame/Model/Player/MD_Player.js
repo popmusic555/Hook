@@ -35,9 +35,9 @@ MPlayer.init = function () {
     // 离线奖励
     this.attr.offlineRewards = 0;
     // 冲击速度
-    this.attr.impactSpeed = -2000;
+    this.attr.impactSpeed = -3000;
     // GameOver速度
-    this.attr.endSpeed = 0;
+    this.attr.endSpeed = Global.Common.Const.GAMEOVER_SPEED;
 
     // 用户游戏内数据
     this.gamedata = {};
@@ -166,6 +166,15 @@ MPlayer.getEnergy = function () {
     return this.gamedata.energy;
 };
 
+/**
+ * 增加能量
+ * 
+ * @param {any} num 
+ */
+MPlayer.addEnergy = function (num) {
+    this.gamedata.energy += num;
+}
+
 MPlayer.setPlayerObj = function (playerObj) {
     this.gamedata.playerObj = playerObj;
 };
@@ -280,13 +289,39 @@ MPlayer.collisionFloor = function (contact , playerCollider , floorCollider) {
 
     var Calculator = Global.Common.Utils.Calculator;
     var selfAttr = this.getAttr();
+
+    switch (this.type) {
+        case Enum.TYPE.CLIP:
+            selfAttr = Global.Model.MClip.getAttr();
+            // 解除变幻
+            this.unTransform();
+            // 取消夹子变幻
+            // 夹子死亡动画
+            break;
+        case Enum.TYPE.ROCKET:
+            selfAttr = Global.Model.MRocket.getAttr();
+            break;
+        case Enum.TYPE.JUMP:
+            selfAttr = Global.Model.MJump.getAttr();
+            break;
+        case Enum.TYPE.PLANE:
+            selfAttr = Global.Model.MPlane.getAttr();
+            // 解除变幻
+            this.unTransform();
+            // 取消飞机变幻
+            // 飞机死亡动画
+            break;
+        case Enum.TYPE.CAR:
+            selfAttr = Global.Model.MCar.getAttr();
+            break;
+    }
+
+
     var otherAttr =  Global.Model.MFloor.getAttr();
     // 处理X轴速度 (加速力处理)
     var velocityX = Calculator.processVelocityX(player.getVelocity().x , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
-    console.log("velocityX" , velocityX);
     // 限定X速度 (限定速度区间)
     velocityX = this.limitVelocityX(velocityX);
-    console.log("velocityX" , velocityX);
     // 处理Y轴速度 (弹性、反弹力处理)
     var velocityY = Calculator.processVelocityY(player.getVelocity().y , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
     // 限定Y速度 (限定速度区间)
@@ -301,6 +336,23 @@ MPlayer.collisionFloor = function (contact , playerCollider , floorCollider) {
 
     if (isGameOver) {
         // 当前游戏结束
+        console.log("当前游戏结束");
+        player.static();
+    }
+    else
+    {
+        // 显示触地动画
+        player.showTouchdownAni();
+        var isHurt = player.onHurt();
+        if (isHurt) {
+            // 受伤状态
+        }
+        else
+        {
+            // 反震状态
+            // 震屏
+            player.shockScreen();
+        }
     }
 };
 
@@ -327,29 +379,44 @@ MPlayer.collisionWall = function (contact , playerCollider , wallCollider) {
             // 墙体1
             contact.disabled = true;
             var mWall = Global.Model.MWall;
-            var crossSpeed = mWall.isCross(playerVelocity);
-            
+            playerVelocity.x += Global.Model.MWall.getAccelerate();
+            var canCross = mWall.isCross(playerVelocity);
+            player.crossWall1(canCross);
+            if (!canCross) {
+                // 无法穿越
+                // 停止相机
+                cc.Camera.main.node.getComponent("VCamera").setStopXFollow();
+            }
             break;
         case 2:
             // 墙体2
-            var canCross = true;
+            var canCross = player.isCanCrossWall();
             if (canCross) {
-                // 穿越
-                // 穿越是 忽略系统碰撞
+                // 穿越忽略系统碰撞
                 contact.disabled = true;
+                // 穿越速度
+                playerVelocity.x += Global.Model.MWall.getAccelerate();
+                playerVelocity.x = this.limitVelocityX(playerVelocity.x);
+                player.crossWall2(playerVelocity);
             }
             else
             {
                 // 停止
+                player.stop();
+                player.crossWall2(null);
             }
             break;
         case 3:
             // 墙体3
             contact.disabled = true;
+            var reLaunchVelocity = player.getWallLaunchVelocity();
             // 播放穿墙动画 并发射
-            var reLaunchVelocity = null;
+            player.crossWall3(reLaunchVelocity);
+            var y = player.node.parent.convertToWorldSpaceAR(player.node.position).y;
+            wall.setHoleWithWorldPosY(y);
+            wall.showHole();
+            player.showHoleAni();
             break;
-    
         default:
             break;
     }
@@ -365,31 +432,46 @@ MPlayer.collisionWall = function (contact , playerCollider , wallCollider) {
  * @param {any} monsterCollider 怪物碰撞器
  */
 MPlayer.collisionMonster = function (contact , playerCollider , monsterCollider) {
-    var player = playerCollider.node.getComponent(Global.GameObj.BaseObject);
-    var monster = monsterCollider.node.getComponent(Global.GameObj.BaseObject);
+    var player = playerCollider.node.getComponent(Global.GameObj.GBase);
+    var monster = monsterCollider.node.getComponent(Global.GameObj.GBase);
 
+    var model = null;
     var type = monster.getType();
     switch (type) {
         case Enum.TYPE.NORMAL:
-            
+            console.log("collisionMNormal");
+            model = Global.Model.MNormal;
+            this.collisionMNormal(contact , player , monster);
             break;
         case Enum.TYPE.NORMAL_FLY:
-            
+            console.log("collisionMFlyNormal");
+            model = Global.Model.MFly;
+            this.collisionMFlyNormal(contact , player , monster);
             break;
         case Enum.TYPE.COINS:
-            
+            console.log("collisionMCoins");
+            model = Global.Model.MCoins;
+            this.collisionMCoins(contact , player , monster);
             break;
         case Enum.TYPE.COINS_FLY:
-            
+            console.log("collisionMFlyCoins");
+            model = Global.Model.MFlyCoins;
+            this.collisionMFlyCoins(contact , player , monster);
             break;
         case Enum.TYPE.BOOM:
-            
+            console.log("collisionMBoom");
+            model = Global.Model.MBoom;
+            this.collisionMBoom(contact , player , monster);
             break;
         case Enum.TYPE.BOOM_FLY:
-            
+            console.log("collisionMFlyBoom");
+            model = Global.Model.MFlyBoom;
+            this.collisionMFlyBoom(contact , player , monster);
             break;
         case Enum.TYPE.CLIP:
-            
+            console.log("collisionMClip");
+            model = Global.Model.MClip;
+            this.collisionMClip(contact , player , monster);
             break;
         case Enum.TYPE.ENERGY:
             
@@ -410,6 +492,240 @@ MPlayer.collisionMonster = function (contact , playerCollider , monsterCollider)
             
             break;
     }
+
+    // 增加金币
+    this.addCoins(model.getAttr().cost);
+    // 增加携带的金币
+    this.addCarryCoins(model.getAttr().coins);
+    // 增加能量
+    this.addEnergy(model.getAttr().energy);
+}
+
+MPlayer.collisionMNormal = function (contact , player , monster) {
+    // 休眠状态下不可触发碰撞逻辑
+    if (player.isSleep() || monster.isSleep()) {
+        console.log("当前玩家或者怪物休眠");
+        return;
+    }
+
+    // 在Y轴速度正向时 不可触发碰撞逻辑
+    if (player.isPositiveVelocityY()) {
+        console.log("玩家速度为正");
+        return;
+    }
+
+    this.collisionNormal(contact , player , monster);
+}
+
+MPlayer.collisionMFlyNormal = function (contact , player , monster) {
+    // 休眠状态下不可触发碰撞逻辑
+    if (player.isSleep() || monster.isSleep()) {
+        console.log("当前玩家或者怪物休眠");
+        return;
+    }
+
+    this.collisionFly(contact , player , monster);
+}
+
+MPlayer.collisionMCoins = function (contact , player , monster) {
+    // 休眠状态下不可触发碰撞逻辑
+    if (player.isSleep() || monster.isSleep()) {
+        console.log("当前玩家或者怪物休眠");
+        return;
+    }
+
+    // 在Y轴速度正向时 不可触发碰撞逻辑
+    if (player.isPositiveVelocityY()) {
+        console.log("玩家速度为正");
+        return;
+    }
+
+    this.collisionNormal(contact , player , monster);
+}
+
+MPlayer.collisionMFlyCoins = function (contact , player , monster) {
+    // 休眠状态下不可触发碰撞逻辑
+    if (player.isSleep() || monster.isSleep()) {
+        console.log("当前玩家或者怪物休眠");
+        return;
+    }
+
+    this.collisionFly(contact , player , monster);
+}
+
+MPlayer.collisionMBoom = function (contact , player , monster) {
+    // 休眠状态下不可触发碰撞逻辑
+    if (player.isSleep() || monster.isSleep()) {
+        console.log("当前玩家或者怪物休眠");
+        return;
+    }
+
+    // 在Y轴速度正向时 不可触发碰撞逻辑
+    if (player.isPositiveVelocityY()) {
+        console.log("玩家速度为正");
+        return;
+    }
+
+    this.collisionNormal(contact , player , monster);
+}
+
+MPlayer.collisionMFlyBoom = function (contact , player , monster) {
+    // 休眠状态下不可触发碰撞逻辑
+    if (player.isSleep() || monster.isSleep()) {
+        console.log("当前玩家或者怪物休眠");
+        return;
+    }
+
+    this.collisionFly(contact , player , monster);
+}
+
+MPlayer.collisionMClip = function (contact , player , monster) {
+    // 休眠状态下不可触发碰撞逻辑
+    if (player.isSleep() || monster.isSleep()) {
+        console.log("当前玩家或者怪物休眠");
+        return;
+    }
+
+    // 在Y轴速度正向时 不可触发碰撞逻辑
+    if (player.isPositiveVelocityY()) {
+        console.log("玩家速度为正");
+        return;
+    }
+
+    this.collisionNormal(contact , player , monster);
+    this.transform(Enum.TYPE.CLIP , monster.animation.skeletonData);
+}
+
+// MPlayer.collisionMNormal = function () {
+    
+// }
+
+MPlayer.collisionNormal = function (contact , player , normal) {
+    var Calculator = Global.Common.Utils.Calculator;
+    var selfAttr = this.getAttr();
+    var otherAttr =  Global.Model.MNormal.getAttr();
+
+    if (player.animation.getState() == Enum.P_ANI_STATE.SKILL) {
+        // 技能状态下 怪物直接被Kill 并且不处理Y轴上速度    
+    }
+    else if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
+        // 冲击状态下 怪物直接被Kill 并且不处理Y轴上速度
+    }
+    else
+    {
+        // 处理X轴速度 (加速力处理)
+        var velocityX = Calculator.processVelocityX(player.getVelocity().x , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+        // 限定X速度 (限定速度区间)
+        velocityX = this.limitVelocityX(velocityX);
+
+        // 处理Y轴速度 (弹性、反弹力处理)
+        var velocityY = Calculator.processVelocityY(player.getVelocity().y , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+        // 限定Y速度 (限定速度区间)
+        velocityY = this.limitVelocityY(velocityY);
+
+        var newVelocity = cc.v2(velocityX , velocityY);
+        // 玩家对象设置新速度
+        player.setVelocity(newVelocity);
+    }
+
+    // 怪物死亡
+    normal.onDeath();
+}
+
+MPlayer.collisionFly = function (contact , player , fly) {
+    var Calculator = Global.Common.Utils.Calculator;
+    var selfAttr = this.getAttr();
+    var otherAttr =  Global.Model.MNormal.getAttr();
+
+    // 处理X轴速度 (加速力处理)
+    var velocityX = Calculator.processVelocityX(player.getVelocity().x , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+    // 限定X速度 (限定速度区间)
+    velocityX = this.limitVelocityX(velocityX);
+    // 处理Y轴速度 (弹性、反弹力处理)
+    var velocityY = Calculator.processVelocityY(player.getVelocity().y , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+    // 限定Y速度 (限定速度区间)
+    velocityY = this.limitVelocityY(velocityY);
+
+    var newVelocity = cc.v2(velocityX , velocityY);
+    // 玩家对象设置新速度
+    player.setVelocity(newVelocity);
+
+    // 怪物死亡
+    fly.onDeath();
+}
+
+MPlayer.collisionVehicle = function (contact , player , vehicle) {
+    var Calculator = Global.Common.Utils.Calculator;
+    var selfAttr = this.getAttr();
+    var otherAttr =  Global.Model.MNormal.getAttr();
+
+    // 处理X轴速度 (加速力处理)
+    var velocityX = Calculator.processVelocityX(player.getVelocity().x , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+    // 限定X速度 (限定速度区间)
+    velocityX = this.limitVelocityX(velocityX);
+
+    var velocityY = player.getVelocity().y;
+    
+    if (player.animation.getState() == Enum.P_ANI_STATE.SKILL) {
+        // 技能状态下 怪物直接被Kill 并且不处理Y轴上速度    
+    }
+    else if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
+        // 冲击状态下 怪物直接被Kill 并且不处理Y轴上速度
+    }
+    else
+    {
+        // 处理Y轴速度 (弹性、反弹力处理)
+        velocityY = Calculator.processVelocityY(player.getVelocity().y , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+        // 限定Y速度 (限定速度区间)
+        velocityY = this.limitVelocityY(velocityY);
+    }
+
+    var newVelocity = cc.v2(velocityX , velocityY);
+    // 玩家对象设置新速度
+    player.setVelocity(newVelocity);
+
+    // 怪物死亡
+    normal.onDeath();
+}
+
+MPlayer.onTouched = function () {
+    if (!this.gamedata.playerObj) {
+        return;
+    }
+    this.gamedata.playerObj.onTouched();
+}
+
+MPlayer.addCoins = function (num) {
+    this.addRewardCoins(num);
+    // 展示UI动画
+}
+
+MPlayer.addCarryCoins = function (num) {
+    this.addRewardCoins(num);
+    // 展示UI动画
+}
+
+MPlayer.transform = function (type , skeletonData) {
+    this.type = type;
+    switch (this.type) {
+        case Enum.TYPE.CLIP:
+            // 当前玩家变幻成夹子 并播放受伤
+            this.gamedata.playerObj.transformClip(skeletonData);
+            break;
+        case Enum.TYPE.ROCKET:
+            break;
+        case Enum.TYPE.JUMP:
+            break;
+        case Enum.TYPE.PLANE:
+            break;
+        case Enum.TYPE.CAR:
+            break;
+    }
+}
+
+MPlayer.unTransform = function () {
+    this.type = Enum.TYPE.PLAYER;
+    this.gamedata.playerObj.transformOriginal();
 }
 
 module.exports = MPlayer;
