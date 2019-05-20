@@ -11,6 +11,12 @@ cc.Class({
     properties: {
         // 人物对象
         _Player:GO_Base,
+        // ani
+        animation:sp.Skeleton,
+        // 死亡动画
+        deathAni:sp.Skeleton,
+        // plugin
+        plugin:cc.Node,
         // 最大相对速度
         maxRelativeVelocity:cc.Vec2.ZERO,
         // 最小相对速度
@@ -21,6 +27,18 @@ cc.Class({
         _IsUpdate:false,
 
         _Shadow:null,
+
+        // 是否绑定
+        _IsBind:false,
+
+        // 弹跳次数
+        _BounceTimes:0,
+        // 是否在使用技能
+        _isSkill:false,
+        // 拳头
+        _Fist:null,
+        // 技能锁
+        _SkillLock:false,
     },
 
     // onLoad () {},
@@ -37,11 +55,23 @@ cc.Class({
             // 阴影动画位置
             shadowAni:this.node.position,
         };
+
+        this._BounceTimes = 4;
+        this._IsSkill = false;
+        this._Fist = this.plugin.getComponent("GO_JumpFist");
+        this._SkillLock = false;
     },
 
-    static:function () {
-        this._super();
-        this._IsUpdate = false;
+    bind:function () {
+        this._IsBind = true;  
+        this.run(this._Player.getVelocity() , this._Player.getGravityScale());
+        this.animation.animation = "ljr_ttj_run";
+        this.animation.node.y = 0;
+    },
+
+    unBind:function () {
+        this._IsBind = false;
+        this.onDeath(this._Player);
     },
 
     update (dt) {
@@ -52,14 +82,22 @@ cc.Class({
         this._CurRelativeVelocity.x = Global.Common.Utils.random(this.minRelativeVelocity.x , this.maxRelativeVelocity.x);
     },
 
-    lateUpdate (dt) {
-        this.updateVelocity();
+    isUseSkill:function () {
+        return this._IsSkill;
+    },
 
+    lateUpdate (dt) {
+        if (!this._IsUpdate) {
+            return;
+        }
+
+        this.updateVelocity();
         this.updateShadow();
+        this.updateHighest();
     },
 
     updateVelocity:function () {
-        if (!this._IsUpdate) {
+        if (this._IsBind) {
             return;
         }
         var velocityX = this._Player.getVelocityX();
@@ -78,6 +116,41 @@ cc.Class({
         aniNode.scale = (1  - scale);
     },
 
+    updateHighest:function () {
+        var curVelocity = this.getVelocity();
+        if (curVelocity.y < 0 && this._BounceTimes <= 0) {
+            console.log("弹跳机爆炸");  
+            var mplayer = Global.Model.MPlayer;
+            mplayer.type = Global.Common.Enum.TYPE.PLAYER;
+            this._Player.unBindMonster();   
+
+            var Calculator = Global.Common.Utils.Calculator;
+            var mJump = Global.Model.MJump;
+            var attr = mJump.getAttr();
+            var velocity = this._Player.getVelocity();
+            var velocityX = velocity.x;
+            var velocityY = velocity.y;
+
+            // 处理Y轴速度 (弹性、反弹力处理)
+            velocityY = Calculator.processVelocityY(velocityY , 0 , attr.endRideBounce , 0 , 0);
+            // 限定Y速度 (限定速度区间)
+            velocityY = mplayer.limitVelocityY(velocityY);
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , attr.endRideAccelerate , 0);
+            // 限定X速度 (限定速度区间)
+            velocityX = mplayer.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            this._Player.setVelocity(newVelocity);
+
+            this._Player.animation.unlockState();  
+        }
+    },  
+
+    reduceBounceTimes:function () {
+        this._BounceTimes -= 1;  
+    },
+
     /**
      * 碰撞回调
      * 在碰撞时回调函数
@@ -87,6 +160,55 @@ cc.Class({
      * @param {any} otherCollider 被碰撞对象碰撞器
      */
     onBeginContact:function (contact, selfCollider, otherCollider) {
-        Global.Model.MJump.handleCollision(contact, selfCollider, otherCollider);
+        if (this._IsBind) {
+            console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Jump" , "player");
+            Global.Model.MPlayer.handleCollision(contact, this._Player, otherCollider);
+        }
+        else
+        {
+            console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Jump");
+            Global.Model.MJump.handleCollision(contact, selfCollider, otherCollider);
+        }
+    },
+
+    onDeath:function (player) {
+        this._IsUpdate = false;
+        this.sleep();
+        this.static();
+        if (player) {
+            this.setVelocityX(player.getVelocityX());
+        }
+        this.plugin.destroy();
+        this.showDeathAni();
+    },
+
+    showDeathAni:function () {
+        this._Shadow.shadow.node.active = false;
+        this.animation.node.active = false;
+        this.deathAni.node.active = true;
+        this.deathAni.animation = "boom_ttjgbl";
+        this.deathAni.setCompleteListener(function () {
+            this.node.destroy();
+        }.bind(this));  
+    },
+
+    useSkill:function () {
+        console.log("弹跳机技能使用");
+
+        if (this._SkillLock) {
+            return;
+        }
+
+        this._SkillLock = true;
+        this._IsSkill = true;
+
+        var downAction = cc.moveBy(0.2 , 0 , -40);
+        var upAction = downAction.reverse();
+        var skillAction = cc.sequence(downAction , cc.delayTime(0.2) , cc.callFunc(function () {
+            this._IsSkill = false;
+        } , this) , upAction , cc.callFunc(function () {
+            this._SkillLock = false;
+        } , this));
+        this.plugin.runAction(skillAction);
     },
 });

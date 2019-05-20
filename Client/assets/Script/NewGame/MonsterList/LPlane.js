@@ -38,7 +38,7 @@ cc.Class({
             else
             {
                 var monster = this.createMonster();
-                monster.name = "MNormal" + this._GeneratedMonsterID;
+                monster.name = "MPlane" + this._GeneratedMonsterID;
                 monster.x = posx;
                 parent.addChild(monster);
                 this._GeneratedMonsterID++;

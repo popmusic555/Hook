@@ -87,7 +87,7 @@ cc.Class({
                 }
                 else
                 {
-                    this.setAnimation("touch" +  + Global.Common.Utils.random(1 , 2));
+                    this.setAnimation("touch" + Global.Common.Utils.random(1 , 2));
                 }
                 break;
             case Global.Common.Enum.P_ANI_STATE.SKILL:
@@ -124,7 +124,7 @@ cc.Class({
     setAnimation:function (aniName) {
         if (aniName) {
             this.spAni.node.active = true;
-            this.spAni.animation = aniName;    
+            this.spAni.animation = aniName;
         }
         else
         {

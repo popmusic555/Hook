@@ -98,7 +98,7 @@ MFly.collisionWall = function (contact , monsterCollider , wallCollider) {
             break;
         case 2:
             // 墙体2
-            monster.static();
+            monster.onDeath();
             break;
         case 3:
             // 墙体3

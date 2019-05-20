@@ -24,13 +24,25 @@ MCar.init = function () {
     // this.attr.minVelocity = cc.Vec2.ZERO;
     this.attr.minVelocity = cc.v2(300 , 0);
     // 反弹力
-    this.attr.bouncePower = 0;
+    this.attr.bouncePower = 200;
     // 加速力
     this.attr.acceleratePower = 0;
     // 价值
     this.attr.cost = 0;
     // 携带金币
     this.attr.coins = 0;
+    // 携带能量
+    this.attr.energy = 0;
+    // 结束乘坐时反弹高度
+    this.attr.endRideBounce = 400;
+    // 结束乘坐时加速度
+    this.attr.endRideAccelerate = 0;
+    // 使用技能时反弹高度
+    this.attr.skillBounce = 0;
+    // 使用技能时加速度
+    this.attr.skillAccelerate = 300;
+    // 持续时间
+    this.attr.duration = 60;
 };
 
 /**
@@ -98,7 +110,7 @@ MCar.collisionWall = function (contact , monsterCollider , wallCollider) {
             break;
         case 2:
             // 墙体2
-            monster.static();
+            monster.onDeath();
             break;
         case 3:
             // 墙体3

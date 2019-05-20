@@ -24,7 +24,7 @@ MBoom.init = function () {
     // this.attr.minVelocity = cc.Vec2.ZERO;
     this.attr.minVelocity = cc.v2(300 , 0);
     // 反弹力
-    this.attr.bouncePower = 0;
+    this.attr.bouncePower = 800;
     // 加速力
     this.attr.acceleratePower = 0;
     // 价值
@@ -98,7 +98,7 @@ MBoom.collisionWall = function (contact , monsterCollider , wallCollider) {
             break;
         case 2:
             // 墙体2
-            monster.static();
+            monster.onDeath();
             break;
         case 3:
             // 墙体3

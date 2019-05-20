@@ -15,6 +15,8 @@ cc.Class({
         animation:sp.Skeleton,
         // 死亡动画
         deathAni:sp.Skeleton,
+        // 提示
+        tips:cc.Sprite,
         // 最大相对速度
         maxRelativeVelocity:cc.Vec2.ZERO,
         // 最小相对速度
@@ -23,6 +25,9 @@ cc.Class({
         _CurRelativeVelocity:cc.Vec2.ZERO,
 
         _IsUpdate:false,
+        _TipsPos:null,
+
+        _Duration:0,
     },
 
     // onLoad () {},
@@ -30,7 +35,13 @@ cc.Class({
     start () {
         this._Player = Global.Model.MPlayer.getPlayerObj();
         this.randomRelativeVelocity();
-        this._IsUpdate = true;
+        this._IsUpdate = true;  
+        this._TipsPos = cc.v2(this.tips.x , this.tips.y);
+        this.setDuration(60);
+    },
+
+    setDuration:function (num) {
+        this._Duration = num;
     },
 
     update (dt) {
@@ -43,15 +54,44 @@ cc.Class({
 
     lateUpdate (dt) {
         this.updateVelocity();
+
+        if (this.tips.node.active) {
+            var pos = this.tips.node.parent.convertToWorldSpaceAR(this._TipsPos);
+            pos = cc.Camera.main.getWorldToCameraPoint(pos);
+            if (pos.y > cc.view.getVisibleSize().height - 80) {
+                pos.y = cc.view.getVisibleSize().height - 80;
+            }
+            if (pos.y < 0 + 80) {
+                pos.y = 0 + 80;
+            }
+            pos = cc.Camera.main.getCameraToWorldPoint(pos);
+            pos = this.tips.node.parent.convertToNodeSpaceAR(pos);
+            // this.tips.node.x = pos.x;
+            this.tips.node.y = pos.y;
+        }
     },
 
     updateVelocity:function () {
         if (!this._IsUpdate) {
             return;
         }
-        var velocityX = this._Player.getVelocityX();
-        velocityX = Global.Model.MFlyCoins.limitVelocityX(velocityX - this._CurRelativeVelocity.x);
-        this.setVelocityX(velocityX);
+
+        if (this._Duration > 0) {
+            this._Duration -= 1;
+        }
+        
+        if (this._Duration == 0) {
+            // 开始运动
+            var velocityX = this._Player.getVelocityX();
+            velocityX = velocityX - this._CurRelativeVelocity.x;
+            this.setVelocityX(velocityX);
+            this.tips.node.active = false;
+        }
+        else
+        {
+            var velocityX = this._Player.getVelocityX();
+            this.setVelocityX(velocityX);
+        }
     },
 
     /**
@@ -63,7 +103,7 @@ cc.Class({
      * @param {any} otherCollider 被碰撞对象碰撞器
      */
     onBeginContact:function (contact, selfCollider, otherCollider) {
-        Global.Model.MFlyCoins.handleCollision(contact, selfCollider, otherCollider);
+        Global.Model.MFly.handleCollision(contact, selfCollider, otherCollider);
     },
 
     onDeath:function (player) {
@@ -77,9 +117,11 @@ cc.Class({
     },
 
     showDeathAni:function () {
+        this.tips.node.active = false;
         this.animation.node.active = false;
+        this.tips.node.active = false;
         this.deathAni.node.active = true;
-        this.deathAni.animation = "boom_fxjbgbl";
+        this.deathAni.animation = "boom_spz";
         this.deathAni.setCompleteListener(function () {
             this.node.destroy();
         }.bind(this));  

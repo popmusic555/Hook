@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "MPlane",
+    "_name": "MPlane1",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -62,8 +62,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 857,
-      "y": 500,
+      "x": 866,
+      "y": 294,
       "z": 0
     },
     "_scale": {
@@ -234,7 +234,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "4eN12+wU9I7qTTQ+lxWzTF"
+    "_id": "c0AX1U1BhLG5KhaFY7VnFI"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -342,7 +342,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "4az6o1yTZEIJLmOT94vH0f"
+    "_id": "5bmDSdg2lNgKzdH6E8fsGm"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -439,7 +439,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "66mmIK4LVGna8QtT8Y2la9"
+    "_id": "bbqOxXnpxBa42HYBYtAeSc"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -474,7 +474,7 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "e51kEu8+BMBZWOQFR66SN2"
+    "_id": "20cM85E4xLYI+EP0SecJ+z"
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -496,7 +496,7 @@
       "y": 0
     },
     "_radius": 60,
-    "_id": "efP878YuBOy4i2Mvv27bk3"
+    "_id": "b2ZFyIP5pIg53gd9LNbdpa"
   },
   {
     "__type__": "5ec09n9H7hKfI6zEfraq/2N",
@@ -509,9 +509,18 @@
     "rigidbody": {
       "__id__": 13
     },
-    "type": 14,
+    "type": 15,
     "_IsSleep": false,
     "_Player": null,
+    "animation": {
+      "__id__": 4
+    },
+    "deathAni": {
+      "__id__": 8
+    },
+    "boomAni": {
+      "__id__": 11
+    },
     "maxRelativeVelocity": {
       "__type__": "cc.Vec2",
       "x": 800,
@@ -522,13 +531,20 @@
       "x": 800,
       "y": 0
     },
+    "oilMonsterPrefab": {
+      "__uuid__": "36cbc3b7-c74f-4878-9270-ce347c58978d"
+    },
     "_CurRelativeVelocity": {
       "__type__": "cc.Vec2",
       "x": 0,
       "y": 0
     },
     "_IsUpdate": false,
-    "_id": "45yKIvf0JNKJixMTRh7FRJ"
+    "_IsBind": false,
+    "_OilNum": 0,
+    "_OilMonster": null,
+    "_Duration": 0,
+    "_id": "22XVVwsxlCpISKpK7p27p7"
   },
   {
     "__type__": "cc.PrefabInfo",

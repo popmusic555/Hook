@@ -23,7 +23,7 @@ MPlayer.init = function () {
     // this.attr.minVelocity = cc.Vec2.ZERO;
     this.attr.minVelocity = cc.v2(0 , -10000);
     // 反弹力
-    this.attr.bouncePower = 300;
+    this.attr.bouncePower = 100;
     // 加速力
     this.attr.acceleratePower = 0;
 
@@ -44,13 +44,14 @@ MPlayer.init = function () {
     
     // 游戏玩家对象
     this.gamedata.playerObj = null;
+    // 游戏全局动画
+    this.gamedata.globalAni = null;
     // 游戏内获取到的金币奖励
     this.gamedata.rewardsCoins = 0;
     // 游戏内获取到的能量
     this.gamedata.energy = 0;
     // 游戏里程
     this.gamedata.mileage = 0;
-    
 
     // 所有升级选项等级
     this.levels = [];
@@ -95,6 +96,7 @@ MPlayer.updateByPass = function (passID) {
  */
 MPlayer.resetGamedata = function () {
     this.gamedata.playerObj = null;
+    this.gamedata.globalAni = null;
     this.gamedata.rewardsCoins = 0;
     this.gamedata.energy = 0;
     this.gamedata.mileage = 0;
@@ -181,6 +183,14 @@ MPlayer.setPlayerObj = function (playerObj) {
 
 MPlayer.getPlayerObj = function () {
     return this.gamedata.playerObj;
+};
+
+MPlayer.setGlobalAni = function (ani) {
+    this.gamedata.globalAni = ani;
+};
+
+MPlayer.getGlobalAni = function (ani) {
+    return this.gamedata.globalAni;
 };
 
 /**
@@ -277,83 +287,12 @@ MPlayer.collisionFloor = function (contact , playerCollider , floorCollider) {
     var player = playerCollider.node.getComponent(Global.GameObj.GBase);
     var floor = floorCollider.node.getComponent(Global.GameObj.GBase);
 
-    // 休眠状态下不可触发碰撞逻辑
-    if (player.isSleep()) {
-        return;
-    }
-
     // 在Y轴速度正向时 不可触发碰撞逻辑
     if (player.isPositiveVelocityY()) {
         return;
     }
 
-    var Calculator = Global.Common.Utils.Calculator;
-    var selfAttr = this.getAttr();
-
-    switch (this.type) {
-        case Enum.TYPE.CLIP:
-            selfAttr = Global.Model.MClip.getAttr();
-            // 解除变幻
-            this.unTransform();
-            // 取消夹子变幻
-            // 夹子死亡动画
-            break;
-        case Enum.TYPE.ROCKET:
-            selfAttr = Global.Model.MRocket.getAttr();
-            break;
-        case Enum.TYPE.JUMP:
-            selfAttr = Global.Model.MJump.getAttr();
-            break;
-        case Enum.TYPE.PLANE:
-            selfAttr = Global.Model.MPlane.getAttr();
-            // 解除变幻
-            this.unTransform();
-            // 取消飞机变幻
-            // 飞机死亡动画
-            break;
-        case Enum.TYPE.CAR:
-            selfAttr = Global.Model.MCar.getAttr();
-            break;
-    }
-
-
-    var otherAttr =  Global.Model.MFloor.getAttr();
-    // 处理X轴速度 (加速力处理)
-    var velocityX = Calculator.processVelocityX(player.getVelocity().x , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
-    // 限定X速度 (限定速度区间)
-    velocityX = this.limitVelocityX(velocityX);
-    // 处理Y轴速度 (弹性、反弹力处理)
-    var velocityY = Calculator.processVelocityY(player.getVelocity().y , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
-    // 限定Y速度 (限定速度区间)
-    velocityY = this.limitVelocityY(velocityY);
-
-    var newVelocity = cc.v2(velocityX , velocityY);
-    // 玩家对象设置新速度
-    player.setVelocity(newVelocity);
-
-    // 判断是否结束游戏
-    var isGameOver = this.isGameOver(newVelocity);
-
-    if (isGameOver) {
-        // 当前游戏结束
-        console.log("当前游戏结束");
-        player.static();
-    }
-    else
-    {
-        // 显示触地动画
-        player.showTouchdownAni();
-        var isHurt = player.onHurt();
-        if (isHurt) {
-            // 受伤状态
-        }
-        else
-        {
-            // 反震状态
-            // 震屏
-            player.shockScreen();
-        }
-    }
+    this.triggerFloor(contact , player , floor , Global.Model.MFloor.getAttr());
 };
 
 /**
@@ -389,27 +328,67 @@ MPlayer.collisionWall = function (contact , playerCollider , wallCollider) {
             }
             break;
         case 2:
-            // 墙体2
-            var canCross = player.isCanCrossWall();
-            if (canCross) {
-                // 穿越忽略系统碰撞
-                contact.disabled = true;
-                // 穿越速度
-                playerVelocity.x += Global.Model.MWall.getAccelerate();
-                playerVelocity.x = this.limitVelocityX(playerVelocity.x);
-                player.crossWall2(playerVelocity);
+
+            if (this.type == Enum.TYPE.PLAYER) {
+                // 墙体2
+                var canCross = player.isCanCrossWall();
+                if (canCross) {
+                    // 穿越忽略系统碰撞
+                    contact.disabled = true;
+                    // 穿越速度
+                    if (!player.getWallLaunchVelocity()) {
+                        playerVelocity.x += Global.Model.MWall.getAccelerate();
+                        playerVelocity.x = this.limitVelocityX(playerVelocity.x);
+                        player.crossWall2(playerVelocity);    
+                    }
+                }
+                else
+                {
+                    // 停止
+                    player.stop();
+                    player.crossWall2(null);
+                    player.scheduleOnce(function () {
+                        var worldPos = wall.node.parent.convertToWorldSpaceAR(wall.node.position);
+                        var nodePos = player.node.parent.convertToNodeSpaceAR(worldPos);
+                        player.node.x = nodePos.x - 25;
+                    } , 0);
+                }    
             }
             else
             {
-                // 停止
-                player.stop();
-                player.crossWall2(null);
+                this.type = Enum.TYPE.PLAYER;
+                player.unBindMonster();
+
+                var canCross = player.isCanCrossWall();
+                if (canCross) {
+                    // 穿越忽略系统碰撞
+                    // contact.disabled = false;
+                    // 穿越速度
+                    if (!player.getWallLaunchVelocity()) {
+                        playerVelocity.x += Global.Model.MWall.getAccelerate();
+                        playerVelocity.x = this.limitVelocityX(playerVelocity.x);
+                        player.crossWall2(playerVelocity);
+                    }
+                }
+                else
+                {
+                    // 停止
+                    player.stop();
+                    player.crossWall2(null);
+                    player.scheduleOnce(function () {
+                        var worldPos = wall.node.parent.convertToWorldSpaceAR(wall.node.position);
+                        var nodePos = player.node.parent.convertToNodeSpaceAR(worldPos);
+                        player.node.x = nodePos.x - 25;
+                    } , 0);
+                }    
             }
+            
             break;
         case 3:
             // 墙体3
             contact.disabled = true;
             var reLaunchVelocity = player.getWallLaunchVelocity();
+            console.log("reLaunchVelocity" , reLaunchVelocity.x , reLaunchVelocity.y);
             // 播放穿墙动画 并发射
             player.crossWall3(reLaunchVelocity);
             var y = player.node.parent.convertToWorldSpaceAR(player.node.position).y;
@@ -474,31 +453,43 @@ MPlayer.collisionMonster = function (contact , playerCollider , monsterCollider)
             this.collisionMClip(contact , player , monster);
             break;
         case Enum.TYPE.ENERGY:
-            
+            model = Global.Model.MEnergy;
+            this.collisionMEnergy(contact , player , monster);
             break;
         case Enum.TYPE.ROCKET:
-            
+            model = Global.Model.MRocket;
+            this.collisionMRocket(contact , player , monster);
             break;
         case Enum.TYPE.JUMP:
-            
+            model = Global.Model.MJump;
+            this.collisionMJump(contact , player , monster);
+            break;
+        case Enum.TYPE.JUMP_FIST:
+            model = Global.Model.MJump;
+            this.collisionMJump(contact , player , monster.getJump());
             break;
         case Enum.TYPE.OIL:
-            
+            model = Global.Model.MOil;
+            this.collisionOil(contact , player , monster);
             break;
         case Enum.TYPE.PLANE:
-            
+            model = Global.Model.MPlane;
+            this.collisionMPlane(contact , player , monster);
             break;
         case Enum.TYPE.CAR:
-            
+            model = Global.Model.MCar;
+            this.collisionMCar(contact , player , monster);
             break;
     }
 
-    // 增加金币
-    this.addCoins(model.getAttr().cost);
-    // 增加携带的金币
-    this.addCarryCoins(model.getAttr().coins);
-    // 增加能量
-    this.addEnergy(model.getAttr().energy);
+    // console.log(model.getAttr().cost , model.getAttr().coins ,model.getAttr().energy);
+
+    // // 增加金币
+    // this.addCoins(model.getAttr().cost);
+    // // 增加携带的金币
+    // this.addCarryCoins(model.getAttr().coins);
+    // // 增加能量
+    // this.addEnergy(model.getAttr().energy);
 }
 
 MPlayer.collisionMNormal = function (contact , player , monster) {
@@ -514,7 +505,7 @@ MPlayer.collisionMNormal = function (contact , player , monster) {
         return;
     }
 
-    this.collisionNormal(contact , player , monster);
+    this.triggerNormal(contact , player , monster , Global.Model.MNormal.getAttr());
 }
 
 MPlayer.collisionMFlyNormal = function (contact , player , monster) {
@@ -524,7 +515,7 @@ MPlayer.collisionMFlyNormal = function (contact , player , monster) {
         return;
     }
 
-    this.collisionFly(contact , player , monster);
+    this.triggerFly(contact , player , monster , Global.Model.MFly.getAttr());
 }
 
 MPlayer.collisionMCoins = function (contact , player , monster) {
@@ -540,7 +531,7 @@ MPlayer.collisionMCoins = function (contact , player , monster) {
         return;
     }
 
-    this.collisionNormal(contact , player , monster);
+    this.triggerNormal(contact , player , monster , Global.Model.MCoins.getAttr());
 }
 
 MPlayer.collisionMFlyCoins = function (contact , player , monster) {
@@ -550,7 +541,7 @@ MPlayer.collisionMFlyCoins = function (contact , player , monster) {
         return;
     }
 
-    this.collisionFly(contact , player , monster);
+    this.triggerFly(contact , player , monster , Global.Model.MFlyCoins.getAttr());
 }
 
 MPlayer.collisionMBoom = function (contact , player , monster) {
@@ -566,7 +557,7 @@ MPlayer.collisionMBoom = function (contact , player , monster) {
         return;
     }
 
-    this.collisionNormal(contact , player , monster);
+    this.triggerBoom(contact , player , monster , Global.Model.MBoom.getAttr());
 }
 
 MPlayer.collisionMFlyBoom = function (contact , player , monster) {
@@ -576,7 +567,17 @@ MPlayer.collisionMFlyBoom = function (contact , player , monster) {
         return;
     }
 
-    this.collisionFly(contact , player , monster);
+    this.triggerFlyBoom(contact , player , monster , Global.Model.MFlyBoom.getAttr());
+}
+
+MPlayer.collisionMEnergy = function (contact , player , monster) {
+    // 休眠状态下不可触发碰撞逻辑
+    if (player.isSleep() || monster.isSleep()) {
+        console.log("当前玩家或者怪物休眠");
+        return;
+    }
+
+    this.triggerFly(contact , player , monster , Global.Model.MEnergy.getAttr());
 }
 
 MPlayer.collisionMClip = function (contact , player , monster) {
@@ -592,100 +593,1044 @@ MPlayer.collisionMClip = function (contact , player , monster) {
         return;
     }
 
-    this.collisionNormal(contact , player , monster);
-    this.transform(Enum.TYPE.CLIP , monster.animation.skeletonData);
+    this.triggerClip(contact , player , monster , Global.Model.MClip.getAttr());
+}
+
+MPlayer.collisionMRocket = function (contact , player , monster) {
+    // 休眠状态下不可触发碰撞逻辑
+    if (player.isSleep() || monster.isSleep()) {
+        console.log("当前玩家或者怪物休眠");
+        return;
+    }
+
+    this.triggerRocket(contact , player , monster , Global.Model.MRocket.getAttr());
+}
+
+MPlayer.collisionMJump = function (contact , player , monster) {
+    // 休眠状态下不可触发碰撞逻辑
+    if (player.isSleep() || monster.isSleep()) {
+        console.log("当前玩家或者怪物休眠");
+        return;
+    }
+
+    this.triggerJump(contact , player , monster , Global.Model.MJump.getAttr());
+}
+
+MPlayer.collisionMPlane = function (contact , player , monster) {
+    // 休眠状态下不可触发碰撞逻辑
+    if (player.isSleep() || monster.isSleep()) {
+        console.log("当前玩家或者怪物休眠");
+        return;
+    }
+
+    this.triggerPlane(contact , player , monster , Global.Model.MPlane.getAttr());
+}
+
+MPlayer.collisionOil = function (contact , player , monster) {
+    // 休眠状态下不可触发碰撞逻辑
+    if (player.isSleep() || monster.isSleep()) {
+        console.log("当前玩家或者怪物休眠");
+        return;
+    }
+    this.triggerOil(contact , player , monster , null);
+}
+
+MPlayer.collisionMCar = function (contact , player , monster) {
+    // 休眠状态下不可触发碰撞逻辑
+    if (player.isSleep() || monster.isSleep()) {
+        console.log("当前玩家或者怪物休眠");
+        return;
+    }
+
+    this.triggerCar(contact , player , monster , Global.Model.MCar.getAttr());
 }
 
 // MPlayer.collisionMNormal = function () {
     
 // }
 
-MPlayer.collisionNormal = function (contact , player , normal) {
+MPlayer.triggerNormal = function (contact , player , normal , attr) {
     var Calculator = Global.Common.Utils.Calculator;
     var selfAttr = this.getAttr();
-    var otherAttr =  Global.Model.MNormal.getAttr();
+    var otherAttr = attr;
+    var velocity = player.getVelocity();
+    var velocityX = velocity.x;
+    var velocityY = velocity.y;
 
-    if (player.animation.getState() == Enum.P_ANI_STATE.SKILL) {
-        // 技能状态下 怪物直接被Kill 并且不处理Y轴上速度    
+    switch (this.type) {
+        case Enum.TYPE.CLIP:
+            // 解除绑定
+            this.type = Enum.TYPE.PLAYER;
+            player.unBindMonster();
+
+            selfAttr = Global.Model.MPlayer.getAttr();
+
+            // 处理Y轴速度 (弹性、反弹力处理)
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            // 限定Y速度 (限定速度区间)
+            velocityY = this.limitVelocityY(velocityY);
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+            
+            // 怪物死亡
+            normal.onDeath(player);
+            break;
+        case Enum.TYPE.ROCKET:
+            selfAttr = Global.Model.MRocket.getAttr();
+            break;
+        case Enum.TYPE.JUMP:
+            selfAttr = Global.Model.MJump.getAttr();
+            // 怪物死亡
+            normal.onDeath(player);
+            break;
+        case Enum.TYPE.PLANE:
+            selfAttr = Global.Model.MPlane.getAttr();
+            // 怪物死亡
+            normal.onDeath(player);
+            break;
+        case Enum.TYPE.CAR:
+            selfAttr = Global.Model.MCar.getAttr();
+            // 怪物死亡
+            normal.onDeath(player);
+            break;
+        case Enum.TYPE.PLAYER:
+            selfAttr = Global.Model.MPlayer.getAttr();
+            if (player.animation.getState() == Enum.P_ANI_STATE.SKILL) {
+            }
+            else if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
+            }
+            else
+            {   
+                // 处理Y轴速度 (弹性、反弹力处理)
+                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                // 限定Y速度 (限定速度区间)
+                velocityY = this.limitVelocityY(velocityY);
+                // 非技能、冲击状态下 减速
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                player.onAttack();
+                // 怪物死亡
+                normal.onDeath(player);
+            }
+            break;
     }
-    else if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
-        // 冲击状态下 怪物直接被Kill 并且不处理Y轴上速度
-    }
-    else
-    {
-        // 处理X轴速度 (加速力处理)
-        var velocityX = Calculator.processVelocityX(player.getVelocity().x , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
-        // 限定X速度 (限定速度区间)
-        velocityX = this.limitVelocityX(velocityX);
-
-        // 处理Y轴速度 (弹性、反弹力处理)
-        var velocityY = Calculator.processVelocityY(player.getVelocity().y , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
-        // 限定Y速度 (限定速度区间)
-        velocityY = this.limitVelocityY(velocityY);
-
-        var newVelocity = cc.v2(velocityX , velocityY);
-        // 玩家对象设置新速度
-        player.setVelocity(newVelocity);
-    }
-
-    // 怪物死亡
-    normal.onDeath();
 }
 
-MPlayer.collisionFly = function (contact , player , fly) {
+MPlayer.triggerFly = function (contact , player , fly , attr) {
     var Calculator = Global.Common.Utils.Calculator;
     var selfAttr = this.getAttr();
-    var otherAttr =  Global.Model.MNormal.getAttr();
+    var otherAttr = attr;
+    var velocity = player.getVelocity();
+    var velocityX = velocity.x;
+    var velocityY = velocity.y;
 
-    // 处理X轴速度 (加速力处理)
-    var velocityX = Calculator.processVelocityX(player.getVelocity().x , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
-    // 限定X速度 (限定速度区间)
-    velocityX = this.limitVelocityX(velocityX);
-    // 处理Y轴速度 (弹性、反弹力处理)
-    var velocityY = Calculator.processVelocityY(player.getVelocity().y , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
-    // 限定Y速度 (限定速度区间)
-    velocityY = this.limitVelocityY(velocityY);
+    switch (this.type) {
+        case Enum.TYPE.CLIP:
+            // 解除绑定
+            this.type = Enum.TYPE.PLAYER;
+            player.unBindMonster();
 
-    var newVelocity = cc.v2(velocityX , velocityY);
-    // 玩家对象设置新速度
-    player.setVelocity(newVelocity);
+            selfAttr = Global.Model.MPlayer.getAttr();
 
-    // 怪物死亡
-    fly.onDeath();
+            // 处理Y轴速度 (弹性、反弹力处理)
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            // 限定Y速度 (限定速度区间)
+            velocityY = this.limitVelocityY(velocityY);
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+
+            // 怪物死亡
+            fly.onDeath(player);
+            break;
+        case Enum.TYPE.ROCKET:
+            selfAttr = Global.Model.MRocket.getAttr();
+            // 怪物死亡
+            fly.onDeath(player);
+            break;
+        case Enum.TYPE.JUMP:
+            selfAttr = Global.Model.MJump.getAttr();
+            // 怪物死亡
+            fly.onDeath(player);
+            break;
+        case Enum.TYPE.PLANE:
+            selfAttr = Global.Model.MPlane.getAttr();
+            // 怪物死亡
+            fly.onDeath(player);
+            break;
+        case Enum.TYPE.CAR:
+            selfAttr = Global.Model.MCar.getAttr();
+            // 怪物死亡
+            fly.onDeath(player);
+            break;
+        case Enum.TYPE.PLAYER:
+            selfAttr = Global.Model.MPlayer.getAttr();
+            if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
+                fly.onDeath(player);
+            }
+            else
+            {   
+                // 处理Y轴速度 (弹性、反弹力处理)
+                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                // 限定Y速度 (限定速度区间)
+                velocityY = this.limitVelocityY(velocityY);
+                // 非技能、冲击状态下 减速
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                player.onAttack();
+                // 怪物死亡
+                fly.onDeath(player);    
+            }
+            break;
+    }
 }
 
-MPlayer.collisionVehicle = function (contact , player , vehicle) {
+MPlayer.triggerBoom = function (contact , player , boom , attr) {
     var Calculator = Global.Common.Utils.Calculator;
     var selfAttr = this.getAttr();
-    var otherAttr =  Global.Model.MNormal.getAttr();
+    var otherAttr = attr;
+    var velocity = player.getVelocity();
+    var velocityX = velocity.x;
+    var velocityY = velocity.y;
 
-    // 处理X轴速度 (加速力处理)
-    var velocityX = Calculator.processVelocityX(player.getVelocity().x , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
-    // 限定X速度 (限定速度区间)
-    velocityX = this.limitVelocityX(velocityX);
+    switch (this.type) {
+        case Enum.TYPE.CLIP:
+            // 解除绑定
+            this.type = Enum.TYPE.PLAYER;
+            player.unBindMonster();
 
-    var velocityY = player.getVelocity().y;
-    
-    if (player.animation.getState() == Enum.P_ANI_STATE.SKILL) {
-        // 技能状态下 怪物直接被Kill 并且不处理Y轴上速度    
+            selfAttr = Global.Model.MPlayer.getAttr();
+
+            // 处理Y轴速度 (弹性、反弹力处理)
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            // 限定Y速度 (限定速度区间)
+            velocityY = this.limitVelocityY(velocityY);
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+
+            // 怪物死亡
+            boom.onDeath(player);
+            MPlayer.boom(boom);
+            break;
+        case Enum.TYPE.ROCKET:
+            selfAttr = Global.Model.MRocket.getAttr();
+            break;
+        case Enum.TYPE.JUMP:
+            selfAttr = Global.Model.MPlayer.getAttr();
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+            // 怪物死亡
+            boom.onDeath(player);
+            MPlayer.boom(boom);
+            break;
+        case Enum.TYPE.PLANE:
+            selfAttr = Global.Model.MPlayer.getAttr();
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+            // 怪物死亡
+            boom.onDeath(player);
+            MPlayer.boom(boom);
+            break;
+        case Enum.TYPE.CAR:
+            selfAttr = Global.Model.MPlayer.getAttr();
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+            // 怪物死亡
+            boom.onDeath(player);
+            MPlayer.boom(boom);
+            break;
+        case Enum.TYPE.PLAYER:
+            selfAttr = Global.Model.MPlayer.getAttr();
+            if (player.animation.getState() == Enum.P_ANI_STATE.SKILL) {
+            }
+            else if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
+            }
+            else
+            {   
+                // 处理Y轴速度 (弹性、反弹力处理)
+                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                // 限定Y速度 (限定速度区间)
+                velocityY = this.limitVelocityY(velocityY);
+                // 非技能、冲击状态下 减速
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                player.onAttack();
+                // 怪物死亡
+                boom.onDeath(player);
+                MPlayer.boom(boom);
+            }
+            break;
     }
-    else if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
-        // 冲击状态下 怪物直接被Kill 并且不处理Y轴上速度
-    }
-    else
-    {
-        // 处理Y轴速度 (弹性、反弹力处理)
-        velocityY = Calculator.processVelocityY(player.getVelocity().y , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
-        // 限定Y速度 (限定速度区间)
-        velocityY = this.limitVelocityY(velocityY);
-    }
+}
 
-    var newVelocity = cc.v2(velocityX , velocityY);
-    // 玩家对象设置新速度
-    player.setVelocity(newVelocity);
+MPlayer.triggerFlyBoom = function (contact , player , flyboom , attr) {
+    var Calculator = Global.Common.Utils.Calculator;
+    var selfAttr = this.getAttr();
+    var otherAttr = attr;
+    var velocity = player.getVelocity();
+    var velocityX = velocity.x;
+    var velocityY = velocity.y;
 
-    // 怪物死亡
-    normal.onDeath();
+    switch (this.type) {
+        case Enum.TYPE.CLIP:
+            // 解除绑定
+            this.type = Enum.TYPE.PLAYER;
+            player.unBindMonster();
+
+            selfAttr = Global.Model.MPlayer.getAttr();
+
+            // 处理Y轴速度 (弹性、反弹力处理)
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            // 限定Y速度 (限定速度区间)
+            velocityY = this.limitVelocityY(velocityY);
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+
+            // 怪物死亡
+            flyboom.onDeath(player);
+            MPlayer.boom(flyboom);
+            break;
+        case Enum.TYPE.ROCKET:
+            selfAttr = Global.Model.MPlayer.getAttr();
+
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+
+            // 怪物死亡
+            flyboom.onDeath(player);
+            MPlayer.boom(flyboom);
+            break;
+        case Enum.TYPE.JUMP:
+            selfAttr = Global.Model.MJump.getAttr();
+
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+
+            // 怪物死亡
+            flyboom.onDeath(player);
+            MPlayer.boom(flyboom);
+            break;
+        case Enum.TYPE.PLANE:
+            selfAttr = Global.Model.MPlane.getAttr();
+
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+
+            // 怪物死亡
+            flyboom.onDeath(player);
+            MPlayer.boom(flyboom);
+            break;
+        case Enum.TYPE.CAR:
+            selfAttr = Global.Model.MCar.getAttr();
+
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+
+            // 怪物死亡
+            flyboom.onDeath(player);
+            MPlayer.boom(flyboom);
+            break;
+        case Enum.TYPE.PLAYER:
+            selfAttr = Global.Model.MPlayer.getAttr();
+            if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                flyboom.onDeath(player);
+                MPlayer.boom(flyboom);
+            }
+            else
+            {   
+                // 处理Y轴速度 (弹性、反弹力处理)
+                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                // 限定Y速度 (限定速度区间)
+                velocityY = this.limitVelocityY(velocityY);
+                // 非技能、冲击状态下 减速
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                player.onAttack();
+                // 怪物死亡
+                flyboom.onDeath(player); 
+                MPlayer.boom(flyboom);   
+            }
+            break;
+    }
+}
+
+MPlayer.triggerClip = function (contact , player , clip , attr) {
+    var Calculator = Global.Common.Utils.Calculator;
+    var selfAttr = this.getAttr();
+    var otherAttr = attr;
+    var velocity = player.getVelocity();
+    var velocityX = velocity.x;
+    var velocityY = velocity.y;
+
+    switch (this.type) {
+        case Enum.TYPE.CLIP:
+            // 解除原绑定
+            this.type = Enum.TYPE.PLAYER;
+            player.unBindMonster();
+
+            selfAttr = Global.Model.MPlayer.getAttr();
+
+            // 处理Y轴速度 (弹性、反弹力处理)
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            // 限定Y速度 (限定速度区间)
+            velocityY = this.limitVelocityY(velocityY);
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+
+            // 绑定
+            this.type = Enum.TYPE.CLIP;
+            player.bindMonster(clip);
+
+            break;
+        case Enum.TYPE.ROCKET:
+            selfAttr = Global.Model.MRocket.getAttr();
+            break;
+        case Enum.TYPE.JUMP:
+            selfAttr = Global.Model.MJump.getAttr();
+            // 怪物死亡
+            clip.onDeath(player);
+            break;
+        case Enum.TYPE.PLANE:
+            selfAttr = Global.Model.MPlane.getAttr();
+            // 怪物死亡
+            clip.onDeath(player);
+            break;
+        case Enum.TYPE.CAR:
+            selfAttr = Global.Model.MCar.getAttr();
+            // 怪物死亡
+            clip.onDeath(player);
+            break;
+        case Enum.TYPE.PLAYER:
+            selfAttr = Global.Model.MPlayer.getAttr();
+            if (player.animation.getState() == Enum.P_ANI_STATE.SKILL) {
+            }
+            else if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
+            }
+            else
+            {   
+                // 处理Y轴速度 (弹性、反弹力处理)
+                console.log("Clip反弹力" , selfAttr.bouncePower + otherAttr.bouncePower);
+                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                // 限定Y速度 (限定速度区间)
+                velocityY = this.limitVelocityY(velocityY);
+                // 非技能、冲击状态下 减速
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                // 绑定
+                this.type = Enum.TYPE.CLIP;
+                player.bindMonster(clip);
+            }
+            break;
+    }
+}
+
+MPlayer.triggerRocket = function (contact , player , rocket , attr) {
+    var Calculator = Global.Common.Utils.Calculator;
+    var selfAttr = this.getAttr();
+    var otherAttr = attr;
+    var velocity = player.getVelocity();
+    var velocityX = velocity.x;
+    var velocityY = velocity.y;
+
+    switch (this.type) {
+        case Enum.TYPE.CLIP:
+        case Enum.TYPE.ROCKET:
+            // 解除原绑定
+            this.type = Enum.TYPE.PLAYER;
+            player.unBindMonster();
+
+            selfAttr = Global.Model.MPlayer.getAttr();
+
+            // 处理Y轴速度 (弹性、反弹力处理)
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            // 限定Y速度 (限定速度区间)
+            velocityY = this.limitVelocityY(velocityY);
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+
+            // 绑定
+            this.type = Enum.TYPE.ROCKET;
+            player.bindMonster(rocket);
+            break;
+        case Enum.TYPE.JUMP:
+            selfAttr = Global.Model.MJump.getAttr();
+
+            // // 火箭乱飞
+            // rocket.setVelocity(cc.v2(velocityX + 300 , velocityY + 600));
+
+            // 怪物死亡
+            rocket.onDeath(player);
+            break;
+        case Enum.TYPE.PLANE:
+            selfAttr = Global.Model.MPlane.getAttr();
+            // 怪物死亡
+            rocket.onDeath(player);
+            break;
+        case Enum.TYPE.CAR:
+            selfAttr = Global.Model.MCar.getAttr();
+            // 怪物死亡
+            rocket.onDeath(player);
+            break;
+        case Enum.TYPE.PLAYER:
+            selfAttr = Global.Model.MPlayer.getAttr();
+            if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                rocket.onDeath(player);
+            }
+            else
+            {   
+                // 处理Y轴速度 (弹性、反弹力处理)
+                console.log("Rocket反弹力" , selfAttr.bouncePower + otherAttr.bouncePower);
+                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                // 限定Y速度 (限定速度区间)
+                velocityY = this.limitVelocityY(velocityY);
+                // 非技能、冲击状态下 减速
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                // 绑定
+                this.type = Enum.TYPE.ROCKET;
+                player.bindMonster(rocket);
+
+            }
+            break;
+    }
+}
+
+MPlayer.triggerJump = function (contact , player , jump , attr) {
+    var Calculator = Global.Common.Utils.Calculator;
+    var selfAttr = this.getAttr();
+    var otherAttr = attr;
+    var velocity = player.getVelocity();
+    var velocityX = velocity.x;
+    var velocityY = velocity.y;
+
+    switch (this.type) {
+        case Enum.TYPE.CLIP:
+        case Enum.TYPE.ROCKET:
+        case Enum.TYPE.JUMP:
+            // 解除原绑定
+            this.type = Enum.TYPE.PLAYER;
+            player.unBindMonster();
+
+            selfAttr = Global.Model.MPlayer.getAttr();
+
+            // 处理Y轴速度 (弹性、反弹力处理)
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            // 限定Y速度 (限定速度区间)
+            velocityY = this.limitVelocityY(velocityY);
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+
+            // 绑定
+            this.type = Enum.TYPE.JUMP;
+            player.bindMonster(jump);
+            break;
+        case Enum.TYPE.PLANE:
+            selfAttr = Global.Model.MPlane.getAttr();
+            // 怪物死亡
+            jump.onDeath(player);
+            break;
+        case Enum.TYPE.CAR:
+            selfAttr = Global.Model.MCar.getAttr();
+            // 怪物死亡
+            jump.onDeath(player);
+            break;
+        case Enum.TYPE.PLAYER:
+            selfAttr = Global.Model.MPlayer.getAttr();
+            if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                jump.onDeath(player);
+            }
+            else
+            {   
+                // 处理Y轴速度 (弹性、反弹力处理)
+                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                // 限定Y速度 (限定速度区间)
+                velocityY = this.limitVelocityY(velocityY);
+                // 非技能、冲击状态下 减速
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                // 绑定
+                this.type = Enum.TYPE.JUMP;
+                player.bindMonster(jump);
+            }
+            break;
+    }
+}
+
+MPlayer.triggerPlane = function (contact , player , plane , attr) {
+    var Calculator = Global.Common.Utils.Calculator;
+    var selfAttr = this.getAttr();
+    var otherAttr = attr;
+    var velocity = player.getVelocity();
+    var velocityX = velocity.x;
+    var velocityY = velocity.y;
+
+    switch (this.type) {
+        case Enum.TYPE.CLIP:
+        case Enum.TYPE.ROCKET:
+        case Enum.TYPE.JUMP:
+        case Enum.TYPE.PLANE:
+            // 解除原绑定
+            this.type = Enum.TYPE.PLAYER;
+            player.unBindMonster();
+
+            selfAttr = Global.Model.MPlayer.getAttr();
+
+            // 处理Y轴速度 (弹性、反弹力处理)
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            // 限定Y速度 (限定速度区间)
+            velocityY = this.limitVelocityY(velocityY);
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+
+            // 绑定
+            this.type = Enum.TYPE.PLANE;
+            player.bindMonster(plane);
+            break;
+        case Enum.TYPE.CAR:
+            selfAttr = Global.Model.MCar.getAttr();
+            // 怪物死亡
+            plane.onDeath(player);
+            break;
+        case Enum.TYPE.PLAYER:
+            selfAttr = Global.Model.MPlayer.getAttr();
+            if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                plane.onDeath(player);
+            }
+            else
+            {   
+                // 处理Y轴速度 (弹性、反弹力处理)
+                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                // 限定Y速度 (限定速度区间)
+                velocityY = this.limitVelocityY(velocityY);
+                // 非技能、冲击状态下 减速
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                // 绑定
+                this.type = Enum.TYPE.PLANE;
+                player.bindMonster(plane);
+            }
+            break;
+    }
+}
+
+MPlayer.triggerOil = function (contact , player , oil , attr) {
+    switch (this.type) {
+        case Enum.TYPE.CLIP:
+        case Enum.TYPE.ROCKET:
+        case Enum.TYPE.JUMP:
+        case Enum.TYPE.CAR:
+            // 怪物死亡
+            oil.onDeath(player);
+            break;
+        case Enum.TYPE.PLAYER:
+            player.onAttack();
+            // 怪物死亡
+            oil.onDeath(player);
+            break;
+        case Enum.TYPE.PLANE:
+            // 怪物死亡
+            oil.onDeath(player);
+            // 添加新油桶
+            var plane = player.getBindMonster();
+            plane.generateOil(oil.node.name);
+            break;
+    }
+}
+
+MPlayer.triggerCar = function (contact , player , car , attr) {
+    var Calculator = Global.Common.Utils.Calculator;
+    var selfAttr = this.getAttr();
+    var otherAttr = attr;
+    var velocity = player.getVelocity();
+    var velocityX = velocity.x;
+    var velocityY = velocity.y;
+
+    switch (this.type) {
+        case Enum.TYPE.CLIP:
+        case Enum.TYPE.ROCKET:
+        case Enum.TYPE.JUMP:
+        case Enum.TYPE.PLANE:
+        case Enum.TYPE.CAR:
+            // 解除原绑定
+            this.type = Enum.TYPE.PLAYER;
+            player.unBindMonster();
+
+            selfAttr = Global.Model.MPlayer.getAttr();
+            // 处理Y轴速度 (弹性、反弹力处理)
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            // 限定Y速度 (限定速度区间)
+            velocityY = this.limitVelocityY(velocityY);
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+            // 绑定
+            this.type = Enum.TYPE.CAR;
+            player.bindMonster(car , cc.v2(100 , 50));
+            break;
+        case Enum.TYPE.PLAYER:
+            selfAttr = Global.Model.MPlayer.getAttr();
+            if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                car.onDeath(player);
+            }
+            else
+            {   
+                // 处理Y轴速度 (弹性、反弹力处理)
+                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                // 限定Y速度 (限定速度区间)
+                velocityY = this.limitVelocityY(velocityY);
+                // 非技能、冲击状态下 减速
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+                // 绑定
+                this.type = Enum.TYPE.CAR;
+                player.bindMonster(car , cc.v2(100 , 50));
+            }
+            break;
+    }
+}
+
+MPlayer.triggerFloor = function (contact , player , floor , attr) {
+    var Calculator = Global.Common.Utils.Calculator;
+    var selfAttr = this.getAttr();
+    var otherAttr = attr;
+    var velocity = player.getVelocity();
+    var velocityX = velocity.x;
+    var velocityY = velocity.y;
+
+    switch (this.type) {
+        case Enum.TYPE.CLIP:
+            // 解除绑定
+            this.type = Enum.TYPE.PLAYER;
+            player.unBindMonster();
+
+            selfAttr = Global.Model.MPlayer.getAttr();
+
+            // 处理Y轴速度 (弹性、反弹力处理)
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            // 限定Y速度 (限定速度区间)
+            velocityY = this.limitVelocityY(velocityY);
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+            break;
+        case Enum.TYPE.ROCKET:
+            selfAttr = Global.Model.MRocket.getAttr();
+            break;
+        case Enum.TYPE.JUMP:
+            selfAttr = Global.Model.MJump.getAttr();
+
+            var jump = player.getBindMonster();
+
+            if (jump.isUseSkill()) {
+                // 处理Y轴速度 (弹性、反弹力处理)
+                velocityY = Calculator.processVelocityY(velocityY , 0 , selfAttr.skillBounce , 0 , 0);
+                // 限定Y速度 (限定速度区间)
+                velocityY = this.limitVelocityY(velocityY);
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.skillAccelerate , 0);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+            }
+            else
+            {
+                // 处理Y轴速度 (弹性、反弹力处理)
+                velocityY = Calculator.processVelocityY(velocityY , 0 , selfAttr.floorBounce , 0 , 0);
+                // 限定Y速度 (限定速度区间)
+                velocityY = this.limitVelocityY(velocityY);
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.floorAccelerate , 0);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+            }
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            jump.setVelocity(newVelocity);
+            jump.reduceBounceTimes();
+            break;
+        case Enum.TYPE.PLANE:
+            selfAttr = Global.Model.MPlane.getAttr();
+
+            // 解除绑定
+            this.type = Enum.TYPE.PLAYER;
+            player.unBindMonster();
+
+            // 处理Y轴速度 (弹性、反弹力处理)
+            console.log("selfAttr.endRideBounce" , selfAttr.endRideBounce);
+            velocityY = Calculator.processVelocityY(velocityY , 0 , selfAttr.endRideBounce , 0 , 0);
+            // 限定Y速度 (限定速度区间)
+            velocityY = this.limitVelocityY(velocityY);
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.endRideAccelerate , 0);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+            break;
+        case Enum.TYPE.CAR:
+            selfAttr = Global.Model.MCar.getAttr();
+
+            // 解除绑定
+            // this.type = Enum.TYPE.PLAYER;
+            // player.unBindMonster();
+            // player.static();
+
+            // 处理Y轴速度 (弹性、反弹力处理)
+            velocityY = Calculator.processVelocityY(velocityY , 0 , 0 , 0 , 0);
+            // 限定Y速度 (限定速度区间)
+            velocityY = this.limitVelocityY(velocityY);
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , 0 , 0);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            var car = player.getBindMonster();
+            car.setVelocity(newVelocity);    
+            car.setDuration(selfAttr.duration);
+            car.scheduleOnce(function () {
+                car.node.rotation = 0;
+            } , 0);
+
+            break;
+        case Enum.TYPE.PLAYER:
+            selfAttr = Global.Model.MPlayer.getAttr();
+
+            // 处理Y轴速度 (弹性、反弹力处理)
+            console.log("Floor反弹力" , selfAttr.bouncePower + otherAttr.bouncePower);
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            // 限定Y速度 (限定速度区间)
+            velocityY = this.limitVelocityY(velocityY);
+
+            if (player.animation.getState() == Enum.P_ANI_STATE.SKILL) {
+                // 技能状态下 清除范围内怪物 不减速
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                // 震屏
+                player.shockScreen();
+                // 显示触地动画
+                player.showTouchdownAni();
+
+                MPlayer.quake(player);
+            }
+            else if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
+                // 冲击状态下 清除范围内怪物 不减速
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                // 震屏
+                player.shockScreen();
+                // 显示触地动画
+                player.showTouchdownAni();
+
+                MPlayer.quake(player);
+            }
+            else
+            {   
+                // 非技能、冲击状态下 减速
+                // 处理X轴速度 (加速力处理)
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+                // 限定X速度 (限定速度区间)
+                velocityX = this.limitVelocityX(velocityX);
+
+                var newVelocity = cc.v2(velocityX , velocityY);
+                // 玩家对象设置新速度
+                player.setVelocity(newVelocity);
+
+                // 判断是否结束游戏
+                var isGameOver = this.isGameOver(newVelocity);
+                if (isGameOver) {
+                    // 当前游戏结束
+                    console.log("当前游戏结束");
+                    player.static();
+                }
+                else
+                {
+                    // 显示触地动画
+                    player.showTouchdownAni();
+                    player.onHurt();
+                }
+            }
+            break;
+    }
 }
 
 MPlayer.onTouched = function () {
@@ -705,27 +1650,100 @@ MPlayer.addCarryCoins = function (num) {
     // 展示UI动画
 }
 
-MPlayer.transform = function (type , skeletonData) {
-    this.type = type;
-    switch (this.type) {
-        case Enum.TYPE.CLIP:
-            // 当前玩家变幻成夹子 并播放受伤
-            this.gamedata.playerObj.transformClip(skeletonData);
-            break;
-        case Enum.TYPE.ROCKET:
-            break;
-        case Enum.TYPE.JUMP:
-            break;
-        case Enum.TYPE.PLANE:
-            break;
-        case Enum.TYPE.CAR:
-            break;
+/**
+ * 爆炸摧毁范围内怪物
+ *
+ */
+MPlayer.boom = function (boom) {
+    var worldPos = boom.node.convertToWorldSpaceAR(cc.v2(0,0));
+
+    var rect = new cc.rect(worldPos.x - 120 , worldPos.y - 120 , 240 ,  240);
+
+    var monsters = this.getMonsterForAABB(rect);
+    var len = monsters.length;
+    for (let index = 0; index < len; index++) {
+        var monster = monsters[index];
+        if (!monster.isSleep() && !monster._IsBind) {
+            monster.onDeath(this.getPlayerObj());
+        }
     }
 }
 
-MPlayer.unTransform = function () {
-    this.type = Enum.TYPE.PLAYER;
-    this.gamedata.playerObj.transformOriginal();
-}
+/**
+ * 地震摧毁范围内怪物
+ *
+ */
+MPlayer.quake = function (player) {
+    var worldPos = player.node.convertToWorldSpaceAR(cc.v2(0,0));
+    var rect = new cc.rect(worldPos.x - 150 , worldPos.y - 30 , 300 ,  80);
+    var monsters = this.getMonsterForAABB(rect);
+
+    var isShowBigBoomAni = false;
+
+    var len = monsters.length;
+    for (let index = 0; index < len; index++) {
+        var monster = monsters[index];
+        if (!monster.isSleep() && !monster._IsBind) {
+            switch (monster.getType()) {
+                case Enum.TYPE.NORMAL:
+                    monster.onDeath(player);
+                    isShowBigBoomAni = true;
+                    break;
+                case Enum.TYPE.COINS:
+                    monster.onDeath(player);
+                    isShowBigBoomAni = true;
+                    break;
+                case Enum.TYPE.BOOM:
+                    var Calculator = Global.Common.Utils.Calculator;
+                    var selfAttr = this.getAttr();
+                    var otherAttr = Global.Model.MBoom.getAttr();
+                    var velocity = player.getVelocity();
+                    var velocityX = velocity.x;
+                    var velocityY = velocity.y;
+
+                    // 处理Y轴速度 (弹性、反弹力处理)
+                    velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                    // 限定Y速度 (限定速度区间)
+                    velocityY = this.limitVelocityY(velocityY);
+                    // 非技能、冲击状态下 减速
+                    // 处理X轴速度 (加速力处理)
+                    velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+                    // 限定X速度 (限定速度区间)
+                    velocityX = this.limitVelocityX(velocityX);
+                    var newVelocity = cc.v2(velocityX , velocityY);
+                    // 玩家对象设置新速度
+                    player.setVelocity(newVelocity);
+
+                    monster.onDeath(player);
+                    isShowBigBoomAni = true;
+                    break;
+                case Enum.TYPE.CLIP:
+                    monster.onDeath(player);
+                    isShowBigBoomAni = true;
+                    break;
+            }
+        }
+    }
+
+    if (isShowBigBoomAni) {
+        this.getGlobalAni().showBigBoom(player);
+    }
+},
+
+MPlayer.getMonsterForAABB = function (worldRect) {
+    var result = [];
+    var colliderList = cc.director.getPhysicsManager().testAABB(worldRect);
+    var len = colliderList.length;
+    for (let index = 0; index < len; index++) {
+        var collider = colliderList[index];
+        var gBase = collider.getComponent(Global.GameObj.GBase);
+        if (gBase.getType() >= Enum.TYPE.NORMAL && gBase.getType() != Enum.TYPE.JUMP_FIST && gBase.getType() != Enum.TYPE.OIL) {
+            result.push(gBase);
+        }
+    }
+    return result;
+},
+
+
 
 module.exports = MPlayer;

@@ -11,6 +11,10 @@ cc.Class({
     properties: {
         // 人物对象
         _Player:GO_Base,
+        // ani
+        animation:sp.Skeleton,
+        // 死亡动画
+        deathAni:sp.Skeleton,
         // 最大相对速度
         maxRelativeVelocity:cc.Vec2.ZERO,
         // 最小相对速度
@@ -19,6 +23,8 @@ cc.Class({
         _CurRelativeVelocity:cc.Vec2.ZERO,
 
         _IsUpdate:false,
+        
+        _Shadow:null,
     },
 
     // onLoad () {},
@@ -27,11 +33,14 @@ cc.Class({
         this._Player = Global.Model.MPlayer.getPlayerObj();
         this.randomRelativeVelocity();
         this._IsUpdate = true;
-    },
 
-    static:function () {
-        this._super();
-        this._IsUpdate = false;
+        var shadow = this.node.getChildByName("Shadow").getComponent(cc.Sprite);
+        this._Shadow = {
+            // 阴影动画
+            shadow:shadow,
+            // 阴影动画位置
+            shadowAni:this.node.position,
+        };
     },
 
     update (dt) {
@@ -65,5 +74,25 @@ cc.Class({
      */
     onBeginContact:function (contact, selfCollider, otherCollider) {
         Global.Model.MCoins.handleCollision(contact, selfCollider, otherCollider);
+    },
+
+    onDeath:function (player) {
+        this._IsUpdate = false;
+        this.sleep();
+        this.static();
+        if (player) {
+            this.setVelocityX(player.getVelocityX());
+        }
+        this.showDeathAni();
+    },
+
+    showDeathAni:function () {
+        this._Shadow.shadow.node.active = false;
+        this.animation.node.active = false;
+        this.deathAni.node.active = true;
+        this.deathAni.animation = "boom_jbgbl";
+        this.deathAni.setCompleteListener(function () {
+            this.node.destroy();
+        }.bind(this));  
     },
 });

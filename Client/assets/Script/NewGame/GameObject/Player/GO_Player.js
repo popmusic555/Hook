@@ -21,6 +21,11 @@ cc.Class({
             type:GlobalEnum.P_STATE,
         },
 
+        // 当前绑定的怪物 绑定怪物会跟随人物一起运动
+        _BindMonster:null,
+        _BindMonsterPos:cc.Vec2.ZERO,
+        _BindMonsterFrist:false,
+
         // 穿墙
         _CrossWall:null,
 
@@ -37,7 +42,7 @@ cc.Class({
         this._CrossWall = {
             canCross:0,
             // 撞墙发射速度
-            wallLaunchVelocity:cc.Vec2.ZERO,
+            wallLaunchVelocity:null,
             // 撞墙动画
             crossWallAni:crossWallAni,
             // 撞墙动画位置
@@ -99,6 +104,7 @@ cc.Class({
             else
             {
                 this.animation.transState(GlobalEnum.P_ANI_STATE.DEATH1);
+                this.sleep();
             }
         }
     },
@@ -107,6 +113,8 @@ cc.Class({
         this.updateHoleAni();
         this.updateTouchdownAni();
         this.updateShadow();
+
+        this.updateBindMonster();
     },
 
     /**
@@ -182,6 +190,7 @@ cc.Class({
         this.setVelocity(velocity);
         this.setGravityScale(Global.Common.Const.GRAVITY_SCALE);
         this.setCrossWall(false);
+        this.setWallLaunchVelocity(null);
     },
     /**
      * 触发受伤
@@ -189,16 +198,16 @@ cc.Class({
      * @returns 是否触发成功
      */
     onHurt:function () {
-        if (this.animation.getState() == GlobalEnum.P_ANI_STATE.SKILL) {
-            return false;
-        }
+        // if (this.animation.getState() == GlobalEnum.P_ANI_STATE.SKILL) {
+        //     return false;
+        // }
 
-        if (this.animation.getState() == GlobalEnum.P_ANI_STATE.IMPACT) {
-            return false;
-        }
+        // if (this.animation.getState() == GlobalEnum.P_ANI_STATE.IMPACT) {
+        //     return false;
+        // }
 
         this.animation.transStateAndLock(GlobalEnum.P_ANI_STATE.HURT);
-        return true;
+        // return true;
     },
 
     /**
@@ -210,6 +219,14 @@ cc.Class({
      * @param {any} otherCollider 被碰撞对象碰撞器
      */
     onBeginContact:function (contact, selfCollider, otherCollider) {
+        if (this._BindMonster) {
+            var other = otherCollider.node.getComponent(Global.GameObj.GBase);
+            if (!(other.getType() == Global.Common.Enum.TYPE.WALL && otherCollider.tag == 1)) {
+                contact.disabled = true; 
+                return;    
+            }
+        }
+        console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "player");
         Global.Model.MPlayer.handleCollision(contact, selfCollider, otherCollider);
     },
 
@@ -324,6 +341,10 @@ cc.Class({
         aniNode.scale = (1  - scale);
     },
 
+    onAttack:function () {
+        this.animation.transStateAndLock(GlobalEnum.P_ANI_STATE.ATTACK , 0.2);
+    },
+
     /**
      * 点击
      * 
@@ -334,7 +355,14 @@ cc.Class({
         }
         else
         {
-            this.useSkill();
+            if (this._BindMonster) {
+                this._BindMonster.useSkill();
+            }
+            else
+            {
+                this.useSkill();
+            }
+            
         }
     },
     /**
@@ -378,27 +406,66 @@ cc.Class({
         this.node.parent.getComponent("VGame").shockScreen();
     },  
 
-    transformClip:function (skeletonData) {
-        this.state = GlobalEnum.P_STATE.TRANSFORM;
+    /**
+     * 绑定怪物
+     *
+     */
+    bindMonster:function (monster , pos) {
+        if (!this._BindMonster) {
+            this._BindMonster = monster;
+            this._BindMonster.bind();  
+            this._BindMonsterFrist = true;
+            if (pos) {
+                this._BindMonsterPos = pos;
+            }
+            else
+            {
+                this._BindMonsterPos = cc.v2(0,0);
+            }
+            this.animation.node.parent.active = false;
+        }
+    },  
 
-        var spAni = this.animation.getComponent(sp.Skeleton);
-        this._SpData = spAni.skeletonData;
-        spAni.skeletonData = skeletonData;
-        spAni.animation = "xg_srh_lvr" + Global.Common.Utils.random(1 , 2);
-
-        // 旋转动画
-        var action = cc.repeatForever(cc.rotateBy(0.5 , 360));
-        action.setTag(20);
-        this.animation.node.runAction(action);
+    /**
+     * 解绑怪物
+     *
+     */
+    unBindMonster:function (notDeath) {
+        if (this._BindMonster) {
+            this._BindMonster.unBind(notDeath);
+            this._BindMonster = null;
+            this.animation.node.parent.active = true;
+        }
     },
 
-    transformOriginal:function () {
-        if (this.state == GlobalEnum.P_STATE.TRANSFORM) {
-            this.state = GlobalEnum.P_STATE.NORMAL;  
-            var spAni = this.animation.getComponent(sp.Skeleton);
-            spAni.skeletonData = this._SpData;
-            this.animation.node.stopActionByTag(20);
-            this.animation.node.rotation = 0;
+    isBind:function () {
+        return !!this._BindMonster;  
+    },
+
+    getBindMonster:function () {
+        return this._BindMonster;  
+    },
+
+    updateBindMonster:function () {
+        if (!this._BindMonster) {
+            return;
         }
+
+        if (this._BindMonsterFrist) {
+            this._BindMonsterFrist = false;
+            // 设置位置
+            var worldPos = this.node.parent.convertToWorldSpaceAR(cc.v2(this.node.x , this.node.y));
+            var nodePos = this._BindMonster.node.parent.convertToNodeSpaceAR(worldPos);
+            this._BindMonster.node.position = nodePos.sub(this._BindMonsterPos);
+        }
+        else
+        {
+            var worldPos = this._BindMonster.node.parent.convertToWorldSpaceAR(this._BindMonster.node.position);
+            var nodePos = this.node.parent.convertToNodeSpaceAR(worldPos);
+            this.node.position = nodePos.add(this._BindMonsterPos);
+        }
+
+        this.setVelocity(this._BindMonster.getVelocity());
+        
     },
 });

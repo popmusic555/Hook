@@ -11,6 +11,10 @@ cc.Class({
     properties: {
         // 人物对象
         _Player:GO_Base,
+        // ani
+        animation:sp.Skeleton,
+        // 死亡动画
+        deathAni:sp.Skeleton,
         // 最大相对速度
         maxRelativeVelocity:cc.Vec2.ZERO,
         // 最小相对速度
@@ -27,11 +31,6 @@ cc.Class({
         this._Player = Global.Model.MPlayer.getPlayerObj();
         this.randomRelativeVelocity();
         this._IsUpdate = true;
-    },
-
-    static:function () {
-        this._super();
-        this._IsUpdate = false;
     },
 
     update (dt) {
@@ -67,7 +66,22 @@ cc.Class({
         Global.Model.MFly.handleCollision(contact, selfCollider, otherCollider);
     },
 
-    onDeath:function () {
+    onDeath:function (player) {
+        this._IsUpdate = false;
+        this.sleep();
+        this.static();
+        if (player) {
+            this.setVelocityX(player.getVelocityX());
+        }
+        this.showDeathAni();
+    },
 
+    showDeathAni:function () {
+        this.animation.node.active = false;
+        this.deathAni.node.active = true;
+        this.deathAni.animation = "boom_spz";
+        this.deathAni.setCompleteListener(function () {
+            this.node.destroy();
+        }.bind(this));  
     },
 });

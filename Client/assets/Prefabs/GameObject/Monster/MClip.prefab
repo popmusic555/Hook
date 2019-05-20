@@ -12,7 +12,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "MClip",
+    "_name": "MClip1",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -62,7 +62,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 768,
+      "x": 1015,
       "y": 150,
       "z": 0
     },
@@ -176,7 +176,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "1fsrMu1YhML5nOquWrMsQr"
+    "_id": "74aj/M2DJKupZz6ovaYcnV"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -336,7 +336,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "d7No25dC9GG5iza4Ml89dd"
+    "_id": "9aj18ANSpEOLCp54eD8tQA"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -444,7 +444,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "echz+srZtOs6X53FnJmqjS"
+    "_id": "93BWk3zWJGRqJ96BFjjkvG"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -479,7 +479,7 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "30VMGbCBhJXomHIx/UTGWr"
+    "_id": "8cNi0VB45LmKElr304pK11"
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -501,7 +501,7 @@
       "y": 0
     },
     "_radius": 55,
-    "_id": "c6i6JlG+BGh5XZGVeYE/yz"
+    "_id": "3f0Vkdz3dDQpT5QSsecDKg"
   },
   {
     "__type__": "38691fgrCVD8rwn7RSqK4oT",
@@ -517,6 +517,12 @@
     "type": 9,
     "_IsSleep": false,
     "_Player": null,
+    "animation": {
+      "__id__": 7
+    },
+    "deathAni": {
+      "__id__": 11
+    },
     "maxRelativeVelocity": {
       "__type__": "cc.Vec2",
       "x": 1500,
@@ -532,7 +538,9 @@
       "x": 0,
       "y": 0
     },
-    "_id": "68ZaNH4q9LvbegAlzg0vRX"
+    "_IsUpdate": false,
+    "_IsBind": false,
+    "_id": "c8lAm4ryNHv4CA2tNF8tzN"
   },
   {
     "__type__": "cc.PrefabInfo",

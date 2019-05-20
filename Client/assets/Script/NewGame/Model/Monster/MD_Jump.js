@@ -31,6 +31,20 @@ MJump.init = function () {
     this.attr.cost = 0;
     // 携带金币
     this.attr.coins = 0;
+    // 携带能量
+    this.attr.energy = 0;
+    // 结束乘坐时反弹高度
+    this.attr.endRideBounce = 200;
+    // 结束乘坐时加速度
+    this.attr.endRideAccelerate = 0;
+    // 触地反弹高度
+    this.attr.floorBounce = 400;
+    // 触地加速度
+    this.attr.floorAccelerate = 0;
+    // 使用技能时反弹高度
+    this.attr.skillBounce = 100;
+    // 使用技能时加速度
+    this.attr.skillAccelerate = 0;
 };
 
 /**
@@ -75,6 +89,24 @@ MJump.handleCollision = function (contact , selfCollider , otherCollider) {
 MJump.collisionFloor = function (contact , monsterCollider , floorCollider) {
     var monster = monsterCollider.node.getComponent(Global.GameObj.GBase);
     var floor = floorCollider.node.getComponent(Global.GameObj.GBase);
+
+    var Calculator = Global.Common.Utils.Calculator;
+    var selfAttr = this.getAttr();
+    var velocity = monster.getVelocity();
+    var velocityX = velocity.x;
+    var velocityY = velocity.y;
+
+    // 处理Y轴速度 (弹性、反弹力处理)
+    velocityY = Calculator.processVelocityY(velocityY , 0 , selfAttr.floorBounce , 0 , 0);
+    // 限定Y速度 (限定速度区间)
+    velocityY = this.limitVelocityY(velocityY);
+    // 处理X轴速度 (加速力处理)
+    velocityX = Calculator.processVelocityX(velocityX , 0 , 0);
+    // 限定X速度 (限定速度区间)
+    velocityX = this.limitVelocityX(velocityX);
+    var newVelocity = cc.v2(velocityX , velocityY);
+    // 玩家对象设置新速度
+    monster.setVelocity(newVelocity);
 };
 
 /**
@@ -98,7 +130,7 @@ MJump.collisionWall = function (contact , monsterCollider , wallCollider) {
             break;
         case 2:
             // 墙体2
-            monster.static();
+            monster.onDeath();
             break;
         case 3:
             // 墙体3

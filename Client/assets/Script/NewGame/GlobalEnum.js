@@ -30,12 +30,14 @@ GlobalEnum.TYPE = new cc.Enum({
     ROCKET:11,
     // 弹跳机
     JUMP:12,
+    // 弹跳机拳头
+    JUMP_FIST:13,
     // 油桶
-    OIL:13,
+    OIL:14,
     // 飞机
-    PLANE:14,
+    PLANE:15,
     // 汽车
-    CAR:15,
+    CAR:16,
 });
 
 GlobalEnum.P_ANI_STATE = new cc.Enum({
