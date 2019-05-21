@@ -6,7 +6,7 @@
     "accelerate": 0,
     "getCoins": 1,
     "offlineReward": 2,
-    "energyLimit": 10
+    "energyLimit": 30
   },
   {
     "passid": 1,
@@ -15,7 +15,7 @@
     "accelerate": 0,
     "getCoins": 1,
     "offlineReward": 2,
-    "energyLimit": 10
+    "energyLimit": 30
   },
   {
     "passid": 2,
@@ -24,7 +24,7 @@
     "accelerate": 0,
     "getCoins": 1,
     "offlineReward": 2,
-    "energyLimit": 10
+    "energyLimit": 30
   },
   {
     "passid": 3,
@@ -33,7 +33,7 @@
     "accelerate": 0,
     "getCoins": 1,
     "offlineReward": 2,
-    "energyLimit": 10
+    "energyLimit": 30
   },
   {
     "passid": 4,
@@ -42,6 +42,6 @@
     "accelerate": 0,
     "getCoins": 1,
     "offlineReward": 2,
-    "energyLimit": 10
+    "energyLimit": 30
   }
 ]

@@ -142,4 +142,13 @@ MCoins.limitVelocityY = function (y) {
     return y;
 }
 
+/**
+ * 根据关卡更新PassID
+ * 
+ * @param {any} passID 关卡ID
+ */
+MCoins.updateByPass = function (passID) {
+    console.log("MCoins UpdateByPass " , passID);
+};
+
 module.exports = MCoins;

@@ -3,9 +3,9 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        speedLabel:cc.Label,
+        lotteryLabel:cc.Label,
         // 速度
-        speed:0,
+        num:0,
     },
 
     // onLoad () {},
@@ -15,7 +15,7 @@ cc.Class({
     },
 
     update (dt) {
-        this.setSpeed(Global.Model.MPlayer.getSpeedPower());
+        this.setLotteryNum(Global.Model.Game.lottery);
     },
 
     /**
@@ -23,8 +23,8 @@ cc.Class({
      * 
      * @param {any} num 速度值
      */
-    setSpeed:function (num) {
-        this.speed = num;
-        this.speedLabel.string = num;
+    setLotteryNum:function (num) {
+        this.num = num;
+        this.lotteryLabel.string = num;
     },
 });

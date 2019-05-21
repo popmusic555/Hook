@@ -1,7 +1,7 @@
 [
   {
     "passid": 0,
-    "crossSpeed": 200,
+    "crossSpeed": 20000,
     "accelerate": 0,
     "cost": 100,
     "carryCoins": 0,

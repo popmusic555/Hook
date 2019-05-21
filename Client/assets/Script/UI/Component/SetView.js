@@ -5,13 +5,17 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-
+        _ResumeNode:null,
     },
 
     // onLoad () {},
 
     start () {
 
+    },
+
+    setResumeNode:function (nodes) {
+        this._ResumeNode = nodes;
     },
 
     // update (dt) {},
@@ -21,19 +25,14 @@ cc.Class({
         var manager = cc.director.getPhysicsManager();
         manager.enabled = true;  
 
-        var components = GameCommon.GAME_VIEW.node.getComponentsInChildren(sp.Skeleton);
+        var components = Global.Model.Game.getGameView().getComponentsInChildren(sp.Skeleton);
         var len = components.length;
         for (let index = 0; index < len; index++) {
             var item = components[index];
             item.timeScale = 1;
         }
 
-        components = GameCommon.GAME_VIEW.node.getComponentsInChildren("MPlayer");
-        var len = components.length;
-        for (let index = 0; index < len; index++) {
-            var item = components[index];
-            item.resume();
-        }
+        cc.director.getActionManager().resumeTargets(this._ResumeNode);
     },
 
     onBackBtn:function () {

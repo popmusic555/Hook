@@ -31,6 +31,8 @@ MFlyBoom.init = function () {
     this.attr.cost = 0;
     // 携带金币
     this.attr.coins = 0;
+    // 携带能量
+    this.attr.energy = 0;
 };
 
 /**
@@ -139,5 +141,14 @@ MFlyBoom.limitVelocityY = function (y) {
     y = Math.min(y , this.getAttr().maxVelocity.y);
     return y;
 }
+
+/**
+ * 根据关卡更新PassID
+ * 
+ * @param {any} passID 关卡ID
+ */
+MFlyBoom.updateByPass = function (passID) {
+    console.log("MFlyBoom UpdateByPass " , passID);
+};
 
 module.exports = MFlyBoom;

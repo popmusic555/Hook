@@ -52,6 +52,15 @@ MWall.init = function () {
     this.config = null;
 };
 
+/**
+ * 获取用户属性
+ * 
+ * @returns 用户属性
+ */
+MWall.getAttr = function () {
+    return this.attr;
+};
+
 MWall.setConfig = function (config) {
     this.config = config;
 };
@@ -98,9 +107,22 @@ MWall.getPassID = function () {
 MWall.setPassID = function (passid) {
     this.gamedata.pass = passid;
     // 更新关卡ID
-    Global.Model.MPlayer.updateByPass(passid);
-    Global.Model.MFloor.updateByPass(passid);
     Global.Model.MWall.updateByPass(passid);
+    Global.Model.MFloor.updateByPass(passid);
+    Global.Model.MPlayer.updateByPass(passid);
+    // 更新关卡ID
+    Global.Model.MNormal.updateByPass(passid);
+    Global.Model.MClip.updateByPass(passid);
+    Global.Model.MFly.updateByPass(passid);
+    Global.Model.MCoins.updateByPass(passid);
+    Global.Model.MFlyCoins.updateByPass(passid);
+    Global.Model.MBoom.updateByPass(passid);
+    Global.Model.MFlyBoom.updateByPass(passid);
+    Global.Model.MEnergy.updateByPass(passid);
+    Global.Model.MRocket.updateByPass(passid);
+    Global.Model.MJump.updateByPass(passid);
+    Global.Model.MPlane.updateByPass(passid);
+    Global.Model.MCar.updateByPass(passid);
 }
 
 /**

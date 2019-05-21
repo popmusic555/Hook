@@ -146,4 +146,13 @@ MRocket.limitVelocityY = function (y) {
     return y;
 }
 
+/**
+ * 根据关卡更新PassID
+ * 
+ * @param {any} passID 关卡ID
+ */
+MRocket.updateByPass = function (passID) {
+    console.log("MRocket UpdateByPass " , passID);
+};
+
 module.exports = MRocket;

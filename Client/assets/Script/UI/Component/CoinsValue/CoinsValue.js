@@ -11,22 +11,15 @@ cc.Class({
     // onLoad () {},
 
     start () {
-        this.setCoins(this.coins);
+        
     },
 
-    // update (dt) {},
+    update (dt) {
+        this.setCoins(Global.Model.MPlayer.getRewardsCoins());
+    },
 
     setCoins:function (num) {
         this.coins = num;
         this.coinsLabel.string = this.coins;
     },
-
-    addCoins:function (num) {
-        this.coins += num;
-        this.setCoins(this.coins);
-    },
-
-    getCoins:function () {
-        return this.coins;
-    }
 });

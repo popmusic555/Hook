@@ -70,8 +70,8 @@ cc.Class({
     },
 
     update (dt) {
-        if (this.state == GlobalEnum.P_STATE.TRANSFORM) {
-            return;
+        if (this.node.x >= 0) {
+            Global.Model.MPlayer.setMileage(this.node.x + 812);    
         }
 
         var velocityX = this.getVelocity().x;
@@ -143,13 +143,14 @@ cc.Class({
     },
 
     launchingForSpeed:function (speed) {
-        // 大炮动画
-        this.artillery.launching(function () {
+        // 大炮
+        this.artillery.launching(speed , function (velocityX , velocityY) {
+            console.log("发射速度" , velocityX , velocityY)
             this.animation.transState(GlobalEnum.P_ANI_STATE.LAUNCH);
             var vCamera = cc.Camera.main.getComponent("VCamera");
             vCamera.targetFollow = this.node;
             vCamera.anchorPos.x = -(cc.view.getVisibleSize().width / 2 - 250);
-            this.launching(cc.v2(speed , speed));
+            this.launching(cc.v2(velocityX , velocityY));
             this.node.parent.getChildByName("Monster").getComponent("VMonster").launching();
         }.bind(this));
     },  
@@ -395,8 +396,12 @@ cc.Class({
      * 
      */
     castSkill:function () {
+        if (!Global.Model.MPlayer.isEnoughEnergy(Global.Common.Const.ENERGY_RATIO)) {
+            return;
+        }
         this.setVelocityY(-2000);
         this.animation.transStateAndLock(GlobalEnum.P_ANI_STATE.SKILL);
+        Global.Model.MPlayer.reduceEnergy(Global.Common.Const.ENERGY_RATIO);
     },
     /**
      * 震屏

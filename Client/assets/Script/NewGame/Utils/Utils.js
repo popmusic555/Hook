@@ -64,7 +64,7 @@ var Converter = {};
  * @param {any} num 实际的距离
  */
 Converter.toMileage = function (num) {
-    return num / Global.Common.Const.MILEAGE_RATIO;
+    return Math.floor(num / Global.Common.Const.MILEAGE_RATIO);
 };
 /**
  * 速度转换
@@ -72,7 +72,7 @@ Converter.toMileage = function (num) {
  * @param {any} num 实际的速度
  */
 Converter.toSpeedPower = function (num) {
-    return num / Global.Common.Const.VELOCITY_RATIO;
+    return Math.floor(num / Global.Common.Const.VELOCITY_RATIO);
 };
 
 /**

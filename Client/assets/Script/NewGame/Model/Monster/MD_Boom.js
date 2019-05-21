@@ -28,9 +28,11 @@ MBoom.init = function () {
     // 加速力
     this.attr.acceleratePower = 0;
     // 价值
-    this.attr.cost = 0;
+    this.attr.cost = 1000;
     // 携带金币
     this.attr.coins = 0;
+    // 携带能量
+    this.attr.energy = 0;
 };
 
 /**
@@ -139,5 +141,14 @@ MBoom.limitVelocityY = function (y) {
     y = Math.min(y , this.getAttr().maxVelocity.y);
     return y;
 }
+
+/**
+ * 根据关卡更新PassID
+ * 
+ * @param {any} passID 关卡ID
+ */
+MBoom.updateByPass = function (passID) {
+    console.log("MBoom UpdateByPass " , passID);
+};
 
 module.exports = MBoom;

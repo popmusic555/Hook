@@ -152,4 +152,13 @@ MCar.limitVelocityY = function (y) {
     return y;
 }
 
+/**
+ * 根据关卡更新PassID
+ * 
+ * @param {any} passID 关卡ID
+ */
+MCar.updateByPass = function (passID) {
+    console.log("MCar UpdateByPass " , passID);
+};
+
 module.exports = MCar;

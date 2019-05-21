@@ -37,10 +37,11 @@ cc.Class({
     },
 
     start () {
+        Global.Model.Game.setGameView(this);
+        
         Global.Model.MPlayer.setConfig(this.playerConfig.json);
         Global.Model.MFloor.setConfig(this.floorConfig.json);
         Global.Model.MWall.setConfig(this.wallConfig.json);
-
         Global.Model.MWall.setPassID(0);
     },
 

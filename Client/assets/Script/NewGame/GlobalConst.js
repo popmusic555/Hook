@@ -9,7 +9,7 @@ GlobalConst.MILEAGE_RATIO = 30;
 // 能量比率
 GlobalConst.ENERGY_RATIO = 10;
 // 速度比率
-GlobalConst.VELOCITY_RATIO = 1;
+GlobalConst.VELOCITY_RATIO = 30;
 
 
 // 游戏结束速度

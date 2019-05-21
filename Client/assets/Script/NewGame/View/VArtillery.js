@@ -1,11 +1,19 @@
+
+var LaunchPower = require("LaunchPower");
+
 cc.Class({
     extends: cc.Component,
 
     properties: {
         spAni:sp.Skeleton,
         effectSomke:sp.Skeleton,
+        launchPower:LaunchPower,
 
         _LaunchingCallback:null,
+        // 发射力量进度
+        _Power:0,
+        // 发射速度
+        _LaunchSpeed:0,
     },
 
     // onLoad () {},
@@ -25,7 +33,11 @@ cc.Class({
         }
     },
 
-    launching:function (callback) {
+    launching:function (speed , callback) {
+        this.launchPower.close(); 
+        this._Power = this.launchPower.getPower();
+        this._LaunchSpeed = speed * this._Power;
+
         this.spAni.loop = false;
         this.spAni.animation = "fashe";  
         this._LaunchingCallback = callback;
@@ -34,7 +46,7 @@ cc.Class({
     onLaunching:function (trackEntry , event) {
         if (event.data.name == "yanwu") {
             this.effectSomke.node.active = true;     
-            this._LaunchingCallback();
+            this._LaunchingCallback(this._LaunchSpeed , this._LaunchSpeed);
         }
     },
 });

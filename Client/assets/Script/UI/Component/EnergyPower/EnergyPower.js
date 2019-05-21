@@ -22,15 +22,20 @@ cc.Class({
     // onLoad () {},
 
     start () {
-        var num = PlayerConfig.getDataByLevel(DataManager.Userdata.getLevelByIndex(2)).energyLimit;
-        this.setEnergyLimit(num);
+        var energyLimit = Global.Model.MPlayer.getAttr().energyLimit;
+        this.setEnergyLimit(energyLimit);
         this.initScale();
-        this.setEnergy(num);
+        Global.Model.MPlayer.addEnergy(energyLimit);
+        this.setEnergy(Global.Model.MPlayer.getEnergy());
+    },
+
+    update(dt) {
+        this.setEnergy(Global.Model.MPlayer.getEnergy());
     },
 
     // 初始化刻度
     initScale:function () {
-        var scaleNum = this._EnergyLimit / 10;
+        var scaleNum = this._EnergyLimit / Global.Common.Const.ENERGY_RATIO;
         for (let index = 0; index < scaleNum - 1; index++) {
             var node = new cc.Node();
             node.name = "Scale";
@@ -50,32 +55,7 @@ cc.Class({
         }
         this.curEnergy = num;
         this.energySlot1.progress = this.curEnergy / this._EnergyLimit;
-        this.energySlot2.progress = Math.floor(this.curEnergy / 10) / (this._EnergyLimit / 10);
-    },
-
-    // 增加1点能量值
-    addEnergyForOne:function () {
-        this.setEnergy(this.curEnergy + 1);
-    },
-
-    // 减少1点能量值
-    reduceEnergyForOne:function () {
-        this.setEnergy(this.curEnergy - 1);  
-    },
-
-    // 增加10点能量值
-    addEnergyForTen:function () {
-        this.setEnergy(this.curEnergy + 10);
-    },
-
-    // 减少1点能量值
-    reduceEnergyForTen:function () {
-        this.setEnergy(this.curEnergy - 10);  
-    },
-
-    // 能量是否足够
-    isEnoughEnergy:function () {
-        return this.curEnergy >= 10;
+        this.energySlot2.progress = Math.floor(this.curEnergy / Global.Common.Const.ENERGY_RATIO) / (this._EnergyLimit / Global.Common.Const.ENERGY_RATIO);
     },
 
     // 设置能量值上限

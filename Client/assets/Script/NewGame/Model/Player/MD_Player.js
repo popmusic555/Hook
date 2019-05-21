@@ -31,7 +31,7 @@ MPlayer.init = function () {
     this.attr.launchingVelocity = cc.Vec2.ZERO;
     this.attr.coinsRadio = 0;
     // 能量上限
-    this.attr.energyLimit = 0;
+    this.attr.energyLimit = 20;
     // 离线奖励
     this.attr.offlineRewards = 0;
     // 冲击速度
@@ -138,7 +138,10 @@ MPlayer.getMileage = function () {
  * @param {any} num 实际速度
  */
 MPlayer.setMileage = function (num) {
-    var mileage = Global.Common.Utils.toMileage(num);
+    if (num < 0) {
+        num = 0;
+    }
+    var mileage = Global.Common.Utils.Converter.toMileage(num);
     this.gamedata.mileage = mileage;
 };
 
@@ -161,6 +164,39 @@ MPlayer.addRewardCoins = function (num) {
 };
 
 /**
+ * 增加能量
+ * 
+ * @param {any} num 
+ */
+MPlayer.addEnergy = function (num) {
+    var energy = this.gamedata.energy + num;
+    this.gamedata.energy = Math.min(energy , this.attr.energyLimit);
+    console.log("addEnergy" , num);
+}
+
+/**
+ * 减少能量
+ * 
+ * @param {any} num 
+ */
+MPlayer.reduceEnergy = function (num) {
+    var energy = this.gamedata.energy - num;
+    this.gamedata.energy = Math.max(energy , 0);
+    console.log("reduceEnergy" , num);
+}
+/**
+ * 能量是否足够
+ * 
+ * @param {any} num 
+ */
+MPlayer.isEnoughEnergy = function (num) {
+    if (this.gamedata.energy >= num) {
+        return true;
+    }
+    return false;
+}
+
+/**
  * 获取能量
  * 
  */
@@ -169,13 +205,12 @@ MPlayer.getEnergy = function () {
 };
 
 /**
- * 增加能量
+ * 获取速度计
  * 
- * @param {any} num 
  */
-MPlayer.addEnergy = function (num) {
-    this.gamedata.energy += num;
-}
+MPlayer.getSpeedPower = function () {
+    return Global.Common.Utils.Converter.toSpeedPower(this.getPlayerObj().getVelocity().x);
+};
 
 MPlayer.setPlayerObj = function (playerObj) {
     this.gamedata.playerObj = playerObj;
@@ -382,7 +417,6 @@ MPlayer.collisionWall = function (contact , playerCollider , wallCollider) {
                     } , 0);
                 }    
             }
-            
             break;
         case 3:
             // 墙体3
@@ -395,6 +429,10 @@ MPlayer.collisionWall = function (contact , playerCollider , wallCollider) {
             wall.setHoleWithWorldPosY(y);
             wall.showHole();
             player.showHoleAni();
+
+            // 获取奖励
+            var attr = Global.Model.MWall.getAttr();
+            MPlayer.addReward(attr.cost , attr.coins , attr.energy);
             break;
         default:
             break;
@@ -679,6 +717,8 @@ MPlayer.triggerNormal = function (contact , player , normal , attr) {
             
             // 怪物死亡
             normal.onDeath(player);
+            // 获取奖励
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.ROCKET:
             selfAttr = Global.Model.MRocket.getAttr();
@@ -687,16 +727,22 @@ MPlayer.triggerNormal = function (contact , player , normal , attr) {
             selfAttr = Global.Model.MJump.getAttr();
             // 怪物死亡
             normal.onDeath(player);
+            // 获取奖励
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.PLANE:
             selfAttr = Global.Model.MPlane.getAttr();
             // 怪物死亡
             normal.onDeath(player);
+            // 获取奖励
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.CAR:
             selfAttr = Global.Model.MCar.getAttr();
             // 怪物死亡
             normal.onDeath(player);
+            // 获取奖励
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.PLAYER:
             selfAttr = Global.Model.MPlayer.getAttr();
@@ -722,6 +768,8 @@ MPlayer.triggerNormal = function (contact , player , normal , attr) {
                 player.onAttack();
                 // 怪物死亡
                 normal.onDeath(player);
+                // 获取奖励
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             }
             break;
     }
@@ -757,31 +805,43 @@ MPlayer.triggerFly = function (contact , player , fly , attr) {
 
             // 怪物死亡
             fly.onDeath(player);
+            // 获取奖励
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.ROCKET:
             selfAttr = Global.Model.MRocket.getAttr();
             // 怪物死亡
             fly.onDeath(player);
+            // 获取奖励
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.JUMP:
             selfAttr = Global.Model.MJump.getAttr();
             // 怪物死亡
             fly.onDeath(player);
+            // 获取奖励
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.PLANE:
             selfAttr = Global.Model.MPlane.getAttr();
             // 怪物死亡
             fly.onDeath(player);
+            // 获取奖励
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.CAR:
             selfAttr = Global.Model.MCar.getAttr();
             // 怪物死亡
             fly.onDeath(player);
+            // 获取奖励
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.PLAYER:
             selfAttr = Global.Model.MPlayer.getAttr();
             if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
                 fly.onDeath(player);
+                // 获取奖励
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             }
             else
             {   
@@ -800,7 +860,9 @@ MPlayer.triggerFly = function (contact , player , fly , attr) {
 
                 player.onAttack();
                 // 怪物死亡
-                fly.onDeath(player);    
+                fly.onDeath(player);  
+                // 获取奖励
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy); 
             }
             break;
     }
@@ -836,6 +898,7 @@ MPlayer.triggerBoom = function (contact , player , boom , attr) {
 
             // 怪物死亡
             boom.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             MPlayer.boom(boom);
             break;
         case Enum.TYPE.ROCKET:
@@ -852,6 +915,7 @@ MPlayer.triggerBoom = function (contact , player , boom , attr) {
             player.setVelocity(newVelocity);
             // 怪物死亡
             boom.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             MPlayer.boom(boom);
             break;
         case Enum.TYPE.PLANE:
@@ -865,6 +929,7 @@ MPlayer.triggerBoom = function (contact , player , boom , attr) {
             player.setVelocity(newVelocity);
             // 怪物死亡
             boom.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             MPlayer.boom(boom);
             break;
         case Enum.TYPE.CAR:
@@ -878,6 +943,7 @@ MPlayer.triggerBoom = function (contact , player , boom , attr) {
             player.setVelocity(newVelocity);
             // 怪物死亡
             boom.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             MPlayer.boom(boom);
             break;
         case Enum.TYPE.PLAYER:
@@ -904,6 +970,7 @@ MPlayer.triggerBoom = function (contact , player , boom , attr) {
                 player.onAttack();
                 // 怪物死亡
                 boom.onDeath(player);
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
                 MPlayer.boom(boom);
             }
             break;
@@ -940,6 +1007,7 @@ MPlayer.triggerFlyBoom = function (contact , player , flyboom , attr) {
 
             // 怪物死亡
             flyboom.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             MPlayer.boom(flyboom);
             break;
         case Enum.TYPE.ROCKET:
@@ -955,6 +1023,7 @@ MPlayer.triggerFlyBoom = function (contact , player , flyboom , attr) {
 
             // 怪物死亡
             flyboom.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             MPlayer.boom(flyboom);
             break;
         case Enum.TYPE.JUMP:
@@ -970,6 +1039,7 @@ MPlayer.triggerFlyBoom = function (contact , player , flyboom , attr) {
 
             // 怪物死亡
             flyboom.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             MPlayer.boom(flyboom);
             break;
         case Enum.TYPE.PLANE:
@@ -985,6 +1055,7 @@ MPlayer.triggerFlyBoom = function (contact , player , flyboom , attr) {
 
             // 怪物死亡
             flyboom.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             MPlayer.boom(flyboom);
             break;
         case Enum.TYPE.CAR:
@@ -1000,6 +1071,7 @@ MPlayer.triggerFlyBoom = function (contact , player , flyboom , attr) {
 
             // 怪物死亡
             flyboom.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             MPlayer.boom(flyboom);
             break;
         case Enum.TYPE.PLAYER:
@@ -1014,6 +1086,7 @@ MPlayer.triggerFlyBoom = function (contact , player , flyboom , attr) {
                 player.setVelocity(newVelocity);
 
                 flyboom.onDeath(player);
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
                 MPlayer.boom(flyboom);
             }
             else
@@ -1034,6 +1107,7 @@ MPlayer.triggerFlyBoom = function (contact , player , flyboom , attr) {
                 player.onAttack();
                 // 怪物死亡
                 flyboom.onDeath(player); 
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
                 MPlayer.boom(flyboom);   
             }
             break;
@@ -1071,7 +1145,7 @@ MPlayer.triggerClip = function (contact , player , clip , attr) {
             // 绑定
             this.type = Enum.TYPE.CLIP;
             player.bindMonster(clip);
-
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.ROCKET:
             selfAttr = Global.Model.MRocket.getAttr();
@@ -1080,16 +1154,19 @@ MPlayer.triggerClip = function (contact , player , clip , attr) {
             selfAttr = Global.Model.MJump.getAttr();
             // 怪物死亡
             clip.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.PLANE:
             selfAttr = Global.Model.MPlane.getAttr();
             // 怪物死亡
             clip.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.CAR:
             selfAttr = Global.Model.MCar.getAttr();
             // 怪物死亡
             clip.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.PLAYER:
             selfAttr = Global.Model.MPlayer.getAttr();
@@ -1116,6 +1193,7 @@ MPlayer.triggerClip = function (contact , player , clip , attr) {
                 // 绑定
                 this.type = Enum.TYPE.CLIP;
                 player.bindMonster(clip);
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             }
             break;
     }
@@ -1139,11 +1217,11 @@ MPlayer.triggerRocket = function (contact , player , rocket , attr) {
             selfAttr = Global.Model.MPlayer.getAttr();
 
             // 处理Y轴速度 (弹性、反弹力处理)
-            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , 0 , otherAttr.elastic , otherAttr.bouncePower);
             // 限定Y速度 (限定速度区间)
             velocityY = this.limitVelocityY(velocityY);
             // 处理X轴速度 (加速力处理)
-            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+            velocityX = Calculator.processVelocityX(velocityX , 0 , otherAttr.acceleratePower);
             // 限定X速度 (限定速度区间)
             velocityX = this.limitVelocityX(velocityX);
             var newVelocity = cc.v2(velocityX , velocityY);
@@ -1153,6 +1231,7 @@ MPlayer.triggerRocket = function (contact , player , rocket , attr) {
             // 绑定
             this.type = Enum.TYPE.ROCKET;
             player.bindMonster(rocket);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.JUMP:
             selfAttr = Global.Model.MJump.getAttr();
@@ -1162,22 +1241,25 @@ MPlayer.triggerRocket = function (contact , player , rocket , attr) {
 
             // 怪物死亡
             rocket.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.PLANE:
             selfAttr = Global.Model.MPlane.getAttr();
             // 怪物死亡
             rocket.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.CAR:
             selfAttr = Global.Model.MCar.getAttr();
             // 怪物死亡
             rocket.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.PLAYER:
             selfAttr = Global.Model.MPlayer.getAttr();
             if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
                 // 处理X轴速度 (加速力处理)
-                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+                velocityX = Calculator.processVelocityX(velocityX , 0 , otherAttr.acceleratePower);
                 // 限定X速度 (限定速度区间)
                 velocityX = this.limitVelocityX(velocityX);
                 var newVelocity = cc.v2(velocityX , velocityY);
@@ -1185,17 +1267,18 @@ MPlayer.triggerRocket = function (contact , player , rocket , attr) {
                 player.setVelocity(newVelocity);
 
                 rocket.onDeath(player);
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             }
             else
             {   
                 // 处理Y轴速度 (弹性、反弹力处理)
-                console.log("Rocket反弹力" , selfAttr.bouncePower + otherAttr.bouncePower);
-                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                console.log("Rocket反弹力" , 0 + otherAttr.bouncePower);
+                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , 0 , otherAttr.elastic , otherAttr.bouncePower);
                 // 限定Y速度 (限定速度区间)
                 velocityY = this.limitVelocityY(velocityY);
                 // 非技能、冲击状态下 减速
                 // 处理X轴速度 (加速力处理)
-                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+                velocityX = Calculator.processVelocityX(velocityX , 0 , otherAttr.acceleratePower);
                 // 限定X速度 (限定速度区间)
                 velocityX = this.limitVelocityX(velocityX);
                 var newVelocity = cc.v2(velocityX , velocityY);
@@ -1205,7 +1288,7 @@ MPlayer.triggerRocket = function (contact , player , rocket , attr) {
                 // 绑定
                 this.type = Enum.TYPE.ROCKET;
                 player.bindMonster(rocket);
-
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             }
             break;
     }
@@ -1230,11 +1313,11 @@ MPlayer.triggerJump = function (contact , player , jump , attr) {
             selfAttr = Global.Model.MPlayer.getAttr();
 
             // 处理Y轴速度 (弹性、反弹力处理)
-            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , 0 , otherAttr.elastic , otherAttr.bouncePower);
             // 限定Y速度 (限定速度区间)
             velocityY = this.limitVelocityY(velocityY);
             // 处理X轴速度 (加速力处理)
-            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+            velocityX = Calculator.processVelocityX(velocityX , 0 , otherAttr.acceleratePower);
             // 限定X速度 (限定速度区间)
             velocityX = this.limitVelocityX(velocityX);
             var newVelocity = cc.v2(velocityX , velocityY);
@@ -1244,22 +1327,25 @@ MPlayer.triggerJump = function (contact , player , jump , attr) {
             // 绑定
             this.type = Enum.TYPE.JUMP;
             player.bindMonster(jump);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.PLANE:
             selfAttr = Global.Model.MPlane.getAttr();
             // 怪物死亡
             jump.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.CAR:
             selfAttr = Global.Model.MCar.getAttr();
             // 怪物死亡
             jump.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.PLAYER:
             selfAttr = Global.Model.MPlayer.getAttr();
             if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
                 // 处理X轴速度 (加速力处理)
-                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+                velocityX = Calculator.processVelocityX(velocityX , 0 , otherAttr.acceleratePower);
                 // 限定X速度 (限定速度区间)
                 velocityX = this.limitVelocityX(velocityX);
                 var newVelocity = cc.v2(velocityX , velocityY);
@@ -1267,16 +1353,17 @@ MPlayer.triggerJump = function (contact , player , jump , attr) {
                 player.setVelocity(newVelocity);
 
                 jump.onDeath(player);
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             }
             else
             {   
                 // 处理Y轴速度 (弹性、反弹力处理)
-                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , 0 , otherAttr.elastic , otherAttr.bouncePower);
                 // 限定Y速度 (限定速度区间)
                 velocityY = this.limitVelocityY(velocityY);
                 // 非技能、冲击状态下 减速
                 // 处理X轴速度 (加速力处理)
-                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+                velocityX = Calculator.processVelocityX(velocityX , 0 , otherAttr.acceleratePower);
                 // 限定X速度 (限定速度区间)
                 velocityX = this.limitVelocityX(velocityX);
                 var newVelocity = cc.v2(velocityX , velocityY);
@@ -1286,6 +1373,7 @@ MPlayer.triggerJump = function (contact , player , jump , attr) {
                 // 绑定
                 this.type = Enum.TYPE.JUMP;
                 player.bindMonster(jump);
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             }
             break;
     }
@@ -1311,11 +1399,11 @@ MPlayer.triggerPlane = function (contact , player , plane , attr) {
             selfAttr = Global.Model.MPlayer.getAttr();
 
             // 处理Y轴速度 (弹性、反弹力处理)
-            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , 0 , otherAttr.elastic , otherAttr.bouncePower);
             // 限定Y速度 (限定速度区间)
             velocityY = this.limitVelocityY(velocityY);
             // 处理X轴速度 (加速力处理)
-            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+            velocityX = Calculator.processVelocityX(velocityX , 0 , otherAttr.acceleratePower);
             // 限定X速度 (限定速度区间)
             velocityX = this.limitVelocityX(velocityX);
             var newVelocity = cc.v2(velocityX , velocityY);
@@ -1325,17 +1413,19 @@ MPlayer.triggerPlane = function (contact , player , plane , attr) {
             // 绑定
             this.type = Enum.TYPE.PLANE;
             player.bindMonster(plane);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.CAR:
             selfAttr = Global.Model.MCar.getAttr();
             // 怪物死亡
             plane.onDeath(player);
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.PLAYER:
             selfAttr = Global.Model.MPlayer.getAttr();
             if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
                 // 处理X轴速度 (加速力处理)
-                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+                velocityX = Calculator.processVelocityX(velocityX , 0 , otherAttr.acceleratePower);
                 // 限定X速度 (限定速度区间)
                 velocityX = this.limitVelocityX(velocityX);
                 var newVelocity = cc.v2(velocityX , velocityY);
@@ -1343,16 +1433,17 @@ MPlayer.triggerPlane = function (contact , player , plane , attr) {
                 player.setVelocity(newVelocity);
 
                 plane.onDeath(player);
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             }
             else
             {   
                 // 处理Y轴速度 (弹性、反弹力处理)
-                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , 0 , otherAttr.elastic , otherAttr.bouncePower);
                 // 限定Y速度 (限定速度区间)
                 velocityY = this.limitVelocityY(velocityY);
                 // 非技能、冲击状态下 减速
                 // 处理X轴速度 (加速力处理)
-                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+                velocityX = Calculator.processVelocityX(velocityX , 0 , otherAttr.acceleratePower);
                 // 限定X速度 (限定速度区间)
                 velocityX = this.limitVelocityX(velocityX);
                 var newVelocity = cc.v2(velocityX , velocityY);
@@ -1362,6 +1453,7 @@ MPlayer.triggerPlane = function (contact , player , plane , attr) {
                 // 绑定
                 this.type = Enum.TYPE.PLANE;
                 player.bindMonster(plane);
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             }
             break;
     }
@@ -1411,11 +1503,11 @@ MPlayer.triggerCar = function (contact , player , car , attr) {
 
             selfAttr = Global.Model.MPlayer.getAttr();
             // 处理Y轴速度 (弹性、反弹力处理)
-            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+            velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , 0 , otherAttr.elastic , otherAttr.bouncePower);
             // 限定Y速度 (限定速度区间)
             velocityY = this.limitVelocityY(velocityY);
             // 处理X轴速度 (加速力处理)
-            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+            velocityX = Calculator.processVelocityX(velocityX , 0 , otherAttr.acceleratePower);
             // 限定X速度 (限定速度区间)
             velocityX = this.limitVelocityX(velocityX);
             var newVelocity = cc.v2(velocityX , velocityY);
@@ -1424,12 +1516,13 @@ MPlayer.triggerCar = function (contact , player , car , attr) {
             // 绑定
             this.type = Enum.TYPE.CAR;
             player.bindMonster(car , cc.v2(100 , 50));
+            MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             break;
         case Enum.TYPE.PLAYER:
             selfAttr = Global.Model.MPlayer.getAttr();
             if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
                 // 处理X轴速度 (加速力处理)
-                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower);
+                velocityX = Calculator.processVelocityX(velocityX , 0 , otherAttr.acceleratePower);
                 // 限定X速度 (限定速度区间)
                 velocityX = this.limitVelocityX(velocityX);
                 var newVelocity = cc.v2(velocityX , velocityY);
@@ -1437,16 +1530,17 @@ MPlayer.triggerCar = function (contact , player , car , attr) {
                 player.setVelocity(newVelocity);
 
                 car.onDeath(player);
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             }
             else
             {   
                 // 处理Y轴速度 (弹性、反弹力处理)
-                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
+                velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , 0 , otherAttr.elastic , otherAttr.bouncePower);
                 // 限定Y速度 (限定速度区间)
                 velocityY = this.limitVelocityY(velocityY);
                 // 非技能、冲击状态下 减速
                 // 处理X轴速度 (加速力处理)
-                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+                velocityX = Calculator.processVelocityX(velocityX , 0 , otherAttr.acceleratePower);
                 // 限定X速度 (限定速度区间)
                 velocityX = this.limitVelocityX(velocityX);
                 var newVelocity = cc.v2(velocityX , velocityY);
@@ -1455,6 +1549,7 @@ MPlayer.triggerCar = function (contact , player , car , attr) {
                 // 绑定
                 this.type = Enum.TYPE.CAR;
                 player.bindMonster(car , cc.v2(100 , 50));
+                MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             }
             break;
     }
@@ -1621,6 +1716,7 @@ MPlayer.triggerFloor = function (contact , player , floor , attr) {
                     // 当前游戏结束
                     console.log("当前游戏结束");
                     player.static();
+                    Global.Model.Game.showSettlementView();
                 }
                 else
                 {
@@ -1639,16 +1735,36 @@ MPlayer.onTouched = function () {
     }
     this.gamedata.playerObj.onTouched();
 }
-
+/**
+ * 增加金币
+ * 
+ * @param {any} num 
+ */
 MPlayer.addCoins = function (num) {
     this.addRewardCoins(num);
     // 展示UI动画
+    console.log("addCoins" , num);
 }
 
+/**
+ * 增加携带金币
+ * 
+ * @param {any} num 
+ */
 MPlayer.addCarryCoins = function (num) {
     this.addRewardCoins(num);
     // 展示UI动画
+    console.log("addCarryCoins" , num);
 }
+
+MPlayer.addReward = function (cost , coins , energy) {
+    // 增加金币
+    this.addCoins(cost);
+    // 增加携带的金币
+    this.addCarryCoins(coins);
+    // 增加能量
+    this.addEnergy(energy);  
+},
 
 /**
  * 爆炸摧毁范围内怪物
@@ -1665,6 +1781,47 @@ MPlayer.boom = function (boom) {
         var monster = monsters[index];
         if (!monster.isSleep() && !monster._IsBind) {
             monster.onDeath(this.getPlayerObj());
+            var attr = null;
+            switch (monster.getType()) {
+                case Enum.TYPE.NORMAL:
+                    attr = Global.Model.MNormal.getAttr()
+                    break;
+                case Enum.TYPE.NORMAL_FLY:
+                    attr = Global.Model.MFly.getAttr()
+                    break;
+                case Enum.TYPE.COINS:
+                    attr = Global.Model.MCoins.getAttr()
+                    break;
+                case Enum.TYPE.COINS_FLY:
+                    attr = Global.Model.MFlyCoins.getAttr()
+                    break;
+                case Enum.TYPE.BOOM:
+                    attr = Global.Model.MBoom.getAttr()
+                    break;
+                case Enum.TYPE.BOOM_FLY:
+                    attr = Global.Model.MFlyBoom.getAttr()
+                    break;
+                case Enum.TYPE.ENERGY:
+                    attr = Global.Model.MEnergy.getAttr()
+                    break;
+                case Enum.TYPE.CLIP:
+                    attr = Global.Model.MClip.getAttr()
+                    break;
+                case Enum.TYPE.ROCKET:
+                    attr = Global.Model.MRocket.getAttr()
+                    break;
+                case Enum.TYPE.JUMP:
+                    attr = Global.Model.MJump.getAttr()
+                    break;
+                case Enum.TYPE.PLANE:
+                    attr = Global.Model.MPlane.getAttr()
+                    break;
+                case Enum.TYPE.CAR:
+                    attr = Global.Model.MCar.getAttr()
+                    break;
+            }
+            // 获取奖励
+            MPlayer.addReward(attr.cost , attr.coins , attr.energy);
         }
     }
 }
@@ -1684,13 +1841,16 @@ MPlayer.quake = function (player) {
     for (let index = 0; index < len; index++) {
         var monster = monsters[index];
         if (!monster.isSleep() && !monster._IsBind) {
+            var attr = null;
             switch (monster.getType()) {
                 case Enum.TYPE.NORMAL:
                     monster.onDeath(player);
+                    attr = Global.Model.MNormal.getAttr();
                     isShowBigBoomAni = true;
                     break;
                 case Enum.TYPE.COINS:
                     monster.onDeath(player);
+                    attr = Global.Model.MCoins.getAttr();
                     isShowBigBoomAni = true;
                     break;
                 case Enum.TYPE.BOOM:
@@ -1715,13 +1875,17 @@ MPlayer.quake = function (player) {
                     player.setVelocity(newVelocity);
 
                     monster.onDeath(player);
+                    attr = otherAttr;
                     isShowBigBoomAni = true;
                     break;
                 case Enum.TYPE.CLIP:
                     monster.onDeath(player);
+                    attr = Global.Model.MClip.getAttr();
                     isShowBigBoomAni = true;
                     break;
             }
+            // 获取奖励
+            MPlayer.addReward(attr.cost , attr.coins , attr.energy);
         }
     }
 

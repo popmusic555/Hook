@@ -16,6 +16,8 @@ Global.Common.Enum = require("GlobalEnum");
 // 工具类
 Global.Common.Utils = require("Utils");
 
+// 游戏数据模型
+Global.Model.Game = require("MD_Game");
 // 用户数据模型
 Global.Model.MPlayer = require("MD_Player");
 // 地板数据模型
@@ -43,6 +45,7 @@ Global.GameObj.GBase = require("GO_Base");
 Global.GameObj.GPlayer = require("GO_Player");
 
 
+Global.Model.Game.init();
 Global.Model.MPlayer.init();
 Global.Model.MFloor.init();
 Global.Model.MWall.init();

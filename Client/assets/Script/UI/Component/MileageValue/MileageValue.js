@@ -23,8 +23,13 @@ cc.Class({
     // onLoad () {},
 
     start () {
-        this.setMaxMileage(DataManager.Userdata.getPassMileage(DataManager.Userdata.getMaxPassID()));
-        this.setBestMileage(DataManager.Userdata.getMaxMileage());
+        var wallPosX = Global.Model.MWall.getPosXByPassID(Global.Model.Game.maxPass);
+        this.setMaxMileage(Global.Common.Utils.Converter.toMileage(wallPosX));
+        this.setBestMileage(Global.Model.Game.mileage);
+    },
+
+    update(dt) {
+        this.setCurMileage(Global.Model.MPlayer.getMileage());
     },
 
     // 设置最大里程数

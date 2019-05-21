@@ -150,4 +150,14 @@ MPlane.limitVelocityY = function (y) {
     return y;
 }
 
+/**
+ * 根据关卡更新PassID
+ * 
+ * @param {any} passID 关卡ID
+ */
+MPlane.updateByPass = function (passID) {
+    console.log("MPlane UpdateByPass " , passID);
+};
+
+
 module.exports = MPlane;
