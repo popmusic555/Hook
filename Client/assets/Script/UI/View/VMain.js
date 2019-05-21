@@ -1,9 +1,4 @@
 
-var MonsterConfig = require("MonsterConfig");
-var PlayerConfig = require("PlayerConfig");
-var PassConfig = require("PassConfig");
-var LevelUpConfig = require("LevelUpConfig");
-var DataManager = require("DataManager");
 var Level = require("Level");
 var ContentIcon = require("ContentIcon");
 
@@ -15,11 +10,13 @@ cc.Class({
             type:cc.AudioClip,
             default:null,
         },
-        
-        playerConfig:cc.JsonAsset,
-        monsterConfig:[cc.JsonAsset],
-        passConfig:cc.JsonAsset,
-        levelUpConfig:cc.JsonAsset,
+
+        // 升级项描述表
+        levelUpDesc:cc.JsonAsset,
+        _LevelUpDescObj:null,
+        // 升级项消耗表
+        levelUpConsume:cc.JsonAsset,
+        _LevelUpConsumeObj:null,
 
         // tab按钮
         tabBtn:[cc.Button],
@@ -42,49 +39,21 @@ cc.Class({
     start () {
         cc.audioEngine.playMusic(this.bgm, true);
 
-        // 初始化配置表
-        this.initPlayerConfig();
-        this.initMonsterConfig();
-        this.initPassConfig();
-        this.initLevelUpConfig();
-        // 初始化用户数据
-        this.initUserData();
+        this._LevelUpDescObj = this.levelUpDesc.json;
+        this._LevelUpConsumeObj = this.levelUpConsume.json;
+        Global.Model.MPlayer.initLevels([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
 
         // 切换到页签1
         this.switchTab({target:this.tabBtn[0].node} , 0);
-        // 切换到选项1
-        this.switchLevelUpItem({target:this.defaultSelect.node} , 0);
     },
 
     // update (dt) {},
-
-    initMonsterConfig:function () {
-        // console.log("length" , this.monsterConfig.length);
-        for (let index = 0; index < this.monsterConfig.length; index++) {
-            const cfg = this.monsterConfig[index];
-            // console.log(cfg.name , cfg.json);
-            MonsterConfig.init(cfg.name , cfg.json);
-        }
-    },
-
-    initPlayerConfig:function (cfg) {
-        PlayerConfig.init(this.playerConfig.json);
-    },
-
-    initPassConfig:function () {
-        PassConfig.init(this.passConfig.json);
-    },
-
-    initLevelUpConfig:function () {
-        LevelUpConfig.init(this.levelUpConfig.json);
-    },
-
-    initUserData:function () {
-        DataManager.Userdata.init();
-    },
-
     gameStart:function () {
-        cc.director.loadScene("GameScene");
+        cc.director.loadScene("NewGameScene");
+    },
+
+    init:function (tabId) {
+        
     },
 
     // 切换tab页
@@ -112,6 +81,17 @@ cc.Class({
                 page.active = false;
             }
         }
+
+        var progress = this.tabPage[tabIndex].getComponentsInChildren(cc.ProgressBar);
+        var len = progress.length;
+        for (let index = 0; index < len; index++) {
+            var item = progress[index];
+            item.progress = Global.Model.MPlayer.getLevelByItemID(tabIndex * 8 + index) / this._LevelUpDescObj[index].maxLevel;
+        }
+
+        // 切换到选项1
+        var btn = this.tabPage[tabIndex].getComponentInChildren(cc.Button);
+        this.switchLevelUpItem({target:btn.node} , tabIndex * 8);
     },
 
     // 切换选项
@@ -134,20 +114,19 @@ cc.Class({
         console.log("当前选项 " , index);
         this._CurLevelUpIndex = index;
         var title = this._ContentPage.getChildByName("Title").getComponent(cc.Label);
-        title.string = LevelUpConfig.getTitleByIndex(index);
+        title.string = this._LevelUpDescObj[index].name;
         var desc = this._ContentPage.getChildByName("Desc").getComponentInChildren(cc.Label);
-        desc.string = LevelUpConfig.getDescByIndex(index);
+        desc.string = this._LevelUpDescObj[index].desc;
         var icon = this._ContentPage.getChildByName("Icon").getComponent(ContentIcon);
         icon.type = index;
         var level = this._ContentPage.getChildByName("Level").getComponent(Level);
-        var maxLevelNum = LevelUpConfig.getMaxLevelByIndex(index);
+        var maxLevelNum = this._LevelUpDescObj[index].maxLevel;
         level.maxLevelNum = maxLevelNum;
-        var curLevelNum = DataManager.Userdata.getLevelByIndex(index);
+        var curLevelNum = Global.Model.MPlayer.getLevelByItemID(index);
         level.level = curLevelNum;
         var coins = this._ContentPage.getChildByName("Coins").getComponentInChildren(cc.Label);
-        var nextLevelNum = curLevelNum+1;
-        if (nextLevelNum <= maxLevelNum) {
-            coins.string = " x " + LevelUpConfig.getConsumeByLevel(index ,nextLevelNum);
+        if (curLevelNum < maxLevelNum) {
+            coins.string = " x " + this._LevelUpConsumeObj[curLevelNum]["levelupItem" + index];
         }
         else
         {
@@ -159,21 +138,21 @@ cc.Class({
     onLevelUpBtn:function (event) {
         // 当前升级按钮回调
         console.log("升级当前选项", this._CurLevelUpIndex);
-        DataManager.Userdata.toNextLevelByIndex(this._CurLevelUpIndex);
-        var curLevelNum = DataManager.Userdata.getLevelByIndex(this._CurLevelUpIndex);
-        var nextLevelNum = curLevelNum+1;
-        var maxLevelNum = LevelUpConfig.getMaxLevelByIndex(this._CurLevelUpIndex);
-        console.log("curLevelNum" , curLevelNum , "nextLevelNum" , nextLevelNum);
+        var curLevelNum = Global.Model.MPlayer.levelUp(this._CurLevelUpIndex);
+        var maxLevelNum = this._LevelUpDescObj[this._CurLevelUpIndex].maxLevel;
 
         var level = this._ContentPage.getChildByName("Level").getComponent(Level);
         level.level = curLevelNum;
         var coins = this._ContentPage.getChildByName("Coins").getComponentInChildren(cc.Label);
-        if (nextLevelNum <= maxLevelNum) {
-            coins.string = " x " + LevelUpConfig.getConsumeByLevel(this._CurLevelUpIndex ,nextLevelNum);    
+        if (curLevelNum < maxLevelNum) {
+            coins.string = " x " + this._LevelUpConsumeObj[curLevelNum]["levelupItem" + this._CurLevelUpIndex];  
         }
         else
         {
             coins.string = "已满级";
         }
+
+        var progress = this._CurSelectedItem.getComponentInChildren(cc.ProgressBar);
+        progress.progress = curLevelNum / maxLevelNum;
     },
 });

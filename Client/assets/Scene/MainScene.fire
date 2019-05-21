@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.45566502463054187,
-      "y": 0.45566502463054187,
+      "x": 0.4059718819759705,
+      "y": 0.4059718819759705,
       "z": 1
     },
     "_quat": {
@@ -3016,7 +3016,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "0"
   },
@@ -3576,7 +3576,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "1"
   },
@@ -4136,7 +4136,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "2"
   },
@@ -4696,7 +4696,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "3"
   },
@@ -5256,7 +5256,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "4"
   },
@@ -5816,7 +5816,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "5"
   },
@@ -6376,7 +6376,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "6"
   },
@@ -6936,7 +6936,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "7"
   },
@@ -7291,7 +7291,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "8"
   },
@@ -8000,7 +8000,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "8"
   },
@@ -8560,7 +8560,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "9"
   },
@@ -9120,7 +9120,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "10"
   },
@@ -9680,7 +9680,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "11"
   },
@@ -10240,7 +10240,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "12"
   },
@@ -10800,7 +10800,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "13"
   },
@@ -11360,7 +11360,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "14"
   },
@@ -11920,7 +11920,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchLevelUpItem",
     "customEventData": "15"
   },
@@ -12681,7 +12681,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchTab",
     "customEventData": "0"
   },
@@ -12851,7 +12851,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchTab",
     "customEventData": "1"
   },
@@ -13021,7 +13021,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "switchTab",
     "customEventData": "2"
   },
@@ -23365,7 +23365,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "onLevelUpBtn",
     "customEventData": ""
   },
@@ -23723,7 +23723,7 @@
     "target": {
       "__id__": 5
     },
-    "component": "MainView",
+    "component": "VMain",
     "handler": "gameStart",
     "customEventData": ""
   },
@@ -23795,53 +23795,14 @@
     "bgm": {
       "__uuid__": "49916027-1b31-4a1e-a0c8-c3699c74d0b8"
     },
-    "playerConfig": {
-      "__uuid__": "6ebf990d-1176-4834-b9b1-5a4d4adcf746"
+    "levelUpDesc": {
+      "__uuid__": "e068ba9b-fd5d-48a1-a1bd-6e5369da920b"
     },
-    "monsterConfig": [
-      {
-        "__uuid__": "e9065e17-a021-443a-8b77-e181ff9b2527"
-      },
-      {
-        "__uuid__": "2dbc3a4b-308d-4b1d-8ded-dff78d6f941b"
-      },
-      {
-        "__uuid__": "304ed22e-768d-407a-b501-43179eea2832"
-      },
-      {
-        "__uuid__": "dc6320b4-f771-40d4-a5a5-5c3bcbf7a4ca"
-      },
-      {
-        "__uuid__": "075edcda-de5d-463d-b083-a1662d5aee08"
-      },
-      {
-        "__uuid__": "8ccc134d-cac0-431c-b068-8a095ab876aa"
-      },
-      {
-        "__uuid__": "b6ccb267-5305-4f35-80c4-4f32dff8bd32"
-      },
-      {
-        "__uuid__": "a01f29f0-650f-47a6-afdc-06b1b85d9a14"
-      },
-      {
-        "__uuid__": "65217e2c-6b07-4d11-a319-ef523524d8f4"
-      },
-      {
-        "__uuid__": "4cf6b758-acd8-4383-aa2b-810a8db47092"
-      },
-      {
-        "__uuid__": "59bf3e3b-1b82-47e5-9ec7-16b2bb70b28e"
-      },
-      {
-        "__uuid__": "4ff7d6bc-8f7f-444f-ac56-8e98685478bb"
-      }
-    ],
-    "passConfig": {
-      "__uuid__": "62a604b1-5e36-4404-b2ec-09b313f68220"
+    "_LevelUpDescObj": null,
+    "levelUpConsume": {
+      "__uuid__": "c602eaa3-8fd8-4d89-a87f-3603de061f91"
     },
-    "levelUpConfig": {
-      "__uuid__": "7c3332f8-19a7-4023-974a-3178e84d09a3"
-    },
+    "_LevelUpConsumeObj": null,
     "tabBtn": [
       {
         "__id__": 285

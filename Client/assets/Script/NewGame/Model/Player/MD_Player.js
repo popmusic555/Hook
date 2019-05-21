@@ -155,6 +155,26 @@ MPlayer.getRewardsCoins = function () {
 };
 
 /**
+ * 根据选项ID获取等级
+ *
+ * @param {*} itemid 选项ID
+ * @returns
+ */
+MPlayer.getLevelByItemID = function (itemid) {
+    return this.levels[itemid];
+};
+
+/**
+ * 升级
+ *
+ * @param {*} itemid 选项ID
+ */
+MPlayer.levelUp = function (itemid) {
+    this.levels[itemid] += 1;
+    return this.getLevelByItemID(itemid);
+};
+
+/**
  * 增加金币奖励
  * 
  * @param {any} num 增加的值
