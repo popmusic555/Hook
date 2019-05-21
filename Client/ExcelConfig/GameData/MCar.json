@@ -1,0 +1,18 @@
+[
+  {
+    "passid": 0,
+    "elastic": 0,
+    "bounce": 200,
+    "accelerate": 90,
+    "cost": 10,
+    "carryCoins": 0,
+    "carryEnergy": 1,
+    "endRideBounce": 0,
+    "endRideAccelerate": 0,
+    "skillBounce": 0,
+    "skillAccelerate": 30,
+    "interval": 0,
+    "rate": 0,
+    "max": 0
+  }
+]

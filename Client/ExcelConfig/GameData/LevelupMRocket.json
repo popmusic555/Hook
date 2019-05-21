@@ -1,0 +1,90 @@
+[
+  {
+    "level": 0,
+    "bounce": 1000,
+    "accelerate": 120,
+    "interval": 678,
+    "rate": 30,
+    "max": 1
+  },
+  {
+    "level": 1,
+    "bounce": 1200,
+    "accelerate": 120,
+    "interval": 678,
+    "rate": 30,
+    "max": 1
+  },
+  {
+    "level": 2,
+    "bounce": 1200,
+    "accelerate": 180,
+    "interval": 678,
+    "rate": 30,
+    "max": 1
+  },
+  {
+    "level": 3,
+    "bounce": 1200,
+    "accelerate": 180,
+    "interval": 678,
+    "rate": 35,
+    "max": 1
+  },
+  {
+    "level": 4,
+    "bounce": 1400,
+    "accelerate": 180,
+    "interval": 678,
+    "rate": 35,
+    "max": 1
+  },
+  {
+    "level": 5,
+    "bounce": 1400,
+    "accelerate": 240,
+    "interval": 678,
+    "rate": 35,
+    "max": 1
+  },
+  {
+    "level": 6,
+    "bounce": 1400,
+    "accelerate": 240,
+    "interval": 678,
+    "rate": 40,
+    "max": 1
+  },
+  {
+    "level": 7,
+    "bounce": 1600,
+    "accelerate": 240,
+    "interval": 678,
+    "rate": 40,
+    "max": 1
+  },
+  {
+    "level": 8,
+    "bounce": 1600,
+    "accelerate": 300,
+    "interval": 678,
+    "rate": 40,
+    "max": 1
+  },
+  {
+    "level": 9,
+    "bounce": 1600,
+    "accelerate": 300,
+    "interval": 678,
+    "rate": 45,
+    "max": 1
+  },
+  {
+    "level": 10,
+    "bounce": 1800,
+    "accelerate": 300,
+    "interval": 678,
+    "rate": 45,
+    "max": 1
+  }
+]

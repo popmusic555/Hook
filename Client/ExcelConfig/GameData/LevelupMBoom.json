@@ -1,0 +1,101 @@
+[
+  {
+    "level": 0,
+    "elastic": 0,
+    "bounce": 300,
+    "accelerate": 300,
+    "interval": 300,
+    "rate": 30,
+    "max": 1
+  },
+  {
+    "level": 1,
+    "elastic": 0,
+    "bounce": 350,
+    "accelerate": 360,
+    "interval": 300,
+    "rate": 30,
+    "max": 1
+  },
+  {
+    "level": 2,
+    "elastic": 0,
+    "bounce": 400,
+    "accelerate": 420,
+    "interval": 300,
+    "rate": 30,
+    "max": 1
+  },
+  {
+    "level": 3,
+    "elastic": 0,
+    "bounce": 400,
+    "accelerate": 420,
+    "interval": 300,
+    "rate": 35,
+    "max": 1
+  },
+  {
+    "level": 4,
+    "elastic": 0,
+    "bounce": 400,
+    "accelerate": 480,
+    "interval": 300,
+    "rate": 35,
+    "max": 1
+  },
+  {
+    "level": 5,
+    "elastic": 0,
+    "bounce": 500,
+    "accelerate": 540,
+    "interval": 300,
+    "rate": 35,
+    "max": 1
+  },
+  {
+    "level": 6,
+    "elastic": 0,
+    "bounce": 500,
+    "accelerate": 540,
+    "interval": 300,
+    "rate": 40,
+    "max": 1
+  },
+  {
+    "level": 7,
+    "elastic": 0,
+    "bounce": 550,
+    "accelerate": 600,
+    "interval": 300,
+    "rate": 40,
+    "max": 1
+  },
+  {
+    "level": 8,
+    "elastic": 0,
+    "bounce": 600,
+    "accelerate": 660,
+    "interval": 300,
+    "rate": 40,
+    "max": 1
+  },
+  {
+    "level": 9,
+    "elastic": 0,
+    "bounce": 600,
+    "accelerate": 660,
+    "interval": 300,
+    "rate": 45,
+    "max": 1
+  },
+  {
+    "level": 10,
+    "elastic": 0,
+    "bounce": 700,
+    "accelerate": 720,
+    "interval": 300,
+    "rate": 50,
+    "max": 1
+  }
+]
