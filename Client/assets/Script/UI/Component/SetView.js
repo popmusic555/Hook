@@ -36,6 +36,10 @@ cc.Class({
     },
 
     onBackBtn:function () {
-        cc.director.loadScene("MainScene");  
+        var transition = cc.find("Canvas/Transition");
+        if (transition) {
+            transition = transition.getComponent("VTransition");
+            transition.transitionWithScene("MainScene");
+        }
     },
 });

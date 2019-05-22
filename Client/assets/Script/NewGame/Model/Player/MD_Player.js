@@ -53,9 +53,6 @@ MPlayer.init = function () {
     // 游戏里程
     this.gamedata.mileage = 0;
 
-    // 所有升级选项等级
-    this.levels = [];
-
     this.config = null;
 
     this.resetGamedata();
@@ -103,18 +100,6 @@ MPlayer.resetGamedata = function () {
 };
 
 /**
- * 初始化所有升级选项等级
- * 
- * @param {any} levels 所有升级选项的等级
- */
-MPlayer.initLevels = function (levels) {
-    var len = levels.length;
-    for (let index = 0; index < len; index++) {
-        this.levels[index] = levels[index];
-    }
-};
-
-/**
  * 获取用户属性
  * 
  * @returns 用户属性
@@ -152,26 +137,6 @@ MPlayer.setMileage = function (num) {
  */
 MPlayer.getRewardsCoins = function () {
     return this.gamedata.rewardsCoins;
-};
-
-/**
- * 根据选项ID获取等级
- *
- * @param {*} itemid 选项ID
- * @returns
- */
-MPlayer.getLevelByItemID = function (itemid) {
-    return this.levels[itemid];
-};
-
-/**
- * 升级
- *
- * @param {*} itemid 选项ID
- */
-MPlayer.levelUp = function (itemid) {
-    this.levels[itemid] += 1;
-    return this.getLevelByItemID(itemid);
 };
 
 /**

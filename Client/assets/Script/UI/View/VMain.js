@@ -41,19 +41,22 @@ cc.Class({
 
         this._LevelUpDescObj = this.levelUpDesc.json;
         this._LevelUpConsumeObj = this.levelUpConsume.json;
-        Global.Model.MPlayer.initLevels([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
+        Global.Model.Game.initLevels([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
 
         // 切换到页签1
         this.switchTab({target:this.tabBtn[0].node} , 0);
+
+        this.refreshTopBar();
     },
 
     // update (dt) {},
     gameStart:function () {
-        cc.director.loadScene("NewGameScene");
-    },
-
-    init:function (tabId) {
-        
+        var transition = cc.find("Canvas/Transition");
+        if (transition) {
+            transition = transition.getComponent("VTransition");
+            transition.transitionWithScene("NewGameScene");
+        }
+        // cc.director.loadScene("NewGameScene");
     },
 
     // 切换tab页
@@ -86,12 +89,38 @@ cc.Class({
         var len = progress.length;
         for (let index = 0; index < len; index++) {
             var item = progress[index];
-            item.progress = Global.Model.MPlayer.getLevelByItemID(tabIndex * 8 + index) / this._LevelUpDescObj[index].maxLevel;
+            item.progress = Global.Model.Game.getLevelByItemID(tabIndex * 8 + index) / this._LevelUpDescObj[index].maxLevel;
         }
 
         // 切换到选项1
         var btn = this.tabPage[tabIndex].getComponentInChildren(cc.Button);
         this.switchLevelUpItem({target:btn.node} , tabIndex * 8);
+    },
+
+    switchTabNoRefresh:function (event , tabIndex) {
+        var len = this.tabBtn.length;
+        for (let index = 0; index < len; index++) {
+            const btn = this.tabBtn[index];
+            if (btn.node.name == event.target.name) {
+                btn.interactable = false;
+            }
+            else
+            {
+                btn.interactable = true;
+            }
+        }
+
+        len = this.tabPage.length;
+        for (let index = 0; index < len; index++) {
+            const page = this.tabPage[index];
+            if (index == tabIndex) {
+                page.active = true;
+            }
+            else
+            {
+                page.active = false;
+            }
+        }
     },
 
     // 切换选项
@@ -122,7 +151,7 @@ cc.Class({
         var level = this._ContentPage.getChildByName("Level").getComponent(Level);
         var maxLevelNum = this._LevelUpDescObj[index].maxLevel;
         level.maxLevelNum = maxLevelNum;
-        var curLevelNum = Global.Model.MPlayer.getLevelByItemID(index);
+        var curLevelNum = Global.Model.Game.getLevelByItemID(index);
         level.level = curLevelNum;
         var coins = this._ContentPage.getChildByName("Coins").getComponentInChildren(cc.Label);
         if (curLevelNum < maxLevelNum) {
@@ -137,10 +166,25 @@ cc.Class({
     // 升级按钮回调
     onLevelUpBtn:function (event) {
         // 当前升级按钮回调
-        console.log("升级当前选项", this._CurLevelUpIndex);
-        var curLevelNum = Global.Model.MPlayer.levelUp(this._CurLevelUpIndex);
         var maxLevelNum = this._LevelUpDescObj[this._CurLevelUpIndex].maxLevel;
+        var curLevelNum = Global.Model.Game.getLevelByItemID(this._CurLevelUpIndex);
+        // 等级是否已经超过上限
+        if (curLevelNum >= maxLevelNum) {
+            // 已满级
+            console.log("当前选项已经满级");
+            return;
+        }
 
+        var nextLevelConsume = this._LevelUpConsumeObj[curLevelNum]["levelupItem" + this._CurLevelUpIndex];
+        if (!Global.Model.Game.isEnoughCoins(nextLevelConsume)) {
+            // 金币不足
+            console.log("当前金币不足");
+            return;
+        }
+
+        // 减少金币
+        Global.Model.Game.reduceCoins(nextLevelConsume);
+        var curLevelNum = Global.Model.Game.levelUp(this._CurLevelUpIndex);
         var level = this._ContentPage.getChildByName("Level").getComponent(Level);
         level.level = curLevelNum;
         var coins = this._ContentPage.getChildByName("Coins").getComponentInChildren(cc.Label);
@@ -154,5 +198,30 @@ cc.Class({
 
         var progress = this._CurSelectedItem.getComponentInChildren(cc.ProgressBar);
         progress.progress = curLevelNum / maxLevelNum;
+
+        this.refreshTopBar();
+    },
+
+    refreshTopBar:function () {
+        var topbar = this.getComponentInChildren("TopBar");
+        topbar.refresh();
+    },
+
+    onRankBtn:function () {
+        
+    },
+
+    onFriendBtn:function () {
+        var friendView = this.node.parent.getComponentInChildren("VFriend");
+        friendView.show([{isReward:true},{isReward:true},{isReward:true},{isReward:false}] , 50);
+    },
+
+    onLotteryBtn:function () {
+        
+    },
+
+    onSetBtn:function () {
+        var setView = this.node.parent.getComponentInChildren("VSet");
+        setView.show();
     },
 });
