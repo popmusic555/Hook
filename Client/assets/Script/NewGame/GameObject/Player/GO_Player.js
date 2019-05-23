@@ -98,12 +98,13 @@ cc.Class({
             if (velocityY == 0 && this.getGravityScale() == 0) {
                 // 死亡状态
                 if (this.animation.getState() != GlobalEnum.P_ANI_STATE.READY) {
-                    this.animation.transState(GlobalEnum.P_ANI_STATE.DEATH2);    
+                    this.animation.transStateAndLock(GlobalEnum.P_ANI_STATE.DEATH2);  
+                    this.sleep();  
                 }
             }
-            else
+            else if (velocityY < 0)
             {
-                this.animation.transState(GlobalEnum.P_ANI_STATE.DEATH1);
+                this.animation.transStateAndLock(GlobalEnum.P_ANI_STATE.DEATH1);
                 this.sleep();
             }
         }
@@ -125,7 +126,8 @@ cc.Class({
     launching:function (velocity) {
         this.state = GlobalEnum.P_STATE.NORMAL;
         this.animation.transState(GlobalEnum.P_ANI_STATE.LAUNCH);
-        this.run(velocity , Global.Common.Const.GRAVITY_SCALE);
+        // this.run(velocity , Global.Common.Const.GRAVITY_SCALE);
+        this.run(cc.v2(1000,1000) , Global.Common.Const.GRAVITY_SCALE);
 
         this.showShadow();
 
@@ -352,7 +354,7 @@ cc.Class({
      */
     onTouched:function () {
         if (this.animation.getState() == GlobalEnum.P_ANI_STATE.READY) {
-            this.launchingForSpeed(1000);
+            this.launchingForSpeed(Global.Model.MPlayer.getAttr().launchingVelocity);
         }
         else
         {
@@ -396,6 +398,7 @@ cc.Class({
      * 
      */
     castSkill:function () {
+        console.log("触发技能")
         if (!Global.Model.MPlayer.isEnoughEnergy(Global.Common.Const.ENERGY_RATIO)) {
             return;
         }
@@ -428,6 +431,7 @@ cc.Class({
                 this._BindMonsterPos = cc.v2(0,0);
             }
             this.animation.node.parent.active = false;
+            this.animation.unlockState();
         }
     },  
 

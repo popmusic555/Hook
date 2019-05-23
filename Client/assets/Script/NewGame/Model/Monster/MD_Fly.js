@@ -33,6 +33,47 @@ MFly.init = function () {
     this.attr.coins = 0;
     // 携带能量
     this.attr.energy = 0;
+
+    // 刷新间隔
+    this.attr.interval = 0;
+    // 刷新概率
+    this.attr.rate = 0;
+    // 最大数量
+    this.attr.maxNum = 0;
+
+    this.config = null;
+};
+
+MFly.setConfig = function (config) {
+    this.config = config;
+};
+
+/**
+ * 根据关卡更新PassID
+ * 
+ * @param {any} passID 关卡ID
+ */
+MFly.updateByPass = function (passID) {
+    var data = null;
+    if (passID >= this.config.length) {
+        data = this.config[this.config.length-1];    
+    }
+    else
+    {
+        data = this.config[passID];
+    }
+
+    this.attr.elastic = data.elastic;
+    this.attr.bouncePower = data.bounce;
+    this.attr.acceleratePower = data.accelerate;
+    this.attr.cost = data.cost;
+    this.attr.coins = data.carryCoins;
+    this.attr.energy = data.carryEnergy;
+    this.attr.interval = data.interval;
+    this.attr.rate = data.rate;
+    this.attr.maxNum = data.max;
+
+    console.log("UpdateByPass MFly" , passID);
 };
 
 /**
@@ -141,14 +182,5 @@ MFly.limitVelocityY = function (y) {
     y = Math.min(y , this.getAttr().maxVelocity.y);
     return y;
 }
-
-/**
- * 根据关卡更新PassID
- * 
- * @param {any} passID 关卡ID
- */
-MFly.updateByPass = function (passID) {
-    console.log("MFly UpdateByPass " , passID);
-};
 
 module.exports = MFly;

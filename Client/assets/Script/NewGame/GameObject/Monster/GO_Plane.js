@@ -98,7 +98,7 @@ cc.Class({
         else
         {
             // 生成完毕
-            this._Duration = 60;
+            this._Duration = Global.Model.MPlane.getAttr().duration * 60;
         }
     },
 
@@ -157,12 +157,12 @@ cc.Class({
      */
     onBeginContact:function (contact, selfCollider, otherCollider) {
         if (this._IsBind) {
-            console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Plane" , "player");
+            // console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Plane" , "player");
             Global.Model.MPlayer.handleCollision(contact, this._Player, otherCollider);
         }
         else
         {
-            console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Plane");
+            // console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Plane");
             Global.Model.MPlane.handleCollision(contact, selfCollider, otherCollider);
         }
     },

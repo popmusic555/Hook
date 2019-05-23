@@ -161,12 +161,12 @@ cc.Class({
      */
     onBeginContact:function (contact, selfCollider, otherCollider) {
         if (this._IsBind) {
-            console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Jump" , "player");
+            // console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Jump" , "player");
             Global.Model.MPlayer.handleCollision(contact, this._Player, otherCollider);
         }
         else
         {
-            console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Jump");
+            // console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Jump");
             Global.Model.MJump.handleCollision(contact, selfCollider, otherCollider);
         }
     },

@@ -65,8 +65,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 853,
-      "y": 345,
+      "x": 850,
+      "y": 400,
       "z": 0
     },
     "_scale": {
@@ -179,7 +179,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "82WNfI8Z5ISoSZ9qgVJbm5"
+    "_id": "c3X+IMfsVHmIAbgIC+yTJO"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -475,7 +475,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "84l8pIkyZCzJnbcw85mrE5"
+    "_id": "6fE0bm0eVMZp9KLxphXV1t"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -509,7 +509,7 @@
     "_enabled": true,
     "_type": 2,
     "_allowSleep": true,
-    "_gravityScale": 1,
+    "_gravityScale": 0,
     "_linearDamping": 0,
     "_angularDamping": 0,
     "_linearVelocity": {
@@ -521,7 +521,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "0b+s+Cy7JJ2ZqvclWao6Ph"
+    "_id": "3c5QoirqFIXKhbtd5cppyE"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -547,7 +547,7 @@
       "width": 70,
       "height": 30
     },
-    "_id": "f3aTfL32dLo4jH0kaj6CNP"
+    "_id": "edNjPxhbVLZJPYIFbL2Q/D"
   },
   {
     "__type__": "86ff2D6xS5Ctb1P5l2uA5W6",
@@ -566,7 +566,7 @@
       "__id__": 1
     },
     "_Jump": null,
-    "_id": "126Nm1c5pPSqihRXBoCm42"
+    "_id": "aenfamox1G5reg5qnznw77"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -737,7 +737,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "5b/Bb0tgJJSZz74TAlg++G"
+    "_id": "38EwPN8jFHnbuW/ECutjSN"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -845,7 +845,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "40zzLc5DBMI4kzQ0xMCqEg"
+    "_id": "e4UWJFVGNHLo+sh0a3gQt1"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -880,7 +880,7 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "1fEKicQd1NnoggfN/m7qLa"
+    "_id": "d2QS2k6CpMBbrqvC1s7ZJD"
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -902,7 +902,7 @@
       "y": 45
     },
     "_radius": 55,
-    "_id": "dc6eVgRHdJeIpVvLhSKwZf"
+    "_id": "6ddIEgPOBHYL5ig8oUV3Wt"
   },
   {
     "__type__": "1a6a12fzrFPoZ+w5aK2djZV",
@@ -949,7 +949,7 @@
     "_isSkill": false,
     "_Fist": null,
     "_SkillLock": false,
-    "_id": "f3BA1+7ohP6J79Hp/3sjbP"
+    "_id": "86men2l9ZO64i3tkIOT2oK"
   },
   {
     "__type__": "cc.PrefabInfo",

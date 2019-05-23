@@ -108,12 +108,12 @@ cc.Class({
      */
     onBeginContact:function (contact, selfCollider, otherCollider) {
         if (this._IsBind) {
-            console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Rocket" , "player");
+            // console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Rocket" , "player");
             Global.Model.MPlayer.handleCollision(contact, this._Player, otherCollider);
         }
         else
         {
-            console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Rocket");
+            // console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "Rocket");
             Global.Model.MRocket.handleCollision(contact, selfCollider, otherCollider);
         }
     },

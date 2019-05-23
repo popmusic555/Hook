@@ -1,0 +1,14 @@
+[
+  {
+    "passid": 0,
+    "elastic": 0,
+    "bounce": 0,
+    "accelerate": 0,
+    "cost": 20,
+    "carryCoins": 0,
+    "carryEnergy": 2,
+    "interval": 0,
+    "rate": 0,
+    "max": 0
+  }
+]

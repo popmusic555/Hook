@@ -98,17 +98,21 @@ cc.Class({
      */
     onBeginContact:function (contact, selfCollider, otherCollider) {
         if (this._IsBind) {
-            console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "clip" , "player");
+            // console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "clip" , "player");
             Global.Model.MPlayer.handleCollision(contact, this._Player, otherCollider);
         }
         else
         {
-            console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "clip");
+            // console.log(selfCollider.node.name , "碰撞" , otherCollider.node.name , "碰撞回调" , "clip");
             Global.Model.MClip.handleCollision(contact, selfCollider, otherCollider);
         }
     },
 
     onDeath:function (player) {
+        if (!this._IsUpdate) {
+            return;
+        }
+
         this._IsUpdate = false;
         this.sleep();
         this.static();

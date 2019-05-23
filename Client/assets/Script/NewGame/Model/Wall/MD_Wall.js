@@ -80,14 +80,17 @@ MWall.updateByPass = function (passID) {
         data = this.config[passID];
     }
 
+    var cfg = Global.Model.Game.levelsItemConfig.player;
+    console.log(Global.Model.Game.levelsItemConfig.player, Global.Model.Game.getLevelByItemID(7));
+
     this.attr.crossSpeed = data.crossSpeed;
-    this.attr.acceleratePower = data.accelerate;
+    this.attr.acceleratePower = data.accelerate + cfg[Global.Model.Game.getLevelByItemID(7)].wallAccelerate;
     this.attr.cost = data.cost;
     this.attr.coins = data.carryCoins;
     this.attr.energy = data.carryEnergy;
     this.attr.distance = data.distance;
 
-    console.log("UpdateByPass " , passID);
+    console.log("UpdateByPass Wall" , passID);
 };
 
 /**

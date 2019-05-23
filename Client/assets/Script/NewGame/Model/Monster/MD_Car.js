@@ -43,6 +43,58 @@ MCar.init = function () {
     this.attr.skillAccelerate = 300;
     // 持续时间
     this.attr.duration = 60;
+
+    // 刷新间隔
+    this.attr.interval = 0;
+    // 刷新概率
+    this.attr.rate = 0;
+    // 最大数量
+    this.attr.maxNum = 0;
+
+    this.config = null;
+};
+
+MCar.setConfig = function (config) {
+    this.config = config;
+};
+
+/**
+ * 根据关卡更新PassID
+ * 
+ * @param {any} passID 关卡ID
+ */
+MCar.updateByPass = function (passID) {
+    var data = null;
+    if (passID >= this.config.length) {
+        data = this.config[this.config.length-1];    
+    }
+    else
+    {
+        data = this.config[passID];
+    }
+
+    var cfg = Global.Model.Game.levelsItemConfig.car;
+    var level = Global.Model.Game.getLevelByItemID(11);
+
+    this.attr.elastic = data.elastic;
+    this.attr.bouncePower = data.bounce;
+    this.attr.acceleratePower = data.accelerate;
+    this.attr.cost = data.cost;
+    this.attr.coins = data.carryCoins;
+    this.attr.energy = data.carryEnergy;
+    this.attr.duration = cfg[level].duration;
+
+    this.attr.endRideBounce = data.endRideBounce + cfg[level].endRideBounce;
+    this.attr.endRideAccelerate = data.endRideAccelerate + cfg[level].endRideAccelerate;
+
+    this.attr.skillBounce = data.skillBounce;
+    this.attr.skillAccelerate = data.skillAccelerate;
+
+    this.attr.interval = data.interval + cfg[level].interval;
+    this.attr.rate = data.rate + cfg[level].rate;
+    this.attr.maxNum = data.max + cfg[level].max;
+
+    console.log("UpdateByPass MCar" , passID);
 };
 
 /**
@@ -151,14 +203,5 @@ MCar.limitVelocityY = function (y) {
     y = Math.min(y , this.getAttr().maxVelocity.y);
     return y;
 }
-
-/**
- * 根据关卡更新PassID
- * 
- * @param {any} passID 关卡ID
- */
-MCar.updateByPass = function (passID) {
-    console.log("MCar UpdateByPass " , passID);
-};
 
 module.exports = MCar;

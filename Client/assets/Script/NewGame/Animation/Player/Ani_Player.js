@@ -29,7 +29,6 @@ cc.Class({
         this.node.stopActionByTag(10);
         this.node.rotation = 0;
         this.impact.active = false;
-
         switch (this._State) {
             case Global.Common.Enum.P_ANI_STATE.NULL:
                 this.setAnimation(null);
@@ -68,7 +67,7 @@ cc.Class({
                 var rotateAction = cc.repeatForever(cc.rotateBy(1 , 360));
                 rotateAction.setTag(10);
                 this.node.runAction(rotateAction);
-                // console.log("State HIT");
+                console.log("State HIT");
                 break;
             case Global.Common.Enum.P_ANI_STATE.ATTACK:
                 if (lastState == Global.Common.Enum.P_ANI_STATE.DROP) {

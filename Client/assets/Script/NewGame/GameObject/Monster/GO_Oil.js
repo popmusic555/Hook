@@ -37,7 +37,8 @@ cc.Class({
         this.randomRelativeVelocity();
         this._IsUpdate = true;  
         this._TipsPos = cc.v2(this.tips.x , this.tips.y);
-        this.setDuration(60);
+
+        this.setDuration(Global.Model.MPlane.getAttr().duration * 60);
     },
 
     setDuration:function (num) {

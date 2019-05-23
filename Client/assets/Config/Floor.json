@@ -1,0 +1,68 @@
+[
+  {
+    "passid": 0,
+    "elastic": 0.7,
+    "bounce": 0,
+    "accelerate": -300
+  },
+  {
+    "passid": 1,
+    "elastic": 0.7,
+    "bounce": 0,
+    "accelerate": -330
+  },
+  {
+    "passid": 2,
+    "elastic": 0.7,
+    "bounce": 0,
+    "accelerate": -360
+  },
+  {
+    "passid": 3,
+    "elastic": 0.7,
+    "bounce": 0,
+    "accelerate": -390
+  },
+  {
+    "passid": 4,
+    "elastic": 0.7,
+    "bounce": 0,
+    "accelerate": -420
+  },
+  {
+    "passid": 5,
+    "elastic": 0.7,
+    "bounce": 0,
+    "accelerate": -450
+  },
+  {
+    "passid": 6,
+    "elastic": 0.7,
+    "bounce": 0,
+    "accelerate": -480
+  },
+  {
+    "passid": 7,
+    "elastic": 0.7,
+    "bounce": 0,
+    "accelerate": -510
+  },
+  {
+    "passid": 8,
+    "elastic": 0.7,
+    "bounce": 0,
+    "accelerate": -540
+  },
+  {
+    "passid": 9,
+    "elastic": 0.7,
+    "bounce": 0,
+    "accelerate": -570
+  },
+  {
+    "passid": 10,
+    "elastic": 0.7,
+    "bounce": 0,
+    "accelerate": -600
+  }
+]

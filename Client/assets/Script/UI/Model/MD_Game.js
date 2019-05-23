@@ -27,7 +27,21 @@ MGame.init = function () {
     this.lottery = 4;
 
     // 所有升级选项等级
-    this.levels = [];
+    this.levels = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+    // 所有升级选项数据表
+    this.levelsItemConfig = {};
+    this.levelsItemConfig.player = null;
+    this.levelsItemConfig.coins = null;
+    this.levelsItemConfig.flycoins = null;
+    this.levelsItemConfig.boom = null;
+    this.levelsItemConfig.flyboom = null;
+    this.levelsItemConfig.clip = null;
+    this.levelsItemConfig.energy = null;
+    this.levelsItemConfig.rocket = null;
+    this.levelsItemConfig.jump = null;
+    this.levelsItemConfig.plane = null;
+    this.levelsItemConfig.car = null;
 
     // 是否切换场景
     this.transition = false;
@@ -43,6 +57,50 @@ MGame.initLevels = function (levels) {
     for (let index = 0; index < len; index++) {
         this.levels[index] = levels[index];
     }
+};
+
+MGame.initPlayerLevelConfig = function (config) {
+    this.levelsItemConfig.player = config;
+};
+
+MGame.initCoinsLevelConfig = function (config) {
+    this.levelsItemConfig.coins = config;
+};
+
+MGame.initFlyCoinsLevelConfig = function (config) {
+    this.levelsItemConfig.flycoins = config;
+};
+
+MGame.initBoomLevelConfig = function (config) {
+    this.levelsItemConfig.boom = config;
+};
+
+MGame.initFlyBoomLevelConfig = function (config) {
+    this.levelsItemConfig.flyboom = config;
+};
+
+MGame.initEnergyLevelConfig = function (config) {
+    this.levelsItemConfig.energy = config;
+};
+
+MGame.initClipLevelConfig = function (config) {
+    this.levelsItemConfig.clip = config;
+};
+
+MGame.initRocketLevelConfig = function (config) {
+    this.levelsItemConfig.rocket = config;
+};
+
+MGame.initJumpLevelConfig = function (config) {
+    this.levelsItemConfig.jump = config;
+};
+
+MGame.initPlaneLevelConfig = function (config) {
+    this.levelsItemConfig.plane = config;
+};
+
+MGame.initCarLevelConfig = function (config) {
+    this.levelsItemConfig.car = config;
 };
 
 /**

@@ -18,17 +18,18 @@ MPlayer.init = function () {
     this.attr.elastic = 0;
     // 最大速度
     // this.attr.maxVelocity = cc.Vec2.ZERO;
-    this.attr.maxVelocity = cc.v2(9000 , 10000);
+    this.attr.maxVelocity = cc.v2(20000 , 20000);
     // 最小速度
     // this.attr.minVelocity = cc.Vec2.ZERO;
-    this.attr.minVelocity = cc.v2(0 , -10000);
+    this.attr.minVelocity = cc.v2(0 , -20000);
     // 反弹力
     this.attr.bouncePower = 100;
     // 加速力
     this.attr.acceleratePower = 0;
 
     // 初始发射速度
-    this.attr.launchingVelocity = cc.Vec2.ZERO;
+    this.attr.launchingVelocity = 1000;
+    // 获取金币倍率
     this.attr.coinsRadio = 0;
     // 能量上限
     this.attr.energyLimit = 20;
@@ -77,14 +78,22 @@ MPlayer.updateByPass = function (passID) {
         data = this.config[passID];
     }
 
-    this.attr.elastic = data.elastic;
-    this.attr.bouncePower = data.bounce;
-    this.attr.acceleratePower = data.accelerate;
-    this.attr.coinsRadio = data.getCoins;
-    this.attr.offlineRewards = data.offlineReward;
-    this.attr.energyLimit = data.energyLimit;
+    var cfg = Global.Model.Game.levelsItemConfig.player;
 
-    console.log("UpdateByPass " , passID);
+    this.attr.elastic = data.elastic;
+    this.attr.bouncePower = data.bounce + cfg[Global.Model.Game.getLevelByItemID(1)].playerBounce;
+    this.attr.acceleratePower = data.accelerate;
+    this.attr.coinsRadio = data.getCoins + cfg[Global.Model.Game.getLevelByItemID(6)].playerBounce;
+    this.attr.offlineRewards = data.offlineReward + cfg[Global.Model.Game.getLevelByItemID(3)].getCoins;
+    this.attr.energyLimit = data.energyLimit + cfg[Global.Model.Game.getLevelByItemID(2)].energyLimit;
+    this.attr.launchingVelocity = cfg[Global.Model.Game.getLevelByItemID(0)].launchSpeed;
+    
+
+    if (passID == 0) {
+        this.gamedata.energy = this.attr.energyLimit;
+    }
+
+    console.log("UpdateByPass Player" , passID);
 };
 
 /**
@@ -1445,6 +1454,12 @@ MPlayer.triggerPlane = function (contact , player , plane , attr) {
 }
 
 MPlayer.triggerOil = function (contact , player , oil , attr) {
+    var Calculator = Global.Common.Utils.Calculator;
+    var selfAttr = this.getAttr();
+    var otherAttr = attr;
+    var velocity = player.getVelocity();
+    var velocityX = velocity.x;
+    var velocityY = velocity.y;
     switch (this.type) {
         case Enum.TYPE.CLIP:
         case Enum.TYPE.ROCKET:
@@ -1459,6 +1474,16 @@ MPlayer.triggerOil = function (contact , player , oil , attr) {
             oil.onDeath(player);
             break;
         case Enum.TYPE.PLANE:
+            // 飞机加速
+            var selfAttr = Global.Model.MPlane.getAttr();
+            // 处理X轴速度 (加速力处理)
+            velocityX = Calculator.processVelocityX(velocityX , selfAttr.oilAccelerate , 0);
+            // 限定X速度 (限定速度区间)
+            velocityX = this.limitVelocityX(velocityX);
+            var newVelocity = cc.v2(velocityX , velocityY);
+            // 玩家对象设置新速度
+            player.setVelocity(newVelocity);
+
             // 怪物死亡
             oil.onDeath(player);
             // 添加新油桶
@@ -1560,10 +1585,10 @@ MPlayer.triggerFloor = function (contact , player , floor , attr) {
             velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
             // 限定Y速度 (限定速度区间)
             velocityY = this.limitVelocityY(velocityY);
-            // 处理X轴速度 (加速力处理)
-            velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
-            // 限定X速度 (限定速度区间)
-            velocityX = this.limitVelocityX(velocityX);
+            // // 处理X轴速度 (加速力处理)
+            // velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+            // // 限定X速度 (限定速度区间)
+            // velocityX = this.limitVelocityX(velocityX);
             var newVelocity = cc.v2(velocityX , velocityY);
             // 玩家对象设置新速度
             player.setVelocity(newVelocity);

@@ -1,0 +1,92 @@
+[
+  {
+    "level": 0,
+    "endRideBounce": 600,
+    "endRideAccelerate": 210,
+    "interval": 600,
+    "rate": 20,
+    "max": 1,
+    "duration": 3
+  },
+  {
+    "level": 1,
+    "endRideBounce": 600,
+    "endRideAccelerate": 210,
+    "interval": 600,
+    "rate": 20,
+    "max": 1,
+    "duration": 3.5
+  },
+  {
+    "level": 2,
+    "endRideBounce": 700,
+    "endRideAccelerate": 300,
+    "interval": 600,
+    "rate": 20,
+    "max": 1,
+    "duration": 3.5
+  },
+  {
+    "level": 3,
+    "endRideBounce": 700,
+    "endRideAccelerate": 300,
+    "interval": 600,
+    "rate": 25,
+    "max": 1,
+    "duration": 3.5
+  },
+  {
+    "level": 4,
+    "endRideBounce": 700,
+    "endRideAccelerate": 300,
+    "interval": 600,
+    "rate": 25,
+    "max": 1,
+    "duration": 4
+  },
+  {
+    "level": 5,
+    "endRideBounce": 800,
+    "endRideAccelerate": 360,
+    "interval": 600,
+    "rate": 25,
+    "max": 1,
+    "duration": 4
+  },
+  {
+    "level": 6,
+    "endRideBounce": 800,
+    "endRideAccelerate": 360,
+    "interval": 600,
+    "rate": 30,
+    "max": 1,
+    "duration": 4
+  },
+  {
+    "level": 7,
+    "endRideBounce": 800,
+    "endRideAccelerate": 360,
+    "interval": 600,
+    "rate": 30,
+    "max": 1,
+    "duration": 4.5
+  },
+  {
+    "level": 8,
+    "endRideBounce": 900,
+    "endRideAccelerate": 450,
+    "interval": 600,
+    "rate": 30,
+    "max": 1,
+    "duration": 4.5
+  },
+  {
+    "level": 9,
+    "endRideBounce": 900,
+    "endRideAccelerate": 450,
+    "interval": 600,
+    "rate": 30,
+    "max": 1,
+    "duration": 5
+  }
+]

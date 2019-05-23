@@ -1,0 +1,101 @@
+[
+  {
+    "passid": 0,
+    "elastic": 1,
+    "bounce": 200,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 1,
+    "energyLimit": 10
+  },
+  {
+    "passid": 1,
+    "elastic": 1,
+    "bounce": 0,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 1,
+    "energyLimit": 0
+  },
+  {
+    "passid": 2,
+    "elastic": 1,
+    "bounce": 0,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 1,
+    "energyLimit": 0
+  },
+  {
+    "passid": 3,
+    "elastic": 1,
+    "bounce": 0,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 1,
+    "energyLimit": 0
+  },
+  {
+    "passid": 4,
+    "elastic": 1,
+    "bounce": 0,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 1,
+    "energyLimit": 0
+  },
+  {
+    "passid": 5,
+    "elastic": 1,
+    "bounce": 0,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 1,
+    "energyLimit": 0
+  },
+  {
+    "passid": 6,
+    "elastic": 1,
+    "bounce": 0,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 1,
+    "energyLimit": 0
+  },
+  {
+    "passid": 7,
+    "elastic": 1,
+    "bounce": 0,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 1,
+    "energyLimit": 0
+  },
+  {
+    "passid": 8,
+    "elastic": 1,
+    "bounce": 0,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 1,
+    "energyLimit": 0
+  },
+  {
+    "passid": 9,
+    "elastic": 1,
+    "bounce": 0,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 1,
+    "energyLimit": 0
+  },
+  {
+    "passid": 10,
+    "elastic": 1,
+    "bounce": 0,
+    "accelerate": 0,
+    "getCoins": 1,
+    "offlineReward": 1,
+    "energyLimit": 0
+  }
+]

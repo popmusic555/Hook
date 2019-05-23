@@ -33,6 +33,49 @@ MNormal.init = function () {
     this.attr.coins = 0;
     // 携带能量
     this.attr.energy = 0;
+
+    // 刷新间隔
+    this.attr.interval = 0;
+    // 刷新概率
+    this.attr.rate = 0;
+    // 最大数量
+    this.attr.maxNum = 0;
+
+    this.config = null;
+};
+
+MNormal.setConfig = function (config) {
+    this.config = config;
+};
+
+/**
+ * 根据关卡更新PassID
+ * 
+ * @param {any} passID 关卡ID
+ */
+MNormal.updateByPass = function (passID) {
+    var data = null;
+    if (passID >= this.config.length) {
+        data = this.config[this.config.length-1];    
+    }
+    else
+    {
+        data = this.config[passID];
+    }
+
+    var cfg = Global.Model.Game.levelsItemConfig.player;
+
+    this.attr.elastic = data.elastic;
+    this.attr.bouncePower = data.bounce;
+    this.attr.acceleratePower = data.accelerate + cfg[Global.Model.Game.getLevelByItemID(4)].mnormalAccelerate;
+    this.attr.cost = data.cost;
+    this.attr.coins = data.carryCoins;
+    this.attr.energy = data.carryEnergy;
+    this.attr.interval = data.interval;
+    this.attr.rate = data.rate;
+    this.attr.maxNum = data.max;
+
+    console.log("UpdateByPass MNormal" , passID);
 };
 
 /**
@@ -57,7 +100,7 @@ MNormal.handleCollision = function (contact , selfCollider , otherCollider) {
             this.collisionWall(contact , selfCollider , otherCollider);
             break;
         case Enum.TYPE.PLAYER:
-            // 怪物无法与玩家碰撞
+            // 怪物与玩家碰撞不处理逻辑
             break;
         default:
             // 怪物无法与怪物碰撞
@@ -141,14 +184,5 @@ MNormal.limitVelocityY = function (y) {
     y = Math.min(y , this.getAttr().maxVelocity.y);
     return y;
 }
-
-/**
- * 根据关卡更新PassID
- * 
- * @param {any} passID 关卡ID
- */
-MNormal.updateByPass = function (passID) {
-    console.log("MNormal UpdateByPass " , passID);
-};
 
 module.exports = MNormal;
