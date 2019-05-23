@@ -1,0 +1,79 @@
+[
+  {
+    "level": 0,
+    "carryCoins": 100,
+    "interval": 435,
+    "rate": 30,
+    "max": 1
+  },
+  {
+    "level": 1,
+    "carryCoins": 200,
+    "interval": 435,
+    "rate": 30,
+    "max": 1
+  },
+  {
+    "level": 2,
+    "carryCoins": 400,
+    "interval": 435,
+    "rate": 30,
+    "max": 1
+  },
+  {
+    "level": 3,
+    "carryCoins": 600,
+    "interval": 435,
+    "rate": 30,
+    "max": 1
+  },
+  {
+    "level": 4,
+    "carryCoins": 800,
+    "interval": 435,
+    "rate": 30,
+    "max": 1
+  },
+  {
+    "level": 5,
+    "carryCoins": 1000,
+    "interval": 435,
+    "rate": 30,
+    "max": 1
+  },
+  {
+    "level": 6,
+    "carryCoins": 1200,
+    "interval": 435,
+    "rate": 40,
+    "max": 1
+  },
+  {
+    "level": 7,
+    "carryCoins": 1400,
+    "interval": 435,
+    "rate": 40,
+    "max": 1
+  },
+  {
+    "level": 8,
+    "carryCoins": 1600,
+    "interval": 435,
+    "rate": 40,
+    "max": 1
+  },
+  {
+    "level": 9,
+    "carryCoins": 1800,
+    "interval": 435,
+    "rate": 40,
+    "max": 1
+  },
+  {
+    "level": 10,
+    "carryCoins": 2000,
+    "interval": 435,
+    "rate": 40,
+    "max": 1
+  }
+]
