@@ -36,9 +36,8 @@ cc.Class({
     },
 
     onBackBtn:function () {
-        var transition = cc.find("Canvas/Transition");
+        var transition = cc.find("Canvas").getComponentInChildren("VTransition");
         if (transition) {
-            transition = transition.getComponent("VTransition");
             transition.transitionWithScene("MainScene");
         }
     },

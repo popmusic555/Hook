@@ -29,6 +29,16 @@ MGame.init = function () {
     // 所有升级选项等级
     this.levels = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
+    this.task = [];
+    // 当前任务ID
+    this.task.id = 2;
+    // 当前任务奖励ID
+    this.task.rewardId = 2;
+    // 当前碎片
+    this.task.fragment = [0,0,0,0,0,0,0,0,0,0,0,0];
+    // 当前击杀怪物数量
+    this.task.killNum = 0;
+
     // 所有升级选项数据表
     this.levelsItemConfig = {};
     this.levelsItemConfig.player = null;
@@ -158,6 +168,10 @@ MGame.getGameView = function () {
     return this.gameView;
 }
 
+MGame.getTask = function () {
+    return this.task;  
+},
+
 /**
  * 设置最大里程
  * 
@@ -208,6 +222,25 @@ MGame.reduceCoins = function (num) {
 MGame.setLotteryNum = function (num) {
     this.lottery = num;
 };
+
+/**
+ * 设置怪物击杀数量
+ *
+ * @param {*} num 数量
+ */
+MGame.setKillNum = function (num) {
+    this.kill = num;  
+};
+
+/**
+ * 设置邀请数量
+ *
+ * @param {*} num 数量
+ */
+MGame.setInvitation = function (num) {
+    this.invitation = num;
+};
+
 /**
  * 金币是否足够 
  * 

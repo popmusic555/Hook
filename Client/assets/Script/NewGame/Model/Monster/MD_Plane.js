@@ -166,7 +166,7 @@ MPlane.collisionWall = function (contact , monsterCollider , wallCollider) {
             break;
         case 2:
             // 墙体2
-            monster.onDeath();
+            monster.onDeathWithWall();
             break;
         case 3:
             // 墙体3

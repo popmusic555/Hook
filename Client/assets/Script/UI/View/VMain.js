@@ -24,14 +24,15 @@ cc.Class({
         tabPage:[cc.Node],
         // 选中效果
         selectedSprite:cc.Sprite,
-        // 默认选项
-        defaultSelect:cc.Button,
+        // 内容
+        content:[cc.Node],
 
         _CurSelectedItem:null,
 
         _ContentPage:null,
 
         _CurLevelUpIndex:0,
+
     },
 
     // onLoad () {},
@@ -51,12 +52,10 @@ cc.Class({
 
     // update (dt) {},
     gameStart:function () {
-        var transition = cc.find("Canvas/Transition");
+        var transition = cc.find("Canvas").getComponentInChildren("VTransition");
         if (transition) {
-            transition = transition.getComponent("VTransition");
             transition.transitionWithScene("NewGameScene");
         }
-        // cc.director.loadScene("NewGameScene");
     },
 
     // 切换tab页
@@ -95,6 +94,9 @@ cc.Class({
         // 切换到选项1
         var btn = this.tabPage[tabIndex].getComponentInChildren(cc.Button);
         this.switchLevelUpItem({target:btn.node} , tabIndex * 8);
+
+        this.content[0].active = true;
+        this.content[1].active = false;
     },
 
     switchTabNoRefresh:function (event , tabIndex) {
@@ -121,6 +123,12 @@ cc.Class({
                 page.active = false;
             }
         }
+
+        this.content[0].active = false;
+        this.content[1].active = true;
+
+        var activityView = this.getComponentInChildren("VActivity");
+        activityView.show();
     },
 
     // 切换选项
@@ -154,13 +162,26 @@ cc.Class({
         var curLevelNum = Global.Model.Game.getLevelByItemID(index);
         level.level = curLevelNum;
         var coins = this._ContentPage.getChildByName("Coins").getComponentInChildren(cc.Label);
+        var levelUpBtn = this._ContentPage.getChildByName("LevelUp").getComponent(cc.Button);
         if (curLevelNum < maxLevelNum) {
-            coins.string = " x " + this._LevelUpConsumeObj[curLevelNum]["levelupItem" + index];
+            var nextLevelConsume = this._LevelUpConsumeObj[curLevelNum]["levelupItem" + index];
+            coins.string = " x " + nextLevelConsume;
+            if (!Global.Model.Game.isEnoughCoins(nextLevelConsume)) {
+                // 金币不足
+                levelUpBtn.interactable = false;
+            }
+            else
+            {
+                levelUpBtn.interactable = true;
+            }
         }
         else
         {
             coins.string = "已满级";
+            levelUpBtn.interactable = false;
         }
+
+        
     },
 
     // 升级按钮回调
@@ -168,19 +189,7 @@ cc.Class({
         // 当前升级按钮回调
         var maxLevelNum = this._LevelUpDescObj[this._CurLevelUpIndex].maxLevel;
         var curLevelNum = Global.Model.Game.getLevelByItemID(this._CurLevelUpIndex);
-        // 等级是否已经超过上限
-        if (curLevelNum >= maxLevelNum) {
-            // 已满级
-            console.log("当前选项已经满级");
-            return;
-        }
-
         var nextLevelConsume = this._LevelUpConsumeObj[curLevelNum]["levelupItem" + this._CurLevelUpIndex];
-        if (!Global.Model.Game.isEnoughCoins(nextLevelConsume)) {
-            // 金币不足
-            console.log("当前金币不足");
-            return;
-        }
 
         // 减少金币
         Global.Model.Game.reduceCoins(nextLevelConsume);
@@ -188,12 +197,23 @@ cc.Class({
         var level = this._ContentPage.getChildByName("Level").getComponent(Level);
         level.level = curLevelNum;
         var coins = this._ContentPage.getChildByName("Coins").getComponentInChildren(cc.Label);
+        var levelUpBtn = event.target.getComponent(cc.Button);
         if (curLevelNum < maxLevelNum) {
-            coins.string = " x " + this._LevelUpConsumeObj[curLevelNum]["levelupItem" + this._CurLevelUpIndex];  
+            nextLevelConsume = this._LevelUpConsumeObj[curLevelNum]["levelupItem" + this._CurLevelUpIndex];
+            coins.string = " x " + nextLevelConsume;
+            
+            if (!Global.Model.Game.isEnoughCoins(nextLevelConsume)) {
+                levelUpBtn.interactable = false;
+            }
+            else
+            {
+                levelUpBtn.interactable = true;  
+            }
         }
         else
         {
             coins.string = "已满级";
+            levelUpBtn.interactable = false;
         }
 
         var progress = this._CurSelectedItem.getComponentInChildren(cc.ProgressBar);

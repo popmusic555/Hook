@@ -27,6 +27,7 @@ cc.Class({
         _CurRelativeVelocity:cc.Vec2.ZERO,
 
         _IsUpdate:false,
+        _IsDeath:false,
 
         // 是否绑定
         _IsBind:false,
@@ -107,15 +108,18 @@ cc.Class({
     },
 
     lateUpdate (dt) {
-        if (!this._IsUpdate) {
+        this.updateVelocity();
+        if (this._IsDeath) {
             return;
         }
-        this.updateVelocity();
         this.updateOil();
         this.updateDuration();
     },
 
     updateVelocity:function () {
+        if (!this._IsUpdate) {
+            return;
+        }
         if (this._IsBind) {
             return;
         }
@@ -168,13 +172,20 @@ cc.Class({
     },
 
     onDeath:function (player) {
-        this._IsUpdate = false;
+        if (this._IsDeath) {
+            return;
+        }
+        this._IsDeath = true;
+        this._CurRelativeVelocity.x = 0;
         this.sleep();
         this.static();
-        if (player) {
-            this.setVelocityX(player.getVelocityX());
-        }
         this.showDeathAni();
+    },
+
+    onDeathWithWall:function () {
+        this._IsUpdate = false;
+        this.static();
+        this.onDeath(this._Player);
     },
 
     showDeathAni:function () {

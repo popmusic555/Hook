@@ -1666,8 +1666,8 @@ MPlayer.triggerFloor = function (contact , player , floor , attr) {
             var newVelocity = cc.v2(velocityX , velocityY);
             // 玩家对象设置新速度
             var car = player.getBindMonster();
-            car.setVelocity(newVelocity);    
-            car.setDuration(selfAttr.duration);
+            car.setVelocity(newVelocity);
+            car.setDuration(selfAttr.duration * 60);
             car.scheduleOnce(function () {
                 car.node.rotation = 0;
             } , 0);
@@ -1857,11 +1857,15 @@ MPlayer.quake = function (player) {
                     monster.onDeath(player);
                     attr = Global.Model.MNormal.getAttr();
                     isShowBigBoomAni = true;
+                    // 获取奖励
+                    MPlayer.addReward(attr.cost , attr.coins , attr.energy);
                     break;
                 case Enum.TYPE.COINS:
                     monster.onDeath(player);
                     attr = Global.Model.MCoins.getAttr();
                     isShowBigBoomAni = true;
+                    // 获取奖励
+                    MPlayer.addReward(attr.cost , attr.coins , attr.energy);
                     break;
                 case Enum.TYPE.BOOM:
                     var Calculator = Global.Common.Utils.Calculator;
@@ -1887,15 +1891,17 @@ MPlayer.quake = function (player) {
                     monster.onDeath(player);
                     attr = otherAttr;
                     isShowBigBoomAni = true;
+                    // 获取奖励
+                    MPlayer.addReward(attr.cost , attr.coins , attr.energy);
                     break;
                 case Enum.TYPE.CLIP:
                     monster.onDeath(player);
                     attr = Global.Model.MClip.getAttr();
                     isShowBigBoomAni = true;
+                    // 获取奖励
+                    MPlayer.addReward(attr.cost , attr.coins , attr.energy);
                     break;
             }
-            // 获取奖励
-            MPlayer.addReward(attr.cost , attr.coins , attr.energy);
         }
     }
 

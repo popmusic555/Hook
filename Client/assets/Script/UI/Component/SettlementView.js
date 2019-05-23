@@ -18,7 +18,10 @@ cc.Class({
     // update (dt) {},
 
     onBackBtn:function () {
-        cc.director.loadScene("MainScene");
+        var transition = cc.find("Canvas").getComponentInChildren("VTransition");
+        if (transition) {
+            transition.transitionWithScene("MainScene");
+        }
     },
 
     onVideoBtn:function () {
@@ -26,7 +29,10 @@ cc.Class({
     },
 
     onContinueBtn:function () {
-        cc.director.loadScene("GameScene");
+        var transition = cc.find("Canvas").getComponentInChildren("VTransition");
+        if (transition) {
+            transition.transitionWithScene("NewGameScene");
+        }
     },
 
     setParam:function (mileage , coins) {

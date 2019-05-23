@@ -126,8 +126,8 @@ cc.Class({
     launching:function (velocity) {
         this.state = GlobalEnum.P_STATE.NORMAL;
         this.animation.transState(GlobalEnum.P_ANI_STATE.LAUNCH);
-        // this.run(velocity , Global.Common.Const.GRAVITY_SCALE);
-        this.run(cc.v2(1000,1000) , Global.Common.Const.GRAVITY_SCALE);
+        this.run(velocity , Global.Common.Const.GRAVITY_SCALE);
+        // this.run(cc.v2(1000,1000) , Global.Common.Const.GRAVITY_SCALE);
 
         this.showShadow();
 

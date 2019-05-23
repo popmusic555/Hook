@@ -81,7 +81,6 @@ MWall.updateByPass = function (passID) {
     }
 
     var cfg = Global.Model.Game.levelsItemConfig.player;
-    console.log(Global.Model.Game.levelsItemConfig.player, Global.Model.Game.getLevelByItemID(7));
 
     this.attr.crossSpeed = data.crossSpeed;
     this.attr.acceleratePower = data.accelerate + cfg[Global.Model.Game.getLevelByItemID(7)].wallAccelerate;

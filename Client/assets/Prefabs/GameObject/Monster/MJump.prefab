@@ -30,7 +30,7 @@
       }
     ],
     "_active": true,
-    "_level": 5,
+    "_level": 2,
     "_components": [
       {
         "__id__": 25
@@ -179,7 +179,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "c3X+IMfsVHmIAbgIC+yTJO"
+    "_id": "26JJVQzytGJIrWoniakCCc"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -475,7 +475,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "6fE0bm0eVMZp9KLxphXV1t"
+    "_id": "9avrPiQqBLKqe77gMgj1nI"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -521,7 +521,7 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "3c5QoirqFIXKhbtd5cppyE"
+    "_id": "ecSxtKo5hGj4cJHxegSF79"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -547,7 +547,7 @@
       "width": 70,
       "height": 30
     },
-    "_id": "edNjPxhbVLZJPYIFbL2Q/D"
+    "_id": "c9dzHkAExAj4tNOwq5iTx/"
   },
   {
     "__type__": "86ff2D6xS5Ctb1P5l2uA5W6",
@@ -566,7 +566,7 @@
       "__id__": 1
     },
     "_Jump": null,
-    "_id": "aenfamox1G5reg5qnznw77"
+    "_id": "8f4hYbpFdIA5EWC/PyaiRp"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -737,7 +737,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "38EwPN8jFHnbuW/ECutjSN"
+    "_id": "3bduUl8kFIHJpu00AxZsX+"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -845,7 +845,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "e4UWJFVGNHLo+sh0a3gQt1"
+    "_id": "d0KEUZ/U1OnJBGIp/sAMZo"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -880,7 +880,7 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "d2QS2k6CpMBbrqvC1s7ZJD"
+    "_id": "292GqLXUdEUr8ThfrsyCDk"
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -902,7 +902,7 @@
       "y": 45
     },
     "_radius": 55,
-    "_id": "6ddIEgPOBHYL5ig8oUV3Wt"
+    "_id": "45l7CajD1LjLQ+QvV3OUey"
   },
   {
     "__type__": "1a6a12fzrFPoZ+w5aK2djZV",
@@ -943,13 +943,14 @@
       "y": 0
     },
     "_IsUpdate": false,
+    "_IsDeath": false,
     "_Shadow": null,
     "_IsBind": false,
     "_BounceTimes": 0,
     "_isSkill": false,
     "_Fist": null,
     "_SkillLock": false,
-    "_id": "86men2l9ZO64i3tkIOT2oK"
+    "_id": "dcbHaOl/xDGLwrUS0h6z73"
   },
   {
     "__type__": "cc.PrefabInfo",

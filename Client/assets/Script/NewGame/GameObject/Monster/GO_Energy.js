@@ -23,6 +23,8 @@ cc.Class({
         _CurRelativeVelocity:cc.Vec2.ZERO,
 
         _IsUpdate:false,
+        _IsDeath:false,
+        
     },
 
     // onLoad () {},
@@ -67,13 +69,20 @@ cc.Class({
     },
 
     onDeath:function (player) {
-        this._IsUpdate = false;
+        if (this._IsDeath) {
+            return;
+        }
+        this._IsDeath = true;
+        this._CurRelativeVelocity.x = 0;
         this.sleep();
         this.static();
-        if (player) {
-            this.setVelocityX(player.getVelocityX());
-        }
         this.showDeathAni();
+    },
+
+    onDeathWithWall:function () {
+        this._IsUpdate = false;
+        this.static();
+        this.onDeath(this._Player);
     },
 
     showDeathAni:function () {
