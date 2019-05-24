@@ -2,7 +2,7 @@
   {
     "passid": 0,
     "elastic": 1,
-    "bounce": 200,
+    "bounce": 0,
     "accelerate": 0,
     "getCoins": 1,
     "offlineReward": 1,

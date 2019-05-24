@@ -124,6 +124,7 @@ cc.Class({
      * @param {any} velocity 发射速度
      */
     launching:function (velocity) {
+        velocity.y = Math.min( Global.Common.Utils.Converter.toBounceSpeed(3000),velocity.y);
         this.state = GlobalEnum.P_STATE.NORMAL;
         this.animation.transState(GlobalEnum.P_ANI_STATE.LAUNCH);
         this.run(velocity , Global.Common.Const.GRAVITY_SCALE);
@@ -400,6 +401,8 @@ cc.Class({
     castSkill:function () {
         console.log("触发技能")
         if (!Global.Model.MPlayer.isEnoughEnergy(Global.Common.Const.ENERGY_RATIO)) {
+            var energyPower = Global.Model.Game.getUIView().getComponentInChildren("EnergyPower");
+            energyPower.shake();
             return;
         }
         this.setVelocityY(-2000);

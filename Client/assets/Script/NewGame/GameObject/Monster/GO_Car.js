@@ -20,18 +20,23 @@ cc.Class({
         // 最小相对速度
         minRelativeVelocity:cc.Vec2.ZERO,
 
+        meter:cc.Sprite,
+        meterTime:0,
+
         _CurRelativeVelocity:cc.Vec2.ZERO,
 
         _IsUpdate:false,
         _IsDeath:false,
 
         _Shadow:null,
+        _CarMeter:null,
 
         // 是否绑定
         _IsBind:false,
 
         // 持续时间
         _Duration:0,
+        _MeterSpeed:0,
     },
 
     // onLoad () {},
@@ -49,6 +54,8 @@ cc.Class({
             shadowAni:this.node.position,
         };
 
+        this._CarMeter = this.meter;
+
         this._Duration = -1;
     },
 
@@ -59,6 +66,8 @@ cc.Class({
         this.scheduleOnce(function () {
             this.node.rotation = -30;
         }.bind(this) , 0);
+        this._Shadow.shadow.node.active = false;
+        this._CarMeter.node.parent.active = true;
     },
 
     unBind:function () {
@@ -72,6 +81,7 @@ cc.Class({
     setDuration:function (num) {
         this._Duration = num;  
         this.animation.animation = "car_ljr_runtx";
+        this._MeterSpeed = 0.25 / (60 * this.meterTime);
     },
 
     update (dt) {
@@ -89,6 +99,7 @@ cc.Class({
             return;
         }
         this.updateDuration();
+        this.updateMeter();
     },
 
     updateVelocity:function () {
@@ -137,6 +148,12 @@ cc.Class({
 
             this._Player.animation.unlockState();  
         }
+    },
+
+    updateMeter:function () {
+        var range = this._CarMeter.fillRange;
+        range = Math.max(0 , range - this._MeterSpeed);
+        this._CarMeter.fillRange = range;
     },
 
     /**
@@ -188,10 +205,10 @@ cc.Class({
     },
 
     useSkill:function () {
-        console.log("汽车技能使用");
         if (this._Duration <= 0) {
             return;
         }
+        console.log("汽车技能使用");
 
         var mCar = Global.Model.MCar;
         var Calculator = Global.Common.Utils.Calculator;
@@ -211,5 +228,14 @@ cc.Class({
         var newVelocity = cc.v2(velocityX , velocityY);
         // 玩家对象设置新速度
         this.setVelocity(newVelocity);
+
+        var action1 = cc.moveBy(0.03 , -10 , 0);
+        var action2 = cc.moveBy(0.125 , 40 , 0);
+        var action3 = cc.moveBy(0.05 , -30 , 0);
+        this.animation.node.parent.runAction(cc.sequence(action1 , action2 ,action3));
+
+        var range = this._CarMeter.fillRange;
+        range = Math.min(0.25 , range + 0.25 * 0.3);
+        this._CarMeter.fillRange = range;
     },
 });

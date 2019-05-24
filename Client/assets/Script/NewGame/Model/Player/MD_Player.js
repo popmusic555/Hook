@@ -21,7 +21,7 @@ MPlayer.init = function () {
     this.attr.maxVelocity = cc.v2(20000 , 20000);
     // 最小速度
     // this.attr.minVelocity = cc.Vec2.ZERO;
-    this.attr.minVelocity = cc.v2(0 , -20000);
+    this.attr.minVelocity = cc.v2(30 , -20000);
     // 反弹力
     this.attr.bouncePower = 100;
     // 加速力
@@ -83,8 +83,8 @@ MPlayer.updateByPass = function (passID) {
     this.attr.elastic = data.elastic;
     this.attr.bouncePower = data.bounce + cfg[Global.Model.Game.getLevelByItemID(1)].playerBounce;
     this.attr.acceleratePower = data.accelerate;
-    this.attr.coinsRadio = data.getCoins + cfg[Global.Model.Game.getLevelByItemID(6)].playerBounce;
-    this.attr.offlineRewards = data.offlineReward + cfg[Global.Model.Game.getLevelByItemID(3)].getCoins;
+    this.attr.coinsRadio = data.getCoins * cfg[Global.Model.Game.getLevelByItemID(6)].getCoins;
+    this.attr.offlineRewards = data.offlineReward + cfg[Global.Model.Game.getLevelByItemID(3)].offlineRewards;
     this.attr.energyLimit = data.energyLimit + cfg[Global.Model.Game.getLevelByItemID(2)].energyLimit;
     this.attr.launchingVelocity = cfg[Global.Model.Game.getLevelByItemID(0)].launchSpeed;
     
@@ -154,7 +154,8 @@ MPlayer.getRewardsCoins = function () {
  * @param {any} num 增加的值
  */
 MPlayer.addRewardCoins = function (num) {
-    this.gamedata.rewardsCoins += num;
+    this.gamedata.rewardsCoins = num;
+    console.log("this.gamedata.rewardsCoins" , this.gamedata.rewardsCoins , this.attr.coinsRadio);
 };
 
 /**
@@ -165,7 +166,6 @@ MPlayer.addRewardCoins = function (num) {
 MPlayer.addEnergy = function (num) {
     var energy = this.gamedata.energy + num;
     this.gamedata.energy = Math.min(energy , this.attr.energyLimit);
-    console.log("addEnergy" , num);
 }
 
 /**
@@ -1754,6 +1754,10 @@ MPlayer.addCoins = function (num) {
     this.addRewardCoins(num);
     // 展示UI动画
     console.log("addCoins" , num);
+    if (num > 0) {
+        var ani = this.getPlayerObj().getComponentInChildren("CoinsRewardAni");
+        ani.showWithCoinsNum(num);    
+    }
 }
 
 /**
@@ -1767,13 +1771,23 @@ MPlayer.addCarryCoins = function (num) {
     console.log("addCarryCoins" , num);
 }
 
+MPlayer.addCarryEnergy = function (num) {
+    this.addEnergy(num);
+    console.log("addCarryEnergy" , num);
+    
+    if (num >= Global.Common.Const.ENERGY_RATIO) {
+        var ani = Global.Model.Game.getUIView().getComponentInChildren("EnergyCarryAni");
+        ani.show();
+    }
+}
+
 MPlayer.addReward = function (cost , coins , energy) {
     // 增加金币
-    this.addCoins(cost);
+    this.addCoins(cost * this.attr.coinsRadio);
     // 增加携带的金币
-    this.addCarryCoins(coins);
+    this.addCarryCoins(coins * this.attr.coinsRadio);
     // 增加能量
-    this.addEnergy(energy);  
+    this.addCarryEnergy(energy);  
 },
 
 /**
@@ -1842,7 +1856,8 @@ MPlayer.boom = function (boom) {
  */
 MPlayer.quake = function (player) {
     var worldPos = player.node.convertToWorldSpaceAR(cc.v2(0,0));
-    var rect = new cc.rect(worldPos.x - 150 , worldPos.y - 30 , 300 ,  80);
+    // var rect = new cc.rect(worldPos.x - 150 , worldPos.y - 30 , 300 ,  80);
+    var rect = new cc.rect(worldPos.x - 150 , worldPos.y - 1000 , 300 ,  2000);
     var monsters = this.getMonsterForAABB(rect);
 
     var isShowBigBoomAni = false;
@@ -1910,17 +1925,53 @@ MPlayer.quake = function (player) {
     }
 },
 
+// MPlayer.getMonsterForAABB = function (worldRect) {
+//     var result = [];
+//     var colliderList = cc.director.getPhysicsManager().testAABB(worldRect);
+//     var len = colliderList.length;
+//     for (let index = 0; index < len; index++) {
+//         var collider = colliderList[index];
+//         var gBase = collider.getComponent(Global.GameObj.GBase);
+//         if (gBase.getType() >= Enum.TYPE.NORMAL && gBase.getType() != Enum.TYPE.JUMP_FIST && gBase.getType() != Enum.TYPE.OIL) {
+//             result.push(gBase);
+//         }
+//     }
+//     return result;
+// },
+
 MPlayer.getMonsterForAABB = function (worldRect) {
     var result = [];
-    var colliderList = cc.director.getPhysicsManager().testAABB(worldRect);
-    var len = colliderList.length;
+    // var colliderList = cc.director.getPhysicsManager().testAABB(worldRect);
+    // var len = colliderList.length;
+    // for (let index = 0; index < len; index++) {
+    //     var collider = colliderList[index];
+    //     var gBase = collider.getComponent(Global.GameObj.GBase);
+    //     if (gBase.getType() >= Enum.TYPE.NORMAL && gBase.getType() != Enum.TYPE.JUMP_FIST && gBase.getType() != Enum.TYPE.OIL) {
+    //         result.push(gBase);
+    //     }
+    // }
+
+    var gameView = Global.Model.Game.getGameView();
+    var monsterView = gameView.getComponentInChildren("VMonster");
+    
+    var monsterList = monsterView.getComponentsInChildren(Global.GameObj.GBase);
+
+    var len = monsterList.length;
     for (let index = 0; index < len; index++) {
-        var collider = colliderList[index];
-        var gBase = collider.getComponent(Global.GameObj.GBase);
-        if (gBase.getType() >= Enum.TYPE.NORMAL && gBase.getType() != Enum.TYPE.JUMP_FIST && gBase.getType() != Enum.TYPE.OIL) {
-            result.push(gBase);
+        var monster = monsterList[index];
+        var gBase = monster;
+        var gBaseWorldPos = gBase.node.convertToWorldSpaceAR(cc.v2(0,0));
+        if (gBaseWorldPos.x <= worldRect.xMax && 
+            gBaseWorldPos.x >= worldRect.xMin &&
+            gBaseWorldPos.y <= worldRect.yMax &&
+            gBaseWorldPos.y >= worldRect.yMin) 
+        {
+            if (gBase.getType() >= Enum.TYPE.NORMAL && gBase.getType() != Enum.TYPE.JUMP_FIST && gBase.getType() != Enum.TYPE.OIL) {
+                result.push(gBase);
+            }    
         }
     }
+
     return result;
 },
 

@@ -58,6 +58,7 @@ cc.Class({
         // this.setAngularVelocity(300);
         this.animation.animation = "xg_srh_lvr" + Global.Common.Utils.random(1 , 2);
         this.animation.node.runAction(cc.repeatForever(cc.rotateBy(0.5 , 300)));
+        this._Shadow.shadow.node.active = false;
     },
 
     unBind:function () {

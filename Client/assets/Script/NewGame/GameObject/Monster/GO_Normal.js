@@ -93,6 +93,10 @@ cc.Class({
         this.sleep();
         this.static();
         this.showDeathAni();
+
+        if (player) {
+            this.setVelocityX(player.getVelocityX());
+        }
     },
 
     onDeathWithWall:function () {

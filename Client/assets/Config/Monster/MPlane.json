@@ -9,7 +9,7 @@
     "carryEnergy": 2,
     "endRideBounce": 0,
     "endRideAccelerate": 0,
-    "skillBounce": 0,
+    "skillBounce": 300,
     "skillAccelerate": 0,
     "interval": 0,
     "rate": 0,

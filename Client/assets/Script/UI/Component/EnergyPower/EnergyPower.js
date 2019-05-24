@@ -61,6 +61,18 @@ cc.Class({
     // 设置能量值上限
     setEnergyLimit:function (num) {
         this._EnergyLimit = num;
+    },
+
+    // 能量槽抖动
+    shake:function () {
+        var upAction = cc.moveBy(0.02 , 0 , 5);
+        var downAction = upAction.reverse();
+        var rightAction = cc.moveBy(0.02 , 5 , 0);
+        var leftAction = rightAction.reverse();
+
+        var action1 = cc.repeat(cc.sequence(upAction , downAction , downAction , upAction) , 2);
+        var action2 = cc.repeat(cc.sequence(leftAction , rightAction , rightAction , leftAction) , 2);
+        this.node.runAction(cc.sequence(action1 , action2));
     }
 
     // update (dt) {},
