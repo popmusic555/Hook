@@ -118,6 +118,7 @@ cc.Class({
         Global.Model.MPlane.setConfig(this.mPlaneConfig.json);
         Global.Model.MCar.setConfig(this.mCarConfig.json);
 
+        Global.Model.MPlayer.resetGamedata();
         // 设置关卡ID
         Global.Model.MWall.setPassID(0);
     },

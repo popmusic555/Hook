@@ -18,6 +18,10 @@ cc.Class({
     start () {
         this._super();
         this._GeneratedMonsterID = -1;
+
+        this.max = Global.Model.MCoins.getAttr().maxNum;
+        this.interval = Global.Model.MCoins.getAttr().interval;
+        this.generateRate = Global.Model.MCoins.getAttr().rate;
     },
 
     // update (dt) {},

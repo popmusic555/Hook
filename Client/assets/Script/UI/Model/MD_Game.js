@@ -18,22 +18,22 @@ MGame.init = function () {
     // 金币数量
     this.coins = 99999999;
     // 复活次数
-    this.revive = 3;
+    this.revive = 0;
     // 最大里程
     this.mileage = 0;
     // 最大关卡数
     this.maxPass = 0;
     // 轮盘奖励倍数
-    this.lottery = 4;
+    this.lottery = 0;
 
     // 所有升级选项等级
     this.levels = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
     this.task = [];
     // 当前任务ID
-    this.task.id = 2;
+    this.task.id = 0;
     // 当前任务奖励ID
-    this.task.rewardId = 2;
+    this.task.rewardId = 0;
     // 当前碎片
     this.task.fragment = [0,0,0,0,0,0,0,0,0,0,0,0];
     // 当前击杀怪物数量
@@ -214,6 +214,10 @@ MGame.reduceCoins = function (num) {
     this.setCoins(this.coins - num);
 }
 
+MGame.addCoins = function (num) {
+    this.setCoins(this.coins + num);
+}
+
 /**
  * 设置轮盘奖励倍数
  * 
@@ -229,8 +233,29 @@ MGame.setLotteryNum = function (num) {
  * @param {*} num 数量
  */
 MGame.setKillNum = function (num) {
-    this.kill = num;  
+    this.killNum = num;  
 };
+
+/**
+ * 增加击杀数量
+ *
+ * @param {*} num
+ */
+MGame.addKillNum = function (num) {
+    this.setKillNum(num + this.killNum);
+}
+
+/**
+ * 添加碎片
+ *
+ * @param {*} fragmentList 碎片列表
+ */
+MGame.addFragment = function (fragmentList) {
+    var len = this.task.fragment.length;
+    for (let index = 0; index < len; index++) {
+        this.task.fragment[index] += fragmentList[index];
+    }
+}
 
 /**
  * 设置邀请数量

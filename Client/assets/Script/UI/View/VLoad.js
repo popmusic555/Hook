@@ -30,6 +30,8 @@ cc.Class({
         }.bind(this) , function () {
             this._ProgressNum2 = 0.5;
         }.bind(this))
+
+        Global.Model.Game.initLevels([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
     },
 
     update (dt) {

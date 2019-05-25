@@ -5,6 +5,8 @@ cc.Class({
         itemPrefab:cc.Prefab,
         content:cc.Node,
 
+        _Datas:null,
+
         // 奖励数据
         _RewardData:null,
     },
@@ -14,6 +16,12 @@ cc.Class({
     },
 
     start () {
+        var len = this._RewardData.length;
+        for (let index = 0; index < len; index++) {
+            var item = cc.instantiate(this.itemPrefab);
+            this.content.addChild(item);
+            this.refreshItem(item , this._Datas , index);
+        }
     },
 
     // update (dt) {},
@@ -28,40 +36,42 @@ cc.Class({
 
     show:function (datas) {
         this.node.active = true;
-
-        var len = this._RewardData.length;
+        this._Datas = datas;
+        
+        var len = this.content.childrenCount;
         for (let index = 0; index < len; index++) {
-            var item = cc.instantiate(this.itemPrefab);
-            this.content.addChild(item);
+            var item = this.content.children[index];
+            this.refreshItem(item , this._Datas , index);
+        }
+    },
 
-            var friendItem = item.getComponent("FriendItem");
-            if (index < datas.length) {
-                var data = datas[index];
-                if (data.isReward) {
-                    // 已领取状态
-                    friendItem.setState(0);
-                    friendItem.setHeadIcon("");
-                    
-                }
-                else
-                {
-                    // 领取状态
-                    friendItem.setState(1);
-                    friendItem.setHeadIcon("");
-                }
-            }
-            else if (index == datas.length)
-            {
-                // 去邀请状态
-                friendItem.setState(2);
+    refreshItem:function (item , datas , index) {
+        var friendItem = item.getComponent("FriendItem");
+        if (index < datas.length) {
+            var data = datas[index];
+            if (data.isReward) {
+                // 已领取状态
+                friendItem.setState(0);
+                friendItem.setHeadIcon("");
             }
             else
             {
-                // 未邀请状态
-                friendItem.setState(3);
+                // 领取状态
+                friendItem.setState(1);
+                friendItem.setHeadIcon("");
             }
-            friendItem.setIndex(index + 1);
-            friendItem.setRewardNum(this._RewardData[index]);
         }
+        else if (index == datas.length)
+        {
+            // 去邀请状态
+            friendItem.setState(2);
+        }
+        else
+        {
+            // 未邀请状态
+            friendItem.setState(3);
+        }
+        friendItem.setIndex(index + 1);
+        friendItem.setRewardNum(this._RewardData[index]);
     },
 });

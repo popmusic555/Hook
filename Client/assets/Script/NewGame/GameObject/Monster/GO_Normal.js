@@ -96,13 +96,20 @@ cc.Class({
 
         if (player) {
             this.setVelocityX(player.getVelocityX());
+            // 随机获取任务碎片
+            var fragment = Global.Model.MPlayer.randomFragment();
+            if (fragment != -1) {
+                Global.Model.MPlayer.addFragment(fragment);
+            }
+            // 增加击杀数量
+            Global.Model.MPlayer.addOneKillNum();
         }
     },
 
     onDeathWithWall:function () {
         this._IsUpdate = false;
         this.static();
-        this.onDeath(this._Player);
+        this.onDeath();
     },
 
     showDeathAni:function () {

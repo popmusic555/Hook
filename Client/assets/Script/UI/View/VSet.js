@@ -19,6 +19,8 @@ cc.Class({
 
     onNoticeBtn:function () {
         // 显示公告
+        var noticeView = this.node.parent.getComponentInChildren("VNotice");
+        noticeView.show();
     },
 
     onCloseBtn:function () {

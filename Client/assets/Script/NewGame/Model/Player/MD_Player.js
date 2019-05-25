@@ -53,6 +53,10 @@ MPlayer.init = function () {
     this.gamedata.energy = 0;
     // 游戏里程
     this.gamedata.mileage = 0;
+    // 当局游戏击杀怪物数量
+    this.gamedata.killNum = 0;
+    // 当局游戏获取到碎片
+    this.gamedata.fragment = [0,0,0,0,0,0,0,0,0,0,0,0];
 
     this.config = null;
 
@@ -106,6 +110,8 @@ MPlayer.resetGamedata = function () {
     this.gamedata.rewardsCoins = 0;
     this.gamedata.energy = 0;
     this.gamedata.mileage = 0;
+    this.gamedata.killNum = 0;
+    this.gamedata.fragment = [0,0,0,0,0,0,0,0,0,0,0,0];
 };
 
 /**
@@ -154,7 +160,7 @@ MPlayer.getRewardsCoins = function () {
  * @param {any} num 增加的值
  */
 MPlayer.addRewardCoins = function (num) {
-    this.gamedata.rewardsCoins = num;
+    this.gamedata.rewardsCoins += num;
     console.log("this.gamedata.rewardsCoins" , this.gamedata.rewardsCoins , this.attr.coinsRadio);
 };
 
@@ -189,13 +195,102 @@ MPlayer.isEnoughEnergy = function (num) {
     }
     return false;
 }
-
 /**
  * 获取能量
  * 
  */
 MPlayer.getEnergy = function () {
     return this.gamedata.energy;
+};
+
+/**
+ * 设置击杀数
+ *
+ */
+MPlayer.getKillNum = function () {
+    return this.gamedata.killNum;
+};
+
+/**
+ * 设置击杀数量
+ *
+ * @param {*} num 数量
+ */
+MPlayer.setKillNum = function (num) {
+    this.gamedata.killNum = num;
+};  
+
+/**
+ * 击杀数量+1
+ *
+ */
+MPlayer.addOneKillNum = function () {
+    this.gamedata.killNum += 1;
+};
+
+/**
+ * 获取任务碎片
+ *
+ * @returns 碎片列表
+ */
+MPlayer.getFragment = function () {
+    return this.gamedata.fragment;  
+};
+
+/**
+ * 设置碎片
+ *
+ * @param {*} index
+ */
+MPlayer.setFragment = function (index) {
+    this.gamedata.fragment[index] = 1;
+};
+
+/**
+ * 添加碎片
+ *
+ * @param {*} index
+ */
+MPlayer.addFragment = function (index) {
+    this.setFragment(index);
+}
+
+/**
+ * 随机获取任务碎片
+ *
+ */
+MPlayer.getFragmentForRandom = function () {
+    var index = this.randomFragment();
+    var rate = Global.Common.Const.FRAGMENT_RATE[index];
+    var num = Math.random();
+    if (num <= rate) {
+        return index;
+    }
+    return -1;
+};
+
+/**
+ * 随机任务碎片
+ *
+ */
+MPlayer.randomFragment = function () {
+    var list = this.surplusFragmentList();
+    return list[Global.Common.Utils.random(0 , list.length-1)];
+};
+
+/**
+ * 剩余为获取碎片列表
+ *
+ */
+MPlayer.surplusFragmentList = function () {
+    var result = [];
+    var len = this.gamedata.fragment.length;
+    for (let index = 0; index < len; index++) {
+        if (this.gamedata.fragment[index] + Global.Model.Game.getTask().fragment[index] <= 0) {
+            result.push(index);
+        }
+    }
+    return result;
 };
 
 /**
@@ -1769,6 +1864,11 @@ MPlayer.addCarryCoins = function (num) {
     this.addRewardCoins(num);
     // 展示UI动画
     console.log("addCarryCoins" , num);
+
+    if (num > 0) {
+        var ani = Global.Model.Game.getUIView().getComponentInChildren("CoinsCarryAni");
+        ani.show();
+    }
 }
 
 MPlayer.addCarryEnergy = function (num) {
@@ -1797,7 +1897,7 @@ MPlayer.addReward = function (cost , coins , energy) {
 MPlayer.boom = function (boom) {
     var worldPos = boom.node.convertToWorldSpaceAR(cc.v2(0,0));
 
-    var rect = new cc.rect(worldPos.x - 120 , worldPos.y - 120 , 240 ,  240);
+    var rect = new cc.rect(worldPos.x - 120 , worldPos.y - 120 , 300 ,  300);
 
     var monsters = this.getMonsterForAABB(rect);
     var len = monsters.length;

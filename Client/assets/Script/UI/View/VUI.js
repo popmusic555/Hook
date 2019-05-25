@@ -33,28 +33,12 @@ cc.Class({
     },
 
     showSettlementView:function () {
-        this.settlementView.node.active = true;
-        this.settlementView.setParam(Global.Model.MPlayer.getRewardsCoins() , Global.Model.MPlayer.getMileage());
+        var mplayer = Global.Model.MPlayer;
+        this.settlementView.show(mplayer.getMileage() , mplayer.getRewardsCoins() , mplayer.getKillNum() , mplayer.getFragment());
     },
 
     showSetView:function () {
-        // 暂停
-        // 停止物理系统
-        var manager = cc.director.getPhysicsManager();
-        manager.enabled = false;
-
-        // 停止SP动画
-        var components = Global.Model.Game.getGameView().getComponentsInChildren(sp.Skeleton);
-        var len = components.length;
-        for (let index = 0; index < len; index++) {
-            var item = components[index];
-            item.timeScale = 0;
-        }
-
-        // 停止节点动画
-        var resumeNodes = cc.director.getActionManager().pauseAllRunningActions();
-        this.setView.setResumeNode(resumeNodes);
-        this.setView.node.active = true;
+        this.setView.show();
     },
 
     onSetBtn:function () {

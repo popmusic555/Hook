@@ -42,7 +42,6 @@ cc.Class({
 
         this._LevelUpDescObj = this.levelUpDesc.json;
         this._LevelUpConsumeObj = this.levelUpConsume.json;
-        Global.Model.Game.initLevels([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]);
 
         // 切换到页签1
         this.switchTab({target:this.tabBtn[0].node} , 0);
@@ -237,7 +236,8 @@ cc.Class({
     },
 
     onLotteryBtn:function () {
-        
+        var friendView = this.node.parent.getComponentInChildren("VLottery");
+        friendView.show();
     },
 
     onSetBtn:function () {
