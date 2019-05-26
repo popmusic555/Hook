@@ -89,7 +89,7 @@ cc.Class({
         if (player) {
             this.setVelocityX(player.getVelocityX());
             // 随机获取任务碎片
-            var fragment = Global.Model.MPlayer.randomFragment();
+            var fragment = Global.Model.MPlayer.getFragmentForRandom();
             if (fragment != -1) {
                 Global.Model.MPlayer.addFragment(fragment);
             }

@@ -232,7 +232,7 @@ cc.Class({
 
     onFriendBtn:function () {
         var friendView = this.node.parent.getComponentInChildren("VFriend");
-        friendView.show([{isReward:true},{isReward:true},{isReward:true},{isReward:false}] , 50);
+        friendView.show(Global.Model.Game.getFriend());
     },
 
     onLotteryBtn:function () {

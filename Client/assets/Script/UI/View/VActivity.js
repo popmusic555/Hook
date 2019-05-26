@@ -20,6 +20,9 @@ cc.Class({
         taskStar:[cc.Button],
         // 拼图
         jigsaw:cc.Node,
+
+        // 领取按钮
+        receiveBtn:cc.Button,
         
         _TaskDesc:null,
         
@@ -51,6 +54,8 @@ cc.Class({
     onReceiveBtn:function () {
         console.log("领取奖励成功");
         // 切换到下一个任务
+        Global.Model.Game.nextTask();
+        this.show();
     },
 
     hide:function () {
@@ -73,8 +78,18 @@ cc.Class({
         else
         {
             this.setRewardIcon(this.taskId);
+            this.setJigsaw();
         }
         
+        if (this.isFinshTask(this.taskId)) {
+            // 任务完成 可领取奖励
+            this.receiveBtn.interactable = true;
+        }
+        else
+        {
+            this.receiveBtn.interactable = false;
+        }
+
     },
     
     // 设置任务星级
@@ -116,6 +131,7 @@ cc.Class({
         else
         {
             this.jigsaw.active = false;
+            return;
         }
 
         var jigsaw = this.jigsaw.children;
@@ -134,7 +150,27 @@ cc.Class({
             }
         }
     },
-    
+
+    // 是否完成任务
+    isFinshTask:function (taskid) {
+        var result = false;
+
+        switch (taskid) {
+            case 0:
+                var num = Global.Model.Game.getKillNum();
+                result = num >= 100;
+                break;
+            case 1:
+                // 邀请好友人数
+                result = Global.Model.Game.getFriend().length > 0
+                break;
+            case 2:
+                result = Global.Model.Game.fullFragment();
+                break;
+        }
+
+        return result;
+    },
 
     // update (dt) {},
 });

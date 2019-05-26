@@ -22,7 +22,8 @@ GlobalConst.INWALL_SPEED = 3000;
 GlobalConst.WALL_WIDTH = 1810;
 
 // 碎片任务概率
-GlobalConst.FRAGMENT_RATE = [0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01];
+// GlobalConst.FRAGMENT_RATE = [0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01];
+GlobalConst.FRAGMENT_RATE = [1,1,1,1,1,1,1,1,1,1,1,1];
 
 
 module.exports = GlobalConst;

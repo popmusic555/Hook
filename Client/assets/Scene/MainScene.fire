@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.5662267111023379,
-      "y": 0.5662267111023379,
+      "x": 0.6687095905172414,
+      "y": 0.6687095905172414,
       "z": 1
     },
     "_quat": {
@@ -15242,6 +15242,9 @@
     "jigsaw": {
       "__id__": 318
     },
+    "receiveBtn": {
+      "__id__": 358
+    },
     "_TaskDesc": null,
     "_id": "9dW2+HuZhEapFivEqOzJ1a"
   },
@@ -15416,7 +15419,7 @@
         "__id__": 360
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 3,
     "_components": [
       {
@@ -15954,7 +15957,7 @@
       "__id__": 285
     },
     "component": "VActivity",
-    "handler": "onLevelUpBtn",
+    "handler": "onReceiveBtn",
     "customEventData": ""
   },
   {

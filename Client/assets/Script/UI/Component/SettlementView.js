@@ -37,6 +37,7 @@ cc.Class({
 
     show:function (mileage , coins , killNum , fragmentList) {
         this.node.active = true;
+        coins = coins * (Global.Model.Game.lottery || 1);
         this.settlement(mileage , coins , killNum , fragmentList);
         this.setParam(mileage , coins);
     },
@@ -52,7 +53,7 @@ cc.Class({
             Global.Model.Game.setHighestMileage(mileage);
         }
         // 增加金币 轮盘奖励加成
-        Global.Model.Game.addCoins(coins * Global.Model.Game.lottery);
+        Global.Model.Game.addCoins(coins);
         // 设置总击杀数量
         Global.Model.Game.setKillNum(killNum);
         // 设置任务碎片

@@ -30,6 +30,8 @@ MGame.init = function () {
     this.levels = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
     this.task = [];
+    // 任务上限
+    this.task.limit = 3;
     // 当前任务ID
     this.task.id = 0;
     // 当前任务奖励ID
@@ -37,7 +39,13 @@ MGame.init = function () {
     // 当前碎片
     this.task.fragment = [0,0,0,0,0,0,0,0,0,0,0,0];
     // 当前击杀怪物数量
-    this.task.killNum = 0;
+    this.task.killNum = 101;
+
+    // 好友邀请
+    this.friend = [];
+    this.friend[0] = {isReward:false};
+    this.friend[1] = {isReward:false};
+    this.friend[2] = {isReward:false};
 
     // 所有升级选项数据表
     this.levelsItemConfig = {};
@@ -170,7 +178,17 @@ MGame.getGameView = function () {
 
 MGame.getTask = function () {
     return this.task;  
-},
+}
+
+MGame.nextTask = function () {
+    if (this.task.id < this.task.limit-1) {
+        this.task.id += 1; 
+    }
+}
+
+MGame.getFriend = function () {
+    return this.friend;
+}
 
 /**
  * 设置最大里程
@@ -228,12 +246,21 @@ MGame.setLotteryNum = function (num) {
 };
 
 /**
+ * 获取怪物击杀数量
+ *
+ * @returns 数量
+ */
+MGame.getKillNum = function () {
+    return this.task.killNum;
+}
+
+/**
  * 设置怪物击杀数量
  *
  * @param {*} num 数量
  */
 MGame.setKillNum = function (num) {
-    this.killNum = num;  
+    this.task.killNum = num;  
 };
 
 /**
@@ -242,7 +269,7 @@ MGame.setKillNum = function (num) {
  * @param {*} num
  */
 MGame.addKillNum = function (num) {
-    this.setKillNum(num + this.killNum);
+    this.setKillNum(num + this.getKillNum());
 }
 
 /**
@@ -255,6 +282,17 @@ MGame.addFragment = function (fragmentList) {
     for (let index = 0; index < len; index++) {
         this.task.fragment[index] += fragmentList[index];
     }
+}
+
+MGame.fullFragment = function () {
+    var len = this.task.fragment.length;
+    for (let index = 0; index < len; index++) {
+        var num = this.task.fragment[index];
+        if (num <= 0) {
+            return false;
+        }
+    }
+    return true;
 }
 
 /**

@@ -226,6 +226,7 @@ MPlayer.setKillNum = function (num) {
  */
 MPlayer.addOneKillNum = function () {
     this.gamedata.killNum += 1;
+    console.log("this.gamedata.killNum" , this.gamedata.killNum);
 };
 
 /**
@@ -261,10 +262,12 @@ MPlayer.addFragment = function (index) {
  */
 MPlayer.getFragmentForRandom = function () {
     var index = this.randomFragment();
-    var rate = Global.Common.Const.FRAGMENT_RATE[index];
-    var num = Math.random();
-    if (num <= rate) {
-        return index;
+    if (index >= 0) {
+        var rate = Global.Common.Const.FRAGMENT_RATE[index];
+        var num = Math.random();
+        if (num <= rate) {
+            return index;
+        }
     }
     return -1;
 };
@@ -275,7 +278,10 @@ MPlayer.getFragmentForRandom = function () {
  */
 MPlayer.randomFragment = function () {
     var list = this.surplusFragmentList();
-    return list[Global.Common.Utils.random(0 , list.length-1)];
+    if (list.length > 0) {
+        return list[Global.Common.Utils.random(0 , list.length-1)];    
+    }
+    return -1;
 };
 
 /**
