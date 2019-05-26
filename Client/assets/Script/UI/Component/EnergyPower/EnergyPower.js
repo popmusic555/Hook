@@ -33,6 +33,15 @@ cc.Class({
         this.setEnergy(Global.Model.MPlayer.getEnergy());
     },
 
+    showGuide:function () {
+        var worldPos = this.node.convertToWorldSpaceAR(cc.v2(0,0));
+        var vGuide = Global.Model.Game.getUIView().getComponentInChildren("VGuide");
+        vGuide.setGuide(this.node , this.node.position, this.node.parent);
+        this.node.parent = vGuide.node;
+        var nodePos = this.node.parent.convertToNodeSpaceAR(worldPos);
+        this.node.position = nodePos;
+    },
+
     // 初始化刻度
     initScale:function () {
         var scaleNum = this._EnergyLimit / Global.Common.Const.ENERGY_RATIO;

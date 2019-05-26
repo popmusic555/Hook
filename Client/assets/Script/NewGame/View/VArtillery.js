@@ -38,6 +38,10 @@ cc.Class({
         this._Power = this.launchPower.getPower();
         this._LaunchSpeed = speed * this._Power;
 
+        if (Global.Model.Game.guideStep == 1) {
+            this._LaunchSpeed = 2200;
+        }
+
         this.spAni.loop = false;
         this.spAni.animation = "fashe";  
         this._LaunchingCallback = callback;

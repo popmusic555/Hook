@@ -16,6 +16,15 @@ cc.Class({
     start () {
         this._Progress = -1;
         this.open();
+
+        if (Global.Model.Game.guideStep == 0) {
+            var worldPos = this.node.convertToWorldSpaceAR(cc.v2(0,0));
+            var vGuide = Global.Model.Game.getUIView().getComponentInChildren("VGuide");
+            vGuide.setGuide(this.node , this.node.position, this.node.parent);
+            this.node.parent = vGuide.node;
+            var nodePos = this.node.parent.convertToNodeSpaceAR(worldPos);
+            this.node.position = nodePos;
+        }
     },
 
     open:function () {

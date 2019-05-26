@@ -48,6 +48,13 @@ cc.Class({
      */
     onReceiveReward:function () {
         this.setState(0);
+        this.receiveReward(this.rewardNum);
+    },
+
+    receiveReward:function (num) {
+        Global.Model.Game.addRevive(num);
+        var vMain = cc.Camera.main.node.parent.getComponentInChildren("VMain");
+        vMain.refreshTopBar();
     },
     /**
      * 邀请好友回调

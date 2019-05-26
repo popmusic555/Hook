@@ -1,0 +1,20 @@
+
+lpk_sg.png
+size: 60,40
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+sg
+  rotate: false
+  xy: 49, 8
+  size: 9, 30
+  orig: 9, 30
+  offset: 0, 0
+  index: -1
+star_t
+  rotate: true
+  xy: 2, 2
+  size: 36, 45
+  orig: 36, 45
+  offset: 0, 0
+  index: -1

@@ -9,11 +9,18 @@ var Enum = Global.Common.Enum;
  * 游戏数据初始化
  */
 MGame.init = function () {
+
+    this._ResumeNode
+
+
     
     // 游戏UI
     this.uiView = null;
     // 游戏内UI
     this.gameView = null;
+
+    // 是否新手引导
+    this.guideStep = 0,
 
     // 金币数量
     this.coins = 99999999;
@@ -215,6 +222,16 @@ MGame.setMaxPass = function (num) {
 MGame.setRevive = function (num) {
     this.revive = num;
 }
+
+/**
+ * 增加复活次数
+ *
+ * @param {*} num 次数
+ */
+MGame.addRevive = function (num) {
+    this.setRevive(this.revive + num);
+}
+
 /**
  * 设置金币数量
  * 
@@ -328,6 +345,52 @@ MGame.showSetView = function () {
  */
 MGame.showSettlementView = function () {
     this.uiView.showSettlementView();
+}
+
+/**
+ * 暂停游戏
+ *
+ */
+MGame.pauseGame = function () {
+    // 暂停
+    // 停止物理系统
+    var manager = cc.director.getPhysicsManager();
+    manager.enabled = false;
+
+    // 停止SP动画
+    var components = Global.Model.Game.getGameView().getComponentsInChildren(sp.Skeleton);
+    var len = components.length;
+    for (let index = 0; index < len; index++) {
+        var item = components[index];
+        item.timeScale = 0;
+    }
+
+    // 停止节点动画
+    var resumeNodes = cc.director.getActionManager().pauseAllRunningActions();
+    this.setResumeNode(resumeNodes);
+}
+
+/**
+ * 恢复游戏
+ *
+ */
+MGame.resumeGame = function () {
+    var manager = cc.director.getPhysicsManager();
+    manager.enabled = true;  
+
+    var components = Global.Model.Game.getGameView().getComponentsInChildren(sp.Skeleton);
+    var len = components.length;
+    for (let index = 0; index < len; index++) {
+        var item = components[index];
+        item.timeScale = 1;
+    }
+
+    cc.director.getActionManager().resumeTargets(this._ResumeNode);
+    this._ResumeNode = null;
+}
+
+MGame.setResumeNode = function (nodes) {
+    this._ResumeNode = nodes;
 }
 
 module.exports = MGame;

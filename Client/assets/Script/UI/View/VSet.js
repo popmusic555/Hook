@@ -13,8 +13,14 @@ cc.Class({
 
     // update (dt) {},
 
-    onMusicBtn:function () {
-        
+    onMusicBtn:function (target) {
+        if (target.isChecked) {
+            console.log("打开音乐");
+        }
+        else
+        {
+            console.log("关闭音乐");
+        }
     },
 
     onNoticeBtn:function () {

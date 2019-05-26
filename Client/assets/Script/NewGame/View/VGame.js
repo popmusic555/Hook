@@ -139,5 +139,32 @@ cc.Class({
         node.runAction(cc.repeat(action , 1));
     },
 
-    // update (dt) {},
+    update (dt) {
+        // 当前怪物超过3个怪物 技能引导开启
+        if (Global.Model.Game.guideStep == 1) {
+            var num = 0;
+
+            var player = Global.Model.MPlayer.getPlayerObj();
+            var playerWorldPos = player.node.convertToWorldSpaceAR(cc.v2(0,0));
+            var monsters = this.getComponentInChildren("LNormal").node.children;
+            for (let index = 0; index < monsters.length; index++) {
+                const monster = monsters[index];
+                var monsterWorldPos = monster.convertToWorldSpaceAR(cc.v2(0,0));
+                if (playerWorldPos.x >= monsterWorldPos.x) {
+                    num++;
+                }    
+            }
+            
+            if (num >= 3) {
+                var energyPower = Global.Model.Game.getUIView().getComponentInChildren("EnergyPower");
+                energyPower.showGuide();
+                Global.Model.Game.pauseGame();
+                Global.Model.Game.isFristEnter = false;
+            }
+
+            // if (Global.Model.Game.isFristEnter) {
+            
+            // }
+        }
+    },
 });

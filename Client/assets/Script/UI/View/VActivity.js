@@ -14,6 +14,7 @@ cc.Class({
         taskIcon:cc.Sprite,
         // 任务奖励对象
         rewardIcon:cc.Sprite,
+        rewardAni:sp.Skeleton,
         // 任务描述Label
         taskDescLabel:cc.Label,
         // 任务星级
@@ -121,6 +122,13 @@ cc.Class({
     setRewardIcon:function (rewardId) {
         console.log("rewardId" , rewardId);
         this.rewardIcon.spriteFrame = this.rewardIconRes[rewardId];
+        if (rewardId >= 2) {
+            this.rewardAni.node.active = true;
+        }
+        else
+        {
+            this.rewardAni.node.active = false;
+        }
     },
 
     // 设置拼图

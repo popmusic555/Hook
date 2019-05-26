@@ -227,7 +227,8 @@ cc.Class({
     },
 
     onRankBtn:function () {
-        
+        // var offlineView = this.node.parent.getComponentInChildren("VOffline");
+        // offlineView.show(9527);
     },
 
     onFriendBtn:function () {
