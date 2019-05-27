@@ -201,7 +201,7 @@ cc.Class({
 
     showDeathAni:function () {
         this.animation.node.active = false;
-        this.deathAni.node.active = true;
+        // this.deathAni.node.active = true;
         this.boomAni.node.active = true;
         this.deathAni.animation = "boom_plagbl";
         this.boomAni.animation = "gbl_zd_boom";

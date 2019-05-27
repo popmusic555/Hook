@@ -92,6 +92,10 @@ MWall.updateByPass = function (passID) {
     console.log("UpdateByPass Wall" , passID);
 };
 
+MWall.resetGamedata = function () {
+    this.gamedata.pass = 0;  
+};
+
 /**
  * 获取关卡ID
  * 

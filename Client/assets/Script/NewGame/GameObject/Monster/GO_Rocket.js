@@ -48,8 +48,9 @@ cc.Class({
 
     unBind:function (notDeath) {
         this._IsBind = false;
+        this.animation.animation = "xg_hj_run";
         if (!notDeath) {
-            this.onDeath(this._Player);    
+            this.onDeath(this._Player); 
         }
     },
 
@@ -152,7 +153,7 @@ cc.Class({
     showDeathAni:function () {
         this.animation.node.active = false;
         this.deathAni.node.active = true;
-        this.deathAni.animation = "boom_hjpgbl";
+        this.deathAni.animation = "gbl_zd_boom";
         this.deathAni.setCompleteListener(function () {
             this.node.destroy();
         }.bind(this));  

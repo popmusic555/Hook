@@ -123,6 +123,7 @@ cc.Class({
         Global.Model.MCar.setConfig(this.mCarConfig.json);
 
         Global.Model.MPlayer.resetGamedata();
+        Global.Model.MWall.resetGamedata();
         // 设置关卡ID
         Global.Model.MWall.setPassID(0);
     },

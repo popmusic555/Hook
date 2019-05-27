@@ -315,7 +315,12 @@ MPlayer.surplusFragmentList = function () {
  * 
  */
 MPlayer.getSpeedPower = function () {
-    return Global.Common.Utils.Converter.toSpeedPower(this.getPlayerObj().getVelocity().x);
+    var VelocityX = this.getPlayerObj().getVelocityX();
+    var reLaunchVelocity = this.getPlayerObj().getWallLaunchVelocity();
+    if (reLaunchVelocity) {
+        VelocityX = reLaunchVelocity.x;
+    }
+    return Global.Common.Utils.Converter.toSpeedPower(VelocityX);
 };
 
 MPlayer.setPlayerObj = function (playerObj) {

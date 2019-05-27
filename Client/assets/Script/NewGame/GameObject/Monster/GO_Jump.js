@@ -206,7 +206,7 @@ cc.Class({
         this._Shadow.shadow.node.active = false;
         this.animation.node.active = false;
         this.deathAni.node.active = true;
-        this.deathAni.animation = "boom_ttjgbl";
+        this.deathAni.animation = "gbl_zd_boom";
         this.deathAni.setCompleteListener(function () {
             this.node.destroy();
         }.bind(this));  

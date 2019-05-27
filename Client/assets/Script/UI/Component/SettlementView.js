@@ -35,10 +35,10 @@ cc.Class({
         }
     },
 
-    show:function (mileage , coins , killNum , fragmentList) {
+    show:function (mileage , maxPass , coins , killNum , fragmentList) {
         this.node.active = true;
         coins = coins;
-        this.settlement(mileage , coins , killNum , fragmentList);
+        this.settlement(mileage , maxPass , coins , killNum , fragmentList);
         this.setParam(mileage , coins);
     },
 
@@ -46,12 +46,18 @@ cc.Class({
         this.node.active = false;  
     },
 
-    settlement:function (mileage , coins , killNum , fragmentList) {
+    settlement:function (mileage , maxPass , coins , killNum , fragmentList) {
         // 设置最大历程
         var highestMileage = Global.Model.Game.mileage;
-        if (mileage >= highestMileage) {
+        if (mileage > highestMileage) {
             Global.Model.Game.setHighestMileage(mileage);
         }
+        // 设置最大关卡数
+        var curMaxPass = Global.Model.Game.maxPass;
+        if (maxPass > curMaxPass) {
+            Global.Model.Game.setMaxPass(maxPass);
+        }
+        
         // 增加金币 轮盘奖励加成
         Global.Model.Game.addCoins(coins);
         // 设置总击杀数量

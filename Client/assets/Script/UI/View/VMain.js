@@ -50,11 +50,18 @@ cc.Class({
     },
 
     // update (dt) {},
-    gameStart:function () {
-        var transition = cc.find("Canvas").getComponentInChildren("VTransition");
-        if (transition) {
-            transition.transitionWithScene("NewGameScene");
-        }
+    gameStart:function (event) {
+        var btn = event.target.getComponent(cc.Button);
+        btn.interactable = false;
+        var ani = event.target.getComponentInChildren(sp.Skeleton);
+        ani.animation = "start";
+        ani.node.active = true;
+        ani.setCompleteListener(function () {
+            var transition = cc.find("Canvas").getComponentInChildren("VTransition");
+            if (transition) {
+                transition.transitionWithScene("NewGameScene");
+            }
+        }.bind(this));
     },
 
     // 切换tab页
@@ -76,6 +83,7 @@ cc.Class({
             const page = this.tabPage[index];
             if (index == tabIndex) {
                 page.active = true;
+                this.playPageAnimation(page);
             }
             else
             {
@@ -144,6 +152,18 @@ cc.Class({
         activityView.show();
     },
 
+    // 播放选项动画
+    playPageAnimation:function (page) {
+        console.log("page" , page.childrenCount);
+        for (let index = 0; index < page.childrenCount; index++) {
+            var btn = page.children[index];
+            var ani = btn.getComponent(cc.Animation);
+            if (ani) {
+                ani.play();
+            }
+        }
+    },
+
     // 切换选项
     switchLevelUpItem:function (event , index) {
         if (this._CurSelectedItem) {
@@ -151,7 +171,7 @@ cc.Class({
         }
         var curBtn = event.target.getComponent(cc.Button);
         this.selectedSprite.node.parent = curBtn.node.getChildByName("Selected");
-        curBtn.interactable = false;
+        // curBtn.interactable = false;
         this._CurSelectedItem = curBtn;
         this.switchContent(index);
     },

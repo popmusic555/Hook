@@ -109,7 +109,7 @@ cc.Class({
     showDeathAni:function () {
         this._Shadow.shadow.node.active = false;
         this.animation.node.active = false;
-        this.deathAni.node.active = true;
+        // this.deathAni.node.active = true;
         this.boomAni.node.active = true;
         this.deathAni.animation = "boom_zdgbl";
         this.boomAni.animation = "gbl_zd_boom";

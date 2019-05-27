@@ -32,9 +32,9 @@ cc.Class({
      * @param {*} cameraY
      */
     updateMonster:function (cameraX , cameraY) {
-        if (true) {
-            return;
-        }
+        // if (true) {
+        //     return;
+        // }
 
         if (!this._IsUpdate) {
             return;

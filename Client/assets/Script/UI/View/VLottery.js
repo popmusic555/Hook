@@ -4,6 +4,8 @@ cc.Class({
     properties: {
         lotteryNumLabel:cc.Label,
         arrow:cc.Node,
+        bgAni:sp.Skeleton,
+        arrowAni:sp.Skeleton,
         lotteryNum:0,
 
         _AngleList:null,
@@ -42,6 +44,17 @@ cc.Class({
         var angle = this._AngleList[this.lotteryNum] + 1080 - this._LastAngle + Global.Common.Utils.random(10 , 50);
         var action = cc.sequence(cc.rotateBy(3.0 , angle).easing(cc.easeExponentialOut()) , cc.callFunc(function () {
             console.log("获取转盘奖励" , this.lotteryNum);
+            this.bgAni.node.active = true;
+            this.bgAni.animation = "zhuanpan";
+            this.bgAni.setCompleteListener(function () {
+                this.bgAni.active = false;
+            }.bind(this));
+            this.arrowAni.node.active = true;
+            this.arrowAni.animation = "shouji_y";
+            this.arrowAni.setCompleteListener(function () {
+                this.arrowAni.active = false;
+            }.bind(this));
+
             this._LastAngle = this.arrow.rotation % 360;
             this._Lock = false;
             Global.Model.Game.setLotteryNum(this._LotteryList[this.lotteryNum]);
