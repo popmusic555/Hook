@@ -76,6 +76,7 @@ cc.Class({
             this.node.rotation = 0;
         }.bind(this) , 0);
         this.onDeath(this._Player);
+        this._Player.lockSkill(0.5);
     },
 
     setDuration:function (num) {
@@ -208,7 +209,7 @@ cc.Class({
         this._Shadow.shadow.node.active = false;
         this.animation.node.active = false;
         this.deathAni.node.active = true;
-        this.deathAni.animation = "boom_cargbl";
+        this.deathAni.animation = "gbl_zd_boom";
         this.deathAni.setCompleteListener(function () {
             this.node.destroy();
         }.bind(this));  
@@ -247,5 +248,14 @@ cc.Class({
         var range = this._CarMeter.fillRange;
         range = Math.min(0.25 , range + 0.25 * 0.3);
         this._CarMeter.fillRange = range;
+    },
+
+    showGuide:function () {
+        var isGuide = Global.Model.Game.monsterGuide[2];
+        if (isGuide) {
+            return;    
+        }
+        var vGuide = Global.Model.Game.getUIView().getComponentInChildren("VGuide");
+        vGuide.showMonsterGuide(2);
     },
 });

@@ -176,7 +176,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "52HhYe/TFEZq/wA8IZoXVB"
+    "_id": "ccdA4B1KtOZp7SEANeUogW"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -474,7 +474,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "b3RovOkURFn5E0wbMeUha4"
+    "_id": "8asPUJjSpLwpNU2uy/jTOo"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -572,11 +572,11 @@
       "y": 0
     },
     "_fillStart": 0,
-    "_fillRange": 0.25,
+    "_fillRange": 0,
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "98jWWiLLlHXYgM78SGDr2T"
+    "_id": "063zPJ0U1AJ6MTZUoKKcWN"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -621,7 +621,7 @@
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "d9jFaI3bpH+qPPmUnw1Olt"
+    "_id": "57AVZ7ovtI0bkKBr1r+RD7"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -673,8 +673,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 329.6,
-      "height": 332
+      "width": 325,
+      "height": 252
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -684,7 +684,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 76,
-      "y": 126,
+      "y": 10,
       "z": 0
     },
     "_scale": {
@@ -720,16 +720,16 @@
     "_dstBlendFactor": 771,
     "paused": false,
     "defaultSkin": "",
-    "defaultAnimation": "boom_cargbl",
+    "defaultAnimation": "gbl_zd_boom",
     "loop": false,
     "premultipliedAlpha": false,
     "timeScale": 1,
     "_N$skeletonData": {
-      "__uuid__": "e80681a7-0c78-44e7-bd56-f1a934c3cf16"
+      "__uuid__": "1189e0a5-7601-4232-87e1-781270ac5f64"
     },
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "68bYKdVmZOpKS1YJYg3ZQ9"
+    "_id": "9fBX5Xz1pPPI2zjW3Iccq7"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -764,7 +764,7 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "d5QieG4zxPApcTmiX8OdZH"
+    "_id": "b8FJ9PUGNDq6o43GUz3Bek"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -790,7 +790,7 @@
       "width": 160,
       "height": 70
     },
-    "_id": "59zti+OhhIXai515r+xg1z"
+    "_id": "8cfWsLjldJvKEw3kjw6gwz"
   },
   {
     "__type__": "5c120znmmpFKqKh7vGAGOPC",
@@ -838,7 +838,7 @@
     "_IsBind": false,
     "_Duration": 0,
     "_MeterSpeed": 0,
-    "_id": "790npEm/tKg7UzcSuUAcPt"
+    "_id": "cbhMr+YlJKsqlkMRMujSgU"
   },
   {
     "__type__": "cc.PrefabInfo",

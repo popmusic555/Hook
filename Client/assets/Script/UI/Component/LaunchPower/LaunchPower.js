@@ -6,7 +6,6 @@ cc.Class({
 
     properties: {
         launchProgress:[cc.Sprite],
-        launchPower:[cc.Float],
 
         _Progress:0,
     },
@@ -68,7 +67,7 @@ cc.Class({
     },
 
     getPower:function () {
-        return this.launchPower[this.getProgress()];
+        return this.getProgress();
     },
 
     // update (dt) {},

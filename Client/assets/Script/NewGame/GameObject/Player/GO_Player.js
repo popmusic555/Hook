@@ -32,6 +32,8 @@ cc.Class({
         _Shadow:null,
 
         _SpData:null,
+
+        _SkillLock:false,
     },
 
     onLoad () {
@@ -392,6 +394,10 @@ cc.Class({
             return;
         }
 
+        if (this._SkillLock) {
+            return;
+        }
+
         this.castSkill();
     },
     /**
@@ -478,6 +484,12 @@ cc.Class({
         }
 
         this.setVelocity(this._BindMonster.getVelocity());
-        
     },
+
+    lockSkill:function (time) {
+        this._SkillLock = true;
+        this.scheduleOnce(function () {
+            this._SkillLock = false;
+        }.bind(this) , time);
+    },  
 });

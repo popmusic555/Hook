@@ -36,7 +36,8 @@ cc.Class({
     launching:function (speed , callback) {
         this.launchPower.close(); 
         this._Power = this.launchPower.getPower();
-        this._LaunchSpeed = speed * this._Power;
+        Global.Model.MPlayer.setLaunchPower(this._Power);
+        this._LaunchSpeed = speed * Global.Common.Const.LAUNCH_POWER[this._Power];
 
         if (Global.Model.Game.guideStep == 1) {
             this._LaunchSpeed = 2200;

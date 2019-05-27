@@ -87,8 +87,22 @@ cc.Class({
         var len = progress.length;
         for (let index = 0; index < len; index++) {
             var item = progress[index];
-            item.progress = Global.Model.Game.getLevelByItemID(tabIndex * 8 + index) / this._LevelUpDescObj[index].maxLevel;
-        }
+            var id = tabIndex * 8 + index;
+            item.progress = Global.Model.Game.getLevelByItemID(id) / this._LevelUpDescObj[id].maxLevel;
+
+            // 显示提示
+            var hint = item.node.parent.getChildByName("Hint");
+            var curLevelNum = Global.Model.Game.getLevelByItemID(id);
+            var nextLevelConsume = this._LevelUpConsumeObj[curLevelNum]["levelupItem" + id];
+            if (Global.Model.Game.isEnoughCoins(nextLevelConsume)) {
+                // 金币不足
+                hint.active = true;
+            }
+            else
+            {
+                hint.active = false;
+            }
+        }        
 
         // 切换到选项1
         var btn = this.tabPage[tabIndex].getComponentInChildren(cc.Button);
@@ -136,7 +150,7 @@ cc.Class({
             this._CurSelectedItem.interactable = true;
         }
         var curBtn = event.target.getComponent(cc.Button);
-        this.selectedSprite.node.parent = curBtn.node;
+        this.selectedSprite.node.parent = curBtn.node.getChildByName("Selected");
         curBtn.interactable = false;
         this._CurSelectedItem = curBtn;
         this.switchContent(index);

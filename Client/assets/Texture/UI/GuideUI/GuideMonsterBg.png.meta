@@ -1,0 +1,31 @@
+{
+  "ver": "2.2.0",
+  "uuid": "d4921a66-b225-4827-b731-ab1c99fe5fbc",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "subMetas": {
+    "GuideMonsterBg": {
+      "ver": "1.0.3",
+      "uuid": "12d0ab38-1e63-46bf-b2c7-7c87495d27ee",
+      "rawTextureUuid": "d4921a66-b225-4827-b731-ab1c99fe5fbc",
+      "trimType": "custom",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 283,
+      "height": 341,
+      "rawWidth": 283,
+      "rawHeight": 341,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

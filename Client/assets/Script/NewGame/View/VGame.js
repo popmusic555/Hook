@@ -73,6 +73,8 @@ cc.Class({
         monsterNode:cc.Node,
         // 前景墙节点
         fgWallNode:cc.Node,
+
+        _IsGuide:false,
     },
 
     onLoad () {
@@ -87,6 +89,8 @@ cc.Class({
     },
 
     start () {
+        this._IsGuide = true;
+
         Global.Model.Game.setGameView(this);
 
         Global.Model.Game.initPlayerLevelConfig(this.levelupPlayer.json);
@@ -141,9 +145,8 @@ cc.Class({
 
     update (dt) {
         // 当前怪物超过3个怪物 技能引导开启
-        if (Global.Model.Game.guideStep == 1) {
+        if (Global.Model.Game.guideStep == 1 && this._IsGuide) {
             var num = 0;
-
             var player = Global.Model.MPlayer.getPlayerObj();
             var playerWorldPos = player.node.convertToWorldSpaceAR(cc.v2(0,0));
             var monsters = this.getComponentInChildren("LNormal").node.children;
@@ -159,12 +162,8 @@ cc.Class({
                 var energyPower = Global.Model.Game.getUIView().getComponentInChildren("EnergyPower");
                 energyPower.showGuide();
                 Global.Model.Game.pauseGame();
-                Global.Model.Game.isFristEnter = false;
+                this._IsGuide = false;
             }
-
-            // if (Global.Model.Game.isFristEnter) {
-            
-            // }
         }
     },
 });

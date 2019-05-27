@@ -51,6 +51,8 @@ MPlayer.init = function () {
     this.gamedata.rewardsCoins = 0;
     // 游戏内获取到的能量
     this.gamedata.energy = 0;
+    // 游戏发射力量
+    this.gamedata.launchPower = 0;
     // 游戏里程
     this.gamedata.mileage = 0;
     // 当局游戏击杀怪物数量
@@ -109,6 +111,7 @@ MPlayer.resetGamedata = function () {
     this.gamedata.globalAni = null;
     this.gamedata.rewardsCoins = 0;
     this.gamedata.energy = 0;
+    this.gamedata.launchPower = 0;
     this.gamedata.mileage = 0;
     this.gamedata.killNum = 0;
     this.gamedata.fragment = [0,0,0,0,0,0,0,0,0,0,0,0];
@@ -201,6 +204,14 @@ MPlayer.isEnoughEnergy = function (num) {
  */
 MPlayer.getEnergy = function () {
     return this.gamedata.energy;
+};
+
+MPlayer.setLaunchPower = function (num) {
+    this.gamedata.launchPower = num;
+}
+
+MPlayer.getLaunchPower = function () {
+    return this.gamedata.launchPower;  
 };
 
 /**
@@ -1007,7 +1018,14 @@ MPlayer.triggerBoom = function (contact , player , boom , attr) {
             velocityX = this.limitVelocityX(velocityX);
             var newVelocity = cc.v2(velocityX , velocityY);
             // 玩家对象设置新速度
-            player.setVelocity(newVelocity);
+            var binder = player.getBindMonster();
+            if (binder) {
+                binder.setVelocity(newVelocity);    
+            }
+            else
+            {
+                player.setVelocity(newVelocity);
+            }
             // 怪物死亡
             boom.onDeath(player);
             MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
@@ -1021,7 +1039,14 @@ MPlayer.triggerBoom = function (contact , player , boom , attr) {
             velocityX = this.limitVelocityX(velocityX);
             var newVelocity = cc.v2(velocityX , velocityY);
             // 玩家对象设置新速度
-            player.setVelocity(newVelocity);
+            var binder = player.getBindMonster();
+            if (binder) {
+                binder.setVelocity(newVelocity);    
+            }
+            else
+            {
+                player.setVelocity(newVelocity);
+            }
             // 怪物死亡
             boom.onDeath(player);
             MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
@@ -1035,7 +1060,14 @@ MPlayer.triggerBoom = function (contact , player , boom , attr) {
             velocityX = this.limitVelocityX(velocityX);
             var newVelocity = cc.v2(velocityX , velocityY);
             // 玩家对象设置新速度
-            player.setVelocity(newVelocity);
+            var binder = player.getBindMonster();
+            if (binder) {
+                binder.setVelocity(newVelocity);    
+            }
+            else
+            {
+                player.setVelocity(newVelocity);
+            }
             // 怪物死亡
             boom.onDeath(player);
             MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
@@ -1114,7 +1146,14 @@ MPlayer.triggerFlyBoom = function (contact , player , flyboom , attr) {
             velocityX = this.limitVelocityX(velocityX);
             var newVelocity = cc.v2(velocityX , velocityY);
             // 玩家对象设置新速度
-            player.setVelocity(newVelocity);
+            var binder = player.getBindMonster();
+            if (binder) {
+                binder.setVelocity(newVelocity);    
+            }
+            else
+            {
+                player.setVelocity(newVelocity);
+            }
 
             // 怪物死亡
             flyboom.onDeath(player);
@@ -1130,7 +1169,14 @@ MPlayer.triggerFlyBoom = function (contact , player , flyboom , attr) {
             velocityX = this.limitVelocityX(velocityX);
             var newVelocity = cc.v2(velocityX , velocityY);
             // 玩家对象设置新速度
-            player.setVelocity(newVelocity);
+            var binder = player.getBindMonster();
+            if (binder) {
+                binder.setVelocity(newVelocity);    
+            }
+            else
+            {
+                player.setVelocity(newVelocity);
+            }
 
             // 怪物死亡
             flyboom.onDeath(player);
@@ -1146,7 +1192,14 @@ MPlayer.triggerFlyBoom = function (contact , player , flyboom , attr) {
             velocityX = this.limitVelocityX(velocityX);
             var newVelocity = cc.v2(velocityX , velocityY);
             // 玩家对象设置新速度
-            player.setVelocity(newVelocity);
+            var binder = player.getBindMonster();
+            if (binder) {
+                binder.setVelocity(newVelocity);    
+            }
+            else
+            {
+                player.setVelocity(newVelocity);
+            }
 
             // 怪物死亡
             flyboom.onDeath(player);
@@ -1162,7 +1215,14 @@ MPlayer.triggerFlyBoom = function (contact , player , flyboom , attr) {
             velocityX = this.limitVelocityX(velocityX);
             var newVelocity = cc.v2(velocityX , velocityY);
             // 玩家对象设置新速度
-            player.setVelocity(newVelocity);
+            var binder = player.getBindMonster();
+            if (binder) {
+                binder.setVelocity(newVelocity);    
+            }
+            else
+            {
+                player.setVelocity(newVelocity);
+            }
 
             // 怪物死亡
             flyboom.onDeath(player);
@@ -1472,6 +1532,8 @@ MPlayer.triggerJump = function (contact , player , jump , attr) {
             }
             break;
     }
+
+    jump.showGuide();
 }
 
 MPlayer.triggerPlane = function (contact , player , plane , attr) {
@@ -1552,6 +1614,8 @@ MPlayer.triggerPlane = function (contact , player , plane , attr) {
             }
             break;
     }
+
+    plane.showGuide();
 }
 
 MPlayer.triggerOil = function (contact , player , oil , attr) {
@@ -1583,7 +1647,14 @@ MPlayer.triggerOil = function (contact , player , oil , attr) {
             velocityX = this.limitVelocityX(velocityX);
             var newVelocity = cc.v2(velocityX , velocityY);
             // 玩家对象设置新速度
-            player.setVelocity(newVelocity);
+            var binder = player.getBindMonster();
+            if (binder) {
+                binder.setVelocity(newVelocity);    
+            }
+            else
+            {
+                player.setVelocity(newVelocity);
+            }
 
             // 怪物死亡
             oil.onDeath(player);
@@ -1664,6 +1735,8 @@ MPlayer.triggerCar = function (contact , player , car , attr) {
             }
             break;
     }
+
+    car.showGuide();
 }
 
 MPlayer.triggerFloor = function (contact , player , floor , attr) {
@@ -1813,7 +1886,7 @@ MPlayer.triggerFloor = function (contact , player , floor , attr) {
             {   
                 // 非技能、冲击状态下 减速
                 // 处理X轴速度 (加速力处理)
-                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , 0);
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , -4);
                 // 限定X速度 (限定速度区间)
                 velocityX = this.limitVelocityX(velocityX);
 
@@ -1889,11 +1962,12 @@ MPlayer.addCarryEnergy = function (num) {
 
 MPlayer.addReward = function (cost , coins , energy) {
     // 增加金币
-    this.addCoins(cost * this.attr.coinsRadio);
+    var rate = this.attr.coinsRadio + (Global.Model.Game.lottery || 1) + Global.Common.Const.LAUNCH_RATE[this.getLaunchPower()];
+    this.addCoins(cost * rate);
     // 增加携带的金币
-    this.addCarryCoins(coins * this.attr.coinsRadio);
+    this.addCarryCoins(coins * rate);
     // 增加能量
-    this.addCarryEnergy(energy);  
+    this.addCarryEnergy(energy);
 },
 
 /**

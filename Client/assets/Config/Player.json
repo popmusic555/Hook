@@ -6,7 +6,7 @@
     "accelerate": 0,
     "getCoins": 1,
     "offlineReward": 1,
-    "energyLimit": 10
+    "energyLimit": 0
   },
   {
     "passid": 1,

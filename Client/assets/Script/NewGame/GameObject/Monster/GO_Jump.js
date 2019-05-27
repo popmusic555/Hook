@@ -231,4 +231,13 @@ cc.Class({
         } , this));
         this.plugin.runAction(skillAction);
     },
+
+    showGuide:function () {
+        var isGuide = Global.Model.Game.monsterGuide[0];
+        if (isGuide) {
+            return;    
+        }
+        var vGuide = Global.Model.Game.getUIView().getComponentInChildren("VGuide");
+        vGuide.showMonsterGuide(0);
+    },
 });

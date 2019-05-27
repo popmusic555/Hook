@@ -19,8 +19,10 @@ MGame.init = function () {
     // 游戏内UI
     this.gameView = null;
 
-    // 是否新手引导
+    // 新手引导步骤
     this.guideStep = 0,
+    // 怪物引导
+    this.monsterGuide = [0,0,0];
 
     // 金币数量
     this.coins = 99999999;

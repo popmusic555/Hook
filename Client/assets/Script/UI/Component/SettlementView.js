@@ -37,7 +37,7 @@ cc.Class({
 
     show:function (mileage , coins , killNum , fragmentList) {
         this.node.active = true;
-        coins = coins * (Global.Model.Game.lottery || 1);
+        coins = coins;
         this.settlement(mileage , coins , killNum , fragmentList);
         this.setParam(mileage , coins);
     },

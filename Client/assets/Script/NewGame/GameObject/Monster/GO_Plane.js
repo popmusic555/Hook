@@ -46,7 +46,7 @@ cc.Class({
         this._Player = Global.Model.MPlayer.getPlayerObj();
         this.randomRelativeVelocity();
         this._IsUpdate = true;
-        this._OilNum = 2;
+        this._OilNum = 5;
         this._Duration = -1;
     },
 
@@ -79,12 +79,13 @@ cc.Class({
 
             var pos = cc.Camera.main.node.convertToWorldSpaceAR(cc.v2(0,0));
             pos = this.node.parent.convertToNodeSpaceAR(pos);
-            pos.x += cc.view.getVisibleSize().width * 0.5 + 120;
-            pos.y += Global.Common.Utils.random(0 , 400) - 200;
+            pos.x += cc.view.getVisibleSize().width * 0.5 + this.getVelocity().x / 60 + 80;
+            pos.y = this.node.y + Global.Common.Utils.random(0 , 800) - 400;
 
             if (!Global.Model.MWall.isInside(pos.x + 150)) {
                 // 可以生成
                 var oil = cc.instantiate(this.oilMonsterPrefab);
+                oil.getComponent("GO_Oil").setVelocityX(this.getVelocityX());
                 oil.name = this.node.name + "MOil" + this._OilNum;
                 oil.x = pos.x;
                 oil.y = pos.y;
@@ -229,5 +230,14 @@ cc.Class({
         var newVelocity = cc.v2(velocityX , velocityY);
         // 玩家对象设置新速度
         this.setVelocity(newVelocity);
+    },
+
+    showGuide:function () {
+        var isGuide = Global.Model.Game.monsterGuide[1];
+        if (isGuide) {
+            return;    
+        }
+        var vGuide = Global.Model.Game.getUIView().getComponentInChildren("VGuide");
+        vGuide.showMonsterGuide(1);
     },
 });

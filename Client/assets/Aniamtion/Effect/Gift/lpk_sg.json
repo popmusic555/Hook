@@ -1,9 +1,9 @@
 {
-"skeleton": { "hash": "oBPH359TIMOvDz5Xba5B0OzZVS4", "spine": "3.6.52", "width": 80, "height": 84.5, "images": "./res/" },
+"skeleton": { "hash": "NbxdJLcBwxX+zl67cCi/DlAah7A", "spine": "3.6.52", "width": 193.89, "height": 210.83, "images": "./res/" },
 "bones": [
 	{ "name": "root" },
-	{ "name": "sg", "parent": "root", "scaleX": 2, "scaleY": 2 },
-	{ "name": "star", "parent": "root", "x": 53, "y": 32 }
+	{ "name": "sg", "parent": "root", "scaleX": 6, "scaleY": 6 },
+	{ "name": "star", "parent": "root", "x": 148.89, "y": 98.33 }
 ],
 "slots": [
 	{ "name": "star_t", "bone": "star", "attachment": "star_t", "blend": "additive" },
@@ -37,18 +37,18 @@
 				"translate": [
 					{
 						"time": 0,
-						"x": -42,
-						"y": 0,
+						"x": -101.12,
+						"y": -5.05,
 						"curve": [ 0.25, 0, 0.75, 1 ]
 					},
-					{ "time": 0.6333, "x": 53, "y": 0, "curve": "stepped" },
-					{ "time": 1.3333, "x": 53, "y": 0 }
+					{ "time": 0.6333, "x": 151.02, "y": 7.93, "curve": "stepped" },
+					{ "time": 1.3333, "x": 151.02, "y": 7.93 }
 				],
 				"scale": [
-					{ "time": 0, "x": 1, "y": 1 },
-					{ "time": 0.2667, "x": 2.25, "y": 1 },
-					{ "time": 0.5667, "x": 1, "y": 1, "curve": "stepped" },
-					{ "time": 1.3333, "x": 1, "y": 1 }
+					{ "time": 0, "x": 0.813, "y": 1.05 },
+					{ "time": 0.2667, "x": 2.25, "y": 1.084 },
+					{ "time": 0.5667, "x": 1, "y": 1.131, "curve": "stepped" },
+					{ "time": 1.3333, "x": 1, "y": 1.131 }
 				]
 			},
 			"star": {
