@@ -182,7 +182,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "98soDY0TpD9aFDmtBgoE29"
+    "_id": "51LL/V8GpJRI8ycAUpT5Sa"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -264,7 +264,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "New Sprite",
+    "_name": "Icon",
     "_objFlags": 0,
     "_parent": {
       "__id__": 5
@@ -351,7 +351,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "4bvnCUGuZBj6b/4cm+uDYM"
+    "_id": "88NInVCgBNBasqJCM/iulm"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -390,7 +390,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "0aUhTwUSJPfahd16TiXOMk"
+    "_id": "17XnPw9GNAXbLEv2ZrMoZZ"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -492,7 +492,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "86HsviKI1Ihoj8tld35cWg"
+    "_id": "72Dq1aCCdPxYd9kVCfjv/f"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -596,7 +596,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "5aWEFasEZDNo1Yls1EOHUU"
+    "_id": "24Gtko3BBPlK7J0wCymdR6"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -614,7 +614,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "37hXikZPtFK4KeBaIHXWGw"
+    "_id": "00eRC6FqlFn4YMe2KFx4pu"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -716,7 +716,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "f30irWABhCNqsvG1+mGcAH"
+    "_id": "32KHKsZLdBkbD/I6uM1oRG"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -817,7 +817,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "36lRZnaItJHKHe/fBnXZBn"
+    "_id": "510ACV8clNIJCHJmXE7NTI"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -856,7 +856,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "abNl+aXypEBIPCpQzkSgcb"
+    "_id": "51ZFX2TGFL04q7+TheD51Q"
   },
   {
     "__type__": "212aaNTI6xD3pQODT+8KX/l",
@@ -866,7 +866,29 @@
       "__id__": 1
     },
     "_enabled": true,
-    "_id": "cfUkleBDBPdLk6W9jp5MsJ"
+    "rankIconRes": [
+      {
+        "__uuid__": "f36f7721-bbae-45ad-9c4f-59599908428c"
+      },
+      {
+        "__uuid__": "5f474346-ea68-47e2-b450-c07490869982"
+      },
+      {
+        "__uuid__": "d1ddd39e-71ad-4553-a4e0-15f565feea7f"
+      }
+    ],
+    "rankIcon": {
+      "__id__": 3
+    },
+    "headIcon": null,
+    "nameLabel": {
+      "__id__": 15
+    },
+    "contentLabel": {
+      "__id__": 22
+    },
+    "_Data": null,
+    "_id": "ca9slmzbxI2IoiKn6yG2Gy"
   },
   {
     "__type__": "cc.PrefabInfo",

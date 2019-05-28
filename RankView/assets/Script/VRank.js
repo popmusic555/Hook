@@ -3,6 +3,7 @@ cc.Class({
 
     properties: {
         rankItem:cc.Prefab,
+        content:cc.Node,
 
         tabBtn:[cc.Button],
     },
@@ -10,7 +11,7 @@ cc.Class({
     // onLoad () {},
 
     start () {
-        this.switchTab(this.tabBtn[0].node , 0);
+        this.show();
     },
 
     // update (dt) {},
@@ -32,9 +33,14 @@ cc.Class({
     },
 
     switchPage:function (index) {
-        var rankItem = cc.instantiate(this.rankItem);
+        // 获取数据
 
-        
+        for (let index = 0; index < 5; index++) {
+            var rankItemNode = cc.instantiate(this.rankItem);
+            var rankItem = rankItemNode.getComponent("RankItem");
+            rankItem.refreshByData({rankNum:index , name:"大哥你好" , content:"1008600"});
+            this.content.addChild(rankItemNode);    
+        }
     },
 
     onTabBtn:function (event , tabIndex) {
@@ -42,7 +48,17 @@ cc.Class({
     },
 
     onCloseBtn:function () {
-        this.node.active = false;  
+        this.hide();  
+    },
+
+    show:function () {
+        this.node.active = true;  
+
+        this.switchTab(this.tabBtn[0].node , 0);
+    },
+
+    hide:function () {
+        this.node.active = false;
     },
     
 });
