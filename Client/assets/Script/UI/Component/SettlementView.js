@@ -18,6 +18,7 @@ cc.Class({
     // update (dt) {},
 
     onBackBtn:function () {
+        Global.Common.Audio.playEffect("btn1Click" , false);
         var transition = cc.find("Canvas").getComponentInChildren("VTransition");
         if (transition) {
             transition.transitionWithScene("MainScene");
@@ -25,10 +26,11 @@ cc.Class({
     },
 
     onVideoBtn:function () {
-        
+        Global.Common.Audio.playEffect("btn1Click" , false);
     },
 
     onContinueBtn:function () {
+        Global.Common.Audio.playEffect("btn1Click" , false);
         var transition = cc.find("Canvas").getComponentInChildren("VTransition");
         if (transition) {
             transition.transitionWithScene("NewGameScene");
@@ -36,6 +38,7 @@ cc.Class({
     },
 
     show:function (mileage , maxPass , coins , killNum , fragmentList) {
+        Global.Common.Audio.playMusic("settlement" , false);
         this.node.active = true;
         coins = coins;
         this.settlement(mileage , maxPass , coins , killNum , fragmentList);
@@ -61,7 +64,7 @@ cc.Class({
         // 增加金币 轮盘奖励加成
         Global.Model.Game.addCoins(coins);
         // 设置总击杀数量
-        Global.Model.Game.setKillNum(killNum);
+        Global.Model.Game.addKillNum(killNum);
         // 设置任务碎片
         Global.Model.Game.addFragment(fragmentList);
     },

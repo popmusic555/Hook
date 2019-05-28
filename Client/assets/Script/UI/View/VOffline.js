@@ -25,6 +25,7 @@ cc.Class({
     },
 
     onCollectBtn:function () {
+        Global.Common.Audio.playEffect("btn2Click" , false);
         console.log("收取离线奖励");
         this.collectReward(false);
         var vMain = this.node.parent.getComponentInChildren("VMain");
@@ -32,6 +33,7 @@ cc.Class({
     },
 
     onDoubleBtn:function () {
+        Global.Common.Audio.playEffect("btn2Click" , false);
         console.log("翻倍收取离线奖励");
         this.collectReward(true);
         var vMain = this.node.parent.getComponentInChildren("VMain");
@@ -39,6 +41,7 @@ cc.Class({
     },
 
     onClose:function () {
+        Global.Common.Audio.playEffect("btn1Click" , false);
         this.hide();  
     },
 

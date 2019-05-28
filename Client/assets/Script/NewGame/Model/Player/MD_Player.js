@@ -57,6 +57,8 @@ MPlayer.init = function () {
     this.gamedata.mileage = 0;
     // 当局游戏击杀怪物数量
     this.gamedata.killNum = 0;
+    // 当局游戏获取碎片概率
+    this.gamedata.fragmentRate = 0;
     // 当局游戏获取到碎片
     this.gamedata.fragment = [0,0,0,0,0,0,0,0,0,0,0,0];
 
@@ -114,6 +116,7 @@ MPlayer.resetGamedata = function () {
     this.gamedata.launchPower = 0;
     this.gamedata.mileage = 0;
     this.gamedata.killNum = 0;
+    this.gamedata.fragmentRate = 0;
     this.gamedata.fragment = [0,0,0,0,0,0,0,0,0,0,0,0];
 };
 
@@ -265,6 +268,22 @@ MPlayer.setFragment = function (index) {
  */
 MPlayer.addFragment = function (index) {
     this.setFragment(index);
+    var ani = Global.Model.Game.getUIView().getComponentInChildren("FragmentRewardAni");
+    ani.show(index);
+}
+/**
+ * 设置碎片回去概率
+ * 
+ * @param {any} num 
+ */
+MPlayer.setFragmentRate = function (num) {
+    if (num >= Global.Common.Const.FRAGMENT_RATE.length) {
+        this.gamedata.fragmentRate = 0;
+    }
+    else
+    {
+        this.gamedata.fragmentRate = Global.Common.Const.FRAGMENT_RATE[num];
+    }
 }
 
 /**
@@ -274,9 +293,11 @@ MPlayer.addFragment = function (index) {
 MPlayer.getFragmentForRandom = function () {
     var index = this.randomFragment();
     if (index >= 0) {
-        var rate = Global.Common.Const.FRAGMENT_RATE[index];
+        var rate = this.gamedata.fragmentRate;
+        console.log("rate" , rate);
         var num = Math.random();
-        if (num <= rate) {
+        if (num < rate) {
+            this.gamedata.fragmentRate = 0;
             return index;
         }
     }
@@ -485,7 +506,8 @@ MPlayer.collisionWall = function (contact , playerCollider , wallCollider) {
                     if (!player.getWallLaunchVelocity()) {
                         playerVelocity.x += Global.Model.MWall.getAccelerate();
                         playerVelocity.x = this.limitVelocityX(playerVelocity.x);
-                        player.crossWall2(playerVelocity);    
+                        player.crossWall2(playerVelocity);
+                        Global.Common.Audio.playEffect("crossInWall" , false);
                     }
                 }
                 else
@@ -498,6 +520,7 @@ MPlayer.collisionWall = function (contact , playerCollider , wallCollider) {
                         var nodePos = player.node.parent.convertToNodeSpaceAR(worldPos);
                         player.node.x = nodePos.x - 25;
                     } , 0);
+                    Global.Common.Audio.playEffect("crossFail" , false);
                 }    
             }
             else
@@ -514,6 +537,7 @@ MPlayer.collisionWall = function (contact , playerCollider , wallCollider) {
                         playerVelocity.x += Global.Model.MWall.getAccelerate();
                         playerVelocity.x = this.limitVelocityX(playerVelocity.x);
                         player.crossWall2(playerVelocity);
+                        Global.Common.Audio.playEffect("crossInWall" , false);
                     }
                 }
                 else
@@ -526,6 +550,7 @@ MPlayer.collisionWall = function (contact , playerCollider , wallCollider) {
                         var nodePos = player.node.parent.convertToNodeSpaceAR(worldPos);
                         player.node.x = nodePos.x - 25;
                     } , 0);
+                    Global.Common.Audio.playEffect("crossFail" , false);
                 }    
             }
             break;
@@ -544,6 +569,8 @@ MPlayer.collisionWall = function (contact , playerCollider , wallCollider) {
             // 获取奖励
             var attr = Global.Model.MWall.getAttr();
             MPlayer.addReward(attr.cost , attr.coins , attr.energy);
+
+            Global.Common.Audio.playEffect("crossOutWall" , false);
             break;
         default:
             break;
@@ -1284,6 +1311,7 @@ MPlayer.triggerClip = function (contact , player , clip , attr) {
 
     switch (this.type) {
         case Enum.TYPE.CLIP:
+            Global.Common.Audio.playEffect("mClip" , false);
             // 解除原绑定
             this.type = Enum.TYPE.PLAYER;
             player.unBindMonster();
@@ -1336,6 +1364,7 @@ MPlayer.triggerClip = function (contact , player , clip , attr) {
             }
             else
             {   
+                Global.Common.Audio.playEffect("mClip" , false);
                 // 处理Y轴速度 (弹性、反弹力处理)
                 console.log("Clip反弹力" , selfAttr.bouncePower + otherAttr.bouncePower);
                 velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , selfAttr.bouncePower , otherAttr.elastic , otherAttr.bouncePower);
@@ -1684,6 +1713,7 @@ MPlayer.triggerCar = function (contact , player , car , attr) {
         case Enum.TYPE.JUMP:
         case Enum.TYPE.PLANE:
         case Enum.TYPE.CAR:
+            Global.Common.Audio.playEffect("mCar" , false);
             // 解除原绑定
             this.type = Enum.TYPE.PLAYER;
             player.unBindMonster();
@@ -1721,6 +1751,7 @@ MPlayer.triggerCar = function (contact , player , car , attr) {
             }
             else
             {   
+                Global.Common.Audio.playEffect("mCar" , false);
                 // 处理Y轴速度 (弹性、反弹力处理)
                 velocityY = Calculator.processVelocityY(velocityY , selfAttr.elastic , 0 , otherAttr.elastic , otherAttr.bouncePower);
                 // 限定Y速度 (限定速度区间)
@@ -1771,6 +1802,8 @@ MPlayer.triggerFloor = function (contact , player , floor , attr) {
             var newVelocity = cc.v2(velocityX , velocityY);
             // 玩家对象设置新速度
             player.setVelocity(newVelocity);
+
+            Global.Common.Audio.playEffect("hurt" , false);
             break;
         case Enum.TYPE.ROCKET:
             selfAttr = Global.Model.MRocket.getAttr();
@@ -1789,6 +1822,7 @@ MPlayer.triggerFloor = function (contact , player , floor , attr) {
                 velocityX = Calculator.processVelocityX(velocityX , selfAttr.skillAccelerate , 0);
                 // 限定X速度 (限定速度区间)
                 velocityX = this.limitVelocityX(velocityX);
+                Global.Common.Audio.playEffect("mJump" , false);
             }
             else
             {
@@ -1862,6 +1896,7 @@ MPlayer.triggerFloor = function (contact , player , floor , attr) {
             velocityY = this.limitVelocityY(velocityY);
 
             if (player.animation.getState() == Enum.P_ANI_STATE.SKILL) {
+                Global.Common.Audio.playEffect("skillFloor" , false);
                 // 技能状态下 清除范围内怪物 不减速
                 var newVelocity = cc.v2(velocityX , velocityY);
                 // 玩家对象设置新速度
@@ -1875,6 +1910,7 @@ MPlayer.triggerFloor = function (contact , player , floor , attr) {
                 MPlayer.quake(player);
             }
             else if (player.animation.getState() == Enum.P_ANI_STATE.IMPACT) {
+                Global.Common.Audio.playEffect("skillFloor" , false);
                 // 冲击状态下 清除范围内怪物 不减速
                 var newVelocity = cc.v2(velocityX , velocityY);
                 // 玩家对象设置新速度
@@ -1911,6 +1947,7 @@ MPlayer.triggerFloor = function (contact , player , floor , attr) {
                 {
                     // 显示触地动画
                     player.showTouchdownAni();
+                    Global.Common.Audio.playEffect("hurt" , false);
                     player.onHurt();
                 }
             }

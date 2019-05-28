@@ -53,6 +53,7 @@ cc.Class({
     },
 
     onReceiveBtn:function () {
+        Global.Common.Audio.playEffect("btn2Click" , false);
         console.log("领取奖励成功");
         // 切换到下一个任务
         Global.Model.Game.nextTask();

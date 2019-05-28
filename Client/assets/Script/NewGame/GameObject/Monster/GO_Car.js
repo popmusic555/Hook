@@ -37,6 +37,8 @@ cc.Class({
         // 持续时间
         _Duration:0,
         _MeterSpeed:0,
+
+        _CurSound:0,
     },
 
     // onLoad () {},
@@ -83,6 +85,7 @@ cc.Class({
         this._Duration = num;  
         this.animation.animation = "car_ljr_runtx";
         this._MeterSpeed = 0.25 / (60 * this.meterTime);
+        this._CurSound = Global.Common.Audio.playEffect("mCar2" , true);
     },
 
     update (dt) {
@@ -196,6 +199,10 @@ cc.Class({
             }
             // 增加击杀数量
             Global.Model.MPlayer.addOneKillNum();
+            if (this._CurSound) {
+                Global.Common.Audio.stopEffect(this._CurSound);
+            }
+            Global.Common.Audio.playEffect("boom" , false);
         }
     },
 

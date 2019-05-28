@@ -10,10 +10,11 @@ var Enum = Global.Common.Enum;
  */
 MGame.init = function () {
 
-    this._ResumeNode
+    this._ResumeNode = null;
 
+    this.musicOff = JSON.parse(cc.sys.localStorage.getItem("musicOff"));
+    Global.Common.Audio.enabled(!this.musicOff);
 
-    
     // 游戏UI
     this.uiView = null;
     // 游戏内UI
@@ -312,6 +313,17 @@ MGame.fullFragment = function () {
         }
     }
     return true;
+}
+
+MGame.getFragmentNum = function () {
+    var num = 0;
+    var len = this.task.fragment.length;
+    for (let index = 0; index < len; index++) {
+        if (this.task.fragment[index] > 0) {
+            num++;
+        }
+    }
+    return num;
 }
 
 /**

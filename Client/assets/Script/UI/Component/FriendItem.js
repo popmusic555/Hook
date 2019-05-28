@@ -47,6 +47,7 @@ cc.Class({
      * 
      */
     onReceiveReward:function () {
+        Global.Common.Audio.playEffect("btn2Click" , false);
         this.setState(0);
         this.receiveReward(this.rewardNum);
     },
@@ -61,7 +62,7 @@ cc.Class({
      * 
      */
     onInvitation:function () {
-        
+        Global.Common.Audio.playEffect("btn1Click" , false);
     },
 
     // update (dt) {},

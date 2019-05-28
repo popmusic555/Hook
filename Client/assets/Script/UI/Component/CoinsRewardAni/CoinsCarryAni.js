@@ -44,6 +44,7 @@ cc.Class({
         var action2 = cc.repeat(cc.sequence(cc.rotateBy(0.05 , 10) , cc.rotateBy(0.05 , -10) , cc.rotateBy(0.05 , -10) , cc.rotateBy(0.05 , 10)) , 2);
         var action3 = cc.removeSelf(true);
         node.runAction(cc.sequence(action1 , action2 , cc.delayTime(0.2) , cc.callFunc(function () {
+            Global.Common.Audio.playEffect("mCoins" , false);
             var len = 15;
             for (let index = 0; index < len; index++) {
                 var iconNode = new cc.Node();            

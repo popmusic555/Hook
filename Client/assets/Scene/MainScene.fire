@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.6687095905172414,
-      "y": 0.6687095905172414,
+      "x": 0.45566502463054187,
+      "y": 0.45566502463054187,
       "z": 1
     },
     "_quat": {
@@ -3180,7 +3180,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "0"
   },
   {
@@ -3822,7 +3822,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "1"
   },
   {
@@ -4464,7 +4464,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "2"
   },
   {
@@ -5106,7 +5106,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "3"
   },
   {
@@ -5748,7 +5748,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "4"
   },
   {
@@ -6390,7 +6390,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "5"
   },
   {
@@ -7032,7 +7032,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "6"
   },
   {
@@ -7674,7 +7674,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "7"
   },
   {
@@ -7959,7 +7959,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "8"
   },
   {
@@ -8750,7 +8750,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "8"
   },
   {
@@ -9392,7 +9392,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "9"
   },
   {
@@ -10034,7 +10034,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "10"
   },
   {
@@ -10676,7 +10676,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "11"
   },
   {
@@ -11318,7 +11318,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "12"
   },
   {
@@ -11960,7 +11960,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "13"
   },
   {
@@ -12602,7 +12602,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "14"
   },
   {
@@ -13244,7 +13244,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchLevelUpItem",
+    "handler": "onSwitchLevelUpItem",
     "customEventData": "15"
   },
   {
@@ -17936,7 +17936,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchTab",
+    "handler": "onSwitchTab",
     "customEventData": "0"
   },
   {
@@ -18106,7 +18106,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchTab",
+    "handler": "onSwitchTab",
     "customEventData": "1"
   },
   {
@@ -18276,7 +18276,7 @@
       "__id__": 5
     },
     "component": "VMain",
-    "handler": "switchTabNoRefresh",
+    "handler": "onSwitchTabNoRefresh",
     "customEventData": "2"
   },
   {
@@ -29046,9 +29046,77 @@
       "__id__": 5
     },
     "_enabled": true,
-    "bgm": {
-      "__uuid__": "49916027-1b31-4a1e-a0c8-c3699c74d0b8"
-    },
+    "musicRes": [
+      {
+        "__uuid__": "49916027-1b31-4a1e-a0c8-c3699c74d0b8"
+      },
+      {
+        "__uuid__": "e4e70f15-ef47-445c-a367-4f88f0e8a2bd"
+      },
+      {
+        "__uuid__": "fb8aecca-c80b-4888-b4b1-2bf09c5b06b9"
+      },
+      {
+        "__uuid__": "00aa1bcb-303e-434a-85f7-ce04c36a7175"
+      },
+      {
+        "__uuid__": "2fce781b-d7a9-4138-8024-edb710812053"
+      },
+      {
+        "__uuid__": "bced7c5a-1bae-4ae7-89a0-6383f6ab30f0"
+      },
+      {
+        "__uuid__": "976eb1c2-0e5f-4684-b688-ad189718d4d2"
+      },
+      {
+        "__uuid__": "1de4aa31-f6d1-42d7-bfb5-2a950cf05cfa"
+      },
+      {
+        "__uuid__": "53b6df85-ba80-478f-9f74-8d25eebc67a0"
+      },
+      {
+        "__uuid__": "f226acbc-d38f-46bc-a0bf-24f4687e41ba"
+      },
+      {
+        "__uuid__": "353c505d-664d-4606-b868-585de41578ad"
+      },
+      {
+        "__uuid__": "0fbefedf-7218-48ad-a2e2-78e2d840cb02"
+      },
+      {
+        "__uuid__": "8873359b-4a84-4971-b10b-7f3139bd00f5"
+      },
+      {
+        "__uuid__": "f41e6315-8b2d-45b0-9f8d-a7df63edf26b"
+      },
+      {
+        "__uuid__": "8c8c49e0-a77b-4714-aa8a-b852d3875cc0"
+      },
+      {
+        "__uuid__": "9dd75ca5-41f7-4a79-9564-f354e99b3b5f"
+      },
+      {
+        "__uuid__": "3e9e0981-acda-4f12-98a6-5b9bea299fde"
+      },
+      {
+        "__uuid__": "b8dbd2fd-4e51-4c03-922e-de4862f94ed8"
+      },
+      {
+        "__uuid__": "bf411c9a-ce82-4734-bc65-7bd49c08f76a"
+      },
+      {
+        "__uuid__": "deb3ffc1-1c0e-4a3d-9811-f99a4ac71ba1"
+      },
+      {
+        "__uuid__": "2761d5e4-97d9-4f9b-9f6c-20669e414aca"
+      },
+      {
+        "__uuid__": "95354fdc-640c-49ae-bd53-e4fa235247a9"
+      },
+      {
+        "__uuid__": "c836c427-d6e7-4892-82f5-2dc093113a30"
+      }
+    ],
     "levelUpDesc": {
       "__uuid__": "e068ba9b-fd5d-48a1-a1bd-6e5369da920b"
     },
@@ -29472,7 +29540,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "35ed8ec3-3c87-42e9-a8ee-485eab63c62f"
+      "__uuid__": "966b4f10-b5ac-4993-a403-91d23d1dbcd3"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -29561,7 +29629,7 @@
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_spriteFrame": {
-      "__uuid__": "a2de92b1-ab76-475b-875d-0aeeb0833d71"
+      "__uuid__": "35ed8ec3-3c87-42e9-a8ee-485eab63c62f"
     },
     "_type": 0,
     "_sizeMode": 2,

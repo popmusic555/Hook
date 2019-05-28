@@ -38,6 +38,8 @@ cc.Class({
         _OilMonster:null,
         // 持续时间
         _Duration:0,
+
+        _CurSound:0,
     },
 
     // onLoad () {},
@@ -46,7 +48,7 @@ cc.Class({
         this._Player = Global.Model.MPlayer.getPlayerObj();
         this.randomRelativeVelocity();
         this._IsUpdate = true;
-        this._OilNum = 5;
+        this._OilNum = 2;
         this._Duration = -1;
     },
 
@@ -56,6 +58,7 @@ cc.Class({
         this.animation.animation = "xg_feiji_ljr";
         this.animation.node.y = 35;
         this.generateOil();
+        this._CurSound = Global.Common.Audio.playEffect("mPlane" , true);
     },
 
     unBind:function () {
@@ -190,6 +193,10 @@ cc.Class({
             }
             // 增加击杀数量
             Global.Model.MPlayer.addOneKillNum();
+            if (this._CurSound) {
+                Global.Common.Audio.stopEffect(this._CurSound);
+            }
+            Global.Common.Audio.playEffect("boom" , false);
         }
     },
 

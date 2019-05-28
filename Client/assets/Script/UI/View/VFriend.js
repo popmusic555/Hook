@@ -27,6 +27,7 @@ cc.Class({
     // update (dt) {},
 
     onCloseBtn:function () {
+        Global.Common.Audio.playEffect("btn1Click" , false);
         this.hide();
     },
 

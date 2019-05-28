@@ -150,6 +150,10 @@ cc.Class({
     launchingForSpeed:function (speed) {
         // 大炮
         this.artillery.launching(speed , function (velocityX , velocityY) {
+            Global.Common.Audio.playEffect("launch" , false);
+            // this.scheduleOnce(function () {
+            Global.Common.Audio.playEffect("fly" , false);
+            // }.bind(this) , 1.5);
             console.log("发射速度" , velocityX , velocityY)
             this.animation.transState(GlobalEnum.P_ANI_STATE.LAUNCH);
             var vCamera = cc.Camera.main.getComponent("VCamera");
@@ -211,7 +215,6 @@ cc.Class({
         // if (this.animation.getState() == GlobalEnum.P_ANI_STATE.IMPACT) {
         //     return false;
         // }
-
         this.animation.transStateAndLock(GlobalEnum.P_ANI_STATE.HURT);
         // return true;
     },
@@ -405,12 +408,14 @@ cc.Class({
      * 
      */
     castSkill:function () {
-        console.log("触发技能")
         if (!Global.Model.MPlayer.isEnoughEnergy(Global.Common.Const.ENERGY_RATIO)) {
             var energyPower = Global.Model.Game.getUIView().getComponentInChildren("EnergyPower");
             energyPower.shake();
             return;
         }
+
+        console.log("触发技能")
+        Global.Common.Audio.playEffect("skill" , false);
         this.setVelocityY(-2000);
         this.animation.transStateAndLock(GlobalEnum.P_ANI_STATE.SKILL);
         Global.Model.MPlayer.reduceEnergy(Global.Common.Const.ENERGY_RATIO);

@@ -24,10 +24,12 @@ cc.Class({
     // update (dt) {},
 
     onStartBtn:function () {
+        Global.Common.Audio.playEffect("btn1Click" , false);
         this.turnOn(Global.Common.Utils.random(0 , 5));
     },
 
     onCloseBtn:function () {
+        Global.Common.Audio.playEffect("btn1Click" , false);
         this.hide();
     },
 

@@ -89,6 +89,8 @@ cc.Class({
     },
 
     start () {
+        Global.Common.Audio.playMusic("gameBgm" , true);
+
         this._IsGuide = true;
 
         Global.Model.Game.setGameView(this);
@@ -123,6 +125,8 @@ cc.Class({
         Global.Model.MCar.setConfig(this.mCarConfig.json);
 
         Global.Model.MPlayer.resetGamedata();
+        Global.Model.MPlayer.setFragmentRate(Global.Model.Game.getFragmentNum());
+
         Global.Model.MWall.resetGamedata();
         // 设置关卡ID
         Global.Model.MWall.setPassID(0);

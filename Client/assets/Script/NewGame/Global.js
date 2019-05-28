@@ -15,6 +15,9 @@ Global.Common.Const = require("GlobalConst");
 Global.Common.Enum = require("GlobalEnum");
 // 工具类
 Global.Common.Utils = require("Utils");
+// 音频
+Global.Common.Audio = require("AudioPlayer");
+Global.Common.Audio.init();
 
 // 游戏数据模型
 Global.Model.Game = require("MD_Game");
@@ -43,7 +46,6 @@ Global.Model.MCar = require("MD_Car");
 // 基类对象
 Global.GameObj.GBase = require("GO_Base");
 Global.GameObj.GPlayer = require("GO_Player");
-
 
 Global.Model.Game.init();
 Global.Model.MPlayer.init();

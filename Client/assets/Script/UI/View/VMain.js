@@ -6,9 +6,9 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        bgm: {
+        musicRes: {
             type:cc.AudioClip,
-            default:null,
+            default:[],
         },
 
         // 升级项描述表
@@ -35,10 +35,36 @@ cc.Class({
 
     },
 
-    // onLoad () {},
+    onLoad () {
+
+        Global.Common.Audio.setAudioClip("mainBgm" , this.musicRes[0]);
+        Global.Common.Audio.setAudioClip("gameBgm" , this.musicRes[1]);
+        Global.Common.Audio.setAudioClip("btn1Click" , this.musicRes[2]);
+        Global.Common.Audio.setAudioClip("btn2Click" , this.musicRes[3]);
+        Global.Common.Audio.setAudioClip("btnStart" , this.musicRes[4]);
+        Global.Common.Audio.setAudioClip("launch" , this.musicRes[5]);
+        Global.Common.Audio.setAudioClip("fly" , this.musicRes[6]);
+        Global.Common.Audio.setAudioClip("mNormal" , this.musicRes[7]);
+        Global.Common.Audio.setAudioClip("hurt" , this.musicRes[8]);
+        Global.Common.Audio.setAudioClip("boom" , this.musicRes[9]);
+        Global.Common.Audio.setAudioClip("mClip" , this.musicRes[10]);
+        Global.Common.Audio.setAudioClip("skill" , this.musicRes[11]);
+        Global.Common.Audio.setAudioClip("skillFloor" , this.musicRes[12]);
+        Global.Common.Audio.setAudioClip("mCoins" , this.musicRes[13]);
+        Global.Common.Audio.setAudioClip("mCar" , this.musicRes[14]);
+        Global.Common.Audio.setAudioClip("mCar2" , this.musicRes[15]);
+        Global.Common.Audio.setAudioClip("mPlane" , this.musicRes[16]);
+        Global.Common.Audio.setAudioClip("mJump" , this.musicRes[17]);
+        Global.Common.Audio.setAudioClip("mEnergy" , this.musicRes[18]);
+        Global.Common.Audio.setAudioClip("crossOutWall" , this.musicRes[19]);
+        Global.Common.Audio.setAudioClip("crossFail" , this.musicRes[20]);
+        Global.Common.Audio.setAudioClip("settlement" , this.musicRes[21]);
+        Global.Common.Audio.setAudioClip("crossInWall" , this.musicRes[22]);
+
+    },
 
     start () {
-        cc.audioEngine.playMusic(this.bgm, true);
+        Global.Common.Audio.playMusic("mainBgm" , true);
 
         this._LevelUpDescObj = this.levelUpDesc.json;
         this._LevelUpConsumeObj = this.levelUpConsume.json;
@@ -51,6 +77,7 @@ cc.Class({
 
     // update (dt) {},
     gameStart:function (event) {
+        Global.Common.Audio.playEffect("btnStart" , false);
         var btn = event.target.getComponent(cc.Button);
         btn.interactable = false;
         var ani = event.target.getComponentInChildren(sp.Skeleton);
@@ -62,6 +89,11 @@ cc.Class({
                 transition.transitionWithScene("NewGameScene");
             }
         }.bind(this));
+    },
+
+    onSwitchTab:function (event , tabIndex) {
+        Global.Common.Audio.playEffect("btn1Click" , false);
+        this.switchTab(event , tabIndex);
     },
 
     // 切换tab页
@@ -120,6 +152,11 @@ cc.Class({
         this.content[1].active = false;
     },
 
+    onSwitchTabNoRefresh:function (event , tabIndex) {
+        Global.Common.Audio.playEffect("btn1Click" , false);
+        this.switchTabNoRefresh(event , tabIndex);
+    },
+
     switchTabNoRefresh:function (event , tabIndex) {
         var len = this.tabBtn.length;
         for (let index = 0; index < len; index++) {
@@ -162,6 +199,11 @@ cc.Class({
                 ani.play();
             }
         }
+    },
+
+    onSwitchLevelUpItem:function (event , index) {
+        Global.Common.Audio.playEffect("btn1Click" , false);
+        this.switchLevelUpItem(event , index);
     },
 
     // 切换选项
@@ -219,6 +261,7 @@ cc.Class({
 
     // 升级按钮回调
     onLevelUpBtn:function (event) {
+        Global.Common.Audio.playEffect("btn2Click" , false);
         // 当前升级按钮回调
         var maxLevelNum = this._LevelUpDescObj[this._CurLevelUpIndex].maxLevel;
         var curLevelNum = Global.Model.Game.getLevelByItemID(this._CurLevelUpIndex);
@@ -261,21 +304,25 @@ cc.Class({
     },
 
     onRankBtn:function () {
+        Global.Common.Audio.playEffect("btn1Click" , false);
         // var offlineView = this.node.parent.getComponentInChildren("VOffline");
         // offlineView.show(9527);
     },
 
     onFriendBtn:function () {
+        Global.Common.Audio.playEffect("btn1Click" , false);
         var friendView = this.node.parent.getComponentInChildren("VFriend");
         friendView.show(Global.Model.Game.getFriend());
     },
 
     onLotteryBtn:function () {
+        Global.Common.Audio.playEffect("btn1Click" , false);
         var friendView = this.node.parent.getComponentInChildren("VLottery");
         friendView.show();
     },
 
     onSetBtn:function () {
+        Global.Common.Audio.playEffect("btn1Click" , false);
         var setView = this.node.parent.getComponentInChildren("VSet");
         setView.show();
     },

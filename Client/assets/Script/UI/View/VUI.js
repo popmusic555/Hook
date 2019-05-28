@@ -43,6 +43,7 @@ cc.Class({
     },
 
     onSetBtn:function () {
+        Global.Common.Audio.playEffect("btn1Click" , false);
         this.showSetView();  
     },  
 });

@@ -97,6 +97,7 @@ cc.Class({
             }
             // 增加击杀数量
             Global.Model.MPlayer.addOneKillNum();
+            Global.Common.Audio.playEffect("boom" , false);
         }
     },
 
