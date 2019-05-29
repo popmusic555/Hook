@@ -37,10 +37,17 @@ cc.Class({
     update (dt) {
         var progress = (this._ProgressNum1+this._ProgressNum2);
         if (progress == 1) {
-            cc.director.loadScene("MainScene");
+            this.runNextScene();
             this._ProgressNum1 = 1;
             this._ProgressNum2 = 1;
         }
         this.progressLabel.string = "- " + Math.floor(Math.min(progress , 1) * 100) + "% -";
+    },
+
+    runNextScene:function () {
+        // cc.director.loadScene("MainScene");
+
+        
+
     },
 });
