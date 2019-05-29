@@ -12,7 +12,13 @@ MGame.init = function () {
 
     this._ResumeNode = null;
 
-    this.musicOff = JSON.parse(cc.sys.localStorage.getItem("musicOff"));
+    if (cc.sys.localStorage.getItem("musicOff") == "true") {
+        this.musicOff = true;    
+    }
+    else
+    {
+        this.musicOff = false;    
+    }
     Global.Common.Audio.enabled(!this.musicOff);
 
     // 游戏UI

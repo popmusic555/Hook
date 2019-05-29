@@ -316,6 +316,8 @@ cc.Class({
         Global.Common.Audio.playEffect("btn1Click" , false);
         // var offlineView = this.node.parent.getComponentInChildren("VOffline");
         // offlineView.show(9527);
+        var rankView = this.node.parent.getComponentInChildren("VRank");
+        rankView.show();
     },
 
     onFriendBtn:function () {

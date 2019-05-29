@@ -31,8 +31,8 @@ cc.Class({
             this._ProgressNum2 = 0.5;
         }.bind(this))
 
-        this.runNextScene();
-
+        // this.runNextScene();
+        this.runNextScene1();
     },
 
     update (dt) {
@@ -43,6 +43,10 @@ cc.Class({
             this._ProgressNum2 = 1;
         }
         this.progressLabel.string = "- " + Math.floor(Math.min(progress , 1) * 100) + "% -";
+    },
+
+    runNextScene1:function () {
+        cc.director.loadScene("MainScene");
     },
 
     runNextScene:function () {

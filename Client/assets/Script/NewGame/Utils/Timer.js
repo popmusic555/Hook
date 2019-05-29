@@ -11,14 +11,14 @@ Timer.init = function () {
  * 
  */
 Timer.getTime = function () {
-    return new Data().getTime() + this._Timedifference;
+    return new Date().getTime() + this._Timedifference;
 }
 /**
  * 修正当前时间
  * 
  */
 Timer.correct = function (serverTime) {
-    var clientTime = new Data().getTime();
+    var clientTime = new Date().getTime();
     this._Timedifference = serverTime - clientTime;
     return serverTime;
 }
