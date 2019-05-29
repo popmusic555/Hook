@@ -3,7 +3,7 @@
 var WxAdapter = {};
 
 WxAdapter.isWeChat = function () {
-    if (cc.sys.browserType === cc.sys.BROWSER_TYPE_WECHAT_GAME) {
+    if (cc.sys.browserType === cc.sys.BROWSER_TYPE_WECHAT_GAME || cc.sys.browserType === cc.sys.BROWSER_TYPE_WECHAT_GAME_SUB) {
         return true;        
     }
     else

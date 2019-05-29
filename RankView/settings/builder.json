@@ -26,7 +26,7 @@
     "orientation": "portrait"
   },
   "startScene": "5c39f045-9147-4b76-8e75-f743d39d3c21",
-  "title": "RankView",
+  "title": "wechatgame-subcontext",
   "webOrientation": "auto",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",

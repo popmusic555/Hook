@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.392,
-      "y": 0.392,
+      "x": 0.38272888118786175,
+      "y": 0.38272888118786175,
       "z": 1
     },
     "_quat": {
@@ -76,7 +76,7 @@
     "_level": 1,
     "_components": [
       {
-        "__id__": 70
+        "__id__": 69
       }
     ],
     "_prefab": null,
@@ -201,7 +201,7 @@
       "r": 0,
       "g": 0,
       "b": 0,
-      "a": 255
+      "a": 0
     },
     "_depth": -1,
     "_zoomRatio": 1,
@@ -236,10 +236,10 @@
     "_level": 2,
     "_components": [
       {
-        "__id__": 68
+        "__id__": 67
       },
       {
-        "__id__": 69
+        "__id__": 68
       }
     ],
     "_prefab": null,
@@ -651,15 +651,13 @@
     "_srcBlendFactor": 1,
     "_dstBlendFactor": 771,
     "_useOriginalSize": false,
-    "_string": "名称",
-    "_N$string": "名称",
+    "_string": "名次",
+    "_N$string": "名次",
     "_fontSize": 26,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "bf250ab2-ccbb-4a5e-93e1-13afac0292e3"
-    },
-    "_isSystemFontUsed": false,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
@@ -744,10 +742,8 @@
     "_fontSize": 26,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "bf250ab2-ccbb-4a5e-93e1-13afac0292e3"
-    },
-    "_isSystemFontUsed": false,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
@@ -832,10 +828,8 @@
     "_fontSize": 26,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "bf250ab2-ccbb-4a5e-93e1-13afac0292e3"
-    },
-    "_isSystemFontUsed": false,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
@@ -920,10 +914,8 @@
     "_fontSize": 26,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "bf250ab2-ccbb-4a5e-93e1-13afac0292e3"
-    },
-    "_isSystemFontUsed": false,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
@@ -1330,7 +1322,7 @@
         "__id__": 39
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 4,
     "_components": [],
     "_prefab": null,
@@ -1530,10 +1522,8 @@
     "_fontSize": 26,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "bf250ab2-ccbb-4a5e-93e1-13afac0292e3"
-    },
-    "_isSystemFontUsed": false,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
@@ -1618,10 +1608,8 @@
     "_fontSize": 26,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "bf250ab2-ccbb-4a5e-93e1-13afac0292e3"
-    },
-    "_isSystemFontUsed": false,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
@@ -1706,10 +1694,8 @@
     "_fontSize": 26,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "bf250ab2-ccbb-4a5e-93e1-13afac0292e3"
-    },
-    "_isSystemFontUsed": false,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
@@ -1794,10 +1780,8 @@
     "_fontSize": 26,
     "_lineHeight": 30,
     "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "bf250ab2-ccbb-4a5e-93e1-13afac0292e3"
-    },
-    "_isSystemFontUsed": false,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
@@ -2829,10 +2813,8 @@
     "_fontSize": 36,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "bf250ab2-ccbb-4a5e-93e1-13afac0292e3"
-    },
-    "_isSystemFontUsed": false,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
@@ -3064,11 +3046,7 @@
     },
     "duration": 0.1,
     "zoomScale": 0.9,
-    "clickEvents": [
-      {
-        "__id__": 67
-      }
-    ],
+    "clickEvents": [],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
     "_N$normalColor": {
@@ -3107,15 +3085,6 @@
       "__id__": 64
     },
     "_id": "e2FrgaPEFKurY4D1Ff9jrG"
-  },
-  {
-    "__type__": "cc.ClickEvent",
-    "target": {
-      "__id__": 5
-    },
-    "component": "VRank",
-    "handler": "onCloseBtn",
-    "customEventData": ""
   },
   {
     "__type__": "cc.BlockInputEvents",
