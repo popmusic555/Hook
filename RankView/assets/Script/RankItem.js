@@ -21,7 +21,6 @@ cc.Class({
     // update (dt) {},
 
     refresh:function () {
-        console.log("RankItem Refresh");
         var rankNum = this._Data.rankNum;
         var rankIconRes = null;
         if (rankNum < this.rankIconRes.length) {
