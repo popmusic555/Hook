@@ -1,5 +1,15 @@
 [
   {
+    "level": -1,
+    "skillBounce": 700,
+    "skillAccelerate": 120,
+    "endRideBounce": 600,
+    "endRideAccelerate": 150,
+    "interval": 824,
+    "rate": 30,
+    "max": 0
+  },
+  {
     "level": 0,
     "skillBounce": 700,
     "skillAccelerate": 120,

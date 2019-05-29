@@ -1,5 +1,15 @@
 [
   {
+    "level": -1,
+    "endRideBounce": 500,
+    "endRideAccelerate": 120,
+    "interval": 941,
+    "rate": 20,
+    "max": 0,
+    "duration": 2,
+    "oilAccelerate": 120
+  },
+  {
     "level": 0,
     "endRideBounce": 500,
     "endRideAccelerate": 120,

@@ -48,11 +48,13 @@ MFloor.updateByPass = function (passID) {
         data = this.config[passID];
     }
 
-    var cfg = Global.Model.Game.levelsItemConfig.player;
+    var mGame = Global.Model.Game;
+    var level = Global.Model.Game.getLevelByItemID(5);
+    var cfg = Global.Model.Game.getConfigByLevel(Global.Model.Game.levelsItemConfig.player , level);
 
     this.attr.elastic = data.elastic;
     this.attr.bouncePower = data.bounce;
-    this.attr.acceleratePower = data.accelerate + cfg[Global.Model.Game.getLevelByItemID(5)].floorAccelerate;
+    this.attr.acceleratePower = data.accelerate + cfg.floorAccelerate;
 
     console.log("UpdateByPass Floor" , passID);
 };

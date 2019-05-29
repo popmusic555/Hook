@@ -1,7 +1,4 @@
 
-var PlayerConfig = require("PlayerConfig");
-var DataManager = require("DataManager");
-
 cc.Class({
     extends: cc.Component,
 

@@ -89,12 +89,12 @@ MPlayer.updateByPass = function (passID) {
     var cfg = Global.Model.Game.levelsItemConfig.player;
 
     this.attr.elastic = data.elastic;
-    this.attr.bouncePower = data.bounce + cfg[Global.Model.Game.getLevelByItemID(1)].playerBounce;
+    this.attr.bouncePower = data.bounce + Global.Model.Game.getConfigByLevel(cfg , Global.Model.Game.getLevelByItemID(1)).playerBounce;
     this.attr.acceleratePower = data.accelerate;
-    this.attr.coinsRadio = data.getCoins * cfg[Global.Model.Game.getLevelByItemID(6)].getCoins;
-    this.attr.offlineRewards = data.offlineReward + cfg[Global.Model.Game.getLevelByItemID(3)].offlineRewards;
-    this.attr.energyLimit = data.energyLimit + cfg[Global.Model.Game.getLevelByItemID(2)].energyLimit;
-    this.attr.launchingVelocity = cfg[Global.Model.Game.getLevelByItemID(0)].launchSpeed;
+    this.attr.coinsRadio = data.getCoins * Global.Model.Game.getConfigByLevel(cfg , Global.Model.Game.getLevelByItemID(6)).getCoins;
+    this.attr.offlineRewards = data.offlineReward + Global.Model.Game.getConfigByLevel(cfg , Global.Model.Game.getLevelByItemID(3)).offlineRewards;
+    this.attr.energyLimit = data.energyLimit + Global.Model.Game.getConfigByLevel(cfg , Global.Model.Game.getLevelByItemID(2)).energyLimit;
+    this.attr.launchingVelocity = Global.Model.Game.getConfigByLevel(cfg , Global.Model.Game.getLevelByItemID(0)).launchSpeed;
     
 
     if (passID == 0) {
@@ -109,6 +109,8 @@ MPlayer.updateByPass = function (passID) {
  * 
  */
 MPlayer.resetGamedata = function () {
+    this.type = Enum.TYPE.PLAYER;
+
     this.gamedata.playerObj = null;
     this.gamedata.globalAni = null;
     this.gamedata.rewardsCoins = 0;
@@ -291,6 +293,10 @@ MPlayer.setFragmentRate = function (num) {
  *
  */
 MPlayer.getFragmentForRandom = function () {
+    if (Global.Model.Game.getTask().id != 2) {
+        return -1;
+    }
+
     var index = this.randomFragment();
     if (index >= 0) {
         var rate = this.gamedata.fragmentRate;

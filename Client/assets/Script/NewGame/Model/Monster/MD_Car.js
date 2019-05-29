@@ -73,8 +73,8 @@ MCar.updateByPass = function (passID) {
         data = this.config[passID];
     }
 
-    var cfg = Global.Model.Game.levelsItemConfig.car;
     var level = Global.Model.Game.getLevelByItemID(11);
+    var cfg = Global.Model.Game.getConfigByLevel(Global.Model.Game.levelsItemConfig.car , level);
 
     this.attr.elastic = data.elastic;
     this.attr.bouncePower = data.bounce;
@@ -82,17 +82,17 @@ MCar.updateByPass = function (passID) {
     this.attr.cost = data.cost;
     this.attr.coins = data.carryCoins;
     this.attr.energy = data.carryEnergy;
-    this.attr.duration = cfg[level].duration;
+    this.attr.duration = cfg.duration;
 
-    this.attr.endRideBounce = data.endRideBounce + cfg[level].endRideBounce;
-    this.attr.endRideAccelerate = data.endRideAccelerate + cfg[level].endRideAccelerate;
+    this.attr.endRideBounce = data.endRideBounce + cfg.endRideBounce;
+    this.attr.endRideAccelerate = data.endRideAccelerate + cfg.endRideAccelerate;
 
     this.attr.skillBounce = data.skillBounce;
     this.attr.skillAccelerate = data.skillAccelerate;
 
-    this.attr.interval = data.interval + cfg[level].interval;
-    this.attr.rate = data.rate + cfg[level].rate;
-    this.attr.maxNum = data.max + cfg[level].max;
+    this.attr.interval = data.interval + cfg.interval;
+    this.attr.rate = data.rate + cfg.rate;
+    this.attr.maxNum = data.max + cfg.max;
 
     console.log("UpdateByPass MCar" , passID);
 };

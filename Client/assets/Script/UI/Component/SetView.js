@@ -1,6 +1,4 @@
 
-var GameCommon = require("GameCommon");
-
 cc.Class({
     extends: cc.Component,
 

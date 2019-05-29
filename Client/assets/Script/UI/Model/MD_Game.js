@@ -33,8 +33,14 @@ MGame.init = function () {
     this.mileage = 0;
     // 最大关卡数
     this.maxPass = 0;
+    // 离线时间
+    this.offlineTime = 0;
     // 轮盘奖励倍数
     this.lottery = 0;
+    // 轮盘免费次数
+    this.freeLottery = 0;
+    // 抽奖时间
+    this.lotteryTime = 0;
 
     // 所有升级选项等级
     this.levels = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -131,6 +137,11 @@ MGame.initCarLevelConfig = function (config) {
     this.levelsItemConfig.car = config;
 };
 
+MGame.getConfigByLevel = function (config , level) {
+    level = level + 1;
+    return config[level];
+};
+
 /**
  * 根据选项ID获取等级
  *
@@ -195,9 +206,29 @@ MGame.nextTask = function () {
         this.task.id += 1; 
     }
 }
-
+/**
+ * 获取已邀请好友数据
+ * 
+ * @returns 
+ */
 MGame.getFriend = function () {
     return this.friend;
+}
+/**
+ * 设置离线时间
+ * 
+ * @param {any} time 
+ */
+MGame.setOfflineTime = function (time) {
+    this.offlineTime = time;
+}
+/**
+ * 获取离线时间
+ * 
+ * @returns 
+ */
+MGame.getOfflineTime = function () {
+    return this.offlineTime;
 }
 
 /**
@@ -264,6 +295,22 @@ MGame.addCoins = function (num) {
 MGame.setLotteryNum = function (num) {
     this.lottery = num;
 };
+/**
+ * 设置免费轮盘次数
+ * 
+ * @param {any} num 
+ */
+MGame.setFreeLottery = function (num) {
+    this.freeLottery = num;
+}
+/**
+ * 设置轮盘抽奖时间
+ * 
+ * @param {any} num 
+ */
+MGame.setLotteryTime = function (num) {
+    this.lotteryTime = num;
+}
 
 /**
  * 获取怪物击杀数量
@@ -290,6 +337,17 @@ MGame.setKillNum = function (num) {
  */
 MGame.addKillNum = function (num) {
     this.setKillNum(num + this.getKillNum());
+}
+/**
+ * 根据值初始化碎片
+ * 
+ * @param {any} num 
+ */
+MGame.initFragment = function (num) {
+    for (let index = 0; index < 12; index++) {
+        this.task.fragment[index] = num & 1;
+        num >>= 1;
+    }
 }
 
 /**

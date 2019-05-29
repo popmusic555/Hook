@@ -1,5 +1,14 @@
 [
   {
+    "level": -1,
+    "endRideBounce": 600,
+    "endRideAccelerate": 210,
+    "interval": 600,
+    "rate": 20,
+    "max": 0,
+    "duration": 3
+  },
+  {
     "level": 0,
     "endRideBounce": 600,
     "endRideAccelerate": 210,

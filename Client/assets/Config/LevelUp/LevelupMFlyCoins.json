@@ -1,5 +1,12 @@
 [
   {
+    "level": -1,
+    "carryCoins": 100,
+    "interval": 515,
+    "rate": 30,
+    "max": 0
+  },
+  {
     "level": 0,
     "carryCoins": 100,
     "interval": 515,

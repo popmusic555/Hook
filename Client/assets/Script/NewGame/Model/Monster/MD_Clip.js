@@ -65,12 +65,12 @@ MClip.updateByPass = function (passID) {
         data = this.config[passID];
     }
 
-    var cfg = Global.Model.Game.levelsItemConfig.clip;
     var level = Global.Model.Game.getLevelByItemID(15);
+    var cfg = Global.Model.Game.getConfigByLevel(Global.Model.Game.levelsItemConfig.clip , level);
 
     this.attr.elastic = data.elastic;
     this.attr.bouncePower = data.bounce;
-    this.attr.acceleratePower = data.accelerate + cfg[level].accelerate;
+    this.attr.acceleratePower = data.accelerate + cfg.accelerate;
     this.attr.cost = data.cost;
     this.attr.coins = data.carryCoins;
     this.attr.energy = data.carryEnergy;
@@ -78,9 +78,9 @@ MClip.updateByPass = function (passID) {
     this.attr.endRideBounce = data.endRideBounce;
     this.attr.endRideAccelerate = data.endRideAccelerate;
 
-    this.attr.interval = data.interval + cfg[level].interval;
-    this.attr.rate = data.rate + cfg[level].rate;
-    this.attr.maxNum = data.max + cfg[level].max;
+    this.attr.interval = data.interval + cfg.interval;
+    this.attr.rate = data.rate + cfg.rate;
+    this.attr.maxNum = data.max + cfg.max;
 
     console.log("UpdateByPass MClip" , passID);
 };

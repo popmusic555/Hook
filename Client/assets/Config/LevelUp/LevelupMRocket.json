@@ -1,5 +1,13 @@
 [
   {
+    "level": -1,
+    "bounce": 1000,
+    "accelerate": 120,
+    "interval": 678,
+    "rate": 30,
+    "max": 0
+  },
+  {
     "level": 0,
     "bounce": 1000,
     "accelerate": 120,

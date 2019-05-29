@@ -83,7 +83,7 @@ MWall.updateByPass = function (passID) {
     var cfg = Global.Model.Game.levelsItemConfig.player;
 
     this.attr.crossSpeed = data.crossSpeed;
-    this.attr.acceleratePower = data.accelerate + cfg[Global.Model.Game.getLevelByItemID(7)].wallAccelerate;
+    this.attr.acceleratePower = data.accelerate + Global.Model.Game.getConfigByLevel(cfg , Global.Model.Game.getLevelByItemID(7)).wallAccelerate;
     this.attr.cost = data.cost;
     this.attr.coins = data.carryCoins;
     this.attr.energy = data.carryEnergy;

@@ -1,5 +1,4 @@
 
-var GameCommon = require("GameCommon");
 var SetView = require("SetView");
 var SettlementView = require("SettlementView");
 

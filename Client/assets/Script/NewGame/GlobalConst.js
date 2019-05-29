@@ -2,6 +2,9 @@
 
 var GlobalConst = {};
 
+// 服务器地址
+GlobalConst.URL = "http://123.59.20.141:8081/hulk/test";
+
 // 重力系数
 GlobalConst.GRAVITY_SCALE = 8;
 // 里程数比率
@@ -30,6 +33,8 @@ GlobalConst.LAUNCH_POWER = [0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2];
 // 发射奖励倍率
 GlobalConst.LAUNCH_RATE = [1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0];
 
+// 轮盘奖励持续时间
+GlobalConst.LOTTERY_TIME = 1200;
 
 
 module.exports = GlobalConst;

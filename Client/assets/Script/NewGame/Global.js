@@ -15,9 +15,13 @@ Global.Common.Const = require("GlobalConst");
 Global.Common.Enum = require("GlobalEnum");
 // 工具类
 Global.Common.Utils = require("Utils");
+// 时间
+Global.Common.Timer = require("Timer");
+Global.Common.Timer.init();
 // 音频
 Global.Common.Audio = require("AudioPlayer");
 Global.Common.Audio.init();
+Global.Common.Http = require("HttpClient");
 
 // 游戏数据模型
 Global.Model.Game = require("MD_Game");

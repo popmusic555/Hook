@@ -63,11 +63,12 @@ MNormal.updateByPass = function (passID) {
         data = this.config[passID];
     }
 
-    var cfg = Global.Model.Game.levelsItemConfig.player;
+    var level = Global.Model.Game.getLevelByItemID(4);
+    var cfg = Global.Model.Game.getConfigByLevel(Global.Model.Game.levelsItemConfig.player , level);
 
     this.attr.elastic = data.elastic;
     this.attr.bouncePower = data.bounce;
-    this.attr.acceleratePower = data.accelerate + cfg[Global.Model.Game.getLevelByItemID(4)].mnormalAccelerate;
+    this.attr.acceleratePower = data.accelerate + cfg.mnormalAccelerate;
     this.attr.cost = data.cost;
     this.attr.coins = data.carryCoins;
     this.attr.energy = data.carryEnergy;

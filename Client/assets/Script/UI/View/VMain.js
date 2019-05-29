@@ -133,14 +133,23 @@ cc.Class({
             // 显示提示
             var hint = item.node.parent.getChildByName("Hint");
             var curLevelNum = Global.Model.Game.getLevelByItemID(id);
-            var nextLevelConsume = this._LevelUpConsumeObj[curLevelNum]["levelupItem" + id];
-            if (Global.Model.Game.isEnoughCoins(nextLevelConsume)) {
-                // 金币不足
-                hint.active = true;
+            if (curLevelNum < 0) {
+                // 未开放
+                hint.active = false;
+                item.node.parent.getComponent(cc.Button).interactable = false;
             }
             else
             {
-                hint.active = false;
+                item.node.parent.getComponent(cc.Button).interactable = true;
+                var nextLevelConsume = this._LevelUpConsumeObj[curLevelNum]["levelupItem" + id];
+                if (Global.Model.Game.isEnoughCoins(nextLevelConsume)) {
+                    // 金币不足
+                    hint.active = true;
+                }
+                else
+                {
+                    hint.active = false;
+                }
             }
         }        
 

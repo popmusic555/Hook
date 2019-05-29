@@ -1,5 +1,16 @@
 [
   {
+    "level": -1,
+    "launchSpeed": 1500,
+    "playerBounce": 200,
+    "energyLimit": 10,
+    "offlineRewards": 20,
+    "mnormalAccelerate": 0,
+    "floorAccelerate": 0,
+    "getCoins": 1,
+    "wallAccelerate": 0
+  },
+  {
     "level": 0,
     "launchSpeed": 1500,
     "playerBounce": 200,

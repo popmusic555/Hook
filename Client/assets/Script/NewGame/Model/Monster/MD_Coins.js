@@ -63,18 +63,18 @@ MCoins.updateByPass = function (passID) {
         data = this.config[passID];
     }
 
-    var cfg = Global.Model.Game.levelsItemConfig.coins;
     var level = Global.Model.Game.getLevelByItemID(12);
+    var cfg = Global.Model.Game.getConfigByLevel(Global.Model.Game.levelsItemConfig.coins , level);
 
     this.attr.elastic = data.elastic;
     this.attr.bouncePower = data.bounce;
     this.attr.acceleratePower = data.accelerate;
     this.attr.cost = data.cost;
-    this.attr.coins = data.carryCoins + cfg[level].carryCoins;
+    this.attr.coins = data.carryCoins + cfg.carryCoins;
     this.attr.energy = data.carryEnergy;
-    this.attr.interval = data.interval + cfg[level].interval;
-    this.attr.rate = data.rate + cfg[level].rate;
-    this.attr.maxNum = data.max + cfg[level].max;
+    this.attr.interval = data.interval + cfg.interval;
+    this.attr.rate = data.rate + cfg.rate;
+    this.attr.maxNum = data.max + cfg.max;
 
     console.log("UpdateByPass MCoins" , passID);
 };

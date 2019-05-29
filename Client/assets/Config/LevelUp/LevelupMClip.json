@@ -1,5 +1,12 @@
 [
   {
+    "level": -1,
+    "accelerate": 0,
+    "interval": 0,
+    "rate": 0,
+    "max": 0
+  },
+  {
     "level": 0,
     "accelerate": 0,
     "interval": 0,

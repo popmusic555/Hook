@@ -1,5 +1,14 @@
 [
   {
+    "level": -1,
+    "elastic": 0,
+    "bounce": 300,
+    "accelerate": 300,
+    "interval": 300,
+    "rate": 30,
+    "max": 0
+  },
+  {
     "level": 0,
     "elastic": 0,
     "bounce": 300,

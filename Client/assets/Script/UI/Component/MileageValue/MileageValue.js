@@ -1,5 +1,3 @@
-var DataManager = require("DataManager");
-
 cc.Class({
     extends: cc.Component,
 

@@ -63,18 +63,18 @@ MBoom.updateByPass = function (passID) {
         data = this.config[passID];
     }
 
-    var cfg = Global.Model.Game.levelsItemConfig.boom;
     var level = Global.Model.Game.getLevelByItemID(13);
+    var cfg = Global.Model.Game.getConfigByLevel(Global.Model.Game.levelsItemConfig.boom , level);
 
-    this.attr.elastic = data.elastic + cfg[level].elastic;
-    this.attr.bouncePower = data.bounce + cfg[level].bounce;
-    this.attr.acceleratePower = data.accelerate + cfg[level].accelerate;
+    this.attr.elastic = data.elastic + cfg.elastic;
+    this.attr.bouncePower = data.bounce + cfg.bounce;
+    this.attr.acceleratePower = data.accelerate + cfg.accelerate;
     this.attr.cost = data.cost;
     this.attr.coins = data.carryCoins;
     this.attr.energy = data.carryEnergy;
-    this.attr.interval = data.interval + cfg[level].interval;
-    this.attr.rate = data.rate + cfg[level].rate;
-    this.attr.maxNum = data.max + cfg[level].max;
+    this.attr.interval = data.interval + cfg.interval;
+    this.attr.rate = data.rate + cfg.rate;
+    this.attr.maxNum = data.max + cfg.max;
 
     console.log("UpdateByPass MBoom" , passID);
 };
