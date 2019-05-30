@@ -35,15 +35,25 @@ cc.Class({
         this.node.active = false;  
     },
 
-    show:function (datas) {
-        this.node.active = true;
-        this._Datas = datas;
+    show:function () {
+        // 邀请好友信息
+        Global.Common.Http.req("inviteAwardForInfo" , {
+            uuid:Global.Model.Game.uuid,
+        } , function (resp , url) {
+            console.log("Response " , url , resp);
+            Global.Model.Game.initFriend(resp);
+
+            this.node.active = true;
+            this._Datas = Global.Model.Game.getFriend();
+            
+            var len = this.content.childrenCount;
+            for (let index = 0; index < len; index++) {
+                var item = this.content.children[index];
+                this.refreshItem(item , this._Datas , index);
+            }
+        }.bind(this));
         
-        var len = this.content.childrenCount;
-        for (let index = 0; index < len; index++) {
-            var item = this.content.children[index];
-            this.refreshItem(item , this._Datas , index);
-        }
+        
     },
 
     refreshItem:function (item , datas , index) {
@@ -72,7 +82,7 @@ cc.Class({
             // 未邀请状态
             friendItem.setState(3);
         }
-        friendItem.setIndex(index + 1);
+        friendItem.setIndex(index);
         friendItem.setRewardNum(this._RewardData[index]);
     },
 });

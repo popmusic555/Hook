@@ -35,7 +35,7 @@ cc.Class({
 
     setIndex:function (index) {
         this.index = index;
-        this.indexLabel.string = index;
+        this.indexLabel.string = index + 1;
     },
 
     setRewardNum:function (num) {
@@ -48,8 +48,16 @@ cc.Class({
      */
     onReceiveReward:function () {
         Global.Common.Audio.playEffect("btn2Click" , false);
-        this.setState(0);
-        this.receiveReward(this.rewardNum);
+
+        // 好友奖励领取
+        Global.Common.Http.req("inviteAwardForAward" , {
+            uuid:Global.Model.Game.uuid,
+            id:Global.Model.Game.getFriend()[this.index].id,
+        } , function (resp , url) {
+            console.log("Response " , url , resp);
+            this.setState(0);
+            this.receiveReward(parseInt(resp[0]));
+        }.bind(this));
     },
 
     receiveReward:function (num) {

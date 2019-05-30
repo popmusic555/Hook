@@ -33,8 +33,10 @@ GlobalConst.LAUNCH_POWER = [0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2];
 // 发射奖励倍率
 GlobalConst.LAUNCH_RATE = [1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0];
 
-// 轮盘奖励持续时间
+// 轮盘奖励持续时间(秒)
 GlobalConst.LOTTERY_TIME = 1200;
+// 最大离线时间(分钟)
+GlobalConst.MAX_OFFLINE = 60;
 
 
 module.exports = GlobalConst;

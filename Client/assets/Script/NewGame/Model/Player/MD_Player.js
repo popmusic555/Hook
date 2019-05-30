@@ -61,6 +61,14 @@ MPlayer.init = function () {
     this.gamedata.fragmentRate = 0;
     // 当局游戏获取到碎片
     this.gamedata.fragment = [0,0,0,0,0,0,0,0,0,0,0,0];
+    // 当局游戏是否穿越墙体
+    this.gamedata.isCross = false;
+    // 当局游戏是否消灭弹跳机
+    this.gamedata.isKillJump = false;
+    // 当局游戏是否消灭能量怪
+    this.gamedata.isKillEnergy = false;
+    // 当局游戏是否消灭飞机怪
+    this.gamedata.isKillPlane = false;
 
     this.config = null;
 
@@ -120,6 +128,10 @@ MPlayer.resetGamedata = function () {
     this.gamedata.killNum = 0;
     this.gamedata.fragmentRate = 0;
     this.gamedata.fragment = [0,0,0,0,0,0,0,0,0,0,0,0];
+    this.gamedata.isCross = false;
+    this.gamedata.isKillJump = false;
+    this.gamedata.isKillEnergy = false;
+    this.gamedata.isKillPlane = false;
 };
 
 /**

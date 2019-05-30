@@ -130,6 +130,13 @@ cc.Class({
         Global.Model.MWall.resetGamedata();
         // 设置关卡ID
         Global.Model.MWall.setPassID(0);
+
+        // 当前转盘倍数是否超时
+        var curTime = Global.Common.Timer.getTime();
+        if (curTime > Global.Model.Game.lotteryTime >= Global.Common.Const.LOTTERY_TIME) {
+            // 超时倍数清零
+            Global.Model.Game.setLotteryNum(0);
+        }
     },
 
     // 震屏

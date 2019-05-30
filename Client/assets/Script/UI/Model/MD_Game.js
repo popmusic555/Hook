@@ -26,6 +26,13 @@ MGame.init = function () {
     // 游戏内UI
     this.gameView = null;
 
+    // uuid
+    this.uuid = "";
+    // 昵称
+    this.nickname = "";
+    // 头像
+    this.headicon = "";
+
     // 新手引导步骤
     this.guideStep = 0,
     // 怪物引导
@@ -39,6 +46,8 @@ MGame.init = function () {
     this.mileage = 0;
     // 最大关卡数
     this.maxPass = 0;
+    // 连击数量
+    this.launchNum = 0;
     // 离线时间
     this.offlineTime = 0;
     // 轮盘奖励倍数
@@ -60,14 +69,18 @@ MGame.init = function () {
     this.task.rewardId = 0;
     // 当前碎片
     this.task.fragment = [0,0,0,0,0,0,0,0,0,0,0,0];
+    // 当前任务状态
+    this.task.state = 0;
+    // 当前任务剩余时间
+    this.task.times = 0;
     // 当前击杀怪物数量
     this.task.killNum = 101;
 
     // 好友邀请
     this.friend = [];
-    this.friend[0] = {isReward:false};
-    this.friend[1] = {isReward:false};
-    this.friend[2] = {isReward:false};
+    // this.friend[0] = {isReward:false};
+    // this.friend[1] = {isReward:false};
+    // this.friend[2] = {isReward:false};
 
     // 所有升级选项数据表
     this.levelsItemConfig = {};
@@ -212,6 +225,34 @@ MGame.nextTask = function () {
         this.task.id += 1; 
     }
 }
+
+MGame.addLaunchNum= function () {
+    this.launchNum++;
+}
+
+/**
+ * 初始化邀请好友信息
+ * 
+ * @param {any} list 
+ */
+MGame.initFriend = function (list) {
+    this.friend = [];
+
+    var len = list.length / 4;
+    for (let index = 0; index < len; index++) {
+        var friend = {};
+        friend.id = list[index * 4 + 0];
+        friend.nickname = list[index * 4 + 1];
+        friend.headicon = list[index * 4 + 2];
+        friend.isReward = false;
+        var state = list[index * 4 + 3];
+        if (state == 1) {
+            friend.isReward = true;
+        }
+        this.friend[index] = friend;        
+    }
+}
+
 /**
  * 获取已邀请好友数据
  * 
@@ -345,6 +386,41 @@ MGame.addKillNum = function (num) {
     this.setKillNum(num + this.getKillNum());
 }
 /**
+ * 初始化引导数据
+ * 
+ * @param {any} num 
+ */
+MGame.initGuide = function (num) {
+    var guideStep = num & 1;
+    if (guideStep > 0) {
+        this.guideStep = 10;
+    }
+    num >>= 1;
+    for (let index = 0; index < this.monsterGuide.length; index++) {
+        this.monsterGuide[index] = num & 1;
+        num >>= 1;
+    }
+}
+
+MGame.getGuideForNum = function () {
+    var guideStep = 0;
+    for (let index = this.monsterGuide.length-1; index >= 0; index--) {
+        guideStep <<= 1;
+        guideStep = guideStep + this.monsterGuide[index];
+    }
+
+    guideStep <<= 1;
+    if (this.guideStep > 0) {
+        guideStep = guideStep + 1;
+    }
+    else
+    {
+        guideStep = guideStep + 0;   
+    }
+    return guideStep;
+}
+
+/**
  * 根据值初始化碎片
  * 
  * @param {any} num 
@@ -353,6 +429,15 @@ MGame.initFragment = function (num) {
     for (let index = 0; index < 12; index++) {
         this.task.fragment[index] = num & 1;
         num >>= 1;
+    }
+}
+
+MGame.getFragmentForNum = function () {
+    var fragment = 0;
+    var len = this.task.fragment.length;
+    for (let index = len-1; index >= 0; index--) {
+        fragment <<= 1;
+        fragment = fragment + this.task.fragment[index];
     }
 }
 

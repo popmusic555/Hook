@@ -73,6 +73,9 @@ cc.Class({
         this.switchTab({target:this.tabBtn[0].node} , 0);
 
         this.refreshTopBar();
+
+        // 弹出离线奖励界面
+        this.onOfflineBtn();
     },
 
     // update (dt) {},
@@ -132,14 +135,17 @@ cc.Class({
 
             // 显示提示
             var hint = item.node.parent.getChildByName("Hint");
+            var lock = item.node.parent.getChildByName("Lock");
             var curLevelNum = Global.Model.Game.getLevelByItemID(id);
             if (curLevelNum < 0) {
                 // 未开放
                 hint.active = false;
+                lock.active = true;
                 item.node.parent.getComponent(cc.Button).interactable = false;
             }
             else
             {
+                lock.active = false;
                 item.node.parent.getComponent(cc.Button).interactable = true;
                 var nextLevelConsume = this._LevelUpConsumeObj[curLevelNum]["levelupItem" + id];
                 if (Global.Model.Game.isEnoughCoins(nextLevelConsume)) {
@@ -264,8 +270,6 @@ cc.Class({
             coins.string = "已满级";
             levelUpBtn.interactable = false;
         }
-
-        
     },
 
     // 升级按钮回调
@@ -276,35 +280,47 @@ cc.Class({
         var curLevelNum = Global.Model.Game.getLevelByItemID(this._CurLevelUpIndex);
         var nextLevelConsume = this._LevelUpConsumeObj[curLevelNum]["levelupItem" + this._CurLevelUpIndex];
 
-        // 减少金币
-        Global.Model.Game.reduceCoins(nextLevelConsume);
-        var curLevelNum = Global.Model.Game.levelUp(this._CurLevelUpIndex);
-        var level = this._ContentPage.getChildByName("Level").getComponent(Level);
-        level.level = curLevelNum;
-        var coins = this._ContentPage.getChildByName("Coins").getComponentInChildren(cc.Label);
-        var levelUpBtn = event.target.getComponent(cc.Button);
-        if (curLevelNum < maxLevelNum) {
-            nextLevelConsume = this._LevelUpConsumeObj[curLevelNum]["levelupItem" + this._CurLevelUpIndex];
-            coins.string = " x " + nextLevelConsume;
-            
-            if (!Global.Model.Game.isEnoughCoins(nextLevelConsume)) {
-                levelUpBtn.interactable = false;
+        Global.Common.Http.req("updateProperty" , {
+            uuid:Global.Model.Game.uuid,
+            propertyid:this._CurLevelUpIndex,
+            level:curLevelNum+1,
+            CurGold:Global.Model.Game.coins - nextLevelConsume,
+        } , function (resp , url) {
+            var result = parseInt(resp[0]);
+            if (result != 0) {
+                return;
+            }
+
+            // 减少金币
+            Global.Model.Game.reduceCoins(nextLevelConsume);
+            var curLevelNum = Global.Model.Game.levelUp(this._CurLevelUpIndex);
+            var level = this._ContentPage.getChildByName("Level").getComponent(Level);
+            level.level = curLevelNum;
+            var coins = this._ContentPage.getChildByName("Coins").getComponentInChildren(cc.Label);
+            var levelUpBtn = event.target.getComponent(cc.Button);
+            if (curLevelNum < maxLevelNum) {
+                nextLevelConsume = this._LevelUpConsumeObj[curLevelNum]["levelupItem" + this._CurLevelUpIndex];
+                coins.string = " x " + nextLevelConsume;
+                
+                if (!Global.Model.Game.isEnoughCoins(nextLevelConsume)) {
+                    levelUpBtn.interactable = false;
+                }
+                else
+                {
+                    levelUpBtn.interactable = true;  
+                }
             }
             else
             {
-                levelUpBtn.interactable = true;  
+                coins.string = "已满级";
+                levelUpBtn.interactable = false;
             }
-        }
-        else
-        {
-            coins.string = "已满级";
-            levelUpBtn.interactable = false;
-        }
+            var progress = this._CurSelectedItem.getComponentInChildren(cc.ProgressBar);
+            progress.progress = curLevelNum / maxLevelNum;
+            this.refreshTopBar();
 
-        var progress = this._CurSelectedItem.getComponentInChildren(cc.ProgressBar);
-        progress.progress = curLevelNum / maxLevelNum;
+        }.bind(this));
 
-        this.refreshTopBar();
     },
 
     refreshTopBar:function () {
@@ -314,8 +330,6 @@ cc.Class({
 
     onRankBtn:function () {
         Global.Common.Audio.playEffect("btn1Click" , false);
-        // var offlineView = this.node.parent.getComponentInChildren("VOffline");
-        // offlineView.show(9527);
         var rankView = this.node.parent.getComponentInChildren("VRank");
         rankView.show();
     },
@@ -323,7 +337,7 @@ cc.Class({
     onFriendBtn:function () {
         Global.Common.Audio.playEffect("btn1Click" , false);
         var friendView = this.node.parent.getComponentInChildren("VFriend");
-        friendView.show(Global.Model.Game.getFriend());
+        friendView.show();
     },
 
     onLotteryBtn:function () {
@@ -336,5 +350,10 @@ cc.Class({
         Global.Common.Audio.playEffect("btn1Click" , false);
         var setView = this.node.parent.getComponentInChildren("VSet");
         setView.show();
+    },
+
+    onOfflineBtn:function () {
+        var offlineView = this.node.parent.getComponentInChildren("VOffline");
+        offlineView.show();  
     },
 });

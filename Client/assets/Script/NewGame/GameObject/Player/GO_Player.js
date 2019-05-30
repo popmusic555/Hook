@@ -201,6 +201,7 @@ cc.Class({
         this.setGravityScale(Global.Common.Const.GRAVITY_SCALE);
         this.setCrossWall(false);
         this.setWallLaunchVelocity(null);
+        Global.Model.MPlayer.gamedata.isCross = true;
     },
     /**
      * 触发受伤

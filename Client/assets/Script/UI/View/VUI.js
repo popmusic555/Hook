@@ -34,7 +34,7 @@ cc.Class({
     showSettlementView:function () {
         var mplayer = Global.Model.MPlayer;
         var mWall = Global.Model.MWall;
-        this.settlementView.show(mplayer.getMileage() , mWall.getPassID() , mplayer.getRewardsCoins() , mplayer.getKillNum() , mplayer.getFragment());
+        this.settlementView.show(mplayer.getMileage() , mWall.getPassID() , mplayer.getRewardsCoins() , mplayer.getKillNum() , mplayer.getFragment() , mplayer.getLaunchPower());
     },
 
     showSetView:function () {

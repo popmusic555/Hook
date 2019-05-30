@@ -55,9 +55,23 @@ cc.Class({
     onReceiveBtn:function () {
         Global.Common.Audio.playEffect("btn2Click" , false);
         console.log("领取奖励成功");
-        // 切换到下一个任务
-        Global.Model.Game.nextTask();
-        this.show();
+        // 领取任务奖励
+        Global.Common.Http.req("getTaskAward" , {
+            uuid:Global.Model.Game.uuid,
+            taskID:Global.Model.Game.getTask().id,
+        } , function (resp , url) {
+            console.log("Response " , url , resp);
+            var result = parseInt(resp[0]);
+            if (result != 0) {
+                return;
+            }
+            // 增加任务奖励
+
+            // 切换到下一个任务
+            Global.Model.Game.nextTask();
+            Global.Model.Game.getTask().state = 0;
+            this.show();
+        }.bind(this));
     },
 
     hide:function () {
@@ -65,8 +79,45 @@ cc.Class({
     },
 
     show:function () {
-        this.node.active = true;  
+        this.node.active = true;
+        
+        // 任务信息获取
+        Global.Common.Http.req("getTasks" , {
+            uuid:Global.Model.Game.uuid,
+        } , function (resp , url) {
+            console.log("Response " , url , resp);
+            // 任务ID
+            var taskId = parseInt(resp[0]) - 1;
+            Global.Model.Game.getTask().id = taskId;
+            if (taskId == 0) {
+                // 任务0 击杀100小怪
+                // 目标值
+                // 任务进度
+                Global.Model.Game.setKillNum(parseInt(resp[2]));
+            }
+            else if (taskId == 1) {
+                // 任务1 邀请一个好友
+                // 目标值
+                // 任务进度
+            }
+            else if (taskId == 2) {
+                // 任务2 收集拼图
+                // 目标值
+                // 任务进度
+                Global.Model.Game.initFragment(parseInt(resp[2]));
+            }
+            // 任务状态
+            Global.Model.Game.getTask().state = parseInt(resp[3]);
+            // 奖励类型
+            Global.Model.Game.getTask().rewardId = parseInt(resp[4]);
+            // 奖励剩余时间
+            Global.Model.Game.getTask().times = parseInt(resp[5]);
 
+            this.refresh();
+        }.bind(this));
+    },
+
+    refresh:function () {
         this.setTaskId(Global.Model.Game.getTask().id);
         this.setRewardId(Global.Model.Game.getTask().rewardId);
 
@@ -91,7 +142,6 @@ cc.Class({
         {
             this.receiveBtn.interactable = false;
         }
-
     },
     
     // 设置任务星级
@@ -125,10 +175,12 @@ cc.Class({
         this.rewardIcon.spriteFrame = this.rewardIconRes[rewardId];
         if (rewardId >= 2) {
             this.rewardAni.node.active = true;
+            this.rewardIcon.node.scale = 1;
         }
         else
         {
             this.rewardAni.node.active = false;
+            this.rewardIcon.node.scale = 3;
         }
     },
 
@@ -162,22 +214,25 @@ cc.Class({
 
     // 是否完成任务
     isFinshTask:function (taskid) {
+        // var result = false;
+        // switch (taskid) {
+        //     case 0:
+        //         var num = Global.Model.Game.getKillNum();
+        //         result = num >= 100;
+        //         break;
+        //     case 1:
+        //         // 邀请好友人数
+        //         result = Global.Model.Game.getFriend().length > 0
+        //         break;
+        //     case 2:
+        //         result = Global.Model.Game.fullFragment();
+        //         break;
+        // }
         var result = false;
-
-        switch (taskid) {
-            case 0:
-                var num = Global.Model.Game.getKillNum();
-                result = num >= 100;
-                break;
-            case 1:
-                // 邀请好友人数
-                result = Global.Model.Game.getFriend().length > 0
-                break;
-            case 2:
-                result = Global.Model.Game.fullFragment();
-                break;
+        var state = Global.Model.Game.getTask().state;
+        if (state == 1) {
+            result = true;
         }
-
         return result;
     },
 
