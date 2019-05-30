@@ -37,6 +37,33 @@ WxAdapter.login = function (timeout , callback) {
     });
 }
 
+WxAdapter.getUserInfo = function (callback) {
+    if (!WxAdapter.isWeChat()) {
+        return;
+    }
+
+    wx.getUserInfo({
+        withCredentials:false,
+        lang:"zh_CN",
+        success:function (res) {
+            // var userInfo = res.userInfo
+            // var nickName = userInfo.nickName
+            // var avatarUrl = userInfo.avatarUrl
+            // var gender = userInfo.gender //性别 0：未知、1：男、2：女
+            // var province = userInfo.province
+            // var city = userInfo.city
+            // var country = userInfo.country
+            callback(res.userInfo);
+        },
+        fail:function () {
+            callback("fail");
+        },
+        complete:function () {
+            callback("complete");
+        },
+    });
+}
+
 /**
  * 获取自身数据
  *
