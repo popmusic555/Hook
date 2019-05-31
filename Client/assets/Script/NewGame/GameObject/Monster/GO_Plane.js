@@ -64,6 +64,7 @@ cc.Class({
     unBind:function () {
         this._IsBind = false;
         this.onDeath(this._Player);
+        this._Player.lockSkill(0.5);
     },
 
     update (dt) {
@@ -241,7 +242,7 @@ cc.Class({
     },
 
     showGuide:function () {
-        var isGuide = Global.Model.Game.monsterGuide[1];
+        var isGuide = Global.Model.MPlayer.getMonsterGuide()[1];
         if (isGuide) {
             return;    
         }

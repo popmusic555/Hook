@@ -1,90 +1,90 @@
 
 wall_posui.png
-size: 1034,1034
+size: 1610,1208
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 zl_01 (1)
   rotate: false
-  xy: 2, 776
-  size: 256, 256
-  orig: 256, 256
+  xy: 2, 806
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
 zl_01 (10)
   rotate: false
-  xy: 2, 518
-  size: 256, 256
-  orig: 256, 256
+  xy: 2, 404
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
 zl_01 (11)
   rotate: false
-  xy: 260, 776
-  size: 256, 256
-  orig: 256, 256
+  xy: 404, 806
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
 zl_01 (12)
   rotate: false
-  xy: 2, 260
-  size: 256, 256
-  orig: 256, 256
+  xy: 2, 2
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
 zl_01 (2)
   rotate: false
-  xy: 260, 518
-  size: 256, 256
-  orig: 256, 256
+  xy: 404, 404
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
 zl_01 (3)
   rotate: false
-  xy: 518, 776
-  size: 256, 256
-  orig: 256, 256
+  xy: 806, 806
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
 zl_01 (4)
   rotate: false
-  xy: 2, 2
-  size: 256, 256
-  orig: 256, 256
+  xy: 404, 2
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
 zl_01 (5)
   rotate: false
-  xy: 260, 260
-  size: 256, 256
-  orig: 256, 256
+  xy: 806, 404
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
 zl_01 (6)
   rotate: false
-  xy: 518, 518
-  size: 256, 256
-  orig: 256, 256
+  xy: 1208, 806
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
 zl_01 (7)
   rotate: false
-  xy: 776, 776
-  size: 256, 256
-  orig: 256, 256
+  xy: 806, 2
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
 zl_01 (8)
   rotate: false
-  xy: 260, 2
-  size: 256, 256
-  orig: 256, 256
+  xy: 1208, 404
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1
 zl_01 (9)
   rotate: false
-  xy: 518, 260
-  size: 256, 256
-  orig: 256, 256
+  xy: 1208, 2
+  size: 400, 400
+  orig: 400, 400
   offset: 0, 0
   index: -1

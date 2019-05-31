@@ -76,7 +76,7 @@
       }
     ],
     "_active": true,
-    "_level": 0,
+    "_level": 1,
     "_components": [
       {
         "__id__": 11
@@ -472,6 +472,7 @@
     "progressLabel": {
       "__id__": 9
     },
+    "_LoginStep": 0,
     "_id": "31tBsfWtZN14mJ1UclaBHi"
   },
   {

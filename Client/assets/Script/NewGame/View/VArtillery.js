@@ -37,10 +37,19 @@ cc.Class({
         this.launchPower.close(); 
         this._Power = this.launchPower.getPower();
         Global.Model.MPlayer.setLaunchPower(this._Power);
+        if (this._Power == Global.Common.Const.LAUNCH_POWER.length-1) {
+            // 增加连击数
+            Global.Model.Game.addCombo();
+        }
+        else
+        {
+            Global.Model.Game.clearCombo();
+        }
         this._LaunchSpeed = speed * Global.Common.Const.LAUNCH_POWER[this._Power];
 
-        if (Global.Model.Game.guideStep == 1) {
-            this._LaunchSpeed = 2200;
+        if (Global.Model.MPlayer.getGuideStep() == 1) {
+            this._LaunchSpeed = 2500;
+            Global.Model.Game.clearCombo();
         }
 
         this.spAni.loop = false;

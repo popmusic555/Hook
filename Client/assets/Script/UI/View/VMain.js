@@ -135,6 +135,7 @@ cc.Class({
 
             // 显示提示
             var hint = item.node.parent.getChildByName("Hint");
+            hint.stopActionByTag(10);
             var lock = item.node.parent.getChildByName("Lock");
             var curLevelNum = Global.Model.Game.getLevelByItemID(id);
             if (curLevelNum < 0) {
@@ -145,12 +146,24 @@ cc.Class({
             }
             else
             {
-                lock.active = false;
+                lock.active = false;  
                 item.node.parent.getComponent(cc.Button).interactable = true;
-                var nextLevelConsume = this._LevelUpConsumeObj[curLevelNum]["levelupItem" + id];
-                if (Global.Model.Game.isEnoughCoins(nextLevelConsume)) {
-                    // 金币不足
-                    hint.active = true;
+
+                var maxLevelNum = this._LevelUpDescObj[id].maxLevel;
+                if (curLevelNum < maxLevelNum) {
+                    var nextLevelConsume = this._LevelUpConsumeObj[curLevelNum]["levelupItem" + id];
+                    if (Global.Model.Game.isEnoughCoins(nextLevelConsume)) {
+                        // 金币不足
+                        hint.active = true;
+                        var action = cc.repeat(cc.sequence(cc.rotateBy(0.05 , 10) , cc.rotateBy(0.05 , -10) , cc.rotateBy(0.05 , -10) , cc.rotateBy(0.05 , 10)) , 2);
+                        var action2 = cc.repeatForever(cc.sequence(cc.delayTime(5.0) , action));
+                        action2.setTag(10);
+                        hint.runAction(action2);
+                    }
+                    else
+                    {
+                        hint.active = false;
+                    }
                 }
                 else
                 {
@@ -320,7 +333,6 @@ cc.Class({
             this.refreshTopBar();
 
         }.bind(this));
-
     },
 
     refreshTopBar:function () {

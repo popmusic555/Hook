@@ -69,6 +69,10 @@ MPlayer.init = function () {
     this.gamedata.isKillEnergy = false;
     // 当局游戏是否消灭飞机怪
     this.gamedata.isKillPlane = false;
+    // 新手引导步骤
+    this.gamedata.guideStep = 0;
+    // 怪物引导
+    this.gamedata.monsterGuide = [0,0,0];
 
     this.config = null;
 
@@ -132,6 +136,8 @@ MPlayer.resetGamedata = function () {
     this.gamedata.isKillJump = false;
     this.gamedata.isKillEnergy = false;
     this.gamedata.isKillPlane = false;
+    this.gamedata.guideStep = 0,
+    this.gamedata.monsterGuide = [0,0,0];
 };
 
 /**
@@ -347,6 +353,22 @@ MPlayer.surplusFragmentList = function () {
         }
     }
     return result;
+};
+
+MPlayer.setGuide = function (step , monsterGuide) {
+    this.gamedata.guideStep = step;
+    var len = monsterGuide.length;
+    for (let index = 0; index < len; index++) {
+        this.gamedata.monsterGuide[index] = monsterGuide[index];
+    }
+};
+
+MPlayer.getGuideStep = function () {
+    return this.gamedata.guideStep;
+};
+
+MPlayer.getMonsterGuide = function () {
+    return this.gamedata.monsterGuide;
 };
 
 /**
@@ -1417,6 +1439,7 @@ MPlayer.triggerRocket = function (contact , player , rocket , attr) {
     switch (this.type) {
         case Enum.TYPE.CLIP:
         case Enum.TYPE.ROCKET:
+            Global.Common.Audio.playEffect("mNormal" , false);
             // 解除原绑定
             this.type = Enum.TYPE.PLAYER;
             player.unBindMonster();
@@ -1513,6 +1536,7 @@ MPlayer.triggerJump = function (contact , player , jump , attr) {
         case Enum.TYPE.CLIP:
         case Enum.TYPE.ROCKET:
         case Enum.TYPE.JUMP:
+            Global.Common.Audio.playEffect("mNormal" , false);
             // 解除原绑定
             this.type = Enum.TYPE.PLAYER;
             player.unBindMonster();
@@ -1601,6 +1625,7 @@ MPlayer.triggerPlane = function (contact , player , plane , attr) {
         case Enum.TYPE.ROCKET:
         case Enum.TYPE.JUMP:
         case Enum.TYPE.PLANE:
+            Global.Common.Audio.playEffect("mNormal" , false);
             // 解除原绑定
             this.type = Enum.TYPE.PLAYER;
             player.unBindMonster();
@@ -1959,7 +1984,7 @@ MPlayer.triggerFloor = function (contact , player , floor , attr) {
                     // 当前游戏结束
                     console.log("当前游戏结束");
                     player.static();
-                    Global.Model.Game.showSettlementView();
+                    Global.Model.Game.showRecvive();
                 }
                 else
                 {
@@ -2011,18 +2036,21 @@ MPlayer.addCarryCoins = function (num) {
 }
 
 MPlayer.addCarryEnergy = function (num) {
-    this.addEnergy(num);
     console.log("addCarryEnergy" , num);
-    
     if (num >= Global.Common.Const.ENERGY_RATIO) {
         var ani = Global.Model.Game.getUIView().getComponentInChildren("EnergyCarryAni");
-        ani.show();
+        ani.show(function () {
+            this.addEnergy(num);
+        }.bind(this));
+    }
+    else if (num >= 0) {
+        this.addEnergy(num);
     }
 }
 
 MPlayer.addReward = function (cost , coins , energy) {
     // 增加金币
-    var rate = this.attr.coinsRadio + (Global.Model.Game.lottery || 1) + Global.Common.Const.LAUNCH_RATE[this.getLaunchPower()];
+    var rate = this.attr.coinsRadio + (Global.Model.Game.lottery) + Global.Common.Const.LAUNCH_RATE[Global.Model.Game.getCombo()];
     this.addCoins(cost * rate);
     // 增加携带的金币
     this.addCarryCoins(coins * rate);

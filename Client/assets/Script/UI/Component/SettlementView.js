@@ -62,7 +62,7 @@ cc.Class({
         this.node.active = false;  
     },
 
-    double:function () {
+    double:function (coins) {
         var video = 1;
 
         Global.Common.Http.req("uploadWX" , {
@@ -75,7 +75,7 @@ cc.Class({
             puzzle:Global.Model.Game.getFragmentForNum(),
             video:video,
             firstPlay:Global.Model.Game.getGuideForNum(),
-            passLv:maxPass,
+            passLv:Global.Model.Game.maxPass,
         } , function (resp , url) {
             // 增加金币
             Global.Model.Game.addCoins(coins);
@@ -90,9 +90,20 @@ cc.Class({
         if (mileage > highestMileage) {
             Global.Model.Game.setHighestMileage(mileage);
         }
+        // 增加金币
+        Global.Model.Game.addCoins(coins);
+        // 设置最大关卡数
+        var curMaxPass = Global.Model.Game.maxPass;
+        if (maxPass > curMaxPass) {
+            Global.Model.Game.setMaxPass(maxPass);
+        }
+        // 设置总击杀数量
+        Global.Model.Game.addKillNum(killNum);
+        // 设置引导
+        Global.Model.Game.setGuide(Global.Model.MPlayer.getGuideStep() , Global.Model.MPlayer.getMonsterGuide());
 
         var fullstate = 0;
-        if (launchPower == Global.Common.Const.LAUNCH_RATE.length) {
+        if (launchPower == Global.Common.Const.LAUNCH_RATE.length - 1) {
             fullstate = 1;
         }
         var video = 0;
@@ -107,23 +118,57 @@ cc.Class({
             puzzle:Global.Model.Game.getFragmentForNum(),
             video:video,
             firstPlay:Global.Model.Game.getGuideForNum(),
-            passLv:maxPass,
+            passLv:Global.Model.Game.maxPass,
         } , function (resp , url) {
-            // 增加金币
-            Global.Model.Game.addCoins(coins);
-            // 设置最大关卡数
-            var curMaxPass = Global.Model.Game.maxPass;
-            if (maxPass > curMaxPass) {
-                Global.Model.Game.setMaxPass(maxPass);
+            if (resp[0] != "OK") {
+                return false;
             }
-            
-            // 设置总击杀数量
-            Global.Model.Game.addKillNum(killNum);
+            // 上传数据成功
+            console.log("上传数据成功");
+            // if (Global.Model.MPlayer.isCross && Global.Model.Game.getLevelByItemID(7) < 0) {
+            //     this.unLockItem(7);
+            // }
+            // if (Global.Model.MPlayer.isKillJump && Global.Model.Game.getLevelByItemID(9) < 0) {
+            //     this.unLockItem(9);
+            // }
+            // if (Global.Model.MPlayer.isKillEnergy && Global.Model.Game.getLevelByItemID(10) < 0) {
+            //     this.unLockItem(10);
+            // }
+            // if (Global.Model.MPlayer.isKillPlane && Global.Model.Game.getLevelByItemID(11) < 0) {
+            //     this.unLockItem(11);
+            // }
         }.bind(this));
+
+        // console.log("当前局金币", coins);
+        // console.log("当前局里程", Global.Model.Game.mileage);
+        // console.log("当前局发射力", launchPower , Global.Common.Const.LAUNCH_RATE.length);
+        // console.log("当前局击杀", killNum);
+        // console.log("当前局碎片", Global.Model.Game.getTask().fragment);
+        // console.log("当前局碎片", Global.Model.Game.getFragmentForNum());
+        // console.log("当前局是否视频", video);
+        // console.log("当前局引导", Global.Model.Game.guideStep , Global.Model.Game.monsterGuide);
+        // console.log("当前局引导", Global.Model.Game.getGuideForNum());
+        // console.log("当前局最大关卡", Global.Model.Game.maxPass);
     },
 
     setParam:function (mileage , coins) {
         this.mileageLabel.string = mileage;
         this.coinsLabel.string = coins;
+    },
+
+    unLockItem:function (index) {
+        Global.Common.Http.req("updateProperty" , {
+            uuid:Global.Model.Game.uuid,
+            propertyid:index,
+            level:0,
+            CurGold:Global.Model.Game.coins,
+        } , function (resp , url) {
+            var result = parseInt(resp[0]);
+            if (result != 0) {
+                return;
+            }
+            var curLevelNum = Global.Model.Game.levelUp(this.index);
+            console.log("解锁成功" , index);
+        }.bind(this));
     },
 });

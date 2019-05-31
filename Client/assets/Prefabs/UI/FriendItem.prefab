@@ -260,7 +260,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "a99Ac8kUVFioG03b26H+vq"
+    "_id": "f68zi5D+FNqLyRbV7cvsUu"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -299,7 +299,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "00HMS2XOVLTIk3eq7rDOrT"
+    "_id": "24+4WIWe1PxKDP7hJRgeUn"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -468,7 +468,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "cfsTiMa2NInKxRnKKQ/CUb"
+    "_id": "9c3UWgrghFMpRZN9aF7cIH"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -507,7 +507,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "98WhCOyvFMTbqQQK693QT+"
+    "_id": "d5FL28kYlLob5Y9V68ZEHW"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -609,7 +609,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "c3pUIKEMxEAKn4fBbBEPox"
+    "_id": "ddK90Pi+xJi58oSP1iFi/N"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -711,7 +711,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "26no2+kbZCHpWgcm2ZYm/7"
+    "_id": "9eH+FytqRDz4K5WfEap7Bq"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -815,7 +815,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "92jv1wscdLNqAUhxiyWeqm"
+    "_id": "2dE4cuTPlCZbTjV7c8js9j"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -833,7 +833,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "1bTVFtaspFqKFfQCnjBiuB"
+    "_id": "c5XXjse9lAQpc8fp+BvaW6"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -935,7 +935,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "99LDJuuttFsKmkMRgb/FDZ"
+    "_id": "92dz6EW+VNAL3IOYCvsA08"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1109,7 +1109,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "44lvILCOdBAJwH2UtDj42g"
+    "_id": "11EZub4zpCL7pVKYA1VJ0T"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -1127,7 +1127,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "a9/842PgVJBJn2d0cw5MoH"
+    "_id": "f7r/wMN7RJWo0wQWxrJdAF"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1166,7 +1166,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "f2exabgxxIz62r6QwZkEAz"
+    "_id": "b4/xrdi1pEf4m3Ch5rmIQF"
   },
   {
     "__type__": "cc.Button",
@@ -1192,7 +1192,7 @@
       "a": 255
     },
     "duration": 0.1,
-    "zoomScale": 1.1,
+    "zoomScale": 0.9,
     "clickEvents": [
       {
         "__id__": 34
@@ -1235,7 +1235,7 @@
     "_N$target": {
       "__id__": 27
     },
-    "_id": "ef7JVOgLZAXaAGK/wABm8y"
+    "_id": "9eSiDWF0ZMs4HF50lBSYSs"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -1346,7 +1346,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "92L0m2/FBHJJuqcDha0j3E"
+    "_id": "f6IqkYtU9NT5dssbDGS/Qt"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1447,7 +1447,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "ccbWV4wb5NQLBMtUuY/CUc"
+    "_id": "f4uDV4azpJOru+uDH1HnAd"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1621,7 +1621,7 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
-    "_id": "9eB1SBoRBIAqbMqG6V/+U6"
+    "_id": "6cVp47ToRHcIMVPpG0zLwH"
   },
   {
     "__type__": "cc.LabelOutline",
@@ -1639,7 +1639,7 @@
       "a": 255
     },
     "_width": 2,
-    "_id": "31i0gMSq1LbpvvbMsla3ep"
+    "_id": "0crQFmnQlMHIIVnzlfWTLf"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -1678,7 +1678,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "07wa32RD1AN7+W1rwD5cqN"
+    "_id": "88SeoGy2lF54K2ZvN/GQUD"
   },
   {
     "__type__": "cc.Button",
@@ -1747,7 +1747,7 @@
     "_N$target": {
       "__id__": 42
     },
-    "_id": "a9JdpBFPdFu4ovXwyne4j4"
+    "_id": "a9jFvAvn9JgbR/qdvqlwFH"
   },
   {
     "__type__": "cc.ClickEvent",
@@ -1795,7 +1795,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "36MIM+23BPgJ51KvUFAoVI"
+    "_id": "3fvN6AxdxA1Z3UkFUM0u0S"
   },
   {
     "__type__": "856bdtOHIpCcqLhBEE7tp6J",
@@ -1832,7 +1832,7 @@
     "index": 0,
     "rewardNum": 0,
     "state": 0,
-    "_id": "b7gTM6u95E75fsTZkBPY/s"
+    "_id": "ad/tWiLv9L0ZnnG0/ffi5c"
   },
   {
     "__type__": "cc.PrefabInfo",

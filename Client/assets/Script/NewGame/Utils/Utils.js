@@ -96,6 +96,32 @@ Utils.random = function (min , max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
+Utils.getTimeToTimeString = function (times) {
+    var timeString = "";
+    var day = Math.floor(times / 86400);
+    times = times % 86400;
+    if (day > 0) {
+        timeString += (day + "天 ");
+    }
+    
+    var hours = Math.floor(times / 3600);
+    times = times % 3600;
+    timeString += Utils.prefixInteger(hours , 2) + ":";
+
+    var min = Math.floor(times / 60);
+    times = times % 60
+    timeString += Utils.prefixInteger(min , 2) + ":";
+
+    var sec = times;
+    timeString += Utils.prefixInteger(sec , 2);
+
+    return timeString;
+};
+
+Utils.prefixInteger = function (num, length) {
+    return (Array(length).join('0') + num).slice(-length);  
+};
+
 
 Utils.Calculator = Calculator;
 Utils.Converter = Converter;

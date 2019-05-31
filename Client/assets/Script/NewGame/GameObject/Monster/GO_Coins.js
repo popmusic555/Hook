@@ -87,6 +87,7 @@ cc.Class({
         this.static();
         this.showDeathAni();
         if (player) {
+            Global.Common.Audio.playEffect("mNormal" , false);
             this.setVelocityX(player.getVelocityX());
             // 随机获取任务碎片
             var fragment = Global.Model.MPlayer.getFragmentForRandom();

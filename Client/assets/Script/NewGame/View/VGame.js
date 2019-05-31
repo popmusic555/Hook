@@ -126,6 +126,7 @@ cc.Class({
 
         Global.Model.MPlayer.resetGamedata();
         Global.Model.MPlayer.setFragmentRate(Global.Model.Game.getFragmentNum());
+        Global.Model.MPlayer.setGuide(Global.Model.Game.guideStep , Global.Model.Game.monsterGuide);
 
         Global.Model.MWall.resetGamedata();
         // 设置关卡ID
@@ -157,7 +158,7 @@ cc.Class({
 
     update (dt) {
         // 当前怪物超过3个怪物 技能引导开启
-        if (Global.Model.Game.guideStep == 1 && this._IsGuide) {
+        if (Global.Model.MPlayer.getGuideStep() == 1 && this._IsGuide) {
             var num = 0;
             var player = Global.Model.MPlayer.getPlayerObj();
             var playerWorldPos = player.node.convertToWorldSpaceAR(cc.v2(0,0));
@@ -170,7 +171,7 @@ cc.Class({
                 }    
             }
             
-            if (num >= 3) {
+            if (num >= 1) {
                 var energyPower = Global.Model.Game.getUIView().getComponentInChildren("EnergyPower");
                 energyPower.showGuide();
                 Global.Model.Game.pauseGame();

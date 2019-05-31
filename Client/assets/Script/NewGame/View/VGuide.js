@@ -7,6 +7,7 @@ cc.Class({
         card:cc.Sprite,
         instructions:cc.Sprite,
         instructionsTitle:cc.Label,
+        shield:cc.Node,
 
         _Step:0,
         _Node:null,
@@ -38,10 +39,11 @@ cc.Class({
     showMonsterGuide:function (index) {
         this.show();
         this._IsMonsterGuide = true;
-        Global.Model.Game.monsterGuide[index] = 1;
+        Global.Model.MPlayer.getMonsterGuide()[index] = 1;
         switch (index) {
             case 0:
                 // 弹跳机怪物引导
+                this.closeShield();
                 var monsterGuide = this.node.getChildByName("Monster");
                 monsterGuide.active = true;
                 this.card.spriteFrame = this.cardRes[0];
@@ -51,6 +53,7 @@ cc.Class({
                 break;
             case 1:
                 // 飞机怪物引导
+                this.closeShield();
                 var monsterGuide = this.node.getChildByName("Monster");
                 monsterGuide.active = true;
                 this.card.spriteFrame = this.cardRes[1];
@@ -60,6 +63,7 @@ cc.Class({
                 break;
             case 2:
                 // 汽车怪物引导
+                this.closeShield();
                 var monsterGuide = this.node.getChildByName("Monster");
                 monsterGuide.active = true;
                 this.card.spriteFrame = this.cardRes[2];
@@ -80,17 +84,19 @@ cc.Class({
         this._NodePos = nodePos;
         this._Parent = parent;
         this._IsMonsterGuide = false;
-        switch (Global.Model.Game.guideStep) {
+        switch (Global.Model.MPlayer.getGuideStep()) {
             case 0:
                 // 发射引导
                 var step0 = this.node.getChildByName("Step0");
                 step0.active = true;
+                this.openShield();
                 break;
             case 1:
                 // 技能引导
                 var step1 = this.node.getChildByName("Step1");
                 step1.active = true;
                 step1.x = this._NodePos.x;
+                this.closeShield();
                 break;
         }
     },
@@ -105,14 +111,14 @@ cc.Class({
         }
         else
         {
-            switch (Global.Model.Game.guideStep) {
+            switch (Global.Model.MPlayer.getGuideStep()) {
                 case 0:
                     // 发射引导
                     this._Node.parent = this._Parent;
                     this._Node.position = this._NodePos;
                     var step0 = this.node.getChildByName("Step0");
                     step0.active = false;
-                    Global.Model.Game.guideStep++;
+                    Global.Model.MPlayer.gamedata.guideStep++;
                     break;
                 case 1:
                     // 技能引导
@@ -120,11 +126,18 @@ cc.Class({
                     this._Node.position = this._NodePos;
                     var step1 = this.node.getChildByName("Step1");
                     step1.active = false;
-                    Global.Model.Game.guideStep++;
+                    Global.Model.MPlayer.gamedata.guideStep++;
                     Global.Model.Game.resumeGame();
                     break;
             }
         }
     },
 
+    openShield:function () {
+        this.shield.active = true;
+    },
+
+    closeShield:function () {
+        this.shield.active = false;
+    },
 });

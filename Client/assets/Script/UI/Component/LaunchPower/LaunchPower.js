@@ -16,7 +16,7 @@ cc.Class({
         this._Progress = -1;
         this.open();
 
-        if (Global.Model.Game.guideStep == 0) {
+        if (Global.Model.MPlayer.getGuideStep() == 0) {
             var worldPos = this.node.convertToWorldSpaceAR(cc.v2(0,0));
             var vGuide = Global.Model.Game.getUIView().getComponentInChildren("VGuide");
             vGuide.setGuide(this.node , this.node.position, this.node.parent);
@@ -31,6 +31,11 @@ cc.Class({
             this._Progress += 1;
             if (this._Progress > 7) {
                 this._Progress = 0;
+            }
+            if (this._Progress == 7 && Global.Model.MPlayer.getGuideStep() == 0) {
+                this.close();
+                var vGuide = Global.Model.Game.getUIView().getComponentInChildren("VGuide");
+                vGuide.closeShield();
             }
             this.setProgress(this._Progress);
         } , this)));

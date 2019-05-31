@@ -10,6 +10,8 @@ cc.Class({
         _ProgressNum1:0,
         _ProgressNum2:0,
         progressLabel:cc.Label,
+
+        _LoginStep:0,
     },
 
     // onLoad () {},
@@ -37,7 +39,7 @@ cc.Class({
 
     update (dt) {
         var progress = (this._ProgressNum1+this._ProgressNum2);
-        if (progress == 1) {
+        if (progress == 1 && this._LoginStep >= 2) {
             this.runNextScene();
             this._ProgressNum1 = 1;
             this._ProgressNum2 = 1;
@@ -56,6 +58,7 @@ cc.Class({
         Global.Common.Http.req("logonGame" , {
             uuid:Global.Model.Game.uuid,
             userSource:1,
+            referrerId:"aaaaaaaaaaaaaaaaab",
         } , function (resp , url) {
             console.log("Response " , url , resp);
             // 升级项等级
@@ -84,7 +87,7 @@ cc.Class({
             // 引导信息
             Global.Model.Game.initGuide(parseInt(resp[21]));
             console.log("当前引导信息" , parseInt(resp[21]));
-            
+            this._LoginStep++;
             this.init();
         }.bind(this));
     },
@@ -96,6 +99,7 @@ cc.Class({
             type:0,
             video:0,
         } , function (resp , url) {
+            this._LoginStep++;
             console.log("Response " , url , resp);
             // 轮盘免费次数
             Global.Model.Game.setFreeLottery(parseInt(resp[0]));

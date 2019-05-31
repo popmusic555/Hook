@@ -37,6 +37,7 @@ cc.Class({
 
     hide:function () {
         this.node.active = false;  
+        Global.Model.Game.setOfflineTime(0);
     },
 
     onCollectBtn:function () {
@@ -54,7 +55,7 @@ cc.Class({
             this.collectReward(false);
             var vMain = this.node.parent.getComponentInChildren("VMain");
             vMain.refreshTopBar();
-            this.onClose();
+            this.hide();
         }.bind(this));
     },
 
@@ -73,7 +74,7 @@ cc.Class({
             this.collectReward(true);
             var vMain = this.node.parent.getComponentInChildren("VMain");
             vMain.refreshTopBar();
-            this.onClose();
+            this.hide();
         }.bind(this));
     },
 

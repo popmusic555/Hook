@@ -1,6 +1,7 @@
 
 var SetView = require("SetView");
 var SettlementView = require("SettlementView");
+var VRecvive = require("VRecvive");
 
 var EnergyPower = require("EnergyPower");
 var SpeedPower = require("SpeedPower");
@@ -13,6 +14,8 @@ cc.Class({
     properties: {
         // 结算界面
         settlementView:SettlementView,
+        // 复活界面
+        recviveView:VRecvive,
         // 设置界面
         setView:SetView,
     },
@@ -29,6 +32,11 @@ cc.Class({
 
     onTouched:function () {
         Global.Model.MPlayer.onTouched();
+    },
+
+    showRecvive:function () {
+        // 显示超越界面
+        this.recviveView.show();
     },
 
     showSettlementView:function () {

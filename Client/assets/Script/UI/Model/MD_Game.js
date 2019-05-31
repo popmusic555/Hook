@@ -47,7 +47,7 @@ MGame.init = function () {
     // 最大关卡数
     this.maxPass = 0;
     // 连击数量
-    this.launchNum = 0;
+    this.combo = 0;
     // 离线时间
     this.offlineTime = 0;
     // 轮盘奖励倍数
@@ -224,10 +224,6 @@ MGame.nextTask = function () {
     if (this.task.id < this.task.limit-1) {
         this.task.id += 1; 
     }
-}
-
-MGame.addLaunchNum= function () {
-    this.launchNum++;
 }
 
 /**
@@ -420,6 +416,26 @@ MGame.getGuideForNum = function () {
     return guideStep;
 }
 
+MGame.setGuide = function (step , monsterGuide) {
+    this.guideStep = step;
+    var len = monsterGuide.length;
+    for (let index = 0; index < len; index++) {
+        this.monsterGuide[index] = monsterGuide[index];
+    }
+}
+
+MGame.getCombo = function () {
+    return this.combo;
+};
+
+MGame.addCombo = function () {
+    this.combo += 1;  
+};
+
+MGame.clearCombo = function () {
+    this.combo = 0;  
+};
+
 /**
  * 根据值初始化碎片
  * 
@@ -439,6 +455,7 @@ MGame.getFragmentForNum = function () {
         fragment <<= 1;
         fragment = fragment + this.task.fragment[index];
     }
+    return fragment;
 }
 
 /**
@@ -508,6 +525,10 @@ MGame.showSetView = function () {
  */
 MGame.showSettlementView = function () {
     this.uiView.showSettlementView();
+}
+
+MGame.showRecvive = function () {
+    this.uiView.showRecvive();
 }
 
 /**

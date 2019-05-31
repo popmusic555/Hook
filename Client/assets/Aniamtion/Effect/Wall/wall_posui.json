@@ -1,8 +1,8 @@
 {
-"skeleton": { "hash": "Gh7PEgz2J9l3hY7YFeXq54Cd16g", "spine": "2.1.27", "width": 1024, "height": 1024, "images": "./res/" },
+"skeleton": { "hash": "cZynGJkcWB7oHpFI31v5ODZMdvc", "spine": "3.6.52", "width": 1334, "height": 760, "images": "./res/" },
 "bones": [
 	{ "name": "root" },
-	{ "name": "bz", "parent": "root", "scaleX": 4, "scaleY": 4 }
+	{ "name": "bz", "parent": "root", "scaleX": 1.6, "scaleY": 1.9 }
 ],
 "slots": [
 	{ "name": "zl__00", "bone": "bz", "attachment": "zl_01 (1)" }
@@ -10,18 +10,18 @@
 "skins": {
 	"default": {
 		"zl__00": {
-			"zl_01 (1)": { "width": 256, "height": 256 },
-			"zl_01 (10)": { "width": 256, "height": 256 },
-			"zl_01 (11)": { "width": 256, "height": 256 },
-			"zl_01 (12)": { "width": 256, "height": 256 },
-			"zl_01 (2)": { "width": 256, "height": 256 },
-			"zl_01 (3)": { "width": 256, "height": 256 },
-			"zl_01 (4)": { "width": 256, "height": 256 },
-			"zl_01 (5)": { "width": 256, "height": 256 },
-			"zl_01 (6)": { "width": 256, "height": 256 },
-			"zl_01 (7)": { "width": 256, "height": 256 },
-			"zl_01 (8)": { "width": 256, "height": 256 },
-			"zl_01 (9)": { "width": 256, "height": 256 }
+			"zl_01 (1)": { "width": 400, "height": 400 },
+			"zl_01 (10)": { "width": 400, "height": 400 },
+			"zl_01 (11)": { "width": 400, "height": 400 },
+			"zl_01 (12)": { "width": 400, "height": 400 },
+			"zl_01 (2)": { "width": 400, "height": 400 },
+			"zl_01 (3)": { "width": 400, "height": 400 },
+			"zl_01 (4)": { "width": 400, "height": 400 },
+			"zl_01 (5)": { "width": 400, "height": 400 },
+			"zl_01 (6)": { "width": 400, "height": 400 },
+			"zl_01 (7)": { "width": 400, "height": 400 },
+			"zl_01 (8)": { "width": 400, "height": 400 },
+			"zl_01 (9)": { "width": 400, "height": 400 }
 		}
 	}
 },
@@ -31,16 +31,16 @@
 			"zl__00": {
 				"attachment": [
 					{ "time": 0, "name": "zl_01 (1)" },
-					{ "time": 0.0666, "name": "zl_01 (2)" },
+					{ "time": 0.0667, "name": "zl_01 (2)" },
 					{ "time": 0.1333, "name": "zl_01 (3)" },
 					{ "time": 0.2, "name": "zl_01 (4)" },
-					{ "time": 0.2666, "name": "zl_01 (5)" },
+					{ "time": 0.2667, "name": "zl_01 (5)" },
 					{ "time": 0.3333, "name": "zl_01 (6)" },
 					{ "time": 0.4, "name": "zl_01 (7)" },
-					{ "time": 0.4666, "name": "zl_01 (8)" },
+					{ "time": 0.4667, "name": "zl_01 (8)" },
 					{ "time": 0.5333, "name": "zl_01 (9)" },
 					{ "time": 0.6, "name": "zl_01 (10)" },
-					{ "time": 0.6666, "name": "zl_01 (11)" },
+					{ "time": 0.6667, "name": "zl_01 (11)" },
 					{ "time": 0.7333, "name": "zl_01 (12)" },
 					{ "time": 0.8, "name": null },
 					{ "time": 1, "name": null }

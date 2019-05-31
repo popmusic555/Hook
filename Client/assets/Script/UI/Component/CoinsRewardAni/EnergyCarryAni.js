@@ -20,7 +20,7 @@ cc.Class({
         this.show();
     },
 
-    show:function () {
+    show:function (callback) {
         // 金币收取动画显示
         var node = new cc.Node();            
         var sprite = node.addComponent(cc.Sprite);
@@ -28,6 +28,8 @@ cc.Class({
         sprite.sizeMode = cc.Sprite.SizeMode.RAW;
         node.width = sprite.spriteFrame.getRect().width;
         node.height = sprite.spriteFrame.getRect().height;
+        node.scale = 1.5;
+        
 
         var player = Global.Model.MPlayer.getPlayerObj();
         var pos = player.node.convertToWorldSpaceAR(cc.v2(0,0));
@@ -48,6 +50,10 @@ cc.Class({
         var action1 = cc.moveTo(0.8 , cc.v2(0,0)).easing(cc.easeCubicActionOut());
         var action2 = cc.moveTo(0.3 , endPos).easing(cc.easeCubicActionIn());
         var rotateAction = cc.rotateBy(0.8 , 360);
-        node.runAction(cc.sequence(cc.spawn(action1 , rotateAction) , cc.delayTime(0.5) , action2 , cc.removeSelf(true)));
+        node.runAction(cc.sequence(cc.spawn(action1 , rotateAction) , cc.delayTime(0.5) , action2 , cc.callFunc(function () {
+            if (callback) {
+                callback();    
+            }
+        }) , cc.removeSelf(true)));
     },
 });

@@ -25,7 +25,7 @@ cc.Class({
         sprite.sizeMode = cc.Sprite.SizeMode.RAW;
         node.width = sprite.spriteFrame.getRect().width;
         node.height = sprite.spriteFrame.getRect().height;
-        node.scale = 0.5;
+        node.scale = 0.65;
 
         var player = Global.Model.MPlayer.getPlayerObj();
         var pos = player.node.convertToWorldSpaceAR(cc.v2(0,0));

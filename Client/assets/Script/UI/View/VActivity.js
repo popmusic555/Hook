@@ -17,6 +17,8 @@ cc.Class({
         rewardAni:sp.Skeleton,
         // 任务描述Label
         taskDescLabel:cc.Label,
+        // 任务剩余时间
+        taskTimesLabel:cc.Label,
         // 任务星级
         taskStar:[cc.Button],
         // 拼图
@@ -26,6 +28,7 @@ cc.Class({
         receiveBtn:cc.Button,
         
         _TaskDesc:null,
+        _Timecallback:null,
         
     },
 
@@ -58,7 +61,7 @@ cc.Class({
         // 领取任务奖励
         Global.Common.Http.req("getTaskAward" , {
             uuid:Global.Model.Game.uuid,
-            taskID:Global.Model.Game.getTask().id,
+            taskID:Global.Model.Game.getTask().id+1,
         } , function (resp , url) {
             console.log("Response " , url , resp);
             var result = parseInt(resp[0]);
@@ -124,6 +127,13 @@ cc.Class({
         this.setTaskStar(this.taskId);
         this.setTaskDesc(this.taskId);
         this.setTaskIcon(this.taskId);
+
+        
+        this.unschedule(this._Timecallback);
+        this._Timecallback = this.refreshTimes.bind(this);
+        this.setTaskTimes(Global.Model.Game.getTask().times);
+        this.schedule(this._Timecallback , 1);
+
         if (this.taskId == 2) {
             this.setRewardIcon(this.taskId + this.rewardId);
             this.setJigsaw(Global.Model.Game.getTask().fragment);
@@ -133,7 +143,6 @@ cc.Class({
             this.setRewardIcon(this.taskId);
             this.setJigsaw();
         }
-        
         if (this.isFinshTask(this.taskId)) {
             // 任务完成 可领取奖励
             this.receiveBtn.interactable = true;
@@ -142,6 +151,11 @@ cc.Class({
         {
             this.receiveBtn.interactable = false;
         }
+    },
+
+    refreshTimes:function () {
+        Global.Model.Game.getTask().times -= 1;
+        this.setTaskTimes(Global.Model.Game.getTask().times);
     },
     
     // 设置任务星级
@@ -162,6 +176,12 @@ cc.Class({
     // 设置任务描述
     setTaskDesc:function (taskId) {
         this.taskDescLabel.string = this._TaskDesc[taskId];
+    },
+
+    // 设置任务剩余时间
+    setTaskTimes:function (times) {
+        var timeString = Global.Common.Utils.getTimeToTimeString(times);
+        this.taskTimesLabel.string = timeString;
     },
 
     // 设置任务Icon

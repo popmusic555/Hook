@@ -258,7 +258,7 @@ cc.Class({
     },
 
     showGuide:function () {
-        var isGuide = Global.Model.Game.monsterGuide[2];
+        var isGuide = Global.Model.MPlayer.getMonsterGuide()[2];
         if (isGuide) {
             return;    
         }

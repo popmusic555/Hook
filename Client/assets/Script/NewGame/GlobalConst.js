@@ -31,7 +31,8 @@ GlobalConst.FRAGMENT_RATE = [0.01,0.01,0.01,0.001,0.001,0.001,0.0001,0.0001,0.00
 // 发射力量
 GlobalConst.LAUNCH_POWER = [0.5,0.6,0.7,0.8,0.9,1.0,1.1,1.2];
 // 发射奖励倍率
-GlobalConst.LAUNCH_RATE = [1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0];
+// GlobalConst.LAUNCH_RATE = [0,0,0,0,0,0,0,0,0,0,0];
+GlobalConst.LAUNCH_RATE = [0,0,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1.0];
 
 // 轮盘奖励持续时间(秒)
 GlobalConst.LOTTERY_TIME = 1200;
