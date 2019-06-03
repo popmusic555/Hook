@@ -20,19 +20,21 @@ cc.Class({
 
     // update (dt) {},
 
-    refresh:function () {
+    refresh:function (content) {
         var rankNum = this._Data.rankNum;
         var rankIconRes = null;
         if (rankNum < this.rankIconRes.length) {
             rankIconRes = this.rankIconRes[rankNum];
         }
         this.rankIcon.spriteFrame = rankIconRes;
-        this.nameLabel.string = this._Data.name;
-        this.contentLabel.string = this._Data.content;
+        this.nameLabel.string = this._Data.nickName;
+        if (content || content == 0) {
+            this.contentLabel.string = content;    
+        }
     },
 
-    refreshByData:function (data) {
+    refreshByData:function (data , content) {
         this._Data = data;
-        this.refresh();
+        this.refresh(content);
     },
 });

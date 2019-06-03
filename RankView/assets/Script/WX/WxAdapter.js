@@ -43,7 +43,7 @@ WxAdapter.getUserInfo = function (callback) {
     }
 
     wx.getUserInfo({
-        withCredentials:false,
+        withCredentials:true,
         lang:"zh_CN",
         success:function (res) {
             // var userInfo = res.userInfo
@@ -53,7 +53,7 @@ WxAdapter.getUserInfo = function (callback) {
             // var province = userInfo.province
             // var city = userInfo.city
             // var country = userInfo.country
-            callback(res.userInfo);
+            callback("success" , res.userInfo);
         },
         fail:function () {
             callback("fail");
@@ -62,6 +62,28 @@ WxAdapter.getUserInfo = function (callback) {
             callback("complete");
         },
     });
+}
+
+WxAdapter.createUserInfoBtn = function (callback) {
+    let button = wx.createUserInfoButton({
+        type: 'text',
+        text: '',
+        style: {
+          left: 0,
+          top: 0,
+          width: 1624,
+          height: 750,
+          lineHeight: 40,
+          backgroundColor: '#ffffff00',
+          color: '#ffffff',
+          textAlign: 'center',
+          fontSize: 16,
+          borderRadius: 0
+        }
+      })
+      button.onTap(callback);
+
+      return button;
 }
 
 /**
@@ -76,9 +98,9 @@ WxAdapter.getUserData = function (keylist , callback) {
         return;
     }
     wx.getUserCloudStorage({
-        keyList:keyList,
-        success:function (userData) {
-            callback("success" , userData);
+        keyList:keylist,
+        success:function (res) {
+            callback("success" , res.KVDataList);
         },
         fail:function () {
             callback("fail");
@@ -103,10 +125,11 @@ WxAdapter.getFriendData = function (keyList , callback) {
 
     wx.getFriendCloudStorage({
         keyList:keyList,
-        success:function (userData) {
-            callback("success" , userData);
+        success:function (res) {
+            callback("success" , res.data);
         },
-        fail:function () {
+        fail:function (res) {
+            console.log("获取好友信息失败" , res);
             callback("fail");
         },
         complete:function () {
@@ -130,8 +153,8 @@ WxAdapter.getGroupData = function (shareTicket , keyList , callback) {
 
     wx.getFriendCloudStorage({
         keyList:["mileage" , "doubleHit"],
-        success:function (userData) {
-            callback("success" , userData);
+        success:function (res) {
+            callback("success" , res.data);
         },
         fail:function () {
             callback("fail");
@@ -197,6 +220,24 @@ WxAdapter.onOpenDataMsg = function (callback) {
     wx.onMessage(function (data) {
         callback(data);
     });
+}
+
+/**
+ * 打开视频广告
+ *
+ * @param {*} callback 回调
+ */
+WxAdapter.openVideo = function (callback) {
+    
+}
+
+/**
+ * 打开分享
+ *
+ * @param {*} callback 回调
+ */
+WxAdapter.openShare = function (callback) {
+    
 }
 
 module.exports = WxAdapter;
