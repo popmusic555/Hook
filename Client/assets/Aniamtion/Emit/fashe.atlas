@@ -1,89 +1,110 @@
 
 fashe.png
-size: 709,296
+size: 533,530
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+res/_quan2
+  rotate: false
+  xy: 273, 272
+  size: 256, 256
+  orig: 256, 256
+  offset: 0, 0
+  index: -1
+res/lizi_00032
+  rotate: false
+  xy: 328, 40
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+res/lizi_001580
+  rotate: false
+  xy: 328, 6
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
 res/p1
   rotate: false
-  xy: 2, 2
+  xy: 2, 310
   size: 241, 99
   orig: 241, 99
   offset: 0, 0
   index: -1
 res/p2
   rotate: false
-  xy: 372, 177
+  xy: 2, 411
   size: 269, 117
   orig: 269, 117
   offset: 0, 0
   index: -1
 res/p3
   rotate: false
-  xy: 553, 4
+  xy: 2, 2
   size: 121, 121
   orig: 121, 121
   offset: 0, 0
   index: -1
 res/p4
-  rotate: true
-  xy: 245, 18
+  rotate: false
+  xy: 195, 142
   size: 83, 106
   orig: 83, 106
   offset: 0, 0
   index: -1
 res/p5
-  rotate: false
-  xy: 2, 103
+  rotate: true
+  xy: 2, 125
   size: 183, 191
   orig: 183, 191
   offset: 0, 0
   index: -1
 res/p6
-  rotate: true
-  xy: 432, 24
+  rotate: false
+  xy: 125, 4
   size: 151, 119
   orig: 151, 119
   offset: 0, 0
   index: -1
 res/p7
-  rotate: false
-  xy: 187, 103
+  rotate: true
+  xy: 280, 87
   size: 183, 191
   orig: 183, 191
   offset: 0, 0
   index: -1
 res/p8
-  rotate: false
-  xy: 353, 37
+  rotate: true
+  xy: 195, 250
   size: 58, 64
   orig: 58, 64
   offset: 0, 0
   index: -1
 res/pao
   rotate: false
-  xy: 553, 127
+  xy: 278, 24
   size: 48, 48
   orig: 48, 48
   offset: 0, 0
   index: -1
 res/tou1
-  rotate: true
-  xy: 643, 236
+  rotate: false
+  xy: 473, 206
   size: 58, 64
   orig: 58, 64
   offset: 0, 0
   index: -1
 res/tou2
-  rotate: true
-  xy: 643, 176
+  rotate: false
+  xy: 473, 140
   size: 58, 64
   orig: 58, 64
   offset: 0, 0
   index: -1
 res/tou3
   rotate: false
-  xy: 372, 111
+  xy: 473, 74
   size: 58, 64
   orig: 58, 64
   offset: 0, 0

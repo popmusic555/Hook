@@ -34,12 +34,16 @@ cc.Class({
         _SpData:null,
 
         _SkillLock:false,
+
+        _Recvive:null,
     },
 
     onLoad () {
         var crossWallAni = this.node.getChildByName("CrossWallAni").getComponent(sp.Skeleton);
         var touchdownAni = this.node.getChildByName("TouchdownAni").getComponent(sp.Skeleton);
         var shadow = this.node.getChildByName("Shadow").getComponent(cc.Sprite);
+        var recviveAni = this.node.getChildByName("RecviveAni").getChildByName("Recvive").getComponent(sp.Skeleton);
+        var blinkAni = this.node.getChildByName("RecviveAni").getChildByName("Blink").getComponent(cc.Sprite);
 
         this._CrossWall = {
             canCross:0,
@@ -64,6 +68,11 @@ cc.Class({
             // 阴影动画位置
             shadowAni:this.node.position,
         };
+
+        this._Recvive = {
+            recviveAni:recviveAni,
+            blinkAni:blinkAni,
+        }
     },
 
     start () {
@@ -110,6 +119,16 @@ cc.Class({
                 this.sleep();
             }
         }
+        else if (velocityX >= Global.Common.Const.SUPER_SPEED && this.state != GlobalEnum.P_STATE.SPEED) {
+            this.state = GlobalEnum.P_STATE.SPEED;
+            var speedline = Global.Model.Game.getUIView().getComponentInChildren("Speedline");
+            speedline.show();
+        }
+        else if (velocityX < Global.Common.Const.SUPER_SPEED && this.state == GlobalEnum.P_STATE.SPEED) {
+            this.state = GlobalEnum.P_STATE.NORMAL;
+            var speedline = Global.Model.Game.getUIView().getComponentInChildren("Speedline");
+            speedline.hide();
+        }
     },
 
     lateUpdate (dt) {
@@ -155,6 +174,7 @@ cc.Class({
             Global.Common.Audio.playEffect("fly" , false);
             // }.bind(this) , 1.5);
             console.log("发射速度" , velocityX , velocityY)
+            Global.Model.MPlayer.setRecviveVelocity(cc.v2(velocityX , velocityY));
             this.animation.transState(GlobalEnum.P_ANI_STATE.LAUNCH);
             var vCamera = cc.Camera.main.getComponent("VCamera");
             vCamera.targetFollow = this.node;
@@ -353,6 +373,43 @@ cc.Class({
 
     onAttack:function () {
         this.animation.transStateAndLock(GlobalEnum.P_ANI_STATE.ATTACK , 0.2);
+    },
+
+    onDeath:function () {
+        this.static();
+        Global.Model.Game.showRecvive();  
+        this.node.parent.getChildByName("Monster").getComponent("VMonster").stop();
+    },
+
+    recvive:function (velocity) {
+        var vMonster = this.node.parent.getChildByName("Monster").getComponent("VMonster");
+        vMonster.clear();
+
+        this._Recvive.recviveAni.node.active = true;
+        this._Recvive.recviveAni.animation = "fuhuo";
+        this._Recvive.recviveAni.setCompleteListener(function () {
+            this._Recvive.recviveAni.node.active = false;
+
+            var velocityX = velocity.x;
+            var velocityY = velocity.y;
+            console.log("发射速度" , velocityX , velocityY)
+            var vCamera = cc.Camera.main.getComponent("VCamera");
+            vCamera.setStartXFollow();
+            this.launching(cc.v2(velocityX , velocityY));
+            this.wakeup();
+            this.animation.unlockState();
+            this.setCrossWall(true);
+            vMonster.launching();
+
+        }.bind(this));
+
+        var worldPos = cc.Camera.main.node.convertToWorldSpaceAR(cc.v2(0,0));
+        this._Recvive.blinkAni.node.position = this._Recvive.blinkAni.node.parent.convertToNodeSpaceAR(worldPos);
+        this._Recvive.blinkAni.node.active = true;
+        this._Recvive.blinkAni.node.runAction(cc.sequence(cc.blink(0.6 , 2) , cc.callFunc(function () {
+            this._Recvive.blinkAni.node.active = false;
+        } , this)));
+
     },
 
     /**

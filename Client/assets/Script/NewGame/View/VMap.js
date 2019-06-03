@@ -2,6 +2,7 @@
 var Skybox = require("Skybox");
 var MountainBg = require("MountainBg");
 var FloorBg = require("FloorBg");
+var Cloud = require("Cloud");
 
 cc.Class({
     extends: cc.Component,
@@ -10,6 +11,7 @@ cc.Class({
         skybox:Skybox,
         mountainBg:MountainBg,
         floorBg:FloorBg,
+        cloud:Cloud,
 
         // 关卡ID
         passID:0,
@@ -40,6 +42,7 @@ cc.Class({
         this.skybox.refresh(xDistance , yDistance);
         this.mountainBg.refresh(xDistance , yDistance);
         this.floorBg.refresh(xDistance , yDistance);
+        this.cloud.refresh(xDistance , yDistance);
     },
 
     _RefreshPassID:function () {
@@ -60,5 +63,6 @@ cc.Class({
         this.skybox.refreshByPassID(passID);
         this.mountainBg.refreshByPassID(passID);
         this.floorBg.refreshByPassID(passID);
+        this.cloud.refreshByPassID(passID);
     },
 });

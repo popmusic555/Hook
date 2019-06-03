@@ -11,16 +11,20 @@ Timer.init = function () {
  * 
  */
 Timer.getTime = function () {
-    return new Date().getTime() + this._Timedifference;
+    return Timer.getTimeForSec() + this._Timedifference;
 }
 /**
  * 修正当前时间
  * 
  */
 Timer.correct = function (serverTime) {
-    var clientTime = new Date().getTime();
+    var clientTime = Timer.getTimeForSec();
     this._Timedifference = serverTime - clientTime;
     return serverTime;
+}
+
+Timer.getTimeForSec = function () {
+    return Math.floor(new Date().getTime() / 1000);
 }
 
 module.exports = Timer;

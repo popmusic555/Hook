@@ -210,7 +210,7 @@ cc.Class({
             }
         }
 
-        this.content[0].active = false;
+        this.content[0].active = true;
         this.content[1].active = true;
 
         var activityView = this.getComponentInChildren("VActivity");

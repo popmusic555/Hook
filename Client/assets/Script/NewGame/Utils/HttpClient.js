@@ -18,6 +18,17 @@ HttpClient.req = function (action , params , callback) {
     HttpClient.requestForAction(Global.Common.Const.URL , action , params , callback)
 }
 
+HttpClient.reqList = function (reqList) {
+    if (reqList.length <= 0) {
+        return;
+    }
+    var req = reqList.shift();
+    HttpClient.req(req.action , req.params , function (resp , url) {
+        req.callback(resp , url);
+        HttpClient.reqList(reqList);
+    });
+}
+
 HttpClient.requestForAction = function (path , action , params , callback) {
     var url = HttpClient.toUrl(path , action , params);
     HttpClient.request(url , callback);

@@ -53,7 +53,13 @@ cc.Class({
         }
 
         this.spAni.loop = false;
-        this.spAni.animation = "fashe";  
+        if (this._Power == Global.Common.Const.LAUNCH_POWER.length-1) {
+            this.spAni.animation = "fashe_xl";  
+        }
+        else
+        {
+            this.spAni.animation = "fashe";  
+        }
         this._LaunchingCallback = callback;
     },
 

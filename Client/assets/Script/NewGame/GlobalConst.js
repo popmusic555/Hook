@@ -24,6 +24,12 @@ GlobalConst.INWALL_SPEED = 3000;
 // 墙体宽度
 GlobalConst.WALL_WIDTH = 1810;
 
+// 超速
+GlobalConst.SUPER_SPEED = 5000;
+
+// 复活时间
+GlobalConst.RECVIVE_TIMES = 3;
+
 // 碎片任务概率
 // GlobalConst.FRAGMENT_RATE = [0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01];
 // GlobalConst.FRAGMENT_RATE = [1,1,1,1,1,1,1,1,1,1,1,1];

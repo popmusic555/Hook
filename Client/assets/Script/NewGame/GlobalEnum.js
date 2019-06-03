@@ -72,8 +72,8 @@ GlobalEnum.P_STATE = new cc.Enum({
     READY:0,
     // 正常
     NORMAL:1,
-    // 变化
-    TRANSFORM:2,
+    // 超速
+    SPEED:2,
 });
 
 module.exports = GlobalEnum;

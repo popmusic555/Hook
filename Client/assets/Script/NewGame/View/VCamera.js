@@ -84,7 +84,15 @@ cc.Class({
         this._XFollow = false;
     },
 
+    setStartXFollow:function () {
+        this._XFollow = true;  
+    },
+
     setStopYFollow:function () {
         this._YFollow = false;
+    },
+    
+    setStartYFollow:function () {
+        this._YFollow = true;  
     },
 });

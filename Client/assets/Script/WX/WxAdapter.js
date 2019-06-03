@@ -37,6 +37,55 @@ WxAdapter.login = function (timeout , callback) {
     });
 }
 
+WxAdapter.getUserInfo = function (callback) {
+    if (!WxAdapter.isWeChat()) {
+        return;
+    }
+
+    wx.getUserInfo({
+        withCredentials:true,
+        lang:"zh_CN",
+        success:function (res) {
+            // var userInfo = res.userInfo
+            // var nickName = userInfo.nickName
+            // var avatarUrl = userInfo.avatarUrl
+            // var gender = userInfo.gender //性别 0：未知、1：男、2：女
+            // var province = userInfo.province
+            // var city = userInfo.city
+            // var country = userInfo.country
+            callback("success" , res.userInfo);
+        },
+        fail:function () {
+            callback("fail");
+        },
+        complete:function () {
+            callback("complete");
+        },
+    });
+}
+
+WxAdapter.createUserInfoBtn = function (callback) {
+    let button = wx.createUserInfoButton({
+        type: 'text',
+        text: '',
+        style: {
+          left: 0,
+          top: 0,
+          width: 1624,
+          height: 750,
+          lineHeight: 40,
+          backgroundColor: '#ffffff00',
+          color: '#ffffff',
+          textAlign: 'center',
+          fontSize: 16,
+          borderRadius: 0
+        }
+      })
+      button.onTap(callback);
+
+      return button;
+}
+
 /**
  * 获取自身数据
  *
@@ -49,9 +98,9 @@ WxAdapter.getUserData = function (keylist , callback) {
         return;
     }
     wx.getUserCloudStorage({
-        keyList:keyList,
-        success:function (userData) {
-            callback("success" , userData);
+        keyList:keylist,
+        success:function (res) {
+            callback("success" , res.KVDataList);
         },
         fail:function () {
             callback("fail");
@@ -76,10 +125,11 @@ WxAdapter.getFriendData = function (keyList , callback) {
 
     wx.getFriendCloudStorage({
         keyList:keyList,
-        success:function (userData) {
-            callback("success" , userData);
+        success:function (res) {
+            callback("success" , res.data);
         },
-        fail:function () {
+        fail:function (res) {
+            console.log("获取好友信息失败" , res);
             callback("fail");
         },
         complete:function () {
@@ -103,8 +153,8 @@ WxAdapter.getGroupData = function (shareTicket , keyList , callback) {
 
     wx.getFriendCloudStorage({
         keyList:["mileage" , "doubleHit"],
-        success:function (userData) {
-            callback("success" , userData);
+        success:function (res) {
+            callback("success" , res.data);
         },
         fail:function () {
             callback("fail");
@@ -153,7 +203,6 @@ WxAdapter.postMsgToOpenData = function (data) {
     }
 
     var openDataContext = wx.getOpenDataContext();
-    console.log("向开放数据域发送数据" , data , openDataContext);
     openDataContext.postMessage(data);
 }
 
@@ -171,6 +220,24 @@ WxAdapter.onOpenDataMsg = function (callback) {
     wx.onMessage(function (data) {
         callback(data);
     });
+}
+
+/**
+ * 打开视频广告
+ *
+ * @param {*} callback 回调
+ */
+WxAdapter.openVideo = function (callback) {
+    
+}
+
+/**
+ * 打开分享
+ *
+ * @param {*} callback 回调
+ */
+WxAdapter.openShare = function (callback) {
+    
 }
 
 module.exports = WxAdapter;

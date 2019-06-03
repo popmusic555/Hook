@@ -1,0 +1,78 @@
+{
+"skeleton": { "hash": "OlL0THV/7eajwMFOoyPEgUtxyM4", "spine": "3.6.52", "width": 1334.62, "height": 753.24, "images": "./res/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "red", "parent": "root", "x": -367.62, "y": 207.12, "scaleX": 3, "scaleY": 3 },
+	{ "name": "red2", "parent": "root", "x": -367.62, "y": -207.12, "scaleX": 3, "scaleY": -3 },
+	{ "name": "red3", "parent": "root", "x": 367, "y": 207, "scaleX": -3, "scaleY": 3 },
+	{ "name": "red4", "parent": "root", "x": 367, "y": -207, "scaleX": -3, "scaleY": -3 }
+],
+"slots": [
+	{ "name": "hong", "bone": "red", "attachment": "hong" },
+	{ "name": "hong3", "bone": "red3", "attachment": "hong" },
+	{ "name": "hong4", "bone": "red4", "attachment": "hong" },
+	{ "name": "hong2", "bone": "red2", "attachment": "hong" }
+],
+"skins": {
+	"default": {
+		"hong": {
+			"hong": { "width": 200, "height": 113 }
+		},
+		"hong2": {
+			"hong": { "width": 200, "height": 113 }
+		},
+		"hong3": {
+			"hong": { "width": 200, "height": 113 }
+		},
+		"hong4": {
+			"hong": { "width": 200, "height": 113 }
+		}
+	}
+},
+"animations": {
+	"red": {
+		"slots": {
+			"hong": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.1, "color": "ffffffff" },
+					{ "time": 0.2, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "hong" }
+				]
+			},
+			"hong2": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.1, "color": "ffffffff" },
+					{ "time": 0.2, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "hong" }
+				]
+			},
+			"hong3": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.1, "color": "ffffffff" },
+					{ "time": 0.2, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "hong" }
+				]
+			},
+			"hong4": {
+				"color": [
+					{ "time": 0, "color": "ffffff00" },
+					{ "time": 0.1, "color": "ffffffff" },
+					{ "time": 0.2, "color": "ffffff00" }
+				],
+				"attachment": [
+					{ "time": 0, "name": "hong" }
+				]
+			}
+		}
+	}
+}
+}

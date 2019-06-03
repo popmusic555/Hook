@@ -25,6 +25,18 @@ cc.Class({
         this._IsUpdate = true;
     },
 
+    stop:function () {
+        this._IsUpdate = false;
+    },
+
+    clear:function () {
+        var len = this.monsterList.length;
+        for (let index = 0; index < len; index++) {
+            var list = this.monsterList[index];
+            list.node.removeAllChildren(true);
+        }
+    },
+
     /**
      * 更新怪物
      *

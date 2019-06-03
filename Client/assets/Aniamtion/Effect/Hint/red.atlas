@@ -1,0 +1,13 @@
+
+red.png
+size: 204,117
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+hong
+  rotate: false
+  xy: 2, 2
+  size: 200, 113
+  orig: 200, 113
+  offset: 0, 0
+  index: -1

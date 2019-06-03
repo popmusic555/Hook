@@ -1,0 +1,41 @@
+{
+"skeleton": { "hash": "VBWXLl6RvKWo2F8vAKHaRXy2zsI", "spine": "3.6.52", "width": 125, "height": 110, "images": "./res/" },
+"bones": [
+	{ "name": "root" },
+	{ "name": "sdx", "parent": "root" }
+],
+"slots": [
+	{ "name": "speed_0001", "bone": "sdx", "attachment": "speed_0007" }
+],
+"skins": {
+	"default": {
+		"speed_0001": {
+			"speed_0001": { "width": 125, "height": 110 },
+			"speed_0002": { "width": 125, "height": 110 },
+			"speed_0003": { "width": 125, "height": 110 },
+			"speed_0004": { "width": 125, "height": 110 },
+			"speed_0005": { "width": 125, "height": 110 },
+			"speed_0006": { "width": 125, "height": 110 },
+			"speed_0007": { "width": 125, "height": 110 }
+		}
+	}
+},
+"animations": {
+	"sdx": {
+		"slots": {
+			"speed_0001": {
+				"attachment": [
+					{ "time": 0, "name": "speed_0001" },
+					{ "time": 0.0667, "name": "speed_0002" },
+					{ "time": 0.1333, "name": "speed_0003" },
+					{ "time": 0.2, "name": "speed_0004" },
+					{ "time": 0.2667, "name": "speed_0005" },
+					{ "time": 0.3333, "name": "speed_0006" },
+					{ "time": 0.4, "name": "speed_0007" },
+					{ "time": 0.4667, "name": "speed_0001" }
+				]
+			}
+		}
+	}
+}
+}

@@ -1,4 +1,6 @@
 
+var WxAdapter = require("WxAdapter");
+
 cc.Class({
     extends: cc.Component,
 
@@ -108,37 +110,51 @@ cc.Class({
         }
         var video = 0;
 
-        Global.Common.Http.req("uploadWX" , {
-            name:"",
-            useruin:Global.Model.Game.uuid,
-            gold:coins,
-            score:Global.Model.Game.mileage,
-            fullstate:fullstate,
-            monsternum:killNum,
-            puzzle:Global.Model.Game.getFragmentForNum(),
-            video:video,
-            firstPlay:Global.Model.Game.getGuideForNum(),
-            passLv:Global.Model.Game.maxPass,
-        } , function (resp , url) {
-            if (resp[0] != "OK") {
-                return false;
-            }
-            // 上传数据成功
-            console.log("上传数据成功");
-            // if (Global.Model.MPlayer.isCross && Global.Model.Game.getLevelByItemID(7) < 0) {
-            //     this.unLockItem(7);
-            // }
-            // if (Global.Model.MPlayer.isKillJump && Global.Model.Game.getLevelByItemID(9) < 0) {
-            //     this.unLockItem(9);
-            // }
-            // if (Global.Model.MPlayer.isKillEnergy && Global.Model.Game.getLevelByItemID(10) < 0) {
-            //     this.unLockItem(10);
-            // }
-            // if (Global.Model.MPlayer.isKillPlane && Global.Model.Game.getLevelByItemID(11) < 0) {
-            //     this.unLockItem(11);
-            // }
-        }.bind(this));
+        // 请求列表
+        var reqList = [];
+        reqList.push({
+            action:"uploadWX",
+            params:{
+                name:"",
+                useruin:Global.Model.Game.uuid,
+                gold:coins,
+                score:Global.Model.Game.mileage,
+                fullstate:fullstate,
+                monsternum:killNum,
+                puzzle:Global.Model.Game.getFragmentForNum(),
+                video:video,
+                firstPlay:Global.Model.Game.getGuideForNum(),
+                passLv:Global.Model.Game.maxPass,
+            },
+            callback:function (resp , url) {
+                if (resp[0] != "OK") {
+                    return false;
+                }
+                // 上传数据成功
+                console.log("Response " , url , resp);
+                console.log("上传数据成功");
+                WxAdapter.postMsgToOpenData({
+                    cmd:"updateUser",
+                    mileage:Global.Model.Game.mileage,
+                    combo:Global.Model.Game.getCombo(),
+                });
+            }.bind(this),
+        });
 
+        if (Global.Model.MPlayer.isCross && Global.Model.Game.getLevelByItemID(7) < 0) {
+            this.unLockItem(reqList , 7);
+        }
+        if (Global.Model.MPlayer.isKillJump && Global.Model.Game.getLevelByItemID(9) < 0) {
+            this.unLockItem(reqList , 9);
+        }
+        if (Global.Model.MPlayer.isKillEnergy && Global.Model.Game.getLevelByItemID(10) < 0) {
+            this.unLockItem(reqList , 10);
+        }
+        if (Global.Model.MPlayer.isKillPlane && Global.Model.Game.getLevelByItemID(11) < 0) {
+            this.unLockItem(reqList , 11);
+        }
+
+        Global.Common.Http.reqList(reqList);
         // console.log("当前局金币", coins);
         // console.log("当前局里程", Global.Model.Game.mileage);
         // console.log("当前局发射力", launchPower , Global.Common.Const.LAUNCH_RATE.length);
@@ -156,19 +172,23 @@ cc.Class({
         this.coinsLabel.string = coins;
     },
 
-    unLockItem:function (index) {
-        Global.Common.Http.req("updateProperty" , {
-            uuid:Global.Model.Game.uuid,
-            propertyid:index,
-            level:0,
-            CurGold:Global.Model.Game.coins,
-        } , function (resp , url) {
-            var result = parseInt(resp[0]);
-            if (result != 0) {
-                return;
-            }
-            var curLevelNum = Global.Model.Game.levelUp(this.index);
-            console.log("解锁成功" , index);
-        }.bind(this));
+    unLockItem:function (reqList , index) {
+        reqList.push({
+            action:"updateProperty",
+            params:{
+                uuid:Global.Model.Game.uuid,
+                propertyid:index,
+                level:0,
+                CurGold:Global.Model.Game.coins,
+            },
+            callback:function (resp , url) {
+                var result = parseInt(resp[0]);
+                if (result != 0) {
+                    return;
+                }
+                Global.Model.Game.levelUp(index);
+                console.log("解锁成功" , index);
+            }.bind(this),
+        });
     },
 });

@@ -73,6 +73,8 @@ MPlayer.init = function () {
     this.gamedata.guideStep = 0;
     // 怪物引导
     this.gamedata.monsterGuide = [0,0,0];
+    // 复活速度
+    this.gamedata.recviveVelocity = null,
 
     this.config = null;
 
@@ -138,6 +140,7 @@ MPlayer.resetGamedata = function () {
     this.gamedata.isKillPlane = false;
     this.gamedata.guideStep = 0,
     this.gamedata.monsterGuide = [0,0,0];
+    this.gamedata.recviveVelocity = null;
 };
 
 /**
@@ -370,6 +373,14 @@ MPlayer.getGuideStep = function () {
 MPlayer.getMonsterGuide = function () {
     return this.gamedata.monsterGuide;
 };
+
+MPlayer.setRecviveVelocity = function (velocity) {
+    this.gamedata.recviveVelocity = velocity;
+};
+
+MPlayer.getRecviveVelocity = function () {
+    return this.gamedata.recviveVelocity;
+}
 
 /**
  * 获取速度计
@@ -1970,7 +1981,7 @@ MPlayer.triggerFloor = function (contact , player , floor , attr) {
             {   
                 // 非技能、冲击状态下 减速
                 // 处理X轴速度 (加速力处理)
-                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , -4);
+                velocityX = Calculator.processVelocityX(velocityX , selfAttr.acceleratePower , otherAttr.acceleratePower , -4 * Global.Common.Const.VELOCITY_RATIO);
                 // 限定X速度 (限定速度区间)
                 velocityX = this.limitVelocityX(velocityX);
 
@@ -1983,8 +1994,7 @@ MPlayer.triggerFloor = function (contact , player , floor , attr) {
                 if (isGameOver) {
                     // 当前游戏结束
                     console.log("当前游戏结束");
-                    player.static();
-                    Global.Model.Game.showRecvive();
+                    player.onDeath();
                 }
                 else
                 {

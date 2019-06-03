@@ -1,0 +1,59 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "LotteryAni",
+  "_objFlags": 0,
+  "_native": "",
+  "_duration": 0.6666666666666666,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "props": {
+      "position": [
+        {
+          "frame": 0,
+          "value": [
+            0,
+            20
+          ],
+          "motionPath": [
+            [
+              11,
+              91,
+              -5,
+              58,
+              25,
+              121
+            ]
+          ]
+        },
+        {
+          "frame": 0.16666666666666666,
+          "value": [
+            58,
+            134
+          ],
+          "motionPath": [
+            [
+              174,
+              19,
+              158,
+              169,
+              169,
+              -128
+            ]
+          ]
+        },
+        {
+          "frame": 0.6666666666666666,
+          "value": [
+            0,
+            -173
+          ],
+          "motionPath": []
+        }
+      ]
+    }
+  },
+  "events": []
+}

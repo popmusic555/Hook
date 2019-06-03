@@ -69,7 +69,7 @@ cc.Class({
                 return;
             }
             // 增加任务奖励
-
+            Global.Model.Game.addRevive(parseInt(resp[1]));
             // 切换到下一个任务
             Global.Model.Game.nextTask();
             Global.Model.Game.getTask().state = 0;

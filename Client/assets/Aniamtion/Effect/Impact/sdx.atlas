@@ -1,0 +1,55 @@
+
+sdx.png
+size: 786,129
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+speed_0001
+  rotate: true
+  xy: 114, 2
+  size: 125, 110
+  orig: 125, 110
+  offset: 0, 0
+  index: -1
+speed_0002
+  rotate: true
+  xy: 226, 2
+  size: 125, 110
+  orig: 125, 110
+  offset: 0, 0
+  index: -1
+speed_0003
+  rotate: true
+  xy: 338, 2
+  size: 125, 110
+  orig: 125, 110
+  offset: 0, 0
+  index: -1
+speed_0004
+  rotate: true
+  xy: 450, 2
+  size: 125, 110
+  orig: 125, 110
+  offset: 0, 0
+  index: -1
+speed_0005
+  rotate: true
+  xy: 562, 2
+  size: 125, 110
+  orig: 125, 110
+  offset: 0, 0
+  index: -1
+speed_0006
+  rotate: true
+  xy: 674, 2
+  size: 125, 110
+  orig: 125, 110
+  offset: 0, 0
+  index: -1
+speed_0007
+  rotate: true
+  xy: 2, 2
+  size: 125, 110
+  orig: 125, 110
+  offset: 0, 0
+  index: -1

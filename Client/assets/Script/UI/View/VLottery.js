@@ -2,10 +2,14 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
+        lotteryNoLabel:cc.Label,
         lotteryNumLabel:cc.Label,
+        lotteryTimeLabel:cc.Label,
         lotteryBtnLabel:cc.Label,
         arrow:cc.Node,
+        lottery:cc.Node,
         bgAni:sp.Skeleton,
+        lotteryAni:cc.Animation,
         arrowAni:sp.Skeleton,
         lotteryNum:0,
 
@@ -13,13 +17,14 @@ cc.Class({
         _LotteryList:null,
         _LastAngle:0,
         _Lock:false,
+        _Timecallback:null,
     },
 
     // onLoad () {},
 
     start () {
-        this._AngleList = [30 , 90 , 150 , 210 , 270 , 330];
-        this._LotteryList = [2 , 4 , 3 , 2 , 4 , 3];
+        this._AngleList = [0 , 300 , 240 , 180 , 120 , 60];
+        this._LotteryList = [3 , 2 , 4 , 3 , 2 , 4];
     },
 
     // update (dt) {},
@@ -51,6 +56,7 @@ cc.Class({
     },
 
     startLottery:function (isVideo) {
+        Global.Common.Audio.playEffect("btn1Click" , false);
         // 轮盘奖励获取
         Global.Common.Http.req("lotteryRecored" , {
             uuid:Global.Model.Game.uuid,
@@ -80,38 +86,51 @@ cc.Class({
             }
 
             this.turnOn(arr[Global.Common.Utils.random(0 , arr.length-1)]);
-
         }.bind(this));
     },
 
     turnOn:function (index) {
         this.lotteryNum = index;
-        var angle = this._AngleList[this.lotteryNum] + 1080 - this._LastAngle + Global.Common.Utils.random(10 , 50);
+        var angle = this._AngleList[this.lotteryNum] + 1080 - this._LastAngle + Global.Common.Utils.random(0 , 0);
         var action = cc.sequence(cc.rotateBy(3.0 , angle).easing(cc.easeExponentialOut()) , cc.callFunc(function () {
             console.log("获取转盘奖励" , this.lotteryNum);
-            this.bgAni.node.active = true;
-            this.bgAni.animation = "zhuanpan";
-            this.bgAni.setCompleteListener(function () {
-                this.bgAni.active = false;
-            }.bind(this));
-            this.arrowAni.node.active = true;
-            this.arrowAni.animation = "shouji_y";
-            this.arrowAni.setCompleteListener(function () {
-                this.arrowAni.active = false;
-            }.bind(this));
+            
+            this.lotteryAni.node.active = true;
+            this.lotteryAni.play();
+            this.lotteryAni.getComponent(cc.ParticleSystem).resetSystem();
+            this.lotteryAni.on('finished',function () {
+                this.lotteryAni.off('finished',this.onFinished,this);
+                this.lotteryAni.getComponent(cc.ParticleSystem).stopSystem();
 
-            this._LastAngle = this.arrow.rotation % 360;
-            this._Lock = false;
-            this.refreshLotteryLabel();
+                this.arrowAni.node.active = true;
+                this.arrowAni.animation = "shouji_y";
+                this.arrowAni.setCompleteListener(function () {
+                    this.arrowAni.active = false;
+
+                    this._LastAngle = this.lottery.rotation % 360;
+                    this._Lock = false;
+                    this.refreshLotteryLabel();
+
+                }.bind(this));
+            },this);
+            
         } , this));
         action.setTag(10);
-        this.arrow.runAction(action);
+        this.lottery.runAction(action);
+        var action1 = cc.rotateBy(3.0 , -360).easing(cc.easeExponentialOut());
+        action1.setTag(10);
+        this.arrow.runAction(action1);
+        this.bgAni.node.active = true;
+        this.bgAni.animation = "zhuanpan";
+        this.bgAni.setCompleteListener(function () {
+            this.bgAni.active = false;
+        }.bind(this));
     },
 
     show:function () {
         // 当前转盘倍数是否超时
         var curTime = Global.Common.Timer.getTime();
-        if (curTime > Global.Model.Game.lotteryTime >= Global.Common.Const.LOTTERY_TIME) {
+        if (curTime - Global.Model.Game.lotteryTime >= Global.Common.Const.LOTTERY_TIME) {
             // 超时倍数清零
             Global.Model.Game.setLotteryNum(0);
         }
@@ -121,18 +140,28 @@ cc.Class({
         this._LastAngle = 0;
         this._Lock = false;
         this.arrow.rotation = 0;
+        this.lottery.rotation = 0;
         this.refreshLotteryLabel();
-        this.node.stopActionByTag(10);
+        this.arrow.stopActionByTag(10);
+        this.lottery.stopActionByTag(10);
     },
 
     refreshLotteryLabel:function () {
+        this.unschedule(this._Timecallback);
         var num = Global.Model.Game.lottery;
         if (num <= 0) {
-            this.lotteryNumLabel.string = "当前无奖励倍数";
+            this.lotteryNoLabel.node.active = true;
+            this.lotteryNumLabel.node.parent.active = false;
         }
         else
         {
+            this.lotteryNoLabel.node.active = false;
+            this.lotteryNumLabel.node.parent.active = true;
             this.lotteryNumLabel.string = "x " + num;
+            this.lotteryTimeLabel.string = Global.Common.Utils.getTimeToTimeString(this.getLotteryTime());
+
+            this._Timecallback = this.refreshTimes.bind(this);
+            this.schedule(this._Timecallback , 1);
         }
 
         var freeNum = Global.Model.Game.freeLottery;
@@ -143,5 +172,14 @@ cc.Class({
         {
             this.lotteryBtnLabel.string = "看视频转转盘";
         }
-    }
+    },
+
+    refreshTimes:function () {
+        this.lotteryTimeLabel.string = Global.Common.Utils.getTimeToTimeString(this.getLotteryTime());
+    },
+
+    getLotteryTime:function () {
+        var curTime = Global.Common.Timer.getTime();
+        return Global.Common.Const.LOTTERY_TIME - (curTime - Global.Model.Game.lotteryTime);
+    },
 });

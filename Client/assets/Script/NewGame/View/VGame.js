@@ -134,7 +134,7 @@ cc.Class({
 
         // 当前转盘倍数是否超时
         var curTime = Global.Common.Timer.getTime();
-        if (curTime > Global.Model.Game.lotteryTime >= Global.Common.Const.LOTTERY_TIME) {
+        if (curTime - Global.Model.Game.lotteryTime >= Global.Common.Const.LOTTERY_TIME) {
             // 超时倍数清零
             Global.Model.Game.setLotteryNum(0);
         }
