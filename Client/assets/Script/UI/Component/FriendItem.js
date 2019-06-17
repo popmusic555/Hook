@@ -1,10 +1,12 @@
+var RemoteSprite = require("RemoteSprite");
+var WxAdapter = require("WxAdapter");
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
         indexLabel:cc.Label,
-        headIcon:cc.Sprite,
+        headIcon:RemoteSprite,
         rewardLabel:cc.Label,
         stateBtn:[cc.Node],
 
@@ -15,6 +17,8 @@ cc.Class({
         rewardNum:0,
         // 状态
         state:0,
+
+        isRewarding:false,
     },
 
     // onLoad () {},
@@ -31,6 +35,13 @@ cc.Class({
 
     setHeadIcon:function (url) {
         this.headIconUrl = url;
+        if (this.headIconUrl) {
+            this.headIcon.setUrl(this.headIconUrl , cc.size(96,96));    
+        }
+        else
+        {
+            this.headIcon.setDefault();
+        }
     },
 
     setIndex:function (index) {
@@ -49,13 +60,21 @@ cc.Class({
     onReceiveReward:function () {
         Global.Common.Audio.playEffect("btn2Click" , false);
 
+        if (this.isRewarding) {
+            return;
+        }
+
+        this.isRewarding = true;
+
         // 好友奖励领取
         Global.Common.Http.req("inviteAwardForAward" , {
             uuid:Global.Model.Game.uuid,
             id:Global.Model.Game.getFriend()[this.index].id,
         } , function (resp , url) {
             console.log("Response " , url , resp);
+            this.isRewarding = false;
             this.setState(0);
+            Global.Model.Game.getFriend()[this.index].isReward = true;
             this.receiveReward(parseInt(resp[0]));
         }.bind(this));
     },
@@ -71,6 +90,8 @@ cc.Class({
      */
     onInvitation:function () {
         Global.Common.Audio.playEffect("btn1Click" , false);
+        // 分享
+        Global.Model.Game.share(WxAdapter);
     },
 
     // update (dt) {},

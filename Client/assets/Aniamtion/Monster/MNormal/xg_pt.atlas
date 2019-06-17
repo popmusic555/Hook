@@ -1,27 +1,34 @@
 
 xg_pt.png
-size: 226,156
+size: 226,181
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 g02_01
   rotate: false
-  xy: 168, 91
+  xy: 168, 116
   size: 56, 63
   orig: 56, 63
   offset: 0, 0
   index: -1
 g02_02
   rotate: false
-  xy: 2, 2
+  xy: 2, 27
   size: 164, 152
   orig: 164, 152
   offset: 0, 0
   index: -1
 g02_03
   rotate: false
-  xy: 168, 28
+  xy: 168, 53
   size: 56, 61
   orig: 56, 61
+  offset: 0, 0
+  index: -1
+yingzi
+  rotate: false
+  xy: 2, 2
+  size: 128, 23
+  orig: 128, 23
   offset: 0, 0
   index: -1

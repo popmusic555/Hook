@@ -31,6 +31,8 @@ cc.Class({
         _Shadow:null,
         _CarMeter:null,
 
+        _Tail:null,
+
         // 是否绑定
         _IsBind:false,
 
@@ -56,6 +58,8 @@ cc.Class({
             shadowAni:this.node.position,
         };
 
+        this._Tail = this.animation.node.parent.getChildByName("Tail");
+
         this._CarMeter = this.meter;
 
         this._Duration = -1;
@@ -65,6 +69,7 @@ cc.Class({
         this._IsBind = true;
         this.run(this._Player.getVelocity() , this._Player.getGravityScale());
         this.animation.animation = "car_ljr_run01";
+        this._Tail.position = cc.v2(-115 , -2);
         this.scheduleOnce(function () {
             this.node.rotation = -30;
         }.bind(this) , 0);
@@ -213,8 +218,9 @@ cc.Class({
     },
 
     showDeathAni:function () {
+        this._Tail.active = false;
         this._Shadow.shadow.node.active = false;
-        this.animation.node.active = false;
+        this.animation.node.parent.active = false;
         this.deathAni.node.active = true;
         this.deathAni.animation = "gbl_zd_boom";
         this.deathAni.setCompleteListener(function () {

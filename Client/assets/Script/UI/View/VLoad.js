@@ -20,7 +20,7 @@ cc.Class({
     // onLoad () {},
 
     start () {
-        cc.audioEngine.playMusic(this.bgm, true);
+        // cc.audioEngine.playMusic(this.bgm, true);
 
         cc.director.preloadScene("MainScene" , function (completedCount , totalCount , item) {
             var progress = completedCount / totalCount;
@@ -124,52 +124,65 @@ cc.Class({
     // },
 
     wxLogin:function () {
-        Global.Model.Game.uuid = "aaaaaaaaaaaaaaaaab";
+        // Global.Model.Game.uuid = "aaaaaaaaaaaaaaaaab";
         // 获取权限
         // if (有权限)
         // 直接获取用户信息
         // else
         // 显示全屏的透明授权按钮
 
-        WxAdapter.login(5000 , function (state , code) {
+        WxAdapter.login(30000 , function (state , code) {
+            console.log("Loginstate" , state);    
             if (state != "success") {
                 return;
             }
+            console.log("LoginCode" , code);   
+            this.getOpenID(code , function (openId) {
+                Global.Model.Game.uuid = openId;
+                WxAdapter.getUserInfo(function (state , userInfo) {
+                    if (state == "success") {
+                        console.log("getUserInfo" , userInfo);    
+                        WxAdapter.postMsgToOpenData({
+                            cmd:"setUserInfo",
+                            nickName:userInfo.nickName,
+                            avatarUrl:userInfo.avatarUrl,
+                            openid:Global.Model.Game.uuid,
+                        });
+                        this.login(userInfo.nickName , userInfo.avatarUrl);
+                    }
+                    else if (state == "fail") {
+                        var button = WxAdapter.createUserInfoBtn(function (res) {
+                            if (res.errMsg == "getUserInfo:ok") {
+                                button.hide();
+                                // 初始化开放数据域本用户名称头像
+                                var userInfo = res.userInfo;
+                                console.log("createUserInfoBtn userInfo" , userInfo);
+                                WxAdapter.postMsgToOpenData({
+                                    cmd:"setUserInfo",
+                                    nickName:userInfo.nickName,
+                                    avatarUrl:userInfo.avatarUrl,
+                                    openid:Global.Model.Game.uuid,
+                                });
+                                this.updateUserInfo(userInfo.nickName , userInfo.avatarUrl);
+                            }
+                        }.bind(this));
+                        this.login("" , "");
+                    }
+                }.bind(this));
 
-            console.log("LoginCode" , code);    
-
-            WxAdapter.getUserInfo(function (state , userInfo) {
-                if (state == "success") {
-                    console.log("getUserInfo" , userInfo);    
-                    WxAdapter.postMsgToOpenData({
-                        cmd:"setUserInfo",
-                        nickName:userInfo.nickName,
-                        avatarUrl:userInfo.avatarUrl,
-                    });
-                    this.login();
-                }
-                else if (state == "fail") {
-                    var button = WxAdapter.createUserInfoBtn(function (res) {
-                        if (res.errMsg == "getUserInfo:ok") {
-                            button.hide();
-                            // 初始化开放数据域本用户名称头像
-                            var userInfo = res.userInfo;
-                            console.log("createUserInfoBtn userInfo" , userInfo);
-                            WxAdapter.postMsgToOpenData({
-                                cmd:"setUserInfo",
-                                nickName:userInfo.nickName,
-                                avatarUrl:userInfo.avatarUrl,
-                            });
-                        }
-                    }.bind(this));
-                    this.login();
-                }
             }.bind(this));
+
         }.bind(this));
     },
 
-    login:function () {
+    login:function (nickName , avatarUrl) {
         console.log("开始连接服务器");
+
+        var options = WxAdapter.getOptions();
+        var referrerId = options.query.uuid;
+        if (!referrerId) {
+            referrerId = "";
+        }
 
         Global.Common.Http.reqList([
             {
@@ -177,7 +190,9 @@ cc.Class({
                 params:{
                     uuid:Global.Model.Game.uuid,
                     userSource:1,
-                    referrerId:"aaaaaaaaaaaaaaaaab",
+                    referrerId:referrerId,
+                    faceUrl:avatarUrl,
+                    userName:nickName,
                 },
                 callback:function (resp , url) {
                     console.log("Response " , url , resp);
@@ -236,7 +251,33 @@ cc.Class({
                     console.log("当前时间持续时间" , time - lotteryTime);
                     this._LoginComplete = true;
                 }.bind(this),
-            }
+            },
         ]);
     },
+
+    getOpenID:function (code , callback) {
+        Global.Common.Http.req("getOpenId" , {
+            jsCode:code,
+        } , function (resp , url) {
+            var id = resp[0];
+            // if (!id) {
+            //     return;
+            // }
+            callback(id);
+        }.bind(this));
+    },
+
+    updateUserInfo:function (nickName , avatarUrl) {
+        Global.Common.Http.req("updateUserInfo" , {
+            uuid:Global.Model.Game.uuid,
+            faceUrl:avatarUrl,
+            userName:nickName,
+        } , function (resp , url) {
+            var id = parseInt(resp[0]);
+            if (!id) {
+                return;
+            }
+            console.log("更新用户昵称 头像成功");
+        }.bind(this));
+    }
 });

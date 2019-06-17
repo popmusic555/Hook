@@ -44,8 +44,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.6687095905172414,
-      "y": 0.6687095905172414,
+      "x": 0.49137931034482757,
+      "y": 0.49137931034482757,
       "z": 1
     },
     "_quat": {
@@ -55,7 +55,6 @@
       "z": 0,
       "w": 1
     },
-    "_zIndex": 0,
     "groupIndex": 0,
     "autoReleaseAssets": false,
     "_id": "070eb2f7-b009-45f3-8382-9d71f945bf5a"
@@ -124,7 +123,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": "13pqoGVVRIAarLZt3vPxYH"
   },
@@ -185,7 +183,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": "1dUL6SsMVPCq7WI8+vIN1k"
   },
@@ -275,7 +272,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": "bcStAYOVtCi5uWxsffkXQH"
   },
@@ -336,7 +332,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": "ba58h9BPdETLpN0CGNUNJK"
   },
@@ -395,7 +390,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 127.6,
-      "height": 40
+      "height": 60
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -425,7 +420,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": "d2zySrkRJGxIQfjJn+ypQk"
   },
@@ -437,23 +431,23 @@
       "__id__": 8
     },
     "_enabled": true,
-    "_srcBlendFactor": 1,
-    "_dstBlendFactor": 771,
     "_useOriginalSize": false,
     "_string": "- 0% -",
     "_N$string": "- 0% -",
     "_fontSize": 40,
-    "_lineHeight": 40,
+    "_lineHeight": 60,
     "_enableWrapText": true,
     "_N$file": {
       "__uuid__": "bf250ab2-ccbb-4a5e-93e1-13afac0292e3"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
+    "_batchAsBitmap": false,
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
+    "_N$cacheMode": 0,
     "_id": "a2RCgjsNlBz4xSGw9AJLZY"
   },
   {
@@ -549,7 +543,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": "32T+7JsQpJgIJdGOnFpqpZ"
   },

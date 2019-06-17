@@ -1433,6 +1433,7 @@ MPlayer.triggerClip = function (contact , player , clip , attr) {
                 // 绑定
                 this.type = Enum.TYPE.CLIP;
                 player.bindMonster(clip);
+                player.onHurtRed();
                 MPlayer.addReward(otherAttr.cost , otherAttr.coins , otherAttr.energy);
             }
             break;
@@ -2035,13 +2036,13 @@ MPlayer.addCoins = function (num) {
  * @param {any} num 
  */
 MPlayer.addCarryCoins = function (num) {
-    this.addRewardCoins(num);
     // 展示UI动画
     console.log("addCarryCoins" , num);
-
     if (num > 0) {
         var ani = Global.Model.Game.getUIView().getComponentInChildren("CoinsCarryAni");
-        ani.show();
+        ani.show(function () {
+            this.addRewardCoins(num);
+        }.bind(this));
     }
 }
 
@@ -2060,7 +2061,8 @@ MPlayer.addCarryEnergy = function (num) {
 
 MPlayer.addReward = function (cost , coins , energy) {
     // 增加金币
-    var rate = this.attr.coinsRadio + (Global.Model.Game.lottery) + Global.Common.Const.LAUNCH_RATE[Global.Model.Game.getCombo()];
+    var lottery = Global.Model.Game.lottery - 1 > 0 ? Global.Model.Game.lottery - 1 : 0;
+    var rate = this.attr.coinsRadio + (lottery) + Global.Common.Const.LAUNCH_RATE[Global.Model.Game.getCombo()];
     this.addCoins(cost * rate);
     // 增加携带的金币
     this.addCarryCoins(coins * rate);

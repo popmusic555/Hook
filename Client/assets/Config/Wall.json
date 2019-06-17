@@ -3,7 +3,7 @@
     "passid": 0,
     "crossSpeed": 1500,
     "accelerate": -450,
-    "cost": 1000,
+    "cost": 0,
     "carryCoins": 0,
     "carryEnergy": 10,
     "distance": 60000
@@ -11,83 +11,83 @@
   {
     "passid": 1,
     "crossSpeed": 1500,
-    "accelerate": -450,
-    "cost": 2000,
+    "accelerate": -900,
+    "cost": 500,
     "carryCoins": 0,
     "carryEnergy": 10,
-    "distance": 60000
+    "distance": 90000
   },
   {
     "passid": 2,
     "crossSpeed": 1500,
-    "accelerate": -600,
-    "cost": 3000,
+    "accelerate": -900,
+    "cost": 1000,
     "carryCoins": 0,
     "carryEnergy": 10,
-    "distance": 90000
+    "distance": 120000
   },
   {
     "passid": 3,
     "crossSpeed": 1500,
-    "accelerate": -600,
-    "cost": 4000,
+    "accelerate": -900,
+    "cost": 1500,
     "carryCoins": 0,
     "carryEnergy": 10,
-    "distance": 90000
+    "distance": 150000
   },
   {
     "passid": 4,
     "crossSpeed": 1500,
-    "accelerate": -750,
-    "cost": 5000,
+    "accelerate": -1200,
+    "cost": 2000,
     "carryCoins": 0,
     "carryEnergy": 10,
-    "distance": 150000
+    "distance": 180000
   },
   {
     "passid": 5,
     "crossSpeed": 1500,
-    "accelerate": -750,
-    "cost": 5000,
+    "accelerate": -1200,
+    "cost": 2500,
     "carryCoins": 0,
     "carryEnergy": 10,
-    "distance": 150000
+    "distance": 210000
   },
   {
     "passid": 6,
     "crossSpeed": 1500,
-    "accelerate": -900,
-    "cost": 5000,
+    "accelerate": -1200,
+    "cost": 3000,
     "carryCoins": 0,
     "carryEnergy": 10,
-    "distance": 150000
+    "distance": 240000
   },
   {
     "passid": 7,
     "crossSpeed": 1500,
-    "accelerate": -1200,
-    "cost": 5000,
+    "accelerate": -1500,
+    "cost": 3500,
     "carryCoins": 0,
     "carryEnergy": 10,
-    "distance": 150000
+    "distance": 240000
   },
   {
     "passid": 8,
     "crossSpeed": 1500,
     "accelerate": -1500,
-    "cost": 5000,
+    "cost": 4000,
     "carryCoins": 0,
     "carryEnergy": 10,
-    "distance": 150000
+    "distance": 240000
   },
   {
     "passid": 9,
     "crossSpeed": 1500,
     "accelerate": -1800,
-    "cost": 5000,
+    "cost": 4500,
     "carryCoins": 0,
     "carryEnergy": 10,
-    "distance": 150000
+    "distance": 240000
   },
   {
     "passid": 10,
@@ -96,6 +96,6 @@
     "cost": 5000,
     "carryCoins": 0,
     "carryEnergy": 10,
-    "distance": 150000
+    "distance": 240000
   }
 ]

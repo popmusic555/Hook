@@ -18,6 +18,8 @@ cc.Class({
         recviveView:VRecvive,
         // 设置界面
         setView:SetView,
+        // 开场动画
+        prologueView:cc.Node,
     },
 
     onLoad () {
@@ -26,6 +28,13 @@ cc.Class({
     },
 
     start () {
+        if (Global.Model.MPlayer.getGuideStep() == 0) {
+            this.prologueView.active = true;
+        }
+        else
+        {
+            this.prologueView.active = false;
+        }
     },
 
     // update (dt) {},
@@ -53,4 +62,8 @@ cc.Class({
         Global.Common.Audio.playEffect("btn1Click" , false);
         this.showSetView();  
     },  
+
+    onClosePrologue:function () {
+        this.prologueView.active = false;
+    },
 });

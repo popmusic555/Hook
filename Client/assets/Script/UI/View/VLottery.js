@@ -1,3 +1,5 @@
+var WxAdapter = require("WxAdapter");
+
 cc.Class({
     extends: cc.Component,
 
@@ -42,13 +44,18 @@ cc.Class({
         else
         {
             // 视频开启
-            this.startLottery(1);
+            Global.Model.Game.share(WxAdapter);
+            this.scheduleOnce(function () {
+                this.startLottery(1);    
+            }.bind(this) , 0.5);
         }
     },
 
     onCloseBtn:function () {
         Global.Common.Audio.playEffect("btn1Click" , false);
         this.hide();
+        var vMain = this.node.parent.getComponentInChildren("VMain");
+        vMain.showRedDot();
     },
 
     hide:function () {
@@ -86,13 +93,14 @@ cc.Class({
             }
 
             this.turnOn(arr[Global.Common.Utils.random(0 , arr.length-1)]);
+            // this.turnOn(4);
         }.bind(this));
     },
 
     turnOn:function (index) {
         this.lotteryNum = index;
-        var angle = this._AngleList[this.lotteryNum] + 1080 - this._LastAngle + Global.Common.Utils.random(0 , 0);
-        var action = cc.sequence(cc.rotateBy(3.0 , angle).easing(cc.easeExponentialOut()) , cc.callFunc(function () {
+        var angle = this._AngleList[this.lotteryNum] + 2160 - this._LastAngle + Global.Common.Utils.random(0 , 0);
+        var action = cc.sequence(cc.rotateBy(6.0 , angle).easing(cc.easeExponentialOut()) , cc.callFunc(function () {
             console.log("获取转盘奖励" , this.lotteryNum);
             
             this.lotteryAni.node.active = true;
@@ -109,15 +117,17 @@ cc.Class({
 
                     this._LastAngle = this.lottery.rotation % 360;
                     this._Lock = false;
-                    this.refreshLotteryLabel();
 
                 }.bind(this));
+
+                this.refreshLotteryLabel();
+
             },this);
             
         } , this));
         action.setTag(10);
         this.lottery.runAction(action);
-        var action1 = cc.rotateBy(3.0 , -360).easing(cc.easeExponentialOut());
+        var action1 = cc.rotateBy(6.0 , -720).easing(cc.easeExponentialOut());
         action1.setTag(10);
         this.arrow.runAction(action1);
         this.bgAni.node.active = true;
@@ -170,7 +180,7 @@ cc.Class({
         }
         else
         {
-            this.lotteryBtnLabel.string = "看视频转转盘";
+            this.lotteryBtnLabel.string = "分享转转盘";
         }
     },
 

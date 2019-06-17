@@ -3,7 +3,7 @@
 var GlobalConst = {};
 
 // 服务器地址
-GlobalConst.URL = "http://123.59.20.141:8081/hulk/test";
+GlobalConst.URL = "https://bhdhkwx.kele55.com/hulk/test";
 
 // 重力系数
 GlobalConst.GRAVITY_SCALE = 8;
@@ -45,5 +45,22 @@ GlobalConst.LOTTERY_TIME = 1200;
 // 最大离线时间(分钟)
 GlobalConst.MAX_OFFLINE = 60;
 
+GlobalConst.TASK_DESC = [
+    ["杀死","<color=#08462d>100</c>只小怪",100],
+    ["邀请","<color=#08462d>1</c>个好友",1],
+    ["收集","<color=#08462d>12</c>个碎片",12],
+];
+
+GlobalConst.SHARE_TITLE = [
+    "铁蜜！任务差0.01%帮不帮一句话。",
+    "这个游戏很难，你不适合，千万别尝试",
+    "震惊！您的朋友全国排名倒数第一。",
+];
+
+GlobalConst.SHARE_IMG = [
+    "share/share1.jpg",
+    "share/share2.jpg",
+    "share/share3.jpg",
+];
 
 module.exports = GlobalConst;

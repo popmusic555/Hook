@@ -1,4 +1,6 @@
 
+var WxAdapter = require("WxAdapter");
+
 cc.Class({
     extends: cc.Component,
 
@@ -16,28 +18,26 @@ cc.Class({
         rewardIcon:cc.Sprite,
         rewardAni:sp.Skeleton,
         // 任务描述Label
-        taskDescLabel:cc.Label,
+        taskDescLabel:cc.RichText,
         // 任务剩余时间
         taskTimesLabel:cc.Label,
         // 任务星级
         taskStar:[cc.Button],
         // 拼图
         jigsaw:cc.Node,
+        content:cc.Node,
 
         // 领取按钮
         receiveBtn:cc.Button,
+        // 分享按钮
+        shareBtn:cc.Button,
         
-        _TaskDesc:null,
         _Timecallback:null,
         
+        _Progress:0,
     },
 
     onLoad () {
-        this._TaskDesc = [
-            "杀死100只小怪",
-            "邀请一个好友",
-            "收集所有的碎片",
-        ];
     },
 
     start () {
@@ -70,6 +70,8 @@ cc.Class({
             }
             // 增加任务奖励
             Global.Model.Game.addRevive(parseInt(resp[1]));
+            var vMain = cc.Camera.main.node.parent.getComponentInChildren("VMain");
+            vMain.refreshTopBar();
             // 切换到下一个任务
             Global.Model.Game.nextTask();
             Global.Model.Game.getTask().state = 0;
@@ -77,18 +79,24 @@ cc.Class({
         }.bind(this));
     },
 
+    onShare:function () {
+        Global.Common.Audio.playEffect("btn1Click" , false);
+        // 分享
+        Global.Model.Game.share(WxAdapter);
+    },
+
     hide:function () {
         this.node.active = false;  
     },
 
     show:function () {
-        this.node.active = true;
-        
         // 任务信息获取
         Global.Common.Http.req("getTasks" , {
             uuid:Global.Model.Game.uuid,
         } , function (resp , url) {
             console.log("Response " , url , resp);
+            this.node.active = true;
+            this.content.active =  true;
             // 任务ID
             var taskId = parseInt(resp[0]) - 1;
             Global.Model.Game.getTask().id = taskId;
@@ -97,17 +105,20 @@ cc.Class({
                 // 目标值
                 // 任务进度
                 Global.Model.Game.setKillNum(parseInt(resp[2]));
+                this._Progress = Global.Model.Game.getKillNum();
             }
             else if (taskId == 1) {
                 // 任务1 邀请一个好友
                 // 目标值
                 // 任务进度
+                this._Progress = parseInt(resp[2]);
             }
             else if (taskId == 2) {
                 // 任务2 收集拼图
                 // 目标值
                 // 任务进度
                 Global.Model.Game.initFragment(parseInt(resp[2]));
+                this._Progress = Global.Model.Game.getFragmentNum();
             }
             // 任务状态
             Global.Model.Game.getTask().state = parseInt(resp[3]);
@@ -144,12 +155,24 @@ cc.Class({
             this.setJigsaw();
         }
         if (this.isFinshTask(this.taskId)) {
+            this.shareBtn.node.active = false;
+            this.receiveBtn.node.active = true;
             // 任务完成 可领取奖励
             this.receiveBtn.interactable = true;
         }
         else
         {
-            this.receiveBtn.interactable = false;
+            if (this.taskId == 1) {
+                this.shareBtn.node.active = true;
+                this.receiveBtn.node.active = false;
+            }
+            else
+            {
+                this.shareBtn.node.active = false;
+                this.receiveBtn.node.active = true;
+                this.receiveBtn.interactable = false;
+            }
+            
         }
     },
 
@@ -175,7 +198,10 @@ cc.Class({
 
     // 设置任务描述
     setTaskDesc:function (taskId) {
-        this.taskDescLabel.string = this._TaskDesc[taskId];
+        var desc = Global.Common.Const.TASK_DESC[taskId];
+        var progress = Math.min(this._Progress , desc[2]);
+        var progressText = "<color=#e6000a>" + progress + "</c>";
+        this.taskDescLabel.string = "任务" + (taskId+1) + "：" + desc[0] + progressText + "/" + "" + desc[1];
     },
 
     // 设置任务剩余时间

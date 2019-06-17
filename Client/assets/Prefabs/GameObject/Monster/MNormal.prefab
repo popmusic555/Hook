@@ -83,7 +83,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -95,7 +94,7 @@
       "__id__": 1
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 6,
     "_components": [
       {
@@ -146,7 +145,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -176,7 +174,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "ebRYqGBrxAFpfRpCGbBOxw"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -248,7 +246,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -291,7 +288,7 @@
     "_position": {
       "__type__": "cc.Vec3",
       "x": 0,
-      "y": 0,
+      "y": -41,
       "z": 0
     },
     "_scale": {
@@ -311,7 +308,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -323,20 +319,33 @@
       "__id__": 6
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
     "paused": false,
     "defaultSkin": "",
     "defaultAnimation": "xg_pt",
+    "_preCacheMode": 0,
+    "_cacheMode": 0,
     "loop": true,
     "premultipliedAlpha": false,
     "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": "xg_pt",
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
     "_N$skeletonData": {
       "__uuid__": "bf1036e0-2baf-42fb-b660-702e433ed4d0"
     },
+    "_N$_defaultCacheMode": 0,
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "57ngL6IKBF7II9zWkVqKNz"
+    "_N$useTint": false,
+    "_N$enableBatch": true,
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -419,7 +428,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -431,20 +439,33 @@
       "__id__": 10
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
     "paused": false,
     "defaultSkin": "",
     "defaultAnimation": "boom_slm",
+    "_preCacheMode": -1,
+    "_cacheMode": 0,
     "loop": true,
     "premultipliedAlpha": false,
     "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": "",
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
     "_N$skeletonData": {
       "__uuid__": "e80681a7-0c78-44e7-bd56-f1a934c3cf16"
     },
+    "_N$_defaultCacheMode": 0,
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "2a186FoK9NIIQu03+5Us9r"
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -479,7 +500,8 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "3fO/MzPplJfo00yaQJzyWP"
+    "awakeOnLoad": true,
+    "_id": ""
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -501,7 +523,7 @@
       "y": 0
     },
     "_radius": 35,
-    "_id": "f6zrXDUp1H+JCbKbXFjnmZ"
+    "_id": ""
   },
   {
     "__type__": "5106cSdVgpPxYkY88iQnbyy",
@@ -539,8 +561,9 @@
       "y": 0
     },
     "_IsUpdate": false,
+    "_IsDeath": false,
     "_Shadow": null,
-    "_id": "75UWbtDF1O3aYlD11VbZEc"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

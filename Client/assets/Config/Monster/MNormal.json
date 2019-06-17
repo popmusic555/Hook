@@ -21,7 +21,7 @@
     "carryEnergy": 1,
     "interval": 0,
     "rate": 100,
-    "max": 30
+    "max": 29
   },
   {
     "passid": 2,
@@ -33,7 +33,7 @@
     "carryEnergy": 1,
     "interval": 0,
     "rate": 100,
-    "max": 30
+    "max": 28
   },
   {
     "passid": 3,
@@ -45,7 +45,7 @@
     "carryEnergy": 1,
     "interval": 0,
     "rate": 100,
-    "max": 30
+    "max": 27
   },
   {
     "passid": 4,
@@ -57,7 +57,7 @@
     "carryEnergy": 1,
     "interval": 0,
     "rate": 100,
-    "max": 30
+    "max": 26
   },
   {
     "passid": 5,
@@ -69,7 +69,7 @@
     "carryEnergy": 1,
     "interval": 0,
     "rate": 100,
-    "max": 30
+    "max": 25
   },
   {
     "passid": 6,
@@ -81,7 +81,7 @@
     "carryEnergy": 1,
     "interval": 0,
     "rate": 100,
-    "max": 30
+    "max": 25
   },
   {
     "passid": 7,
@@ -93,7 +93,7 @@
     "carryEnergy": 1,
     "interval": 0,
     "rate": 100,
-    "max": 30
+    "max": 25
   },
   {
     "passid": 8,
@@ -105,7 +105,7 @@
     "carryEnergy": 1,
     "interval": 0,
     "rate": 100,
-    "max": 30
+    "max": 25
   },
   {
     "passid": 9,
@@ -117,7 +117,7 @@
     "carryEnergy": 1,
     "interval": 0,
     "rate": 100,
-    "max": 30
+    "max": 25
   },
   {
     "passid": 10,
@@ -129,6 +129,6 @@
     "carryEnergy": 1,
     "interval": 0,
     "rate": 100,
-    "max": 30
+    "max": 25
   }
 ]

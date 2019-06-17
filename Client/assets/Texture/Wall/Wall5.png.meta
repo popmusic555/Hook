@@ -2,12 +2,12 @@
   "ver": "2.2.0",
   "uuid": "36492e51-7238-4b3d-b2d4-65841a80e473",
   "type": "sprite",
-  "wrapMode": "clamp",
+  "wrapMode": "repeat",
   "filterMode": "bilinear",
   "premultiplyAlpha": false,
   "subMetas": {
     "Wall5": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "3eab7fc4-f5e7-4bfe-9a63-dab924f01ea7",
       "rawTextureUuid": "36492e51-7238-4b3d-b2d4-65841a80e473",
       "trimType": "custom",

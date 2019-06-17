@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "H85/Ui7RKG10aAtQwvSzxl9OU+o", "spine": "3.6.52", "width": 163.15, "height": 170.35, "images": "" },
+"skeleton": { "hash": "DeNpVpuYjfUptECqiNSXjlySHoU", "spine": "3.6.52", "width": 163.15, "height": 170.35, "images": "" },
 "bones": [
 	{ "name": "root", "scaleX": 0.6, "scaleY": 0.6 },
 	{ "name": "bone7", "parent": "root", "x": 34.25, "y": -80.31 },
@@ -189,6 +189,26 @@
 "animations": {
 	"fashe": {
 		"slots": {
+			"res/_quan2": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/_quan3": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/_quan4": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/lizi_001580": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
 			"res/p5": {
 				"attachment": [
 					{ "time": 0, "name": "res/p5" },
@@ -215,6 +235,91 @@
 					{ "time": 0, "name": "res/p8" },
 					{ "time": 0.5333, "name": null },
 					{ "time": 0.9333, "name": null }
+				]
+			},
+			"res/xian": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian2": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian3": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian4": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian5": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian6": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian7": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian8": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian9": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian10": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian11": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian12": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian13": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian14": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian15": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian16": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian17": {
+				"attachment": [
+					{ "time": 0, "name": null }
 				]
 			}
 		},
@@ -918,6 +1023,26 @@
 	},
 	"idle": {
 		"slots": {
+			"res/_quan2": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/_quan3": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/_quan4": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/lizi_001580": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
 			"res/p8": {
 				"attachment": [
 					{ "time": 0, "name": "res/tou1" },
@@ -932,6 +1057,91 @@
 				"attachment": [
 					{ "time": 0, "name": "res/pao" },
 					{ "time": 1.3333, "name": "res/pao" }
+				]
+			},
+			"res/xian": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian2": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian3": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian4": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian5": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian6": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian7": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian8": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian9": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian10": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian11": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian12": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian13": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian14": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian15": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian16": {
+				"attachment": [
+					{ "time": 0, "name": null }
+				]
+			},
+			"res/xian17": {
+				"attachment": [
+					{ "time": 0, "name": null }
 				]
 			}
 		},

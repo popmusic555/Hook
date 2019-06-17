@@ -25,6 +25,8 @@ cc.Class({
         _IsUpdate:false,
         _IsDeath:false,
 
+        _Tail:null,
+
         // 是否绑定
         _IsBind:false,
 
@@ -34,6 +36,8 @@ cc.Class({
     // onLoad () {},
 
     start () {
+        this._Tail = this.animation.node.parent.getChildByName("Tail");
+
         this._Player = Global.Model.MPlayer.getPlayerObj();
         this.randomRelativeVelocity();
         this._IsUpdate = true;
@@ -44,11 +48,15 @@ cc.Class({
         this._IsBind = true;  
         this.run(this._Player.getVelocity() , this._Player.getGravityScale());
         this.animation.animation = "ljr_hj_run";
+        this._Tail.position = cc.v2(15 , -55);
+        this._Tail.rotation = -80;
     },
 
     unBind:function (notDeath) {
         this._IsBind = false;
         this.animation.animation = "xg_hj_run";
+        this._Tail.position = cc.v2(-28 , -44);
+        this._Tail.rotation = -60;
         if (!notDeath) {
             this.onDeath(this._Player); 
         }
@@ -152,6 +160,7 @@ cc.Class({
     },
 
     showDeathAni:function () {
+        this._Tail.active = false;
         this.animation.node.active = false;
         this.deathAni.node.active = true;
         this.deathAni.animation = "gbl_zd_boom";

@@ -36,6 +36,8 @@ cc.Class({
         _SkillLock:false,
 
         _Recvive:null,
+
+        _Tail:null,
     },
 
     onLoad () {
@@ -72,6 +74,11 @@ cc.Class({
         this._Recvive = {
             recviveAni:recviveAni,
             blinkAni:blinkAni,
+        }
+
+        this._Tail = {
+            tail1:this.animation.node.parent.getChildByName("Tail1"),
+            tail2:this.animation.node.parent.getChildByName("Tail2")
         }
     },
 
@@ -128,6 +135,16 @@ cc.Class({
             this.state = GlobalEnum.P_STATE.NORMAL;
             var speedline = Global.Model.Game.getUIView().getComponentInChildren("Speedline");
             speedline.hide();
+        }
+
+        if (this.animation.getState() == GlobalEnum.P_ANI_STATE.SKILL) {
+            this._Tail.tail1.active = true;
+            this._Tail.tail2.active = true;
+        }
+        else
+        {
+            this._Tail.tail1.active = false;
+            this._Tail.tail2.active = false;
         }
     },
 
@@ -237,7 +254,13 @@ cc.Class({
         //     return false;
         // }
         this.animation.transStateAndLock(GlobalEnum.P_ANI_STATE.HURT);
+        this.onHurtRed();
         // return true;
+    },
+
+    onHurtRed:function () {
+        var hurtRed = Global.Model.Game.getUIView().getComponentInChildren("HurtRed");
+        hurtRed.show();
     },
 
     /**
@@ -477,6 +500,9 @@ cc.Class({
         this.setVelocityY(-2000);
         this.animation.transStateAndLock(GlobalEnum.P_ANI_STATE.SKILL);
         Global.Model.MPlayer.reduceEnergy(Global.Common.Const.ENERGY_RATIO);
+
+        this._Tail.tail1.active = true;
+        this._Tail.tail2.active = true;
     },
     /**
      * 震屏

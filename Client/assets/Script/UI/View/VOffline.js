@@ -1,3 +1,5 @@
+var WxAdapter = require("WxAdapter");
+
 cc.Class({
     extends: cc.Component,
 
@@ -55,6 +57,7 @@ cc.Class({
             this.collectReward(false);
             var vMain = this.node.parent.getComponentInChildren("VMain");
             vMain.refreshTopBar();
+            vMain.refresh();
             this.hide();
         }.bind(this));
     },
@@ -62,20 +65,27 @@ cc.Class({
     onDoubleBtn:function () {
         Global.Common.Audio.playEffect("btn2Click" , false);
         console.log("翻倍收取离线奖励");
-        Global.Common.Http.req("offlineGold" , {
-            uuid:Global.Model.Game.uuid,
-            offlinegold:this.reward * 2,
-            video:1,
-        } , function (resp , url) {
-            var result = parseInt(resp[0]);
-            if (result != 0) {
-                return;
-            }
-            this.collectReward(true);
-            var vMain = this.node.parent.getComponentInChildren("VMain");
-            vMain.refreshTopBar();
-            this.hide();
-        }.bind(this));
+
+        Global.Model.Game.share(WxAdapter);
+        this.scheduleOnce(function () {
+            
+            Global.Common.Http.req("offlineGold" , {
+                uuid:Global.Model.Game.uuid,
+                offlinegold:this.reward * 2,
+                video:1,
+            } , function (resp , url) {
+                var result = parseInt(resp[0]);
+                if (result != 0) {
+                    return;
+                }
+                this.collectReward(true);
+                var vMain = this.node.parent.getComponentInChildren("VMain");
+                vMain.refreshTopBar();
+                vMain.refresh();
+                this.hide();
+            }.bind(this));
+
+        }.bind(this) , 0.5);
     },
 
     onClose:function () {

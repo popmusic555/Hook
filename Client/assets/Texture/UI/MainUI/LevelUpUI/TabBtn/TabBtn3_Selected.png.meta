@@ -7,7 +7,7 @@
   "premultiplyAlpha": false,
   "subMetas": {
     "TabBtn3_Selected": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "a379526e-4594-4733-a23d-39dbb2d973d2",
       "rawTextureUuid": "4a4f16d7-27e5-406c-bfc0-837ab0934a9c",
       "trimType": "custom",
@@ -17,10 +17,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 150,
-      "height": 153,
-      "rawWidth": 150,
-      "rawHeight": 153,
+      "width": 250,
+      "height": 200,
+      "rawWidth": 250,
+      "rawHeight": 200,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

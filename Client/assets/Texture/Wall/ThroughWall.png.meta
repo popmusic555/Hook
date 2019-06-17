@@ -7,7 +7,7 @@
   "premultiplyAlpha": false,
   "subMetas": {
     "ThroughWall": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "bd1a2207-7b9a-4b93-b96a-b3619697e14a",
       "rawTextureUuid": "43a3ccc7-0915-433a-af23-eb3d4056cb68",
       "trimType": "custom",

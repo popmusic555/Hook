@@ -138,6 +138,13 @@ cc.Class({
             // 超时倍数清零
             Global.Model.Game.setLotteryNum(0);
         }
+
+        // 游戏开始消息
+        Global.Common.Http.req("startPlayWX" , {
+            uuid:Global.Model.Game.uuid,
+            userSource:1,
+        }, function (resp , url) {
+        }.bind(this));
     },
 
     // 震屏

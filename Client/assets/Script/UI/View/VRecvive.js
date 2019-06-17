@@ -25,13 +25,16 @@ cc.Class({
     show:function () {
         this.node.active = true;
 
+        var times = Global.Common.Const.RECVIVE_TIMES;
+
         // 设置复活次数
         var recviveNum = Global.Model.Game.revive;
         this.recviveNumLabel.string = recviveNum;
         var isRecvive = false;
-        if (recviveNum <= 0) {
+        if (recviveNum <= 0 || !Global.Model.MPlayer.getRecviveVelocity()) {
             this.recvive.active = false;
             isRecvive = false;
+            times = 1;
         }
         else
         {
@@ -44,8 +47,6 @@ cc.Class({
             mileage:Global.Model.MPlayer.getMileage(),
             recvive:isRecvive,
         });
-
-        var times = Global.Common.Const.RECVIVE_TIMES;
 
         this.unschedule(this._TimeCallback);
         this._TimeCallback = this.onTimes.bind(this);
@@ -67,13 +68,23 @@ cc.Class({
         this.hide();
         // 复活
         console.log("复活");
-        var velocity = Global.Model.MPlayer.getRecviveVelocity();
-        if (!velocity) {
-            return;
-        }
-        Global.Model.MPlayer.setRecviveVelocity(null);
-        var player = Global.Model.MPlayer.getPlayerObj();
-        player.recvive(velocity);
+
+        Global.Common.Http.req("setRestartNum" ,{
+            uuid:Global.Model.Game.uuid,
+        } , function (resp , url) {
+            var result = parseInt(resp[0]);
+            if (result != 0) {
+                return;
+            }
+            Global.Model.Game.setRevive(parseInt(resp[1]));
+            var velocity = Global.Model.MPlayer.getRecviveVelocity();
+            if (!velocity) {
+                return;
+            }
+            Global.Model.MPlayer.setRecviveVelocity(null);
+            var player = Global.Model.MPlayer.getPlayerObj();
+            player.recvive(velocity);
+        }.bind(this));
     },
 
     showTimes:function (times) {

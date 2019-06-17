@@ -1,14 +1,16 @@
 {
-"skeleton": { "hash": "S7hr2mPoNYHquIp+rS4TDALY3mA", "spine": "3.6.52", "width": 101.34, "height": 91.2, "images": "./res/" },
+"skeleton": { "hash": "HHLod1iH1nlh1n8uANwBouoMD74", "spine": "3.6.52", "width": 107.36, "height": 95.54, "images": "./res/" },
 "bones": [
-	{ "name": "root", "scaleX": 0.6, "scaleY": 0.6 },
-	{ "name": "bone", "parent": "root", "y": -67.16 },
+	{ "name": "root" },
+	{ "name": "bone", "parent": "root", "scaleX": 0.6, "scaleY": 0.6 },
 	{ "name": "bone2", "parent": "bone", "length": 28.2, "rotation": -62.53, "x": 37.29, "y": 73.05 },
 	{ "name": "bone4", "parent": "bone", "length": 22, "rotation": -63.5, "x": -7.39, "y": 64.44 },
 	{ "name": "bone3", "parent": "bone4", "length": 26.44, "rotation": 10.78, "x": 23.64, "y": 0.3 },
-	{ "name": "bone5", "parent": "bone2", "length": 27.71, "rotation": 14.14, "x": 29.19, "y": 0.1 }
+	{ "name": "bone5", "parent": "bone2", "length": 27.71, "rotation": 14.14, "x": 29.19, "y": 0.1 },
+	{ "name": "yingzi", "parent": "bone" }
 ],
 "slots": [
+	{ "name": "yingzi", "bone": "yingzi", "attachment": "yingzi" },
 	{ "name": "g2", "bone": "bone5", "attachment": "g02_01" },
 	{ "name": "g02", "bone": "bone", "attachment": "g02_02" },
 	{ "name": "g3", "bone": "bone3", "attachment": "g02_03" }
@@ -50,6 +52,9 @@
 				"width": 56,
 				"height": 61
 			}
+		},
+		"yingzi": {
+			"yingzi": { "scaleX": 1.398, "scaleY": 1.398, "width": 128, "height": 23 }
 		}
 	}
 },

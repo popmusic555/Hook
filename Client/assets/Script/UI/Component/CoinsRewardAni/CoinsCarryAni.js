@@ -22,7 +22,7 @@ cc.Class({
         this.show();
     },
 
-    show:function () {
+    show:function (callback) {
         // 金币收取动画显示
         var node = new cc.Node();            
         var sprite = node.addComponent(cc.Sprite);
@@ -44,6 +44,7 @@ cc.Class({
         var action2 = cc.repeat(cc.sequence(cc.rotateBy(0.05 , 10) , cc.rotateBy(0.05 , -10) , cc.rotateBy(0.05 , -10) , cc.rotateBy(0.05 , 10)) , 2);
         var action3 = cc.removeSelf(true);
         node.runAction(cc.sequence(action1 , action2 , cc.delayTime(0.2) , cc.callFunc(function () {
+            callback();
             Global.Common.Audio.playEffect("mCoins" , false);
             var len = 15;
             for (let index = 0; index < len; index++) {

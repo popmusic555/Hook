@@ -36,7 +36,11 @@ cc.Class({
 
     onVideoBtn:function () {
         Global.Common.Audio.playEffect("btn1Click" , false);
-        this.double(this.coins);
+        Global.Model.Game.share(WxAdapter);
+        this.scheduleOnce(function () {
+            this.double(this.coins);
+        }.bind(this) , 0.5);
+        
     },
 
     onContinueBtn:function () {
@@ -141,16 +145,16 @@ cc.Class({
             }.bind(this),
         });
 
-        if (Global.Model.MPlayer.isCross && Global.Model.Game.getLevelByItemID(7) < 0) {
+        if (Global.Model.MPlayer.gamedata.isCross && Global.Model.Game.getLevelByItemID(7) < 0) {
             this.unLockItem(reqList , 7);
         }
-        if (Global.Model.MPlayer.isKillJump && Global.Model.Game.getLevelByItemID(9) < 0) {
+        if (Global.Model.MPlayer.gamedata.isKillJump && Global.Model.Game.getLevelByItemID(9) < 0) {
             this.unLockItem(reqList , 9);
         }
-        if (Global.Model.MPlayer.isKillEnergy && Global.Model.Game.getLevelByItemID(10) < 0) {
+        if (Global.Model.MPlayer.gamedata.isKillEnergy && Global.Model.Game.getLevelByItemID(10) < 0) {
             this.unLockItem(reqList , 10);
         }
-        if (Global.Model.MPlayer.isKillPlane && Global.Model.Game.getLevelByItemID(11) < 0) {
+        if (Global.Model.MPlayer.gamedata.isKillPlane && Global.Model.Game.getLevelByItemID(11) < 0) {
             this.unLockItem(reqList , 11);
         }
 

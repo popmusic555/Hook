@@ -245,7 +245,10 @@ MGame.initFriend = function (list) {
         if (state == 1) {
             friend.isReward = true;
         }
-        this.friend[index] = friend;        
+
+        if (friend.id != 0) {
+            this.friend[index] = friend;    
+        }
     }
 }
 
@@ -257,6 +260,23 @@ MGame.initFriend = function (list) {
 MGame.getFriend = function () {
     return this.friend;
 }
+
+/**
+ * 获取已邀请好友奖励数据
+ * 
+ * @returns 
+ */
+MGame.getFriendReward = function () {
+    var result = [];
+    for (let i = 0; i < this.friend.length; i++) {
+        const item = this.friend[i];
+        if (!item.isReward) {
+            result.push(item);
+        }
+    }
+    return result;
+}
+
 /**
  * 设置离线时间
  * 
@@ -307,6 +327,10 @@ MGame.setRevive = function (num) {
  */
 MGame.addRevive = function (num) {
     this.setRevive(this.revive + num);
+}
+
+MGame.reduceRecvive = function (num) {
+    this.setRevive(this.revive - num);
 }
 
 /**
@@ -575,6 +599,16 @@ MGame.resumeGame = function () {
 
 MGame.setResumeNode = function (nodes) {
     this._ResumeNode = nodes;
+}
+
+MGame.share = function (WxAdapter) {
+    var num = Global.Common.Utils.random(0 , 2);
+    
+    var title = Global.Common.Const.SHARE_TITLE[num];
+    var img = Global.Common.Const.SHARE_IMG[num];
+    var query = "uuid=" + this.uuid;
+
+    WxAdapter.openShare(title , img , query);
 }
 
 module.exports = MGame;

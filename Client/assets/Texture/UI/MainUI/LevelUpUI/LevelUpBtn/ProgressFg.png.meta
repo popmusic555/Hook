@@ -7,7 +7,7 @@
   "premultiplyAlpha": false,
   "subMetas": {
     "ProgressFg": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "03faae1e-a966-489d-9b4f-e711e1f2dece",
       "rawTextureUuid": "3bb9a019-23f5-4392-bd54-8ae8535c5dba",
       "trimType": "auto",
@@ -17,10 +17,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 121,
-      "height": 17,
-      "rawWidth": 121,
-      "rawHeight": 17,
+      "width": 116,
+      "height": 12,
+      "rawWidth": 116,
+      "rawHeight": 12,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 10,

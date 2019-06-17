@@ -29,6 +29,8 @@ cc.Class({
     onCloseBtn:function () {
         Global.Common.Audio.playEffect("btn1Click" , false);
         this.hide();
+        var vMain = this.node.parent.getComponentInChildren("VMain");
+        vMain.showRedDot();
     },
 
     hide:function () {
@@ -52,8 +54,6 @@ cc.Class({
                 this.refreshItem(item , this._Datas , index);
             }
         }.bind(this));
-        
-        
     },
 
     refreshItem:function (item , datas , index) {
@@ -63,24 +63,26 @@ cc.Class({
             if (data.isReward) {
                 // 已领取状态
                 friendItem.setState(0);
-                friendItem.setHeadIcon("");
+                friendItem.setHeadIcon(data.headicon);
             }
             else
             {
                 // 领取状态
                 friendItem.setState(1);
-                friendItem.setHeadIcon("");
+                friendItem.setHeadIcon(data.headicon);
             }
         }
         else if (index == datas.length)
         {
             // 去邀请状态
             friendItem.setState(2);
+            friendItem.setHeadIcon(null);
         }
         else
         {
             // 未邀请状态
             friendItem.setState(3);
+            friendItem.setHeadIcon(null);
         }
         friendItem.setIndex(index);
         friendItem.setRewardNum(this._RewardData[index]);

@@ -7,7 +7,7 @@
   "premultiplyAlpha": false,
   "subMetas": {
     "TopBarBg1": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "1366e28e-5eb2-4a61-a7a1-5025555557b1",
       "rawTextureUuid": "11880789-da76-4100-a496-3057b34d51a8",
       "trimType": "custom",
@@ -17,9 +17,9 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 773,
+      "width": 746,
       "height": 68,
-      "rawWidth": 773,
+      "rawWidth": 746,
       "rawHeight": 68,
       "borderTop": 0,
       "borderBottom": 0,

@@ -76,4 +76,11 @@ GlobalEnum.P_STATE = new cc.Enum({
     SPEED:2,
 });
 
+GlobalEnum.REDDOT_TYPE = new cc.Enum({
+    // 好友
+    FRIEND:10,
+    // 轮盘
+    LOTTERY:11,
+});
+
 module.exports = GlobalEnum;

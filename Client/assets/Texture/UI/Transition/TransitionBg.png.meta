@@ -7,7 +7,7 @@
   "premultiplyAlpha": false,
   "subMetas": {
     "TransitionBg": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "40242806-4bc1-4b15-8c7c-9b991b767465",
       "rawTextureUuid": "231547b5-2ec6-4cd1-a8c6-823de0dd9c8b",
       "trimType": "custom",
@@ -17,14 +17,14 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 2417,
+      "width": 1693,
       "height": 750,
-      "rawWidth": 2417,
+      "rawWidth": 1693,
       "rawHeight": 750,
       "borderTop": 0,
       "borderBottom": 0,
-      "borderLeft": 0,
-      "borderRight": 0,
+      "borderLeft": 810,
+      "borderRight": 750,
       "subMetas": {}
     }
   }

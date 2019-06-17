@@ -28,8 +28,8 @@ WxAdapter.login = function (timeout , callback) {
         success:function (res) {
             callback("success" , res.code);
         },
-        fail:function () {
-            callback("fail" , res.errMsg);
+        fail:function (res) {
+            callback("fail",res.code);
         },
         complete:function () {
             callback("complete");
@@ -227,8 +227,18 @@ WxAdapter.onOpenDataMsg = function (callback) {
  *
  * @param {*} callback 回调
  */
-WxAdapter.openVideo = function (callback) {
-    
+WxAdapter.openVideo = function () {
+    if (!WxAdapter.isWeChat()) {
+        return;
+    }
+}
+
+WxAdapter.createVideo = function (adUnitId) {
+    if (!WxAdapter.isWeChat()) {
+        return;
+    }
+
+    wx.createRewardedVideoAd({adUnitId:adUnitId});
 }
 
 /**
@@ -236,8 +246,24 @@ WxAdapter.openVideo = function (callback) {
  *
  * @param {*} callback 回调
  */
-WxAdapter.openShare = function (callback) {
-    
+WxAdapter.openShare = function (title , img , query) {
+    if (!WxAdapter.isWeChat()) {
+        return;
+    }
+    wx.shareAppMessage({
+        title:title,
+        imageUrl:img,
+        query:query,
+    });
+}
+
+WxAdapter.getOptions = function () {
+    if (!WxAdapter.isWeChat()) {
+        return;
+    }
+
+    var result = wx.getLaunchOptionsSync();
+    return result;
 }
 
 module.exports = WxAdapter;

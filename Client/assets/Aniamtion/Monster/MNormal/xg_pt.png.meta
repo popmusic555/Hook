@@ -7,7 +7,7 @@
   "premultiplyAlpha": false,
   "subMetas": {
     "xg_pt": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "bf3f5156-6a51-4313-ad16-6aaccc002518",
       "rawTextureUuid": "6023c495-51a4-459c-92b2-582bc6492ad5",
       "trimType": "auto",
@@ -18,9 +18,9 @@
       "trimX": 2,
       "trimY": 2,
       "width": 222,
-      "height": 152,
+      "height": 177,
       "rawWidth": 226,
-      "rawHeight": 156,
+      "rawHeight": 181,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

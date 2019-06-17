@@ -24,7 +24,7 @@
       }
     ],
     "_active": true,
-    "_level": 4,
+    "_level": 3,
     "_components": [
       {
         "__id__": 26
@@ -314,7 +314,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "daGG1WhNxCiZqejMCVyhtV"
+    "_id": "0dtuNbrCZGE6uDhNxw4Gvr"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -416,7 +416,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "bcsLpesrdME6yZP4BvB6LR"
+    "_id": "53gULXWZ9G3b1jeaT5o7jy"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -595,7 +595,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "2dEkrWmjZAUYJuK3gI15d6"
+    "_id": "96q3q/ZDRBpKYKZt7fh2aP"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -697,7 +697,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "fd3ermCk5MTJRNWZWqteBu"
+    "_id": "0cgN+K4J5Pw7l3z4oEvqHU"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -810,7 +810,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "520V8y9CJH0IncLxU+nETm"
+    "_id": "6f9hOWpKVOzZjKeSAIuBDp"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -923,7 +923,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "758Pnz25tIPaeHLujYamB0"
+    "_id": "98lxcKjspFMLxtBgcF7yMe"
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -958,7 +958,7 @@
     "_fixedRotation": false,
     "enabledContactListener": false,
     "bullet": false,
-    "_id": "c2Kcifv6hHlorslgFDZaDl"
+    "_id": "6fnEKO2KVB6KOChIujujYz"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -984,7 +984,7 @@
       "width": 200,
       "height": 6000
     },
-    "_id": "9cPJJliSlFfZTME4BoNZ0D"
+    "_id": "9bDNHZnqlIN4htaCCMHuT/"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -1010,7 +1010,7 @@
       "width": 210,
       "height": 6000
     },
-    "_id": "be2LXkprhFipnw+FsNFkNa"
+    "_id": "3aTbM6dPRFG70ycXSj9Gtj"
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -1036,7 +1036,7 @@
       "width": 300,
       "height": 6000
     },
-    "_id": "13WJDygWFKcKaMbDztCo9F"
+    "_id": "70rnStftFOiaTlaFlpORnj"
   },
   {
     "__type__": "5131cdWhStKOpKI8xeQ0Kim",
@@ -1069,7 +1069,8 @@
       "__id__": 20
     },
     "_PassID": 0,
-    "_id": "04WMvQLRtIPKyr4ziYCnoh"
+    "_PassPosX": -1,
+    "_id": "60/2uLHvRD+KFoDMaInpI4"
   },
   {
     "__type__": "cc.PrefabInfo",

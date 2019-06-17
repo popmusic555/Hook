@@ -7,7 +7,7 @@
   "premultiplyAlpha": false,
   "subMetas": {
     "LevelUpIcon3": {
-      "ver": "1.0.3",
+      "ver": "1.0.4",
       "uuid": "5f33ea70-b49b-4ab7-a65d-0180bc5d4566",
       "rawTextureUuid": "180d6da0-59ed-47c9-9bdb-9e820f2a1704",
       "trimType": "custom",
@@ -17,10 +17,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 154,
-      "height": 169,
-      "rawWidth": 154,
-      "rawHeight": 169,
+      "width": 183,
+      "height": 177,
+      "rawWidth": 183,
+      "rawHeight": 177,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,
