@@ -1,3 +1,6 @@
+
+var RemoteSprite = require("RemoteSprite");
+
 cc.Class({
     extends: cc.Component,
 
@@ -5,9 +8,10 @@ cc.Class({
         rankIconRes:[cc.SpriteFrame],
 
         rankIcon:cc.Sprite,
-        headIcon:cc.Sprite,
+        headIcon:RemoteSprite,
         nameLabel:cc.Label,
         contentLabel:cc.Label,
+        
 
         _Data:null,
     },
@@ -27,7 +31,8 @@ cc.Class({
             rankIconRes = this.rankIconRes[rankNum];
         }
         this.rankIcon.spriteFrame = rankIconRes;
-        this.nameLabel.string = this._Data.nickName;
+        this.nameLabel.string = this._Data.nickname;
+        this.headIcon.setUrl(this._Data.avatarUrl , cc.size(96,96));
         if (content || content == 0) {
             this.contentLabel.string = content;    
         }

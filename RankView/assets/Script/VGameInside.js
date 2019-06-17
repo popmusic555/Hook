@@ -1,10 +1,14 @@
 
+var RemoteSprite = require("RemoteSprite");
+
 cc.Class({
     extends: cc.Component,
 
     properties: {
         leftView:cc.Node,
         rightView:cc.Node,
+        // 玩家头像
+        headIcon:RemoteSprite,
         // 即将超越图标
         transcendIcon:cc.Sprite,
         // 霸榜图标
@@ -33,12 +37,14 @@ cc.Class({
             // 获取到即将超越的用户
             this.transcendIcon.node.active = true;
             this.fristIcon.node.active = false;
+            this.headIcon.setUrl(transcend.avatarUrl , cc.size(96,96));
         }
         else
         {  
             // 未获取到即将超越的用户 当前用户第一
             this.transcendIcon.node.active = false;
             this.fristIcon.node.active = true;
+            this.headIcon.setUrl(this._Datas[this._Datas.length-1].avatarUrl , cc.size(96,96));
         }
 
         if (recvive) 

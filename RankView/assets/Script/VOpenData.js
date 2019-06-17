@@ -15,6 +15,7 @@ cc.Class({
 		
 		_NickName:null,
 		_AvatarUrl:null,
+        _OpenID:null,
 		
         _Datas:null,
     },
@@ -36,6 +37,7 @@ cc.Class({
 		if (cmd == "setUserInfo") {
 			this._NickName = msg.nickName;
 			this._AvatarUrl = msg.avatarUrl;
+            this._OpenID = msg.openid;
             this.requestFriendData(function (datas) {
                 this._Datas = datas;
                 console.log("requestFriendData" , this._Datas);
@@ -73,7 +75,7 @@ cc.Class({
                 return;
             }
             var newData = {};
-            newData.nickName = nickName;                
+            newData.nickname = nickName;                
             newData.avatarUrl = avatarUrl;
             for (var i = 0; i < this._KeyList.length; i++) {
                 newData[this._KeyList[i]] = 0;
@@ -96,19 +98,21 @@ cc.Class({
                 var friendDatasLen = friendDatas.length;
                 for (let index = 0; index < friendDatasLen; index++) {
                     var friendData = friendDatas[index];
-                    var newData = {};
-                    newData.nickName = friendData.nickname;                
-                    newData.avatarUrl = friendData.avatarUrl;
-                    for (var i = 0; i < this._KeyList.length; i++) {
-                        newData[this._KeyList[i]] = 0;
+                    if (this._OpenID != friendData.openid) {
+                        var newData = {};
+                        newData.nickname = friendData.nickname;                
+                        newData.avatarUrl = friendData.avatarUrl;
+                        for (var i = 0; i < this._KeyList.length; i++) {
+                            newData[this._KeyList[i]] = 0;
+                        }
+                        var len = friendData.KVDataList.length;
+                        for (let i = 0; i < len; i++) {
+                            var data = friendData.KVDataList[i];
+                            newData[data.key] = parseInt(data.value);
+                        }
+                        newData.isMe = false;
+                        datas.push(newData);
                     }
-                    var len = friendData.KVDataList.length;
-                    for (let i = 0; i < len; i++) {
-                        var data = friendData.KVDataList[i];
-                        newData[data.key] = parseInt(data.value);
-                    }
-                    newData.isMe = false;
-                    datas.push(newData);
                 }
 
                 callback(datas);
