@@ -1,22 +1,22 @@
 {
-"skeleton": { "hash": "ve1WLolq2IgRtawMbUhyeQudNzo", "spine": "3.6.52", "width": 284, "height": 153.44, "images": "./res/" },
+"skeleton": { "hash": "zKqw+5q9MbgE24I01YT7tQrn+Fo", "spine": "3.6.52", "width": 324.65, "height": 153.44, "images": "./res/" },
 "bones": [
 	{ "name": "root", "scaleX": 0.6, "scaleY": 0.6 },
-	{ "name": "bone", "parent": "root", "x": -191.76, "y": -86.45, "scaleX": -1.224, "scaleY": 1.228 },
+	{ "name": "bone", "parent": "root", "x": -221.49, "y": -60.43, "scaleX": -1.832, "scaleY": 1.838 },
 	{ "name": "car", "parent": "root" },
 	{ "name": "lunzi01", "parent": "root", "x": -87, "y": -65 },
 	{ "name": "lunzi02", "parent": "root", "x": 103, "y": -96 }
 ],
 "slots": [
-	{ "name": "23", "bone": "car", "attachment": "23" },
+	{ "name": "23", "bone": "car", "attachment": "20" },
 	{ "name": "25", "bone": "lunzi01", "attachment": "25" },
 	{ "name": "24", "bone": "lunzi02", "attachment": "24" },
-	{ "name": "yan_0001", "bone": "bone", "attachment": "yan_0007" }
+	{ "name": "yan_0001", "bone": "bone", "attachment": "yan_0005" }
 ],
 "skins": {
 	"default": {
 		"23": {
-			"23": { "width": 401, "height": 241 },
+			"20": { "width": 401, "height": 241 },
 			"g05": { "y": -48.59, "width": 321, "height": 171 }
 		},
 		"24": {
@@ -27,8 +27,8 @@
 		},
 		"yan_0001": {
 			"yan_0001": { "width": 130, "height": 80 },
-			"yan_0002": { "width": 130, "height": 80 },
-			"yan_0003": { "width": 130, "height": 80 },
+			"yan_0002": { "x": 1.07, "width": 130, "height": 80 },
+			"yan_0003": { "x": 2.67, "width": 130, "height": 80 },
 			"yan_0004": { "width": 130, "height": 80 },
 			"yan_0005": { "width": 130, "height": 80 },
 			"yan_0006": { "width": 130, "height": 80 },
@@ -65,7 +65,7 @@
 		"slots": {
 			"23": {
 				"attachment": [
-					{ "time": 0, "name": "23" }
+					{ "time": 0, "name": "20" }
 				]
 			},
 			"24": {
@@ -89,8 +89,8 @@
 		"slots": {
 			"23": {
 				"attachment": [
-					{ "time": 0, "name": "23" },
-					{ "time": 0.5, "name": "23" }
+					{ "time": 0, "name": "20" },
+					{ "time": 0.5, "name": "20" }
 				]
 			},
 			"24": {
@@ -122,9 +122,9 @@
 		"bones": {
 			"car": {
 				"translate": [
-					{ "time": 0, "x": 0, "y": -1.74 },
-					{ "time": 0.2333, "x": 0, "y": 3.49 },
-					{ "time": 0.5, "x": 0, "y": -1.74 }
+					{ "time": 0, "x": 0, "y": -4.69 },
+					{ "time": 0.2333, "x": 0, "y": 7.91 },
+					{ "time": 0.5, "x": 0, "y": -4.69 }
 				]
 			}
 		}

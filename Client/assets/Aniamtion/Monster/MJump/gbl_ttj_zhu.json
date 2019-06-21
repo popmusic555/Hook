@@ -1,16 +1,16 @@
 {
-"skeleton": { "hash": "JgbrSiz8WKrEcgqSnLMfgHsfVmY", "spine": "3.6.52", "width": 130.2, "height": 169.8, "images": "" },
+"skeleton": { "hash": "QJDnOZ2C9Yg0K/bpT9mnXws+u6k", "spine": "3.6.52", "width": 130.2, "height": 169.8, "images": "" },
 "bones": [
 	{ "name": "root", "scaleX": 0.6, "scaleY": 0.6 },
 	{ "name": "zhap", "parent": "root" }
 ],
 "slots": [
-	{ "name": "res/blz", "bone": "zhap", "attachment": "res/21" }
+	{ "name": "res/blz", "bone": "zhap", "attachment": "res/21 (2)" }
 ],
 "skins": {
 	"default": {
 		"res/blz": {
-			"res/21": { "width": 217, "height": 283 },
+			"res/21 (2)": { "width": 217, "height": 283 },
 			"res/g06": { "width": 174, "height": 213 }
 		}
 	}
@@ -29,7 +29,7 @@
 		"slots": {
 			"res/blz": {
 				"attachment": [
-					{ "time": 0, "name": "res/21" }
+					{ "time": 0, "name": "res/21 (2)" }
 				]
 			}
 		}

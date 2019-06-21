@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.5140569133280318,
-      "y": 0.5140569133280318,
+      "x": 0.474128309729064,
+      "y": 0.474128309729064,
       "z": 1
     },
     "_quat": {
@@ -2759,7 +2759,7 @@
         "__id__": 208
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 4,
     "_components": [
       {
@@ -6223,8 +6223,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 98,
-      "height": 99
+      "width": 103,
+      "height": 104
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -6894,8 +6894,8 @@
     "target": {
       "__id__": 5
     },
-    "component": "VMain",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "3cb87r3T9JNiJs5z3AKXSam",
     "handler": "onSwitchLevelUpItem",
     "customEventData": "4"
   },
@@ -16491,7 +16491,7 @@
         "__id__": 369
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 4,
     "_components": [
       {
@@ -21703,8 +21703,8 @@
     "target": {
       "__id__": 5
     },
-    "component": "VMain",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "3cb87r3T9JNiJs5z3AKXSam",
     "handler": "onSwitchTab",
     "customEventData": "0"
   },
@@ -39180,8 +39180,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_string": "        欢迎来到来到崩坏浩克的世界，让我们丢掉压力，来个痛快的破坏之旅吧！更有实物大奖等你来拿！还等什么，一起来砸，砸，砸！",
-    "_N$string": "        欢迎来到来到崩坏浩克的世界，让我们丢掉压力，来个痛快的破坏之旅吧！更有实物大奖等你来拿！还等什么，一起来砸，砸，砸！",
+    "_string": "        欢迎来到来到狂扁史莱姆的世界，让我们丢掉压力，来个痛快的破坏之旅吧！更有实物大奖等你来拿！还等什么，一起来砸，砸，砸！",
+    "_N$string": "        欢迎来到来到狂扁史莱姆的世界，让我们丢掉压力，来个痛快的破坏之旅吧！更有实物大奖等你来拿！还等什么，一起来砸，砸，砸！",
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -41158,7 +41158,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 2417,
+      "width": 1693,
       "height": 750
     },
     "_anchorPoint": {

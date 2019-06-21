@@ -1,5 +1,5 @@
 {
-"skeleton": { "hash": "1+SI1y/jroivN0QjLkPzhyPQWWI", "spine": "3.6.52", "width": 159.9, "height": 217.31, "images": "./res/" },
+"skeleton": { "hash": "twpNFFu8SGAvokPg4NsNQiwpn9c", "spine": "3.6.52", "width": 159.9, "height": 217.31, "images": "./res/" },
 "bones": [
 	{ "name": "root", "scaleX": 0.6, "scaleY": 0.6 },
 	{ "name": "zhuti", "parent": "root" },
@@ -15,12 +15,12 @@
 	{ "name": "fd_6", "bone": "bone5", "attachment": "fd_05" },
 	{ "name": "fd_7", "bone": "bone6", "attachment": "fd_05" },
 	{ "name": "fd_3", "bone": "bone2", "attachment": "fd_01" },
-	{ "name": "fd_03", "bone": "zhuti", "attachment": "fd_03" }
+	{ "name": "fd_03", "bone": "zhuti", "attachment": "19" }
 ],
 "skins": {
 	"default": {
 		"fd_03": {
-			"fd_03": { "width": 247, "height": 291 },
+			"19": { "width": 247, "height": 291 },
 			"g04": { "width": 198, "height": 232 }
 		},
 		"fd_3": {
@@ -45,8 +45,8 @@
 		"slots": {
 			"fd_03": {
 				"attachment": [
-					{ "time": 0, "name": "fd_03" },
-					{ "time": 1, "name": "fd_03" }
+					{ "time": 0, "name": "19" },
+					{ "time": 1, "name": "19" }
 				]
 			},
 			"fd_6": {

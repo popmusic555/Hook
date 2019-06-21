@@ -88,7 +88,7 @@ res/hurt2
   orig: 229, 169
   offset: 0, 0
   index: -1
-res/impact 
+res/impact
   rotate: true
   xy: 1158, 39
   size: 175, 205

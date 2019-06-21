@@ -83,7 +83,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -146,7 +145,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -176,7 +174,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "91NnEZBndBTJowtw45zy2/"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -251,7 +249,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -287,7 +284,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 284,
+      "width": 324.65,
       "height": 153.44
     },
     "_anchorPoint": {
@@ -318,7 +315,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -384,7 +380,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -447,7 +442,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -477,7 +471,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "8a5dEGyzpGWZx435kI5Rpb"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -549,7 +543,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -579,7 +572,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "8aGM1D2sFJ5qasoEFqhDku"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -611,20 +604,33 @@
       "__id__": 6
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
     "paused": false,
     "defaultSkin": "",
     "defaultAnimation": "car_gbl_run",
+    "_preCacheMode": 0,
+    "_cacheMode": 0,
     "loop": true,
     "premultipliedAlpha": false,
     "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": "car_gbl_run",
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
     "_N$skeletonData": {
       "__uuid__": "9d12e018-feae-48e7-8731-8c3dcad61933"
     },
+    "_N$_defaultCacheMode": 0,
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "4a/JsMGO5CFKoN/xD1BSEu"
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -696,7 +702,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -716,6 +721,9 @@
     },
     "_spriteFrame": {
       "__uuid__": "e80b66cf-491c-42b2-98a1-443a744dae40"
+    },
+    "_texture": {
+      "__uuid__": "b01711d7-7922-4b97-befb-6edf4083f06c"
     },
     "_stopped": true,
     "playOnLoad": true,
@@ -794,7 +802,7 @@
     "rotatePerS": 0,
     "rotatePerSVar": 0,
     "_N$preview": true,
-    "_id": "7cWZrYQuxC1KC55pvSHS8a"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -877,7 +885,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -889,20 +896,33 @@
       "__id__": 21
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
     "paused": false,
     "defaultSkin": "",
     "defaultAnimation": "gbl_zd_boom",
+    "_preCacheMode": -1,
+    "_cacheMode": 0,
     "loop": false,
     "premultipliedAlpha": false,
     "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": "",
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
     "_N$skeletonData": {
       "__uuid__": "1189e0a5-7601-4232-87e1-781270ac5f64"
     },
+    "_N$_defaultCacheMode": 0,
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "a2DgEJ2XdGi61saacqwcl2"
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -937,7 +957,8 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "acoJ0P3QhMbbaTfIWYRuIS"
+    "awakeOnLoad": true,
+    "_id": ""
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -963,7 +984,7 @@
       "width": 160,
       "height": 70
     },
-    "_id": "51wbty8thOMZ6Da83IHgac"
+    "_id": ""
   },
   {
     "__type__": "5c120znmmpFKqKh7vGAGOPC",
@@ -1013,7 +1034,7 @@
     "_Duration": 0,
     "_MeterSpeed": 0,
     "_CurSound": 0,
-    "_id": "33Kj/KiapCTYftsB5pGHHg"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

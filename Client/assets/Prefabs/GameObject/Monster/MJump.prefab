@@ -86,7 +86,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -149,7 +148,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -179,7 +177,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "ff1f3ZVDVBjKFU+R9ZBG7C"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -251,7 +249,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -324,7 +321,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -387,7 +383,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -450,7 +445,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -462,20 +456,33 @@
       "__id__": 8
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
     "paused": false,
     "defaultSkin": "",
     "defaultAnimation": "gbl_ttj_run1",
+    "_preCacheMode": 0,
+    "_cacheMode": 0,
     "loop": true,
     "premultipliedAlpha": false,
     "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": "gbl_ttj_run1",
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
     "_N$skeletonData": {
       "__uuid__": "952abaff-85f9-4f35-8ead-e16445cb6061"
     },
+    "_N$_defaultCacheMode": 0,
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "ffEFKPZvhMzJDh612HzWcE"
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -521,7 +528,8 @@
     "_fixedRotation": false,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "22EqicXm5Fm5jWXGdToeWL"
+    "awakeOnLoad": true,
+    "_id": ""
   },
   {
     "__type__": "cc.PhysicsBoxCollider",
@@ -547,7 +555,7 @@
       "width": 70,
       "height": 30
     },
-    "_id": "18DjnBfXtO9IQzyjPUiuYa"
+    "_id": ""
   },
   {
     "__type__": "86ff2D6xS5Ctb1P5l2uA5W6",
@@ -566,7 +574,7 @@
       "__id__": 1
     },
     "_Jump": null,
-    "_id": "77YhrJuTJGy42osT+UImOT"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -649,7 +657,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -712,7 +719,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -724,20 +730,33 @@
       "__id__": 18
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
     "paused": false,
     "defaultSkin": "",
     "defaultAnimation": "gbl_ttj_zhuti",
+    "_preCacheMode": 0,
+    "_cacheMode": 0,
     "loop": true,
     "premultipliedAlpha": false,
     "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": "gbl_ttj_zhuti",
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
     "_N$skeletonData": {
       "__uuid__": "b48b5b43-b4ea-4e75-ab93-1abbf614022a"
     },
+    "_N$_defaultCacheMode": 0,
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "51/5orIYlOGpgAwhdX2LHZ"
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -820,7 +839,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -832,20 +850,33 @@
       "__id__": 22
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
     "paused": false,
     "defaultSkin": "",
     "defaultAnimation": "gbl_zd_boom",
+    "_preCacheMode": -1,
+    "_cacheMode": 0,
     "loop": false,
     "premultipliedAlpha": false,
     "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": "",
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
     "_N$skeletonData": {
       "__uuid__": "1189e0a5-7601-4232-87e1-781270ac5f64"
     },
+    "_N$_defaultCacheMode": 0,
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "a1TBgBztxCGZnAWTMmX7Bb"
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -880,7 +911,8 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "c7cuS6UlBAoJY63oExeySs"
+    "awakeOnLoad": true,
+    "_id": ""
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -902,7 +934,7 @@
       "y": 45
     },
     "_radius": 55,
-    "_id": "2dhbhE10tM6rXQ9xk5VwNZ"
+    "_id": ""
   },
   {
     "__type__": "1a6a12fzrFPoZ+w5aK2djZV",
@@ -950,7 +982,7 @@
     "_isSkill": false,
     "_Fist": null,
     "_SkillLock": false,
-    "_id": "6cGn62t2xNeoeO4zMFCthG"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

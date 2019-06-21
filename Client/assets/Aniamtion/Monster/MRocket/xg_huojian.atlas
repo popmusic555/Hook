@@ -4,7 +4,7 @@ size: 214,437
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
-18
+18 (2)
   rotate: false
   xy: 2, 186
   size: 179, 249

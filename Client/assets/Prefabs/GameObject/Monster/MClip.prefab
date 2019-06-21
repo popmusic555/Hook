@@ -27,7 +27,7 @@
       }
     ],
     "_active": true,
-    "_level": 2,
+    "_level": 5,
     "_components": [
       {
         "__id__": 13
@@ -83,7 +83,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -146,7 +145,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -176,7 +174,7 @@
     "_isTrimmedMode": true,
     "_state": 0,
     "_atlas": null,
-    "_id": "91Q/I/9ixF4JGdU+cxGnr9"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -248,7 +246,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -280,8 +277,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 151.8,
-      "height": 121.88
+      "width": 149.4,
+      "height": 142.2
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -311,7 +308,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -323,20 +319,33 @@
       "__id__": 6
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
     "paused": false,
     "defaultSkin": "",
     "defaultAnimation": "xg_srh",
+    "_preCacheMode": 0,
+    "_cacheMode": 0,
     "loop": true,
     "premultipliedAlpha": false,
     "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": "xg_srh",
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
     "_N$skeletonData": {
       "__uuid__": "505547ec-2db4-4e72-8876-a269e2e9b53f"
     },
+    "_N$_defaultCacheMode": 0,
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "efU/tJMUZJX72wiq45kW5j"
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -419,7 +428,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -431,20 +439,33 @@
       "__id__": 10
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
     "paused": false,
     "defaultSkin": "",
     "defaultAnimation": "boom_jzgbl",
+    "_preCacheMode": -1,
+    "_cacheMode": 0,
     "loop": false,
     "premultipliedAlpha": false,
     "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": "",
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
     "_N$skeletonData": {
       "__uuid__": "e80681a7-0c78-44e7-bd56-f1a934c3cf16"
     },
+    "_N$_defaultCacheMode": 0,
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "bfYetVbD1DwoztidWNF6x4"
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -479,7 +500,8 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "37S51RazhMVr5onrczNI0P"
+    "awakeOnLoad": true,
+    "_id": ""
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -501,7 +523,7 @@
       "y": 0
     },
     "_radius": 55,
-    "_id": "d7+sTA941BaKL6i/zhYto0"
+    "_id": ""
   },
   {
     "__type__": "38691fgrCVD8rwn7RSqK4oT",
@@ -542,7 +564,7 @@
     "_IsDeath": false,
     "_Shadow": null,
     "_IsBind": false,
-    "_id": "90RM0hatZCdI3wg6GH8aIJ"
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

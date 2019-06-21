@@ -4,6 +4,13 @@ size: 529,255
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+19
+  rotate: true
+  xy: 2, 6
+  size: 247, 291
+  orig: 247, 291
+  offset: 0, 0
+  index: -1
 fd_01
   rotate: true
   xy: 461, 10
@@ -16,13 +23,6 @@ fd_02
   xy: 407, 2
   size: 51, 52
   orig: 51, 52
-  offset: 0, 0
-  index: -1
-fd_03
-  rotate: true
-  xy: 2, 6
-  size: 247, 291
-  orig: 247, 291
   offset: 0, 0
   index: -1
 fd_04

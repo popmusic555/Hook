@@ -83,7 +83,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -146,7 +145,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -209,7 +207,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -221,20 +218,33 @@
       "__id__": 3
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
     "paused": false,
     "defaultSkin": "",
     "defaultAnimation": "xg_feiji_run",
+    "_preCacheMode": 0,
+    "_cacheMode": 0,
     "loop": true,
     "premultipliedAlpha": false,
     "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": "xg_feiji_run",
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
     "_N$skeletonData": {
       "__uuid__": "5a1daf0a-0a1f-4440-89f9-b3cf9fdf03ae"
     },
+    "_N$_defaultCacheMode": 0,
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "bceiwiAtlGEIiSEQcwq4Od"
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -317,7 +327,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -329,20 +338,33 @@
       "__id__": 7
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
     "paused": false,
     "defaultSkin": "",
     "defaultAnimation": "boom_plagbl",
+    "_preCacheMode": -1,
+    "_cacheMode": 0,
     "loop": true,
     "premultipliedAlpha": false,
     "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": "",
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
     "_N$skeletonData": {
       "__uuid__": "e80681a7-0c78-44e7-bd56-f1a934c3cf16"
     },
+    "_N$_defaultCacheMode": 0,
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "fbgZScsw1E25YHbDJBfK8I"
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -414,7 +436,6 @@
     },
     "_skewX": 0,
     "_skewY": 0,
-    "_zIndex": 0,
     "groupIndex": 0,
     "_id": ""
   },
@@ -426,20 +447,33 @@
       "__id__": 10
     },
     "_enabled": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
     "paused": false,
     "defaultSkin": "",
     "defaultAnimation": "gbl_zd_boom",
+    "_preCacheMode": -1,
+    "_cacheMode": 0,
     "loop": false,
     "premultipliedAlpha": false,
     "timeScale": 1,
+    "_accTime": 0,
+    "_playCount": 0,
+    "_frameCache": null,
+    "_curFrame": null,
+    "_skeletonCache": null,
+    "_animationName": "",
+    "_animationQueue": [],
+    "_headAniInfo": null,
+    "_playTimes": 0,
+    "_isAniComplete": true,
     "_N$skeletonData": {
       "__uuid__": "1189e0a5-7601-4232-87e1-781270ac5f64"
     },
+    "_N$_defaultCacheMode": 0,
     "_N$debugSlots": false,
     "_N$debugBones": false,
-    "_id": "1eVIUStiRMZZfk3kDGoCLx"
+    "_N$useTint": false,
+    "_N$enableBatch": false,
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",
@@ -474,7 +508,8 @@
     "_fixedRotation": true,
     "enabledContactListener": true,
     "bullet": false,
-    "_id": "a9xQPlEEJNuoWkixR4HCIG"
+    "awakeOnLoad": true,
+    "_id": ""
   },
   {
     "__type__": "cc.PhysicsCircleCollider",
@@ -496,7 +531,7 @@
       "y": 0
     },
     "_radius": 60,
-    "_id": "a0P8CMFBxIX4jgNb6sj/Kc"
+    "_id": ""
   },
   {
     "__type__": "5ec09n9H7hKfI6zEfraq/2N",
@@ -540,11 +575,13 @@
       "y": 0
     },
     "_IsUpdate": false,
+    "_IsDeath": false,
     "_IsBind": false,
     "_OilNum": 0,
     "_OilMonster": null,
     "_Duration": 0,
-    "_id": "feJfBJmp1CtLifOD1aRE0m"
+    "_CurSound": 0,
+    "_id": ""
   },
   {
     "__type__": "cc.PrefabInfo",

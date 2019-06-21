@@ -4,6 +4,20 @@ size: 533,530
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
+res/01
+  rotate: false
+  xy: 125, 4
+  size: 151, 119
+  orig: 151, 119
+  offset: 0, 0
+  index: -1
+res/01_01
+  rotate: true
+  xy: 195, 250
+  size: 58, 64
+  orig: 58, 64
+  offset: 0, 0
+  index: -1
 res/_quan2
   rotate: false
   xy: 273, 272
@@ -60,25 +74,11 @@ res/p5
   orig: 183, 191
   offset: 0, 0
   index: -1
-res/p6
-  rotate: false
-  xy: 125, 4
-  size: 151, 119
-  orig: 151, 119
-  offset: 0, 0
-  index: -1
 res/p7
   rotate: true
   xy: 280, 87
   size: 183, 191
   orig: 183, 191
-  offset: 0, 0
-  index: -1
-res/p8
-  rotate: true
-  xy: 195, 250
-  size: 58, 64
-  orig: 58, 64
   offset: 0, 0
   index: -1
 res/pao
@@ -88,21 +88,21 @@ res/pao
   orig: 48, 48
   offset: 0, 0
   index: -1
-res/tou1
+res/tou1 (1)
   rotate: false
   xy: 473, 206
   size: 58, 64
   orig: 58, 64
   offset: 0, 0
   index: -1
-res/tou2
+res/tou1 (2)
   rotate: false
   xy: 473, 140
   size: 58, 64
   orig: 58, 64
   offset: 0, 0
   index: -1
-res/tou3
+res/tou1 (3)
   rotate: false
   xy: 473, 74
   size: 58, 64
