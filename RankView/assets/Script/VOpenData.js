@@ -165,8 +165,8 @@ cc.Class({
                             {key:"mileageTimes" , value:new Date().getTime() + ""},
                         ] , function (state) {
                             if (state == "success") {
-                                console.log("上传最大里程数据成功");
                                 data.mileage = mileage;
+                                console.log("上传最大里程数据成功");
                             }
                         }.bind(this));
                     }
@@ -178,12 +178,13 @@ cc.Class({
                             {key:"comboTimes" , value:new Date().getTime() + ""},
                         ] , function (state) {
                             if (state == "success") {
-                                console.log("上传最大连击数据成功");
                                 data.combo = combo;
+                                console.log("上传最大连击数据成功");
                             }
                         }.bind(this));
                         
                     }
+                    break;
                 }
             }
         }
