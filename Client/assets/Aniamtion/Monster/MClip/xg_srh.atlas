@@ -1,61 +1,61 @@
 
 xg_srh.png
-size: 615,253
+size: 612,250
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 22_01
-  rotate: false
-  xy: 241, 73
-  size: 253, 178
-  orig: 253, 178
+  rotate: true
+  xy: 2, 2
+  size: 246, 234
+  orig: 246, 234
   offset: 0, 0
   index: -1
 22_02
-  rotate: true
-  xy: 2, 2
-  size: 249, 237
-  orig: 249, 237
+  rotate: false
+  xy: 238, 71
+  size: 253, 177
+  orig: 253, 177
   offset: 0, 0
   index: -1
 g07_01
   rotate: true
-  xy: 497, 37
+  xy: 494, 34
   size: 105, 107
   orig: 105, 107
   offset: 0, 0
   index: -1
 g07_02
   rotate: false
-  xy: 496, 144
+  xy: 493, 141
   size: 117, 107
   orig: 117, 107
   offset: 0, 0
   index: -1
 g07_03
   rotate: false
-  xy: 322, 11
+  xy: 319, 9
   size: 95, 60
   orig: 95, 60
   offset: 0, 0
   index: -1
 g07_04
   rotate: false
-  xy: 457, 22
+  xy: 454, 20
   size: 38, 49
   orig: 38, 49
   offset: 0, 0
   index: -1
 g07_05
   rotate: false
-  xy: 241, 10
+  xy: 238, 8
   size: 79, 61
   orig: 79, 61
   offset: 0, 0
   index: -1
 g07_06
   rotate: true
-  xy: 419, 12
+  xy: 416, 10
   size: 59, 36
   orig: 59, 36
   offset: 0, 0

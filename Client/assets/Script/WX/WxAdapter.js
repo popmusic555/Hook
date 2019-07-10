@@ -237,7 +237,6 @@ WxAdapter.createVideo = function (adUnitId) {
     if (!WxAdapter.isWeChat()) {
         return;
     }
-
     wx.createRewardedVideoAd({adUnitId:adUnitId});
 }
 

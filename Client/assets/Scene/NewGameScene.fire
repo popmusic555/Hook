@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.3685673043227751,
-      "y": 0.3685673043227751,
+      "x": 0.20637633355463755,
+      "y": 0.20637633355463755,
       "z": 1
     },
     "_quat": {
@@ -11689,7 +11689,7 @@
     "_N$debugSlots": false,
     "_N$debugBones": false,
     "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_N$enableBatch": true,
     "_id": "418xFDWQpGi7DtwTB/4BbI"
   },
   {
@@ -11817,7 +11817,7 @@
     "_N$debugSlots": false,
     "_N$debugBones": false,
     "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_N$enableBatch": true,
     "_id": "c3hsmecBlPnK48Ge+T0i/D"
   },
   {
@@ -11945,7 +11945,7 @@
     "_N$debugSlots": false,
     "_N$debugBones": false,
     "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_N$enableBatch": true,
     "_id": "10rdSDb0pOKopTyroTND1G"
   },
   {
@@ -12073,7 +12073,7 @@
     "_N$debugSlots": false,
     "_N$debugBones": false,
     "_N$useTint": false,
-    "_N$enableBatch": false,
+    "_N$enableBatch": true,
     "_id": "45oegGFzBOWZBxvPMsYIFk"
   },
   {
@@ -13555,7 +13555,7 @@
         "__id__": 296
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 6,
     "_components": [
       {
@@ -17542,8 +17542,8 @@
     "clickEvents": [],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
-    "_N$transition": 3,
-    "transition": 3,
+    "_N$transition": 0,
+    "transition": 0,
     "_N$normalColor": {
       "__type__": "cc.Color",
       "r": 214,

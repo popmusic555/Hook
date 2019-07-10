@@ -611,4 +611,8 @@ MGame.share = function (WxAdapter) {
     WxAdapter.openShare(title , img , query);
 }
 
+MGame.video = function (WxAdapter) {
+    
+};
+
 module.exports = MGame;

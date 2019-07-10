@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.2878420841099496,
-      "y": 0.2878420841099496,
+      "x": 0.6612874570320342,
+      "y": 0.6612874570320342,
       "z": 1
     },
     "_quat": {
@@ -17841,7 +17841,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 265.69,
+      "width": 265.84,
       "height": 50
     },
     "_anchorPoint": {
@@ -17901,7 +17901,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 265.69,
+      "width": 265.84,
       "height": 50
     },
     "_anchorPoint": {
@@ -17911,7 +17911,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -132.845,
+      "x": -132.92,
       "y": -25,
       "z": 0
     },
@@ -17933,7 +17933,7 @@
     "_skewX": 0,
     "_skewY": 0,
     "groupIndex": 0,
-    "_id": "31PNLe3OJK5oR4bqzRRZkG"
+    "_id": "6aqT9D/XdOFLwjl46C+AHI"
   },
   {
     "__type__": "cc.Label",
@@ -17949,10 +17949,8 @@
     "_fontSize": 26,
     "_lineHeight": 50,
     "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "bf250ab2-ccbb-4a5e-93e1-13afac0292e3"
-    },
-    "_isSystemFontUsed": false,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_N$horizontalAlign": 0,
@@ -17960,7 +17958,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "49N6QiLrBFdoGUYcqtHHw/"
+    "_id": "d1HbakY9lOf4Tqf7jhwBWe"
   },
   {
     "__type__": "cc.RichText",
@@ -18313,8 +18311,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 179,
-      "height": 147
+      "width": 177,
+      "height": 146
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -18490,7 +18488,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 228,
-      "height": 147
+      "height": 146
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -18577,7 +18575,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 145,
+      "width": 143,
       "height": 176
     },
     "_anchorPoint": {
@@ -18587,7 +18585,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 198.6,
+      "x": 200,
       "y": 113.5,
       "z": 0
     },
@@ -18665,7 +18663,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 147,
+      "width": 144,
       "height": 215
     },
     "_anchorPoint": {
@@ -18929,7 +18927,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 179,
+      "width": 178,
       "height": 159
     },
     "_anchorPoint": {
@@ -19017,8 +19015,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 177,
-      "height": 145
+      "width": 175,
+      "height": 144
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -19194,7 +19192,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 228,
-      "height": 147
+      "height": 146
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -19281,7 +19279,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 147,
+      "width": 145,
       "height": 176
     },
     "_anchorPoint": {
@@ -19291,7 +19289,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 197.4,
+      "x": 200,
       "y": -115.5,
       "z": 0
     },
@@ -21888,8 +21886,8 @@
     "target": {
       "__id__": 5
     },
-    "component": "VMain",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "3cb87r3T9JNiJs5z3AKXSam",
     "handler": "onSwitchTab",
     "customEventData": "1"
   },
@@ -22073,8 +22071,8 @@
     "target": {
       "__id__": 5
     },
-    "component": "VMain",
-    "_componentId": "",
+    "component": "",
+    "_componentId": "3cb87r3T9JNiJs5z3AKXSam",
     "handler": "onSwitchTabNoRefresh",
     "customEventData": "2"
   },
@@ -33705,8 +33703,8 @@
     "clickEvents": [],
     "_N$interactable": true,
     "_N$enableAutoGrayEffect": false,
-    "_N$transition": 3,
-    "transition": 3,
+    "_N$transition": 0,
+    "transition": 0,
     "_N$normalColor": {
       "__type__": "cc.Color",
       "r": 214,
@@ -39756,7 +39754,7 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -140,
+      "x": 0,
       "y": -120,
       "z": 0
     },
@@ -40022,7 +40020,7 @@
         "__id__": 929
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 4,
     "_components": [
       {
@@ -41158,7 +41156,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 1693,
+      "width": 2417,
       "height": 750
     },
     "_anchorPoint": {

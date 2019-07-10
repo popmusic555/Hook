@@ -56,7 +56,8 @@ cc.Class({
                     Global.Model.Game.setFreeLottery(parseInt(resp[0]));
                     if (Global.Model.Game.freeLottery > 0) {
                         // 有免费次数
-                        this.node.active = true;
+                        // this.node.active = true;
+                        this.node.active = false;
                     }
                     else
                     {

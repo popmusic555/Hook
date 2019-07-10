@@ -392,8 +392,8 @@ cc.Class({
 
     onLotteryBtn:function () {
         Global.Common.Audio.playEffect("btn1Click" , false);
-        var friendView = this.node.parent.getComponentInChildren("VLottery");
-        friendView.show();
+        // var friendView = this.node.parent.getComponentInChildren("VLottery");
+        // friendView.show();
     },
 
     onSetBtn:function () {
