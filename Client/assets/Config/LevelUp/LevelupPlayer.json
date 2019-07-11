@@ -1,7 +1,7 @@
 [
   {
     "level": -1,
-    "launchSpeed": 1500,
+    "launchSpeed": 2000,
     "playerBounce": 200,
     "energyLimit": 10,
     "offlineRewards": 50,
@@ -12,7 +12,7 @@
   },
   {
     "level": 0,
-    "launchSpeed": 1500,
+    "launchSpeed": 2000,
     "playerBounce": 200,
     "energyLimit": 10,
     "offlineRewards": 50,
@@ -23,7 +23,7 @@
   },
   {
     "level": 1,
-    "launchSpeed": 2000,
+    "launchSpeed": 3000,
     "playerBounce": 250,
     "energyLimit": 20,
     "offlineRewards": 100,
@@ -34,7 +34,7 @@
   },
   {
     "level": 2,
-    "launchSpeed": 2500,
+    "launchSpeed": 4000,
     "playerBounce": 300,
     "energyLimit": 30,
     "offlineRewards": 150,
@@ -45,7 +45,7 @@
   },
   {
     "level": 3,
-    "launchSpeed": 3000,
+    "launchSpeed": 4500,
     "playerBounce": 350,
     "energyLimit": 40,
     "offlineRewards": 200,
@@ -56,7 +56,7 @@
   },
   {
     "level": 4,
-    "launchSpeed": 3500,
+    "launchSpeed": 5000,
     "playerBounce": 400,
     "energyLimit": 50,
     "offlineRewards": 250,
@@ -67,7 +67,7 @@
   },
   {
     "level": 5,
-    "launchSpeed": 4000,
+    "launchSpeed": 5500,
     "playerBounce": 450,
     "energyLimit": 60,
     "offlineRewards": 300,
@@ -78,7 +78,7 @@
   },
   {
     "level": 6,
-    "launchSpeed": 4500,
+    "launchSpeed": 6000,
     "playerBounce": 500,
     "energyLimit": 70,
     "offlineRewards": 400,
@@ -89,7 +89,7 @@
   },
   {
     "level": 7,
-    "launchSpeed": 5000,
+    "launchSpeed": 6500,
     "playerBounce": 550,
     "energyLimit": 80,
     "offlineRewards": 500,
@@ -100,7 +100,7 @@
   },
   {
     "level": 8,
-    "launchSpeed": 5500,
+    "launchSpeed": 7000,
     "playerBounce": 600,
     "energyLimit": 90,
     "offlineRewards": 600,
@@ -111,7 +111,7 @@
   },
   {
     "level": 9,
-    "launchSpeed": 6000,
+    "launchSpeed": 7500,
     "playerBounce": 650,
     "energyLimit": 100,
     "offlineRewards": 700,
@@ -122,7 +122,7 @@
   },
   {
     "level": 10,
-    "launchSpeed": 6500,
+    "launchSpeed": 8000,
     "playerBounce": 700,
     "energyLimit": 110,
     "offlineRewards": 800,
@@ -133,7 +133,7 @@
   },
   {
     "level": 11,
-    "launchSpeed": 7000,
+    "launchSpeed": 8500,
     "playerBounce": 0.0,
     "energyLimit": 0.0,
     "offlineRewards": 0.0,
@@ -144,7 +144,7 @@
   },
   {
     "level": 12,
-    "launchSpeed": 7500,
+    "launchSpeed": 9000,
     "playerBounce": 0.0,
     "energyLimit": 0.0,
     "offlineRewards": 0.0,

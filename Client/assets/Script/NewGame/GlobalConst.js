@@ -1,4 +1,4 @@
-
+﻿
 
 var GlobalConst = {};
 
@@ -6,7 +6,7 @@ var GlobalConst = {};
 GlobalConst.URL = "https://bhdhkwx.kele55.com/hulk/test";
 
 // 重力系数
-GlobalConst.GRAVITY_SCALE = 8;
+GlobalConst.GRAVITY_SCALE = 9;
 // 里程数比率
 GlobalConst.MILEAGE_RATIO = 30;
 // 能量比率

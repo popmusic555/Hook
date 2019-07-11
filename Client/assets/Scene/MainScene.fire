@@ -41,8 +41,8 @@
     },
     "_scale": {
       "__type__": "cc.Vec3",
-      "x": 0.6612874570320342,
-      "y": 0.6612874570320342,
+      "x": 0.474128309729064,
+      "y": 0.474128309729064,
       "z": 1
     },
     "_quat": {
@@ -2176,7 +2176,7 @@
       "__id__": 46
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 6,
     "_components": [
       {
@@ -17667,7 +17667,7 @@
       "__id__": 369
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 6,
     "_components": [
       {
@@ -17933,7 +17933,7 @@
     "_skewX": 0,
     "_skewY": 0,
     "groupIndex": 0,
-    "_id": "6aqT9D/XdOFLwjl46C+AHI"
+    "_id": "0fB76VxY9Nm6AdUsTqxY2L"
   },
   {
     "__type__": "cc.Label",
@@ -17958,7 +17958,7 @@
     "_N$fontFamily": "Arial",
     "_N$overflow": 0,
     "_N$cacheMode": 0,
-    "_id": "d1HbakY9lOf4Tqf7jhwBWe"
+    "_id": "38NAeUJ45DcrA99WSpjJWH"
   },
   {
     "__type__": "cc.RichText",
@@ -39178,8 +39178,8 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_string": "        欢迎来到来到逃离异星的世界，让我们丢掉压力，来个痛快的破坏之旅吧！更有实物大奖等你来拿！还等什么，一起来砸，砸，砸！",
-    "_N$string": "        欢迎来到来到逃离异星的世界，让我们丢掉压力，来个痛快的破坏之旅吧！更有实物大奖等你来拿！还等什么，一起来砸，砸，砸！",
+    "_string": "        欢迎来到来到逃离异星的世界，让我们丢掉压力，来个痛快的破坏之旅吧！还等什么，一起来砸，砸，砸！",
+    "_N$string": "        欢迎来到来到逃离异星的世界，让我们丢掉压力，来个痛快的破坏之旅吧！还等什么，一起来砸，砸，砸！",
     "_fontSize": 30,
     "_lineHeight": 40,
     "_enableWrapText": true,

@@ -9,60 +9,60 @@
     "passid": 1,
     "elastic": 0.7,
     "bounce": 0,
-    "accelerate": -330
+    "accelerate": -400
   },
   {
     "passid": 2,
     "elastic": 0.7,
     "bounce": 0,
-    "accelerate": -360
+    "accelerate": -500
   },
   {
     "passid": 3,
     "elastic": 0.7,
     "bounce": 0,
-    "accelerate": -390
+    "accelerate": -600
   },
   {
     "passid": 4,
     "elastic": 0.7,
     "bounce": 0,
-    "accelerate": -420
+    "accelerate": -700
   },
   {
     "passid": 5,
     "elastic": 0.7,
     "bounce": 0,
-    "accelerate": -450
+    "accelerate": -800
   },
   {
     "passid": 6,
     "elastic": 0.7,
     "bounce": 0,
-    "accelerate": -480
+    "accelerate": -900
   },
   {
     "passid": 7,
     "elastic": 0.7,
     "bounce": 0,
-    "accelerate": -510
+    "accelerate": -1000
   },
   {
     "passid": 8,
     "elastic": 0.7,
     "bounce": 0,
-    "accelerate": -540
+    "accelerate": -1100
   },
   {
     "passid": 9,
     "elastic": 0.7,
     "bounce": 0,
-    "accelerate": -570
+    "accelerate": -1200
   },
   {
     "passid": 10,
     "elastic": 0.7,
     "bounce": 0,
-    "accelerate": -600
+    "accelerate": -1300
   }
 ]
