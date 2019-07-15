@@ -9,6 +9,8 @@ Global.Common = {};
 // 游戏对象
 Global.GameObj = {};
 
+// 版本文件
+Global.Common.Version = require("Version");
 // 全局常量
 Global.Common.Const = require("GlobalConst");
 // 全局枚举

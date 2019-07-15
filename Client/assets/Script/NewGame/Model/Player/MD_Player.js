@@ -190,6 +190,7 @@ MPlayer.getRewardsCoins = function () {
  */
 MPlayer.addRewardCoins = function (num) {
     this.gamedata.rewardsCoins += num;
+    this.gamedata.rewardsCoins = Math.round(this.gamedata.rewardsCoins);
     console.log("this.gamedata.rewardsCoins" , this.gamedata.rewardsCoins , this.attr.coinsRadio);
 };
 

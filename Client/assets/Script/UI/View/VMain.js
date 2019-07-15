@@ -27,6 +27,8 @@ cc.Class({
         selectedSprite:cc.Sprite,
         // 内容
         content:[cc.Node],
+        // 版本
+        version:cc.Label,
 
         _CurSelectedItem:null,
 
@@ -81,6 +83,13 @@ cc.Class({
 
         // 红点提示
         this.showRedDot();
+
+        // 显示版本号
+        this.showVersion(Global.Common.Version.VERSION);
+    },
+
+    showVersion:function (num) {
+        this.version.string = num;
     },
 
     showRedDot:function () {

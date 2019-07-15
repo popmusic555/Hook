@@ -2,6 +2,8 @@
 
 var WxAdapter = {};
 
+WxAdapter.__UpdateManager__ = null;
+
 WxAdapter.isWeChat = function () {
     if (cc.sys.browserType === cc.sys.BROWSER_TYPE_WECHAT_GAME || cc.sys.browserType === cc.sys.BROWSER_TYPE_WECHAT_GAME_SUB) {
         return true;        
@@ -263,6 +265,67 @@ WxAdapter.getOptions = function () {
 
     var result = wx.getLaunchOptionsSync();
     return result;
+}
+
+WxAdapter.getUpdateManager = function () {
+    if (!this.__UpdateManager__) {
+        this.__UpdateManager__ = wx.getUpdateManager();
+    }
+    return this.__UpdateManager__;
+}
+
+WxAdapter.checkVersion = function (callback) {
+    if (!WxAdapter.isWeChat()) {
+        callback(false);
+        return;
+    }
+    var updateManager = WxAdapter.getUpdateManager();
+    updateManager.onCheckForUpdate(function (res) {
+        // 请求完新版本信息的回调
+        console.log("当前是否需要更新" , res.hasUpdate)
+        callback(res.hasUpdate);
+    });
+}
+
+WxAdapter.onUpdateSuccess = function (callback) {
+    if (!WxAdapter.isWeChat()) {
+        return;
+    }
+    var updateManager = WxAdapter.getUpdateManager();
+    updateManager.onUpdateReady(callback);
+}
+
+WxAdapter.applyUpdate = function () {
+    if (!WxAdapter.isWeChat()) {
+        return;
+    }
+    var updateManager = WxAdapter.getUpdateManager();
+    updateManager.applyUpdate()  
+};
+
+WxAdapter.exitProgram = function (obj) {
+    wx.exitMiniProgram(obj);
+};
+
+WxAdapter.onUpdateFailed = function (callback) {
+    if (!WxAdapter.isWeChat()) {
+        return;
+    }
+
+    var updateManager = WxAdapter.getUpdateManager();
+    updateManager.onUpdateFailed(callback);
+}
+
+WxAdapter.showDialog = function (title , content , success , showCancel) {
+    if (!WxAdapter.isWeChat()) {
+        return;
+    }
+    wx.showModal({
+        title: title,
+        content: content,
+        success:success,
+        showCancel:showCancel,
+    });
 }
 
 module.exports = WxAdapter;
