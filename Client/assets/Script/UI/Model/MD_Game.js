@@ -54,6 +54,8 @@ MGame.init = function () {
     this.lottery = 0;
     // 轮盘免费次数
     this.freeLottery = 0;
+    // 邀请轮盘次数
+    this.payLottery = 0;
     // 抽奖时间
     this.lotteryTime = 0;
 
@@ -77,10 +79,7 @@ MGame.init = function () {
     this.task.killNum = 101;
 
     // 好友邀请
-    this.friend = [];
-    // this.friend[0] = {isReward:false};
-    // this.friend[1] = {isReward:false};
-    // this.friend[2] = {isReward:false};
+    this.friend = {};
 
     // 所有升级选项数据表
     this.levelsItemConfig = {};
@@ -231,25 +230,19 @@ MGame.nextTask = function () {
  * 
  * @param {any} list 
  */
-MGame.initFriend = function (list) {
-    this.friend = [];
+MGame.initFriend = function (serverData) {
+    this.friend = {};
 
-    var len = list.length / 4;
-    for (let index = 0; index < len; index++) {
-        var friend = {};
-        friend.id = list[index * 4 + 0];
-        friend.nickname = list[index * 4 + 1];
-        friend.headicon = list[index * 4 + 2];
-        friend.isReward = false;
-        var state = list[index * 4 + 3];
-        if (state == 1) {
-            friend.isReward = true;
-        }
-
-        if (friend.id != 0) {
-            this.friend[index] = friend;    
-        }
+    this.friend.id = parseInt(serverData[0]);
+    this.friend.nickname = serverData[1];
+    this.friend.headicon = serverData[2];
+    this.friend.isReward = false;
+    var state = parseInt(serverData[3]);
+    if (state == 1) {
+        this.friend.isReward = true;
     }
+    this.friend.rewardNum = parseInt(serverData[4]);
+    this.friend.rewardedCount = parseInt(serverData[5]);
 }
 
 /**
@@ -267,14 +260,10 @@ MGame.getFriend = function () {
  * @returns 
  */
 MGame.getFriendReward = function () {
-    var result = [];
-    for (let i = 0; i < this.friend.length; i++) {
-        const item = this.friend[i];
-        if (!item.isReward) {
-            result.push(item);
-        }
+    if (this.friend.id == 0) {
+        return null;
     }
-    return result;
+    return this.friend;
 }
 
 /**
@@ -369,6 +358,14 @@ MGame.setLotteryNum = function (num) {
  */
 MGame.setFreeLottery = function (num) {
     this.freeLottery = num;
+}
+/**
+ * 设置付费轮盘次数
+ * 
+ * @param {any} num 
+ */
+MGame.setPayLottery = function (num) {
+    this.payLottery = num;
 }
 /**
  * 设置轮盘抽奖时间
@@ -601,12 +598,12 @@ MGame.setResumeNode = function (nodes) {
     this._ResumeNode = nodes;
 }
 
-MGame.share = function (WxAdapter) {
+MGame.share = function (WxAdapter , type) {
     var num = Global.Common.Utils.random(0 , 2);
     
     var title = Global.Common.Const.SHARE_TITLE[num];
     var img = Global.Common.Const.SHARE_IMG[num];
-    var query = "uuid=" + this.uuid;
+    var query = "uuid=" + this.uuid + "&" + "type=" + type + "&" + "curtime=" + Global.Common.Timer.getTime();
 
     WxAdapter.openShare(title , img , query);
 }

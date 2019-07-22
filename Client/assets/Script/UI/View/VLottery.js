@@ -38,21 +38,29 @@ cc.Class({
         }
         this._Lock = true;
         var freeNum = Global.Model.Game.freeLottery;
+        var payNum = Global.Model.Game.payLottery;
         if (freeNum > 0) {
-            this.startLottery(0);
+            this.startLottery(1);
+        }
+        else if (payNum > 0) {
+            this.startLottery(2);
         }
         else
         {
-            // 视频开启
-            Global.Model.Game.share(WxAdapter);
-            this.scheduleOnce(function () {
-                this.startLottery(1);    
-            }.bind(this) , 0.5);
+            // 开始邀请分享
+            Global.Model.Game.share(WxAdapter , 2);
+            this._Lock = false;
+            // this.scheduleOnce(function () {
+            //     this.startLottery(1);    
+            // }.bind(this) , 0.5);
         }
     },
 
     onCloseBtn:function () {
         Global.Common.Audio.playEffect("btn1Click" , false);
+        if (this._Lock) {
+            return;
+        }
         this.hide();
         var vMain = this.node.parent.getComponentInChildren("VMain");
         vMain.showRedDot();
@@ -62,17 +70,15 @@ cc.Class({
         this.node.active = false;  
     },
 
-    startLottery:function (isVideo) {
+    startLottery:function (type) {
         Global.Common.Audio.playEffect("btn1Click" , false);
         // 轮盘奖励获取
         Global.Common.Http.req("lotteryRecored" , {
             uuid:Global.Model.Game.uuid,
-            type:1,
-            video:isVideo,
+            type:type,
+            video:0,
         } , function (resp , url) {
             console.log("Response " , url , resp);
-            // 轮盘免费次数
-            Global.Model.Game.setFreeLottery(parseInt(resp[0]));
             // 奖励倍数
             Global.Model.Game.setLotteryNum(parseInt(resp[2]));
             // 抽奖时间
@@ -83,6 +89,12 @@ cc.Class({
             if (time - lotteryTime >= Global.Common.Const.LOTTERY_TIME) {
                 Global.Model.Game.setLotteryNum(0);
             }
+            // 付费轮盘次数
+            var num = parseInt(resp[5]) ? 0 : 1;
+            Global.Model.Game.setPayLottery(num);
+            // 轮盘免费次数
+            num = parseInt(resp[6]) ? 0 : 1;
+            Global.Model.Game.setFreeLottery(num);
 
             var arr = [];
             for (let index = 0; index < this._LotteryList.length; index++) {
@@ -175,12 +187,16 @@ cc.Class({
         }
 
         var freeNum = Global.Model.Game.freeLottery;
+        var payNum = Global.Model.Game.payLottery;
         if (freeNum > 0) {
-            this.lotteryBtnLabel.string = "免  费";
+            this.lotteryBtnLabel.string = "转动转盘";
+        }
+        else if (payNum > 0) {
+            this.lotteryBtnLabel.string = "转动转盘";
         }
         else
         {
-            this.lotteryBtnLabel.string = "分享转转盘";
+            this.lotteryBtnLabel.string = "分享游戏转转盘";
         }
     },
 

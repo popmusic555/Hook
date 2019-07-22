@@ -180,8 +180,16 @@ cc.Class({
 
         var options = WxAdapter.getOptions();
         var referrerId = options.query.uuid;
+        var type = options.query.type;
+        var curtime = options.query.curtime;
         if (!referrerId) {
             referrerId = "";
+        }
+        if (!type) {
+            type = 0;
+        }
+        if (!curtime) {
+            curtime = 0;
         }
 
         Global.Common.Http.reqList([
@@ -193,6 +201,8 @@ cc.Class({
                     referrerId:referrerId,
                     faceUrl:avatarUrl,
                     userName:nickName,
+                    type:type,
+                    curTime:curtime,
                 },
                 callback:function (resp , url) {
                     console.log("Response " , url , resp);
@@ -233,9 +243,6 @@ cc.Class({
                 },
                 callback:function (resp , url) {
                     console.log("Response " , url , resp);
-                    // 轮盘免费次数
-                    Global.Model.Game.setFreeLottery(parseInt(resp[0]));
-                    console.log("轮盘免费次数" , parseInt(resp[0]));
                     // 奖励倍数
                     Global.Model.Game.setLotteryNum(parseInt(resp[2]));
                     console.log("奖励倍数" , parseInt(resp[2]));
@@ -249,6 +256,15 @@ cc.Class({
                         Global.Model.Game.setLotteryNum(0);
                     }
                     console.log("当前时间持续时间" , time - lotteryTime);
+                    // 付费轮盘次数
+                    var num = parseInt(resp[5]) ? 0 : 1;
+                    Global.Model.Game.setPayLottery(num);
+                    console.log("邀请轮盘状态" , parseInt(resp[5]));
+                    // 轮盘免费次数
+                    num = parseInt(resp[6]) ? 0 : 1;
+                    Global.Model.Game.setFreeLottery(num);
+                    console.log("免费轮盘状态" , parseInt(resp[6]));
+
                     this._LoginComplete = true;
                 }.bind(this),
             },

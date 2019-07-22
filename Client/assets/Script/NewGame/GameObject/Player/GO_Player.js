@@ -410,20 +410,36 @@ cc.Class({
 
         this._Recvive.recviveAni.node.active = true;
         this._Recvive.recviveAni.animation = "fuhuo";
-        this._Recvive.recviveAni.setCompleteListener(function () {
-            this._Recvive.recviveAni.node.active = false;
+        // this._Recvive.recviveAni.setCompleteListener(function () {
+        //     this._Recvive.recviveAni.node.active = false;
 
-            var velocityX = velocity.x;
-            var velocityY = velocity.y;
-            console.log("发射速度" , velocityX , velocityY)
-            var vCamera = cc.Camera.main.getComponent("VCamera");
-            vCamera.setStartXFollow();
-            this.launching(cc.v2(velocityX , velocityY));
-            this.wakeup();
-            this.animation.unlockState();
-            this.setCrossWall(true);
-            vMonster.launching();
+        //     var velocityX = velocity.x;
+        //     var velocityY = velocity.y;
+        //     console.log("发射速度" , velocityX , velocityY)
+        //     var vCamera = cc.Camera.main.getComponent("VCamera");
+        //     vCamera.setStartXFollow();
+        //     this.launching(cc.v2(velocityX , velocityY));
+        //     this.wakeup();
+        //     this.animation.unlockState();
+        //     this.setCrossWall(true);
+        //     vMonster.launching();
 
+        // }.bind(this));
+        this._Recvive.recviveAni.setEventListener(function (trackEntry , event) {
+            if (event.data.name == "up") {
+                this._Recvive.recviveAni.node.active = false;
+
+                var velocityX = velocity.x;
+                var velocityY = velocity.y;
+                console.log("发射速度" , velocityX , velocityY)
+                var vCamera = cc.Camera.main.getComponent("VCamera");
+                vCamera.setStartXFollow();
+                this.launching(cc.v2(velocityX , velocityY));
+                this.wakeup();
+                this.animation.unlockState();
+                this.setCrossWall(true);
+                vMonster.launching();
+            }
         }.bind(this));
 
         var worldPos = cc.Camera.main.node.convertToWorldSpaceAR(cc.v2(0,0));

@@ -3,7 +3,14 @@
 var GlobalConst = {};
 
 // 服务器地址
-GlobalConst.URL = "https://bhdhkwx.kele55.com/hulk/test";
+// GlobalConst.URL = "https://bhdhkwx.kele55.com/hulk/test";
+GlobalConst.SERVER_IP = "bhdhkwxtest.kele55.com";
+GlobalConst.URL = "https://" + GlobalConst.SERVER_IP + "/hulk/test";
+
+GlobalConst.setServerIP = function (serverIP) {
+    GlobalConst.SERVER_IP = serverIP;
+    GlobalConst.URL = "https://" + GlobalConst.SERVER_IP + "/hulk/test";
+};
 
 // 重力系数
 GlobalConst.GRAVITY_SCALE = 9;

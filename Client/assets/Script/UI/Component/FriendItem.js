@@ -1,6 +1,16 @@
 var RemoteSprite = require("RemoteSprite");
 var WxAdapter = require("WxAdapter");
 
+var DOMAIN = [
+    [-1 , 5],
+    [5 , 15],
+    [15 , 30],
+    [30 , 50],
+    [50 , 99999],
+];
+
+var REWARD = [1,2,3,4,5];
+
 cc.Class({
     extends: cc.Component,
 
@@ -9,6 +19,7 @@ cc.Class({
         headIcon:RemoteSprite,
         rewardLabel:cc.Label,
         stateBtn:[cc.Node],
+        tips:cc.RichText,
 
         // 头像Url
         headIconUrl:"",
@@ -46,7 +57,7 @@ cc.Class({
 
     setIndex:function (index) {
         this.index = index;
-        this.indexLabel.string = index + 1;
+        this.indexLabel.string = index;
     },
 
     setRewardNum:function (num) {
@@ -69,13 +80,17 @@ cc.Class({
         // 好友奖励领取
         Global.Common.Http.req("inviteAwardForAward" , {
             uuid:Global.Model.Game.uuid,
-            id:Global.Model.Game.getFriend()[this.index].id,
+            id:Global.Model.Game.getFriend().id,
         } , function (resp , url) {
             console.log("Response " , url , resp);
+
+            this.receiveReward(Global.Model.Game.getFriend().rewardNum);
+
             this.isRewarding = false;
-            this.setState(0);
-            Global.Model.Game.getFriend()[this.index].isReward = true;
-            this.receiveReward(parseInt(resp[0]));
+            Global.Model.Game.initFriend(resp);
+
+            var datas = Global.Model.Game.getFriend();
+            this.refreshItem(datas);
         }.bind(this));
     },
 
@@ -91,8 +106,49 @@ cc.Class({
     onInvitation:function () {
         Global.Common.Audio.playEffect("btn1Click" , false);
         // 分享
-        Global.Model.Game.share(WxAdapter);
+        Global.Model.Game.share(WxAdapter , 1);
     },
 
+    refreshItem:function (data) {
+        var inviteAwardNum = 0;
+        if (data.id != 0) {
+            // 当前可领取
+            this.setState(1);
+            this.setHeadIcon(data.headicon);
+            inviteAwardNum = data.rewardedCount+1;
+        }
+        else
+        {
+            // 不可领取
+            this.setState(2);
+            this.setHeadIcon(null);
+            inviteAwardNum = data.rewardedCount;
+        }
+        this.setIndex(data.rewardedCount+1);
+        this.setRewardNum(data.rewardNum);
+
+        var domainIndex = this.getDomain(inviteAwardNum);
+        var domainNextIndex = domainIndex + 1;
+        if (domainNextIndex < DOMAIN.length) {
+            var num = DOMAIN[domainNextIndex][0]+1 - inviteAwardNum;
+            var rewardNum = REWARD[domainNextIndex];
+            this.tips.string = "再邀请" + num + "名好友，每次邀 请成功的奖励会提高到<color=#FF3740> " + rewardNum + " </c>个复活药水";
+        }
+        else
+        {
+            this.tips.string = "每次邀请成功都会得到个" + REWARD[REWARD.length-1] + "复活药水";
+        }
+    },
+
+    getDomain:function (inviteAwardNum) {
+        var len = DOMAIN.length;
+        for (let index = 0; index < len; index++) {
+            const domain = DOMAIN[index];
+            if (inviteAwardNum > domain[0] && inviteAwardNum <= domain[1]) {
+                return index;
+            }
+        }
+        return -1;
+    },
     // update (dt) {},
 });

@@ -66,7 +66,7 @@ cc.Class({
         Global.Common.Audio.playEffect("btn2Click" , false);
         console.log("翻倍收取离线奖励");
 
-        Global.Model.Game.share(WxAdapter);
+        Global.Model.Game.share(WxAdapter , 0);
         this.scheduleOnce(function () {
             
             Global.Common.Http.req("offlineGold" , {

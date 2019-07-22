@@ -82,7 +82,7 @@ cc.Class({
     onShare:function () {
         Global.Common.Audio.playEffect("btn1Click" , false);
         // 分享
-        Global.Model.Game.share(WxAdapter);
+        Global.Model.Game.share(WxAdapter , 1);
     },
 
     hide:function () {

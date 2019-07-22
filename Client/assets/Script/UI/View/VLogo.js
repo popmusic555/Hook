@@ -85,10 +85,20 @@ cc.Class({
         var action = cc.sequence(cc.fadeIn(1.5) , cc.callFunc(function () {
             cc.loader.loadRes("Font/MFLiHei" , cc.Font , function (err, font) {
                 console.log("" , err , font);
-                this.node.runAction(cc.sequence(cc.delayTime(1.0) , cc.fadeOut(1.5) ,cc.callFunc(function () {
-                    console.log("Run Next Scene");
-                    cc.director.loadScene("LoadingScene");
-                })));
+
+                Global.Common.Http.req("checkServerIP" , {
+                    clientID:Global.Common.Version.SERVER_CHECK,
+                } , function (resp , url) {
+                    console.log("Response " , url , resp);
+
+                    Global.Common.Const.setServerIP(resp[0]);
+
+                    this.node.runAction(cc.sequence(cc.delayTime(1.0) , cc.fadeOut(1.5) ,cc.callFunc(function () {
+                        console.log("Run Next Scene");
+                        cc.director.loadScene("LoadingScene");
+                    })));
+
+                }.bind(this));
             }.bind(this));
         } , this));
 

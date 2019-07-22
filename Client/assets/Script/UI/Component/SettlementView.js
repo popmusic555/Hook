@@ -36,7 +36,7 @@ cc.Class({
 
     onVideoBtn:function () {
         Global.Common.Audio.playEffect("btn1Click" , false);
-        Global.Model.Game.share(WxAdapter);
+        Global.Model.Game.share(WxAdapter , 0);
         this.scheduleOnce(function () {
             this.double(this.coins);
         }.bind(this) , 0.5);

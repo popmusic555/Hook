@@ -16,7 +16,7 @@ cc.Class({
     // update (dt) {},
 
     refresh:function () {
-        // this.title.string = title;
+        this.title.string = "[游戏版本 " + Global.Common.Version.VERSION + "]";
         // this.contentName.string = name;
         // this.content.string = content;
     },

@@ -1,5 +1,6 @@
 
 var SetView = require("SetView");
+var TipsView = require("VTips");
 var SettlementView = require("SettlementView");
 var VRecvive = require("VRecvive");
 
@@ -20,6 +21,8 @@ cc.Class({
         setView:SetView,
         // 开场动画
         prologueView:cc.Node,
+        // 退出提示
+        exitTips:TipsView,
     },
 
     onLoad () {
@@ -61,7 +64,35 @@ cc.Class({
     onSetBtn:function () {
         Global.Common.Audio.playEffect("btn1Click" , false);
         this.showSetView();  
+    },
+
+    onHome:function () {
+        Global.Common.Audio.playEffect("btn1Click" , false);
+        this.showExitTips();  
     },  
+
+    showExitTips:function () {
+        this.exitTips.show({
+            title:"确  认",
+            text:"游戏中途离开，获得的金币会丢失，是否进入角色升级界面？",
+            click:function (isCancel) {
+                if (isCancel) {
+                    // 取消
+                    this.exitTips.hide();
+                    Global.Model.Game.resumeGame();
+                }
+                else
+                {
+                    // 确定
+                    var transition = cc.find("Canvas").getComponentInChildren("VTransition");
+                    if (transition) {
+                        transition.transitionWithScene("MainScene");
+                    }
+                }
+            }.bind(this),
+        });
+        Global.Model.Game.pauseGame();  
+    },
 
     onClosePrologue:function () {
         this.prologueView.active = false;
